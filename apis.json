@@ -1,0 +1,54 @@
+{
+    "name": "WorldCat",
+    "description": "Find what you want in a library near you with WorldCat, a global catalog of library collections.",
+    "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/971-worldcat.jpg",
+    "tags": [
+        "books",
+        "have api",
+        "isbn",
+        "libraries"
+    ],
+    "created": "2019-12-19",
+    "modified": "2019-12-19",
+    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/worldcat\/master\/apis.json",
+    "specificationVersion": "0.14",
+    "apis": [
+        {
+            "name": "WorldCat",
+            "description": null,
+            "image": "http:\/\/kinlane-productions.s3.amazonaws.com\/screen-capture-api\/971-worldcat.jpg",
+            "humanURL": "http:\/\/xisbn.worldcat.org\/xisbnadmin\/index.htm",
+            "baseURL": "",
+            "tags": [],
+            "properties": [
+                {
+                    "type": "x-openapi",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/worldcat-openapi.json"
+                },
+                {
+                    "type": "x-postman-collecction",
+                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/worldcat-postman-collection.json"
+                }
+            ]
+        }
+    ],
+    "include": [],
+    "x-common": [
+        {
+            "type": "Base",
+            "url": " http:\/\/xisbn.worldcat.org\/webservices\/"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/OCLC"
+        },
+        {
+            "type": "Twitter",
+            "url": "https:\/\/twitter.com\/worldcatorg"
+        },
+        {
+            "type": "Website",
+            "url": "http:\/\/xisbn.worldcat.org\/xisbnadmin\/index.htm"
+        }
+    ]
+}
