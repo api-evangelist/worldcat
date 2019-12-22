@@ -8,8 +8,8 @@
         "isbn",
         "libraries"
     ],
-    "created": "2019-12-19",
-    "modified": "2019-12-19",
+    "created": "2019-12-21",
+    "modified": "2019-12-21",
     "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/worldcat\/master\/apis.json",
     "specificationVersion": "0.14",
     "apis": [
@@ -20,20 +20,15 @@
             "humanURL": "http:\/\/xisbn.worldcat.org\/xisbnadmin\/index.htm",
             "baseURL": "",
             "tags": [],
-            "properties": [
-                {
-                    "type": "x-openapi",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/worldcat-openapi.json"
-                },
-                {
-                    "type": "x-postman-collecction",
-                    "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/worldcat-postman-collection.json"
-                }
-            ]
+            "properties": []
         }
     ],
     "include": [],
     "x-common": [
+        {
+            "type": "APIs.json",
+            "url": "https:\/\/raw.githubusercontent.com\/api-evangelist\/1forge\/master\/apis.json"
+        },
         {
             "type": "Base",
             "url": " http:\/\/xisbn.worldcat.org\/webservices\/"
