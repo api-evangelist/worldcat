@@ -1,0 +1,61 @@
+name: WorldCat API Rate Limits
+description: >-
+  OCLC WorldCat APIs enforce usage caps designed to meet typical member
+  requirements while preserving network resources for all users. Rate limits
+  vary by API and are applied on a rolling 24-hour window basis. Organizations
+  with higher volume needs can request increased limits by contacting OCLC
+  developer support with their WSKey and use case details.
+url: https://www.oclc.org/developer/support/faq.en.html
+created: "2026-06-13"
+modified: "2026-06-13"
+
+limits:
+  - api: WorldCat Search API v2
+    window: rolling 24-hour
+    requests: 50000
+    notes: >-
+      Rolling 24-hour limit of 50,000 requests applies to the WorldCat Search
+      API. This is consistent with the v1 limit before v1 was deprecated at
+      end of 2024. Libraries needing higher limits should contact OCLC support.
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+
+  - api: WorldCat Knowledge Base API
+    window: per day
+    requests: 50000
+    notes: >-
+      Production access is limited to 50,000 requests per day. The API
+      supports both OpenURL requests for matching citations and REST requests
+      for browsing and searching subscription resources.
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
+
+  - api: WorldCat Metadata API
+    window: per day
+    requests: null
+    notes: >-
+      Specific rate limit figures are not published for the Metadata API.
+      OCLC establishes usage caps in line with typical library cataloging
+      workflows. Contact OCLC developer support for current limits.
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+
+  - api: WorldCat Entities Data API
+    window: per day
+    requests: null
+    notes: >-
+      Specific rate limit figures are not published for the Entities Data API.
+      Access is limited to OCLC Meridian subscribers. Contact OCLC developer
+      support for current limits applicable to your subscription.
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+
+exceeding_limits:
+  description: >-
+    Organizations that need to exceed standard thresholds can request higher
+    limits by emailing OCLC developer support with their WSKey and the specific
+    API in question along with a description of the use case.
+  contact: devnet@oclc.org
+  url: https://www.oclc.org/developer/support/faq.en.html
+
+authentication_note: >-
+  All rate limits are enforced per WSKey (Web Services Key). OAuth 2.0 is the
+  primary authentication method for current APIs. Legacy APIs may use API key
+  (WSKey string) authentication. Rate limits apply per credential, not per
+  IP address.

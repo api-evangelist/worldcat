@@ -1,0 +1,83 @@
+name: WorldCat API Plans and Pricing
+description: >-
+  OCLC WorldCat APIs are available to OCLC member libraries through subscription
+  plans. Access is tied to existing OCLC service subscriptions rather than
+  standalone API pricing tiers. Commercial partnerships are available for
+  non-library organizations.
+url: https://www.oclc.org/en/membership/fees.html
+created: "2026-06-13"
+modified: "2026-06-13"
+
+plans:
+  - name: WorldCat Cataloging and Metadata Subscription
+    description: >-
+      Required subscription for libraries accessing the WorldCat Search API v2
+      and WorldCat Metadata API. Libraries with a full cataloging subscription
+      gain access to search, retrieve, and maintain bibliographic and holdings
+      data in WorldCat. Both a Cataloging and Metadata subscription and a
+      FirstSearch/WorldCat Discovery subscription are required for full
+      Search API access.
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+    type: Subscription
+    audience: OCLC member libraries
+    features:
+      - WorldCat Search API v2 access
+      - WorldCat Metadata API access
+      - Sandbox testing environment
+      - WSKey/OAuth 2.0 credentials
+      - Up to 50,000 API requests per day (rolling 24-hour window)
+
+  - name: WorldCat Knowledge Base Subscription
+    description: >-
+      Required subscription for libraries using OCLC WorldCat Knowledge Base
+      services. Provides access to the Knowledge Base API for managing and
+      accessing e-resource subscription data, OpenURL linking, and browsing
+      library subscription resources.
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
+    type: Subscription
+    audience: OCLC member libraries using WorldCat Knowledge Base
+    features:
+      - WorldCat Knowledge Base API access
+      - OpenURL request support
+      - REST browsing and search requests
+      - Up to 50,000 requests per day
+
+  - name: WorldCat Meridian Subscription (Entities)
+    description: >-
+      Required subscription for libraries accessing WorldCat Entities APIs.
+      Available to OCLC Meridian subscribers, enabling creation, management,
+      and analysis of linked data through Entity Management, Entity Search,
+      Entity Query, and related tools.
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+    type: Subscription
+    audience: OCLC Meridian subscriber libraries
+    features:
+      - WorldCat Entities Data API access
+      - Entity Management API access
+      - Entity Query API access
+      - Linked data integration
+      - PID Lookup support
+
+  - name: Commercial Partnership
+    description: >-
+      OCLC offers commercial partnerships for non-library organizations that
+      wish to integrate WorldCat data and APIs into commercial products and
+      services. Pricing and terms are negotiated individually based on use case
+      and volume requirements.
+    url: https://www.oclc.org/developer/api.en.html
+    type: Commercial
+    audience: Commercial organizations and technology vendors
+    features:
+      - Custom API access agreements
+      - Volume-based pricing
+      - Technical support
+      - Integration guidance
+
+notes: >-
+  OCLC does not publish public standalone API pricing. Access to WorldCat APIs
+  is bundled with library membership fees and specific service subscriptions.
+  Libraries interested in API access should contact OCLC directly to determine
+  which subscription tier is required for their intended use case.
+contact:
+  url: https://www.oclc.org/developer/api.en.html
+  email: devnet@oclc.org

@@ -1,0 +1,84 @@
+name: WorldCat API FinOps
+description: >-
+  Financial operations guidance for managing OCLC WorldCat API costs. WorldCat
+  API access is bundled with OCLC library membership and service subscriptions
+  rather than metered pay-per-call pricing, making FinOps focused on
+  subscription value optimization, usage monitoring, and ensuring API consumption
+  stays within rate limits to avoid service disruption.
+url: https://www.oclc.org/developer/api.en.html
+created: "2026-06-13"
+modified: "2026-06-13"
+
+cost_model:
+  type: Subscription-bundled
+  billing_cycle: Annual (OCLC membership and service subscriptions)
+  metered: false
+  description: >-
+    WorldCat APIs are not priced on a per-call or usage-based model. API access
+    is included with OCLC library membership fees and specific service
+    subscriptions (Cataloging and Metadata, WorldCat Discovery, Meridian, etc.).
+    There are no direct overage charges for API calls, but exceeding rate limits
+    (50,000 requests/day) may result in temporary throttling or request denial.
+
+optimization_strategies:
+  - name: Monitor Daily API Usage Against Rate Limits
+    description: >-
+      Track API call volumes against the 50,000 requests/day limit to avoid
+      hitting the ceiling during peak periods such as semester starts or
+      large batch cataloging operations.
+    priority: high
+
+  - name: Use Sandbox for Development and Testing
+    description: >-
+      OCLC provides sandbox environments for the WorldCat Search API and
+      WorldCat Metadata API. Use sandbox endpoints exclusively during
+      development to avoid consuming production rate limit quota.
+    priority: high
+
+  - name: Cache Frequently Accessed Bibliographic Records
+    description: >-
+      Implement local caching of frequently retrieved bibliographic records,
+      OCLC numbers, and entity data to reduce redundant API calls and stay
+      well within daily rate limits.
+    priority: medium
+
+  - name: Batch Operations During Off-Peak Hours
+    description: >-
+      Schedule large batch metadata operations, holdings updates, and data
+      synchronization tasks during off-peak hours to spread API usage across
+      the rolling 24-hour window rather than spiking at peak times.
+    priority: medium
+
+  - name: Evaluate Subscription Tier Against API Usage Needs
+    description: >-
+      Regularly review which OCLC subscriptions are active against actual API
+      usage patterns. Ensure the library holds only the subscriptions needed
+      for the APIs in use (e.g., do not maintain a Meridian subscription if
+      only using Search API features).
+    priority: low
+
+  - name: Request Higher Rate Limits Proactively
+    description: >-
+      If your institution anticipates exceeding 50,000 requests/day for a
+      sustained project, contact OCLC developer support in advance to request
+      a temporary or permanent limit increase rather than discovering the limit
+      mid-project.
+    priority: medium
+
+cost_visibility:
+  - name: OCLC Member Fee Schedule
+    url: https://www.oclc.org/en/membership/fees.html
+    description: Annual membership and subscription fee schedule for OCLC members
+
+  - name: OCLC Developer FAQ
+    url: https://www.oclc.org/developer/support/faq.en.html
+    description: Documentation on rate limits and usage policy
+
+  - name: WSKey Management Portal
+    url: https://platform.worldcat.org/wskey/
+    description: Manage API credentials and monitor associated API keys per institution
+
+contact:
+  description: Contact OCLC developer support for rate limit increases or subscription questions
+  email: devnet@oclc.org
+  url: https://www.oclc.org/developer/support.en.html

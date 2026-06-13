@@ -1,0 +1,158 @@
+aid: worldcat
+name: WorldCat
+description: >-
+  OCLC WorldCat REST API for searching 500 million+ library holdings worldwide,
+  accessing bibliographic records, finding library locations, and retrieving
+  rich metadata for books, videos, music, and other media. Provides access to
+  the WorldCat Search API, WorldCat Metadata API, WorldCat Knowledge Base API,
+  and WorldCat Entities data API for libraries and developers building discovery
+  and cataloging applications.
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/worldcat/refs/heads/main/apis.yml
+created: "2026-06-13"
+modified: "2026-06-13"
+specificationVersion: "0.19"
+tags:
+  - Libraries
+  - Bibliographic Records
+  - WorldCat
+  - OCLC
+  - Cataloging
+  - Metadata
+  - Discovery
+  - Books
+  - Media
+  - Linked Data
+apis:
+  - aid: worldcat:worldcat-search-api
+    name: WorldCat Search API
+    description: >-
+      Search WorldCat and retrieve bibliographic records for cataloged items
+      such as books, videos, music and more across 500 million+ holdings.
+      Supports retrieval by OCLC number, ISBN, ISSN, and other identifiers.
+      Also enables finding libraries holding specific items and identifying
+      libraries committed to retention programs.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+    baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+    tags:
+      - Search
+      - Bibliographic Records
+      - WorldCat
+      - OCLC
+      - Libraries
+      - Holdings
+    properties:
+      - type: Documentation
+        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+      - type: OpenAPI
+        url: https://developer.api.oclc.org/wcv2
+    contact:
+      - FN: OCLC Developer Network
+        url: https://www.oclc.org/developer/api.en.html
+        email: devnet@oclc.org
+
+  - aid: worldcat:worldcat-metadata-api
+    name: WorldCat Metadata API
+    description: >-
+      Enables libraries to search, retrieve and maintain their bibliographic,
+      local bibliographic, holdings, and local holdings data in WorldCat.
+      Supports synchronizing local catalog data, discovering shared print
+      retention information, and enhancing metadata quality across the network.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+    baseURL: https://metadata.api.oclc.org/worldcat
+    tags:
+      - Metadata
+      - Cataloging
+      - Holdings
+      - Bibliographic Records
+      - Libraries
+    properties:
+      - type: Documentation
+        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+      - type: OpenAPI
+        url: https://developer.api.oclc.org/wc-metadata-v2
+    contact:
+      - FN: OCLC Developer Network
+        url: https://www.oclc.org/developer/api.en.html
+        email: devnet@oclc.org
+
+  - aid: worldcat:worldcat-knowledge-base-api
+    name: WorldCat Knowledge Base API
+    description: >-
+      Provides developer-level access to a library's information in the WorldCat
+      Knowledge Base, combining data about a library's e-content with access
+      through linking features. Supports OpenURL requests for matching citations
+      and retrieving access links, and REST requests for browsing and searching
+      library subscription resources.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
+    baseURL: https://worldcat.org/webservices/kb
+    tags:
+      - Knowledge Base
+      - E-resources
+      - OpenURL
+      - Libraries
+      - Subscriptions
+    properties:
+      - type: Documentation
+        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
+    contact:
+      - FN: OCLC Developer Network
+        url: https://www.oclc.org/developer/api.en.html
+        email: devnet@oclc.org
+
+  - aid: worldcat:worldcat-entities-data-api
+    name: WorldCat Entities Data API
+    description: >-
+      Retrieve a set of properties and data for over 150 million WorldCat
+      Entities using associated uniform resource identifiers (URIs). Supports
+      linked data integration for local discovery applications, research and
+      analysis, and monitoring updates to WorldCat Entities data.
+    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+    baseURL: https://id.oclc.org/worldcat/entity
+    tags:
+      - Entities
+      - Linked Data
+      - WorldCat
+      - Libraries
+      - Research
+    properties:
+      - type: Documentation
+        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+      - type: OpenAPI
+        url: https://developer.api.oclc.org/entity-data
+    contact:
+      - FN: OCLC Developer Network
+        url: https://www.oclc.org/developer/api.en.html
+        email: devnet@oclc.org
+
+common:
+  - type: Website
+    url: https://www.worldcat.org/
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis.en.html
+  - type: GitHubOrg
+    url: https://github.com/OCLC-Developer-Network
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/oclc
+  - type: Blog
+    url: https://www.oclc.org/developer/news.en.html
+  - type: Pricing
+    url: https://www.oclc.org/en/membership/fees.html
+  - type: StatusPage
+    url: https://oclc.service-now.com/status
+  - type: X
+    url: https://x.com/oclcdevnetwork
+  - type: Plans
+    url: plans/worldcat-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/worldcat-rate-limits.yml
+  - type: FinOps
+    url: finops/worldcat-finops.yml
+
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
