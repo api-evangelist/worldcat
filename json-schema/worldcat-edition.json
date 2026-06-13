@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.api.oclc.org/schemas/worldcat-edition.json",
+  "title": "Edition",
+  "description": "WorldCat Edition schema",
+  "type": "object",
+  "properties": {
+    "id": {
+      "$ref": "#/components/schemas/EditionIdentifier"
+    },
+    "count": {
+      "description": "Number of items in edition cluster",
+      "type": "integer",
+      "format": "int32"
+    }
+  }
+}

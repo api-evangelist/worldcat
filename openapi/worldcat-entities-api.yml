@@ -1,0 +1,282 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data
+  description: WorldCat Entity Data
+servers:
+  - url: https://id.oclc.org/worldcat
+    description: PROD
+paths:
+  /entity/{id}:
+    get:
+      tags:
+        - Retrieve entity
+      summary: Get an entity or entities by IDs
+      description: Given a known entity ID, or IDs of multiple entities in a comma-separated list, find information about the entity for each identifier provided
+      operationId: read-entity-data
+      parameters:
+        - $ref: '#/components/parameters/accept-ld'
+        - $ref: '#/components/parameters/if-none-match'
+        - $ref: '#/components/parameters/emi-id'
+      responses:
+        '200':
+          description: Client request has succeeded
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/JsonLdEntity'
+        '304':
+          $ref: '#/components/responses/not-modified'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '405':
+          $ref: '#/components/responses/post-not-supported'
+        '406':
+          $ref: '#/components/responses/failed-not-acceptable'
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+        '502':
+          $ref: '#/components/responses/bad-gateway-error'
+      security:
+        - entity_data_auth:
+            - publicEntities:read_brief_entities
+components:
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+  parameters:
+    accept-ld:
+      name: Accept
+      in: header
+      description: Format of response, current support is application/ld+json
+      required: false
+      schema:
+        type: string
+        enum:
+          - application/ld+json
+        example: application/ld+json
+        default: application/ld+json
+    if-none-match:
+      name: If-None-Match
+      in: header
+      description: Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.
+      required: false
+      schema:
+        type: string
+        example: '"0e91bff9e85b0e77dc2c53db82519e987"'
+    emi-id:
+      name: id
+      in: path
+      description: Singular Entity ID
+      required: true
+      schema:
+        type: string
+        example: E39PBJcGmbT4qdMwCHRrCypHG3
+  schemas:
+    JsonLdEntity:
+      type: object
+      properties:
+        '@context':
+          type: string
+          example: https://id.oclc.org/api/context.json
+        '@id':
+          type: string
+          example: E39PBJt8mDMYddfbpGdp8bFYfq
+        type:
+          type: array
+          items:
+            type: string
+            example: Person
+        prefLabel:
+          type: object
+          properties:
+            az:
+              type: string
+              example: Fred Kilgur
+            es:
+              type: string
+              example: Frederick Kilgour
+            en:
+              type: string
+              example: Fred Kilgour
+        altLabel:
+          type: object
+          properties:
+            en:
+              type: array
+              items:
+                type: string
+                example: Frederick Gridley Kilgour
+            es:
+              type: array
+              items:
+                type: string
+                example: Fred Kilgour
+        description:
+          type: object
+          properties:
+            en:
+              type: string
+              example: American librarian (1914-2006)
+            es:
+              type: string
+              example: bibliotecario estadounidense
+    ProblemGateway:
+      type: object
+      description: Description of error occurring at platform gateway level
+      properties:
+        message:
+          description: Sole field returned if gateway error occurs
+          type: string
+    Problem:
+      type: object
+      description: Description of an error.
+      properties:
+        type:
+          description: Enumerated value string identifying the problem type.
+          type: string
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        timestamp:
+          description: ISO 8601 timestamp string showing time when error occurred.
+          type: string
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.
+          type: string
+  headers:
+    Cache-Control:
+      schema:
+        type: string
+      description: Transmits a variety of cache control directives that typically override default caching algorithms.
+    ETag:
+      schema:
+        type: string
+      description: Identifier for a specific version of a resource.
+  responses:
+    not-modified:
+      description: The client has performed a conditional GET request and access is allowed, but the document has not been modified.
+      headers:
+        Cache-Control:
+          $ref: '#/components/headers/Cache-Control'
+        ETag:
+          $ref: '#/components/headers/ETag'
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemGateway'
+          examples:
+            unauthorized:
+              $ref: '#/components/examples/unauthorized'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemGateway'
+          examples:
+            forbidden:
+              $ref: '#/components/examples/forbidden'
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found-user:
+              $ref: '#/components/examples/failed-not-found'
+    post-not-supported:
+      description: Method not supported, see response Allow header
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-allowed:
+              $ref: '#/components/examples/post-not-allowed-error'
+    failed-not-acceptable:
+      description: Media type not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
+    internal-server-error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            access-denied-error:
+              $ref: '#/components/examples/internal-error'
+    bad-gateway-error:
+      description: Bad Gateway
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemGateway'
+          examples:
+            access-denied-error:
+              $ref: '#/components/examples/bad-gateway-error'
+  examples:
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    forbidden:
+      summary: Error returned when API credentials not for resource
+      value:
+        message: Forbidden
+    failed-not-found:
+      summary: Entity is not found
+      value:
+        type: ITEM_NOT_FOUND
+        title: Item was not found
+        timestamp: '2024-01-01T20:00:39.647Z'
+        detail: Entity ID E39PBJpjdHFcRjmdvjWFr33fb is not found
+    post-not-allowed-error:
+      summary: Error when invalid HTTP method used
+      value:
+        type: METHOD_NOT_ALLOWED
+        title: Method not allowed
+        timestamp: '2024-01-01T20:00:39.647'
+        detail: Request method 'POST' is not supported
+    not-acceptable-error:
+      summary: Error when media type in Accept header not supported
+      value:
+        type: NOT_ACCEPTABLE
+        title: Not acceptable
+        timestamp: '2020-01-01T20:00:39.647634'
+        detail: 'Acceptable representations: application/json;charset=UTF-8, application/problem+json'
+    internal-error:
+      summary: Unexpected server error
+      value:
+        type: INTERNAL_ERROR
+        title: Internal error
+        timestamp: '2020-01-01T20:00:39.647634'
+    bad-gateway-error:
+      summary: Unexpected server error
+      value:
+        message: Bad Gateway

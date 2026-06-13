@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.api.oclc.org/schemas/worldcat-bib-record-brief.json",
+  "title": "BibRecordBrief",
+  "description": "WorldCat BibRecordBrief schema",
+  "type": "object",
+  "properties": {
+    "oclcNumber": {
+      "$ref": "#/components/schemas/OclcNumber"
+    },
+    "title": {
+      "$ref": "#/components/schemas/SimpleTitle"
+    },
+    "creator": {
+      "$ref": "#/components/schemas/CreatorString"
+    },
+    "date": {
+      "$ref": "#/components/schemas/Date"
+    },
+    "language": {
+      "$ref": "#/components/schemas/ItemLanguage"
+    },
+    "generalFormat": {
+      "$ref": "#/components/schemas/GeneralFormat"
+    },
+    "specificFormat": {
+      "$ref": "#/components/schemas/SpecificFormat"
+    },
+    "edition": {
+      "$ref": "#/components/schemas/EditionStatement"
+    },
+    "publisher": {
+      "type": "string"
+    },
+    "isbns": {
+      "$ref": "#/components/schemas/Isbns"
+    },
+    "issns": {
+      "$ref": "#/components/schemas/Issns"
+    },
+    "mergedOclcNumbers": {
+      "$ref": "#/components/schemas/MergedOclcNumbers"
+    },
+    "catalogingInfo": {
+      "$ref": "#/components/schemas/CatalogingInfo"
+    },
+    "institutionHolding": {
+      "$ref": "#/components/schemas/InstitutionHolding"
+    }
+  },
+  "required": [
+    "oclcNumber",
+    "title",
+    "creator",
+    "date",
+    "language",
+    "edition",
+    "publisher"
+  ]
+}

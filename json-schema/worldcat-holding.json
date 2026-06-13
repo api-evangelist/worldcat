@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.api.oclc.org/schemas/worldcat-holding.json",
+  "title": "InstitutionHolding",
+  "description": "WorldCat InstitutionHolding schema",
+  "type": "object",
+  "properties": {
+    "totalHoldingCount": {
+      "description": "Number of holdings for this item [Holdings/TotalLibCount || FRBRHoldings/B]",
+      "type": "integer",
+      "format": "int32"
+    },
+    "totalWorksHoldingCount": {
+      "description": "Number of holdings in the workset [FRBRHoldings/B]",
+      "type": "integer",
+      "format": "int32"
+    },
+    "totalEditions": {
+      "$ref": "#/components/schemas/TotalEditions"
+    }
+  },
+  "oneOf": [
+    {
+      "$ref": "#/components/schemas/briefHoldings"
+    },
+    {
+      "$ref": "#/components/schemas/detailedHoldings"
+    }
+  ]
+}

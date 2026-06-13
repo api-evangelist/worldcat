@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://developer.api.oclc.org/schemas/worldcat-bib-record.json",
+  "title": "BibRecord",
+  "description": "WorldCat BibRecord schema",
+  "type": "object",
+  "properties": {
+    "identifier": {
+      "$ref": "#/components/schemas/Identifier"
+    },
+    "title": {
+      "$ref": "#/components/schemas/Title"
+    },
+    "contributor": {
+      "$ref": "#/components/schemas/Contributor"
+    },
+    "subjects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Subject"
+      }
+    },
+    "classification": {
+      "$ref": "#/components/schemas/Classification"
+    },
+    "publishers": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Publisher"
+      }
+    },
+    "date": {
+      "$ref": "#/components/schemas/DateObject"
+    },
+    "language": {
+      "$ref": "#/components/schemas/Language"
+    },
+    "edition": {
+      "$ref": "#/components/schemas/EditionInfo"
+    },
+    "source": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Source"
+      }
+    },
+    "note": {
+      "$ref": "#/components/schemas/Note"
+    },
+    "format": {
+      "$ref": "#/components/schemas/Format"
+    },
+    "musicInfo": {
+      "$ref": "#/components/schemas/MusicInfo"
+    },
+    "digitalAccessAndLocations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/DigitalAccessAndLocation"
+      }
+    },
+    "description": {
+      "$ref": "#/components/schemas/Description"
+    },
+    "related": {
+      "$ref": "#/components/schemas/Related"
+    },
+    "work": {
+      "$ref": "#/components/schemas/Work"
+    },
+    "editionCluster": {
+      "$ref": "#/components/schemas/Edition"
+    },
+    "totalEditions": {
+      "$ref": "#/components/schemas/TotalEditions"
+    },
+    "database": {
+      "$ref": "#/components/schemas/Database"
+    },
+    "localTitle": {
+      "$ref": "#/components/schemas/Title"
+    },
+    "localContributor": {
+      "$ref": "#/components/schemas/Contributor"
+    },
+    "localSubjects": {
+      "type": "array",
+      "items": {
+        "$ref": "#/components/schemas/Subject"
+      }
+    },
+    "localNote": {
+      "$ref": "#/components/schemas/Note"
+    },
+    "localGenres": {
+      "$ref": "#/components/schemas/Genres"
+    }
+  }
+}

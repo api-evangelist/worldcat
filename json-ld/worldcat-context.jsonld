@@ -1,0 +1,62 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "oclc": "https://www.oclc.org/ontologies/",
+    "worldcat": "https://id.oclc.org/worldcat/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "dc": "http://purl.org/dc/elements/1.1/",
+    "dcterms": "http://purl.org/dc/terms/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "bibframe": "http://id.loc.gov/ontologies/bibframe/",
+    "oclcnum": {
+      "@id": "worldcat:oclcNumber",
+      "@type": "xsd:string"
+    },
+    "isbn": {
+      "@id": "schema:isbn",
+      "@type": "xsd:string"
+    },
+    "issn": {
+      "@id": "schema:issn",
+      "@type": "xsd:string"
+    },
+    "holdings": {
+      "@id": "worldcat:holdings",
+      "@type": "@id"
+    },
+    "institution": {
+      "@id": "worldcat:institution",
+      "@type": "@id"
+    },
+    "bibliographicRecord": {
+      "@id": "worldcat:BibliographicRecord",
+      "@type": "@id"
+    },
+    "workIdentifier": {
+      "@id": "worldcat:workIdentifier"
+    },
+    "edition": {
+      "@id": "bibframe:edition"
+    },
+    "generalFormat": {
+      "@id": "worldcat:generalFormat"
+    },
+    "specificFormat": {
+      "@id": "worldcat:specificFormat"
+    },
+    "language": {
+      "@id": "dcterms:language",
+      "@type": "@id"
+    },
+    "catalogingInfo": {
+      "@id": "worldcat:catalogingInfo"
+    },
+    "mergedOclcNumbers": {
+      "@id": "worldcat:mergedOclcNumbers",
+      "@container": "@list"
+    }
+  }
+}
