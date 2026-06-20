@@ -7,7 +7,7 @@ description: >-
   the WorldCat Search API, WorldCat Metadata API, WorldCat Knowledge Base API,
   and WorldCat Entities data API for libraries and developers building discovery
   and cataloging applications.
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://raw.githubusercontent.com/api-evangelist/worldcat/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -32,7 +32,7 @@ apis:
       Supports retrieval by OCLC number, ISBN, ISSN, and other identifiers.
       Also enables finding libraries holding specific items and identifying
       libraries committed to retention programs.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
     baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
     tags:
@@ -59,7 +59,7 @@ apis:
       local bibliographic, holdings, and local holdings data in WorldCat.
       Supports synchronizing local catalog data, discovering shared print
       retention information, and enhancing metadata quality across the network.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
     baseURL: https://metadata.api.oclc.org/worldcat
     tags:
@@ -86,7 +86,7 @@ apis:
       through linking features. Supports OpenURL requests for matching citations
       and retrieving access links, and REST requests for browsing and searching
       library subscription resources.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
     baseURL: https://worldcat.org/webservices/kb
     tags:
@@ -110,7 +110,7 @@ apis:
       Entities using associated uniform resource identifiers (URIs). Supports
       linked data integration for local discovery applications, research and
       analysis, and monitoring updates to WorldCat Entities data.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
     baseURL: https://id.oclc.org/worldcat/entity
     tags:
