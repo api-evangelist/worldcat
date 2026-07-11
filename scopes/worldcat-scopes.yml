@@ -1,0 +1,207 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/worldcat-entities-api.yml, openapi/worldcat-metadata-api.yml, openapi/worldcat-search-api.yml
+schemes:
+- name: entity_data_auth
+  source: openapi/worldcat-entities-api.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://oauth.oclc.org/token
+  - flow: authorizationCode
+    authorizationUrl: https://oauth.oclc.org/auth
+    tokenUrl: https://oauth.oclc.org/token
+- name: worldcat_metadata_auth
+  source: openapi/worldcat-metadata-api.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://oauth.oclc.org/token
+  - flow: authorizationCode
+    authorizationUrl: https://oauth.oclc.org/auth
+    tokenUrl: https://oauth.oclc.org/token
+- name: worldcat_search_auth
+  source: openapi/worldcat-search-api.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://oauth.oclc.org/token
+  - flow: authorizationCode
+    authorizationUrl: https://oauth.oclc.org/auth
+    tokenUrl: https://oauth.oclc.org/token
+scopes:
+- scope: WorldCatMetadataAPI
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:get_holding_codes
+  description: retrieve holding codes
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:manage_bibs
+  description: manage bibliographic data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:manage_institution_holdings
+  description: manage institution holdings
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:manage_institution_lbds
+  description: manage institution local bibliographic data records
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:manage_institution_lhrs
+  description: manage institution local holdings data records
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:match_bibs
+  description: match bibliographic records
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_bib
+  description: view full bibliographic data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_brief_bib
+  description: view brief bibliographic data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_marc_bib
+  description: view marc bibliographic data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_my_holdings
+  description: view detailed information about the authentication institution's holdings
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_my_holdings_private_notes
+  description: view private notes in holdings data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_my_local_bib_data
+  description: view local bibliographic data from the authenticate institution
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_retained_holdings
+  description: view holdings which libraries have chosen to retain
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: WorldCatMetadataAPI:view_summary_holdings
+  description: view summary information about library holdings
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: enhMetadataAPI:fieldTransfer
+  description: field transfer functionality
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-metadata-api.yml
+- scope: publicEntities:read_brief_entities
+  description: read brief entity data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-entities-api.yml
+- scope: publicEntities:read_references
+  description: read entity references
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-entities-api.yml
+- scope: wcapi:view_bib
+  description: view bibliographic data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml
+- scope: wcapi:view_brief_bib
+  description: view brief bibliographic data
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml
+- scope: wcapi:view_holdings
+  description: view detailed information about library holdings
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml
+- scope: wcapi:view_institution_holdings
+  description: view information about what library holds an item
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml
+- scope: wcapi:view_my_holdings
+  description: view detailed information about the authentication institution's holdings
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml
+- scope: wcapi:view_my_holdings_private_notes
+  description: view private notes in the authentication institution's holdings
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml
+- scope: wcapi:view_retained_holdings
+  description: view holdings which libraries have chosen to retain
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml
+- scope: wcapi:view_summary_holdings
+  description: view summary information about library holdings
+  flows:
+  - authorizationCode
+  - clientCredentials
+  sources:
+  - openapi/worldcat-search-api.yml

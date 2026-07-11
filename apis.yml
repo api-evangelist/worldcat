@@ -130,6 +130,10 @@ apis:
         email: devnet@oclc.org
 
 common:
+  - type: Authentication
+    url: authentication/worldcat-authentication.yml
+  - type: OAuthScopes
+    url: scopes/worldcat-scopes.yml
   - type: Website
     url: https://www.worldcat.org/
   - type: Documentation
