@@ -130,6 +130,8 @@ apis:
         email: devnet@oclc.org
 
 common:
+  - type: DomainSecurity
+    url: security/worldcat-domain-security.yml
   - type: Authentication
     url: authentication/worldcat-authentication.yml
   - type: OAuthScopes
