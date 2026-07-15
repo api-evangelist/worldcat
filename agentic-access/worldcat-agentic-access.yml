@@ -1,0 +1,797 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/worldcat-entities-api.yml, openapi/worldcat-knowledge-base-api.yml, openapi/worldcat-metadata-api.yml,
+  openapi/worldcat-search-api.yml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 58
+  by_action_class:
+    connected: 43
+    acting: 15
+  by_consequence:
+    read: 43
+    write: 11
+    safety-critical: 4
+  human_in_the_loop_required: 4
+operations:
+- path: /entity/{id}
+  method: get
+  operationId: read-entity-data
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - publicEntities:read_brief_entities
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/collections/search
+  method: get
+  operationId: find-kb-collections
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/collections/{collection_uid}
+  method: get
+  operationId: read-kb-collection
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/entries/search
+  method: get
+  operationId: find-kb-titles
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/entries/{entry_uid}
+  method: get
+  operationId: read-kb-title
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/providers/search
+  method: get
+  operationId: find-kb-providers
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /rest/providers/{provider_ID}
+  method: get
+  operationId: read-kb-provider
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /openurl/resolve
+  method: get
+  operationId: find-title-by-openurl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /openurl/mresolve
+  method: get
+  operationId: find-multiple-titles-by-openurl
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/bibs/validate/{validationLevel}
+  method: post
+  operationId: validate-a-bib
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_bibs
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/bibs/current
+  method: get
+  operationId: get-current-oclc-number
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:manage_bibs
+    - WorldCatMetadataAPI:match_bibs
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/bibs
+  method: post
+  operationId: bib-create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_bibs
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/bibs/{oclcNumber}
+  method: get
+  operationId: bib-read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:manage_bibs
+    - WorldCatMetadataAPI:view_marc_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/bibs/{oclcNumber}
+  method: put
+  operationId: bib-replace
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_bibs
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/bibs/match
+  method: post
+  operationId: match-bib
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_bibs
+    - WorldCatMetadataAPI:match_bibs
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/institution/holdings/current
+  method: get
+  operationId: get-current-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:manage_institution_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/institution/holdings/set
+  method: post
+  operationId: set-a-holding
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_holdings
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/institution/holdings/unset
+  method: post
+  operationId: unset-a-holding
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_holdings
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/institution/holdings/{oclcNumber}/set
+  method: post
+  operationId: set-holding-for-one-or-multiple-institutions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_holdings
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/institution/holdings/{oclcNumber}/unset
+  method: post
+  operationId: Unset-holding-for-one-or-multiple-institutions
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_holdings
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/institution/holdings/move
+  method: post
+  operationId: move-holdings
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_holdings
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/institution/holding-codes
+  method: get
+  operationId: retrieve-holding-codes
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:get_holding_codes
+    - WorldCatMetadataAPI:manage_bibs
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/lbds
+  method: post
+  operationId: lbd-create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lbds
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/lbds/{controlNumber}
+  method: get
+  operationId: lbd-read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lbds
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/lbds/{controlNumber}
+  method: put
+  operationId: lbd-update
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lbds
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /worldcat/manage/lbds/{controlNumber}
+  method: delete
+  operationId: lbd-delete
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lbds
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /worldcat/manage/lhrs
+  method: post
+  operationId: lhr-create
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lhrs
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /worldcat/manage/lhrs/{controlNumber}
+  method: get
+  operationId: lhr-read
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lhrs
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/lhrs/{controlNumber}
+  method: put
+  operationId: lhr-update
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lhrs
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /worldcat/manage/lhrs/{controlNumber}
+  method: delete
+  operationId: lhr-delete
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - WorldCatMetadataAPI:manage_institution_lhrs
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /worldcat/search/bibs-retained-holdings
+  method: get
+  operationId: find-bib-retained-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_retained_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/bibs-summary-holdings
+  method: get
+  operationId: find-bib-summary-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_summary_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/brief-bibs
+  method: get
+  operationId: search-brief-bibs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_brief_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/brief-bibs/{oclcNumber}
+  method: get
+  operationId: retrieve-brief-bib
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_brief_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/brief-bibs/{oclcNumber}/other-editions
+  method: get
+  operationId: retrieve-other-editions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_brief_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/classification-bibs/{oclcNumber}
+  method: get
+  operationId: get-classifications
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_brief_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/bibs/{oclcNumber}
+  method: get
+  operationId: retrieve-bib
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/summary-holdings
+  method: get
+  operationId: find-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_summary_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/retained-holdings
+  method: get
+  operationId: search-retrained-lhr
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_retained_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/my-local-bib-data/{controlNumber}
+  method: get
+  operationId: retrieve-lbd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_my_local_bib_data
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/my-local-bib-data
+  method: get
+  operationId: search-lbd
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_my_local_bib_data
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/my-holdings/{controlNumber}
+  method: get
+  operationId: retrieve-lhr
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_my_holdings
+    - WorldCatMetadataAPI:view_my_holdings_private_notes
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/my-holdings
+  method: get
+  operationId: search-lhr
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_my_holdings
+    - WorldCatMetadataAPI:view_my_holdings_private_notes
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/browse/my-holdings
+  method: get
+  operationId: browse-lhr
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:view_my_holdings
+    - WorldCatMetadataAPI:view_my_holdings_private_notes
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/manage/institution-config/branch-shelving-locations
+  method: get
+  operationId: manage-institution-branch-config
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:get_holding_codes
+    - WorldCatMetadataAPI:manage_bibs
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/institution
+  method: get
+  operationId: find-institution-by-identifier
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - WorldCatMetadataAPI:get_holding_codes
+    - WorldCatMetadataAPI:manage_bibs
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/bibs-retained-holdings
+  method: get
+  operationId: find-bib-retained-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_retained_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/bibs-summary-holdings
+  method: get
+  operationId: find-bib-summary-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_summary_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/bibs-holdings
+  method: get
+  operationId: find-bib-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_institution_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/bibs-detailed-holdings
+  method: get
+  operationId: find-bib-detailed-holdings
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/bibs
+  method: get
+  operationId: search-bibs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/bibs/{oclcNumber}
+  method: get
+  operationId: retrieve-bib
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/brief-bibs
+  method: get
+  operationId: search-brief-bibs
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_brief_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/brief-bibs/{oclcNumber}
+  method: get
+  operationId: retrieve-brief-bib
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_brief_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/brief-bibs/{oclcNumber}/other-editions
+  method: get
+  operationId: retrieve-other-editions
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_brief_bib
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/my-holdings/{controlNumber}
+  method: get
+  operationId: retrieve-lhr
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_my_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/my-holdings
+  method: get
+  operationId: search-lhr
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_my_holdings
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /worldcat/search/v2/retained-holdings
+  method: get
+  operationId: search-retrained-lhr
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - wcapi:view_retained_holdings
+    token:
+      max-ttl: 3600
+    audit: none
