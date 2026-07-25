@@ -1,0 +1,486 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data Bibliographic Resources Member Enabled Titles by OpenURL API
+  description: WorldCat Entity Data
+servers:
+- url: https://id.oclc.org/worldcat
+  description: PROD
+tags:
+- name: Member Enabled Titles by OpenURL
+paths:
+  /openurl/mresolve:
+    get:
+      tags:
+      - Member Enabled Titles by OpenURL
+      summary: Find member enabled titles based on OpenURL
+      description: Given an OpenURL find titles enabled by member library
+      operationId: find-multiple-titles-by-openurl
+      parameters:
+      - name: queries
+        in: query
+        description: JSON object contain queries
+        schema:
+          type: object
+        required: true
+        example:
+          queryForBook:
+            rft.isbn: '9780596007652'
+          queryForJournal:
+            rft.issn: 0028-0836
+          queryForArticle:
+            rft.title: Nature
+            rft.issn: 0028-0836
+            rft.date: '2010-02-18'
+            rft.volume: '463'
+            rft.issue: '7283'
+            rft.spage: '850'
+            rft.atitle: Nature's+choices
+      - name: alt
+        in: query
+        description: Format to return results in. application/xml or application/json
+        schema:
+          type: string
+          default: xml
+          enum:
+          - xml
+          - json
+        required: false
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                success-read-collection:
+                  $ref: '#/components/examples/success-openurl-multiple'
+        '400':
+          description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                missing-query-parameter:
+                  $ref: '#/components/examples/missing-query-parameter'
+        '405':
+          description: Method not supported, see response Allow header
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                summary: Error when invalid HTTP method used
+                value:
+                  title: NOT_ALLOWED
+                  detail: POST method not allowed
+        '500':
+          description: Something went wrong (hopfully rare) - please try again
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - api_key: []
+components:
+  examples:
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
+    success-openurl-multiple:
+      summary: successful openurl request for multiple items
+      value:
+        queryForBook:
+          result:
+          - coverage: ebook@2005-09-26
+            collection_url: http://my.safaribooksonline.com
+            collection_uid: safari.tech
+            oclcnums: 65183407 61260129 878406930 861529762 847462570 61849699 270992543
+            isbn: '9780596007652'
+            provider_uid: safari
+            source: holdings
+            title: Ambient Findability
+            collection_type: browsable
+            content: ebook
+            url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best
+            institution_id:
+            - '128807'
+            uid: '1883656'
+            bkey: 0596007655
+            publisher: O'Reilly Media, Inc. - O'Reilly Media
+            openaccess: 'no'
+            id: d6edd1064311b081e77051faf19e687e
+            provider_name: Safari Books Online
+            collection_name: Safari Tech Books Online
+            oclcnum: '61849699'
+        queryForJournal:
+          result:
+          - coverage: fulltext@2005-10-05~2018-08-29
+            collection_url: https://www.nature.com
+            collection_uid: NPG.openAccess
+            jkey: nature
+            oclcnums: 1058009839 1586310 993757444
+            provider_uid: NPG
+            eissn: 1476-4687
+            linkerurl: http://linker2.worldcat.org/?jKey=nature&rft.institution_id=128807&linktype=best&eissn=1476-4687&title=Nature&linkScheme=npg&jHome=https%3A%2F%2Fwww.nature.com%2Fnature&issn=0028-0836&provider=NPG&pkgName=openAccess&linkclass=to_article
+            source: holdings
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fwww.nature.com%2Fnature&linktype=best
+            institution_id:
+            - '128807'
+            uid: '40067081'
+            issn: 0028-0836
+            publisher: Nature Publishing Group
+            openaccess: 'yes'
+            id: 4261821ec9fcc25391bf7643b6a817e5
+            provider_name: Nature Publishing Group
+            collection_name: Nature Open Access Content
+            coverage_enum: fulltext
+            oclcnum: '1058009839'
+          - coverage: fulltext@1878~1922
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.UsDnldRestrict
+            oclcnums: 65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '47723575'
+            bkey: mdp.39015038818442
+            issn: 0028-0836
+            publisher: Macmillan Journals Ltd., etc.
+            openaccess: 'yes'
+            id: b93693c2879e9d0f7a9fb5a616ac9dc3
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '65289277'
+          - coverage: fulltext@1869~1875
+            collection_uid: global.53639.8.mcgillejournalsopenaccess
+            oclcnums: 65289277 863853449 4285192 297226504 630212514 421716612 942765934 993757444 243591959 933310873 47076528 1087156682 932537059 396102007 740974185 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 466385074 1586310
+            eissn: 1476-4687
+            source: openaccess
+            title: Nature
+            collection_type: openaccess deprecated cooperative
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fdigicoll.library.wisc.edu%2Fcgi-bin%2FHistSciTech%2FHistSciTech-idx%3Ftype%3Dbrowse%26scope%3DHISTSCITECH.NATURE&linktype=best
+            institution_id:
+            - '128807'
+            issn: 0028-0836
+            openaccess: 'yes'
+            id: 19da7263f842da819060197f40bd7a2b
+            collection_name: Open Access eJournals (McGill)
+            coverage_enum: fulltext
+            oclcnum: '47076528'
+          - coverage: fulltext@1870~1875
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.OutsideDnldRestrict
+            oclcnums: 65289277 855510898 4285192 499775149 630212514 421716612 942765934 140122618 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F140122618.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '44464947'
+            bkey: nyp.33433016842746
+            issn: 0028-0836
+            publisher: Macmillan Journals ltd.
+            openaccess: 'yes'
+            id: 2a5bc70a369aa3e24cf600a1759a0102
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust Outside US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '65289277'
+          - coverage: fulltext@1869~1878
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.OutsideDnldRestrict
+            oclcnums: 65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '46041304'
+            bkey: uc1.31210005082027
+            issn: 0028-0836
+            publisher: Macmillan Journals Ltd., etc.
+            openaccess: 'yes'
+            id: 520808ea5f7493ef8fa35210d416b2e8
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust Outside US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '65289277'
+          - coverage: fulltext@1869~1873
+            collection_url: http://www.hathitrust.org/
+            collection_uid: hathitrust.pdAccess
+            oclcnums: 855510898 863853449 297226504 499775149 421716612 505014713 630212514 801435398 47076528 740974185 669712494 7417753 8315982 14638648 252459251 466385074 65289277 4285192 942765934 932537059 396102007 9269265 682135186 433679811 496009298 610353595 1586310
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess deprecated
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '18400864'
+            bkey: coo.31924066893615
+            issn: 0028-0836
+            openaccess: 'yes'
+            id: 225a22a80d99e3cdf56eb7cc3d326755
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust Public Domain Access
+            coverage_enum: fulltext
+            oclcnum: '47076528'
+          - coverage: fulltext@1869~1877
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.OutsideDnldRestrict
+            oclcnums: 855510898 863853449 496009298 1586310
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '44552745'
+            bkey: coo.31924066893847
+            issn: 0028-0836
+            publisher: Macmillan.
+            openaccess: 'yes'
+            id: 9c08d5ef62e46baa383d22075ba88c1e
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust Outside US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '863853449'
+          - coverage: fulltext@1869~1877
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.UsDnldRestrict
+            oclcnums: 855510898 863853449 496009298 1586310
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '46739507'
+            bkey: coo.31924066893847
+            issn: 0028-0836
+            publisher: Macmillan.
+            openaccess: 'yes'
+            id: 8587f6072d21eacbc70f57cba481b11b
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '863853449'
+          - coverage: fulltext@1869~1873
+            collection_url: http://www.hathitrust.org/
+            collection_uid: hathitrust.pdAccess
+            oclcnums: 855510898 863853449 297226504 499775149 421716612 505014713 630212514 801435398 47076528 740974185 669712494 7417753 8315982 14638648 252459251 466385074 65289277 4285192 942765934 932537059 396102007 9269265 682135186 433679811 610353595 1586310
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess deprecated
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '5804956'
+            bkey: mdp.39015038818269
+            issn: 0028-0836
+            openaccess: 'yes'
+            id: cd7b75934349bf07acf540d350585a62
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust Public Domain Access
+            coverage_enum: fulltext
+            oclcnum: '47076528'
+          - coverage: fulltext@1869~1878
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.UsDnldRestrict
+            oclcnums: 65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '49229610'
+            bkey: uc1.31210005082027
+            issn: 0028-0836
+            publisher: Macmillan Journals Ltd., etc.
+            openaccess: 'yes'
+            id: 10ddc9b636369fc35085f416f21e9687
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '65289277'
+          - coverage: fulltext@1874~1921
+            collection_url: http://www.hathitrust.org/
+            collection_uid: hathitrust.pdusAccess
+            oclcnums: 65289277 855510898 863853449 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 496009298 8315982 14638648 610353595 1058009839 466385074 1586310
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess deprecated
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '18690922'
+            bkey: coo.31924072038395
+            issn: 0028-0836
+            openaccess: 'yes'
+            id: 6d995bedf04219f448356e4e821eea12
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust Public Domain only in US Access
+            coverage_enum: fulltext
+            oclcnum: '863853449'
+          - coverage: fulltext@1870~1875
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.UsDnldRestrict
+            oclcnums: 65289277 855510898 4285192 499775149 630212514 421716612 942765934 140122618 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F140122618.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '46545263'
+            bkey: nyp.33433016842746
+            issn: 0028-0836
+            publisher: Macmillan Journals ltd.
+            openaccess: 'yes'
+            id: b279a6a0bcdbfa8946e649779a74d2bc
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '65289277'
+          - coverage: fulltext@1878~1887
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.UsDnldRestrict
+            oclcnums: 65289277 855510898 4285192 499775149 630212514 421716612 942765934 140122618 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F140122618.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '46664680'
+            bkey: nyp.33433016842928
+            issn: 0028-0836
+            publisher: Macmillan Journals ltd.
+            openaccess: 'yes'
+            id: 30b582c98de415a38e3f52d3cf3160ee
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '65289277'
+          - coverage: fulltext@1873~1987
+            collection_url: http://www.hathitrust.org/
+            collection_uid: hathitrust.pdusAccess
+            oclcnums: 65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 568729044 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess deprecated
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '4278754'
+            bkey: mdp.39015038818343
+            issn: 0028-0836
+            openaccess: 'yes'
+            id: 0ca4a862ee7f4f817461ec2d1996cd60
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust Public Domain only in US Access
+            coverage_enum: fulltext
+            oclcnum: '568729044'
+          - coverage: fulltext@1881~1921
+            collection_url: https://www.hathitrust.org/
+            collection_uid: hathitrust.UsDnldRestrict
+            oclcnums: 855510898 863853449 496009298 1586310
+            provider_uid: hathitrust
+            source: openaccess
+            title: Nature
+            collection_type: autoapprove browsable openaccess
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best
+            institution_id:
+            - '128807'
+            uid: '46918299'
+            bkey: coo.31924066893904
+            issn: 0028-0836
+            publisher: Macmillan.
+            openaccess: 'yes'
+            id: e64a3f2bf3b30fa2f2ce9f7246069356
+            provider_name: HathiTrust Digital Library
+            collection_name: HathiTrust US Access with possible download restrictions
+            coverage_enum: fulltext
+            oclcnum: '863853449'
+        queryForArticle:
+          result:
+          - coverage: fulltext@2005-10-05~2018-08-29
+            collection_url: https://www.nature.com
+            collection_uid: NPG.openAccess
+            jkey: nature
+            oclcnums: 1058009839 1586310 993757444
+            provider_uid: NPG
+            eissn: 1476-4687
+            linkerurl: http://linker2.worldcat.org/?date=2010-02-18&issue=7283&jKey=nature&rft.institution_id=128807&linktype=best&spage=850&eissn=1476-4687&title=Nature&atitle=Nature%27s+choices&volume=463&linkScheme=npg&jHome=https%3A%2F%2Fwww.nature.com%2Fnature&issn=0028-0836&provider=NPG&pkgName=openAccess&linkclass=to_article
+            source: holdings
+            title: Nature
+            collection_type: openaccess browsable autoapprove
+            content: fulltext
+            url: http://linker2.worldcat.org/?jHome=https%3A%2F%2Fwww.nature.com%2Fnature&linktype=best
+            institution_id:
+            - '128807'
+            uid: '40067081'
+            issn: 0028-0836
+            publisher: Nature Publishing Group
+            openaccess: 'yes'
+            id: 4261821ec9fcc25391bf7643b6a817e5
+            provider_name: Nature Publishing Group
+            collection_name: Nature Open Access Content
+            coverage_enum: fulltext
+            oclcnum: '1058009839'
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references

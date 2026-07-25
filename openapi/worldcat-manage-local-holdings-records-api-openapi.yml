@@ -1,0 +1,390 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data Bibliographic Resources Manage Local Holdings Records API
+  description: WorldCat Entity Data
+servers:
+- url: https://id.oclc.org/worldcat
+  description: PROD
+tags:
+- name: Manage Local Holdings Records
+paths:
+  /worldcat/manage/lhrs:
+    post:
+      tags:
+      - Manage Local Holdings Records
+      summary: Create a Local Holdings Record
+      description: Given a Local Holdings Record, create it in WorldCat.
+      operationId: lhr-create
+      requestBody:
+        description: The Local Holdings Record that will be created in WorldCat.
+        required: true
+        content:
+          application/marcxml+xml:
+            schema:
+              $ref: '#/components/schemas/MARCXML'
+            examples:
+              MARCXML:
+                $ref: '#/components/examples/lhr-marcxml-new'
+              addSharedPrint:
+                $ref: '#/components/examples/lhr-marcxml-shared-print'
+          application/marc:
+            schema:
+              type: string
+            examples:
+              MARC21:
+                $ref: '#/components/examples/lhr-marc-new'
+      responses:
+        '200':
+          description: The Local Holdings Record was created successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                generic-bad-request:
+                  $ref: '#/components/examples/generic-bad-request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/403-forbidden-url'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lhrs
+  /worldcat/manage/lhrs/{controlNumber}:
+    get:
+      tags:
+      - Manage Local Holdings Records
+      summary: Retrieve a Local Holdings Record
+      description: Given an Accesion Number, retrieve the associated Local Holdings Record.
+      operationId: lhr-read
+      parameters:
+      - name: controlNumber
+        in: path
+        description: The Control Number associated with the Local Holdings Record.
+        required: true
+        schema:
+          type: integer
+        example: 906268152
+      responses:
+        '200':
+          description: The Local Holdings Record was retrieved successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                generic-bad-request:
+                  $ref: '#/components/examples/generic-bad-request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/403-forbidden-url'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lhrs
+    put:
+      tags:
+      - Manage Local Holdings Records
+      summary: Replace a Local Holdings Record.
+      description: Given a Control Number, find the associated Local Holdings Record and replace it. If the Control Number is not found in WorldCat, then the provided Local Holdings Record will be created.
+      operationId: lhr-update
+      parameters:
+      - name: controlNumber
+        in: path
+        description: The Control Number associated with the Local Holdings Record.
+        required: true
+        schema:
+          type: integer
+        example: 906268152
+      requestBody:
+        description: The provided Local Holdings Record that will replace the Local Holdings Record that matches the same Control Number in WorldCat.
+        required: true
+        content:
+          application/marcxml+xml:
+            schema:
+              $ref: '#/components/schemas/MARCXML'
+            examples:
+              MARCXML:
+                $ref: '#/components/examples/lhr-marcxml-existing'
+          application/marc:
+            schema:
+              type: string
+            examples:
+              MARC21:
+                $ref: '#/components/examples/lhr-marc-existing'
+      responses:
+        '200':
+          description: The Local Holdings Record was replaced successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                generic-bad-request:
+                  $ref: '#/components/examples/generic-bad-request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/403-forbidden-url'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lhrs
+    delete:
+      tags:
+      - Manage Local Holdings Records
+      summary: Delete a Local Holdings Record
+      description: Given a Control Number, delete a Local Holdings record.
+      operationId: lhr-delete
+      parameters:
+      - name: controlNumber
+        in: path
+        description: The Control Number associated with the Local Holdings Record.
+        required: true
+        schema:
+          type: integer
+        example: 90626815
+      responses:
+        '200':
+          description: The Local Holdings Record was deleted successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lhr-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                generic-bad-request:
+                  $ref: '#/components/examples/generic-bad-request'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/403-forbidden-url'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lhrs
+components:
+  examples:
+    lhr-marc-existing:
+      summary: LHR MARC Record
+      value: "00260nx  a2200121zi 4500001001000000004000700010005001700017007000300034008003300037852002900070876001100099538002800110\\u001E227503625\\u001E312010\\u001E20210831082208.5\\u001Ezu\\u001E1103280p    0   4001uueng0110328\\u001E  \\u001FaOCPSB\\u001FbEAST\\u001FcEAST-STACKS\\u001E  \\u001Fp879456\\u001E  \\u001FWMAPI test update marc 1\\u001E\\u001D        \n"
+    lhr-marcxml-existing:
+      summary: LHR MARC XML Record
+      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n"
+    lhr-marcxml-shared-print:
+      summary: LHR MARC XML Record with Shared Print Commitments
+      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield tag=\"583\" ind1=\"1\" ind2=\" \">\n    <subfield code=\"a\">committed to retain</subfield>\n    <subfield code=\"c\">20210630</subfield>\n    <subfield code=\"d\">20210630</subfield>\n    <subfield code=\"f\">EAST</subfield>      \n    <subfield code=\"u\">http://eastlibraries.org/retained-materials<</subfield>\n    <subfield code=\"z\">EAST</subfield>\n    <subfield code=\"2\">pda</subfield>\n    <subfield code=\"5\">NHemH</subfield>\n  </datafield>      \n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n  </datafield>\n\n</record>\n"
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    generic-bad-request:
+      summary: Bad Request.
+      value:
+        type: BAD_REQUEST
+        title: string
+        detail: string
+    failed-not-found:
+      summary: Error when resource not found
+      value:
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
+    lhr-marc-new:
+      summary: LHR MARC Record
+      value: "00209nx  a2200097zi 4500004000700000007000300007008003300010852002900043876001100072538002800083\\u001E312010\\u001Ezu\\u001E1103280p    0   4001uueng0110328\\u001E  \\u001FaOCPSB\\u001FbEAST\\u001FcEAST-STACKS\\u001E  \\u001Fp879456\\u001E  \\u001FWMAPI test create marc 1\\u001E\\u001D    \n"
+    lhr-marcxml-new:
+      summary: LHR MARC XML Record
+      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n"
+  schemas:
+    MARCXML:
+      description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
+      type: object
+      xml:
+        name: record
+      externalDocs:
+        description: Learn about the Marc Bibliographic Standard
+        url: https://www.loc.gov/standards/marcxml/
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
+  responses:
+    406-accept-header-unacceptable:
+      description: Accept Header Media Type is not Supported.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Accept Header Unacceptable
+              value:
+                type: NOT_ACCEPTABLE
+                title: Invalid 'Accept' header.
+                detail: 'A request with an invalid ''Accept'' header was attempted: ....'
+    500-internal-server-error:
+      description: Something went wrong (hopefully rare) - please try again.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Unexpected Error.
+              value:
+                type: INTERNAL_SERVER_ERROR
+                title: string
+                detail: string
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          examples:
+            unauthorized:
+              $ref: '#/components/examples/unauthorized'
+    403-forbidden-url:
+      description: Forbidden URL.
+      content:
+        application/json:
+          examples:
+            forbidden-url:
+              summary: Forbidden URL
+              value:
+                message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found:
+              $ref: '#/components/examples/failed-not-found'
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references

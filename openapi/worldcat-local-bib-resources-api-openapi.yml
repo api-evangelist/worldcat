@@ -1,0 +1,762 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data Bibliographic Resources Local Bib Resources API
+  description: WorldCat Entity Data
+servers:
+- url: https://id.oclc.org/worldcat
+  description: PROD
+tags:
+- name: Local Bib Resources
+paths:
+  /worldcat/search/my-local-bib-data/{controlNumber}:
+    get:
+      tags:
+      - Local Bib Resources
+      summary: Retrieve LBD Resource
+      description: Retrieve LBD Resource
+      operationId: retrieve-lbd
+      parameters:
+      - $ref: '#/components/parameters/accept'
+      - $ref: '#/components/parameters/lbd-control-number'
+      responses:
+        '200':
+          $ref: '#/components/responses/success-my-local-bib-data'
+        '400':
+          description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Problem'
+              examples:
+                invalid-control-number:
+                  $ref: '#/components/examples/invalid-control-number'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '405':
+          $ref: '#/components/responses/method-not-supported'
+        '406':
+          $ref: '#/components/responses/failed-not-acceptable'
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:view_my_local_bib_data
+  /worldcat/search/my-local-bib-data:
+    get:
+      tags:
+      - Local Bib Resources
+      summary: Search LBD Resources
+      description: 'Search LBD Resources <a href="https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Local_bibliographic_data_records/Local_bibliographic_data_record_indexes_A-Z">Learn more about the indexes available</a>
+
+        '
+      operationId: search-lbd
+      parameters:
+      - $ref: '#/components/parameters/accept'
+      - $ref: '#/components/parameters/query'
+      - $ref: '#/components/parameters/offset'
+      - $ref: '#/components/parameters/limit'
+      responses:
+        '200':
+          $ref: '#/components/responses/success-my-local-bib-data-search'
+        '400':
+          $ref: '#/components/responses/lbd_query_error'
+        '405':
+          $ref: '#/components/responses/method-not-supported'
+        '406':
+          $ref: '#/components/responses/failed-not-acceptable'
+        '500':
+          $ref: '#/components/responses/internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:view_my_local_bib_data
+components:
+  schemas:
+    StatementOfResponsibility:
+      allOf:
+      - $ref: '#/components/schemas/InternationalText'
+    ReproductionNotes:
+      description: Reproduction Notes [v533]
+      type: array
+      items:
+        $ref: '#/components/schemas/ReproductionNote'
+    AudienceNote:
+      description: Target Audience Note [v521sa]
+      type: string
+    Dissertation:
+      description: Disseration notes [v502sa,b,c,d,g,o]
+      type: object
+      properties:
+        disserationNote:
+          type: string
+        type:
+          type: string
+        institution:
+          type: string
+        year:
+          type: string
+        id:
+          type: string
+        miscellaneousInfo:
+          type: string
+    RelatedItem:
+      type: object
+      properties:
+        typeOfRelationship:
+          type: string
+        relatedItemTitle:
+          type: string
+        relationshipInfo:
+          type: array
+          items:
+            type: string
+        relatedParts:
+          type: array
+          items:
+            type: string
+        mainEntryHeading:
+          type: string
+        edition:
+          $ref: '#/components/schemas/EditionStatement'
+        qualifyingInfo:
+          type: string
+        publicationInfo:
+          type: string
+        physicalDescription:
+          type: string
+        seriesData:
+          type: array
+          items:
+            type: string
+        materialSpecificDetail:
+          type: string
+        relatedItemNotes:
+          type: array
+          items:
+            type: string
+        otherItemIdentifiers:
+          type: array
+          items:
+            type: string
+        reportNumbers:
+          type: array
+          items:
+            type: string
+        uniformTitle:
+          type: string
+        standardTechReportNumber:
+          type: string
+        recordControlNumbers:
+          type: array
+          items:
+            type: string
+        issns:
+          $ref: '#/components/schemas/Issns'
+        coden:
+          type: string
+        isbns:
+          $ref: '#/components/schemas/Isbns'
+    LBDResultSet:
+      type: object
+      properties:
+        numberOfRecords:
+          type: integer
+          format: int32
+        records:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalBibData'
+    Creator:
+      description: '[v100sa,q,b,c,d,e,4,k v110sa,q,b,c,d,e,4,k,n v111sa,q,c,d,e,j,k,n v700sa,q,b,c,d,e,4,k v710sa,q,b,c,d,e,4,k,n v720sa v711 sa,q,c,d,e,j,k,n v790sa,q,c,d,e,j,k,n v791sa,q,b,c,d,e,4,k v792sa,b,q,c, d,e,j,k,n v796 sa,q,b,c,d,e,4,k v797sa,q,b,c,d,e,4,k,n v798sa,b,q,c, d,e,j,k,n]'
+      type: object
+      properties:
+        firstName:
+          $ref: '#/components/schemas/InternationalText'
+        secondName:
+          $ref: '#/components/schemas/InternationalText'
+        nonPersonName:
+          $ref: '#/components/schemas/InternationalText'
+        type:
+          type: string
+        creatorNotes:
+          description: subfield d
+          type: array
+          items:
+            type: string
+        relators:
+          description: subfield e
+          type: array
+          items:
+            $ref: '#/components/schemas/Relator'
+        affiliation:
+          description: subfield u
+          type: string
+        isPrimary:
+          $ref: '#/components/schemas/IsPrimaryCreator'
+        relatedItem:
+          $ref: '#/components/schemas/RelatedItem'
+    LocalBibData:
+      type: object
+      properties:
+        controlNumber:
+          description: LBD Control Number [LBD -> HldDetRec/c001]
+          type: string
+        oclcNumber:
+          $ref: '#/components/schemas/OclcNumber'
+        title:
+          $ref: '#/components/schemas/Title'
+        contributor:
+          $ref: '#/components/schemas/Contributor'
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subject'
+        note:
+          $ref: '#/components/schemas/Note'
+        genres:
+          $ref: '#/components/schemas/Genres'
+        localSystemNumber:
+          type: string
+        dateCreated:
+          description: LBD Date Created [LBD -> HldDetRec/Admin/CreateDate]
+          type: string
+          format: date-time
+        lastUpdated:
+          description: LBD Date Last Updated [LBD -> HldDetRec/Admin/ReplacedDate]
+          type: string
+          format: date-time
+    MainTitles:
+      description: Main Titles [v245sa,b,c,f,g,k,n,p,s]
+      type: array
+      items:
+        $ref: '#/components/schemas/InternationalText'
+    LanguageNotes:
+      description: language note [v546sa]
+      type: array
+      items:
+        type: string
+    Note:
+      type: object
+      properties:
+        generalNotes:
+          $ref: '#/components/schemas/GeneralNotes'
+        audienceNote:
+          $ref: '#/components/schemas/AudienceNote'
+        dissertationNotes:
+          $ref: '#/components/schemas/DissertationNotes'
+        castNotes:
+          $ref: '#/components/schemas/CastNotes'
+        performerNotes:
+          $ref: '#/components/schemas/PerformerNotes'
+        participantNote:
+          description: Participants Notes [v511sa]
+          type: string
+        eventNotes:
+          $ref: '#/components/schemas/EventNotes'
+        creditNotes:
+          $ref: '#/components/schemas/CreditNotes'
+        scaleNotes:
+          description: Scale Note for Graphic Material [v507sa,b]
+          type: array
+          items:
+            type: string
+        reproductionNotes:
+          $ref: '#/components/schemas/ReproductionNotes'
+        useAndReproductionNotes:
+          $ref: '#/components/schemas/UseAndReproductionNotes'
+        useownershipAndCustodialHistories:
+          description: Ownership and Custodial History [v561sa,3,5,u]
+          type: array
+          items:
+            type: string
+        systemDetailNote:
+          description: System Details Note [v538sa,u,i]
+          type: string
+        awardNote:
+          description: Awards Note [v586sa]
+          type: string
+        languageNotes:
+          $ref: '#/components/schemas/LanguageNotes'
+    Subject:
+      type: object
+      description: Subjects [v600sa,b,c,d,n,v,x,y,z,e,j,4 v610sa,b,n,v,x,y,z,e,j,4 v611sa,c,d,n,v,x,y,z,e,j,4 v630sa,d,e,f,k,l,m,n,o,d,p,r,s,v,x,y,z,e,j,4 v650sa,b,x,y,z,v,e,j,4 v651sa,x,y,z,v,e,j,4 v655sa,b,c,v,x,y,z,e,j,4 v648sa,v,w,x,y,z,e,j,4 v653sa,e,j,4 v656sa,k,v,x,y,z,3,e,j,4 v657sa,v,x,y,z,3,e,j,4 (v690,v691,v695,v696,v697,v698,v699 sa,b,c,d,e,f,k,l,m,n,o,p,r,s,v,x,y,z,e,j,4)]
+      properties:
+        subjectName:
+          $ref: '#/components/schemas/InternationalText'
+        vocabulary:
+          type: string
+          description: subject authority vocabularies (MESH, FAST, LCSH, RVM)
+        relators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relator'
+        subjectType:
+          type: string
+        uri:
+          type: string
+          description: URI [6xx s1]
+    UseAndReproductionNotes:
+      description: Terms Governing Use and Reproduction [v540sa]
+      type: array
+      items:
+        type: string
+    OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    SeriesName:
+      description: '[(v490,v810,v830 - sa)]'
+      type: string
+    AdditionalRelationship:
+      type: object
+      properties:
+        relationshipInfo:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+        issns:
+          $ref: '#/components/schemas/Issns'
+        relators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relator'
+        relatedData:
+          type: string
+        additionalRelationshipInfo:
+          type: string
+    InternationalText:
+      type: object
+      properties:
+        text:
+          type: string
+        romanizedText:
+          type: string
+        languageCode:
+          type: string
+        textDirection:
+          type: string
+          enum:
+          - RTL
+          - LTR
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
+    Isbns:
+      description: International Standard Book Number [v020sa]
+      type: array
+      items:
+        type: string
+    PerformerNotes:
+      description: Performers Notes [v511sa]
+      type: array
+      items:
+        type: string
+    LocalizableText:
+      type: object
+      properties:
+        text:
+          type: string
+        private:
+          description: 1st indicator of 590
+          type: boolean
+          default: false
+    Contributor:
+      type: object
+      properties:
+        creators:
+          description: Creators of work
+          type: array
+          items:
+            $ref: '#/components/schemas/Creator'
+        additionalCreators:
+          description: Additional creators of work [(v700,v710,v711,v790,v791,v792,v796,v797,v798) - sa,b,c,d,q,n,k,e,j,4]
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalRelationship'
+        statementOfResponsibility:
+          description: 245 |c
+          allOf:
+          - $ref: '#/components/schemas/StatementOfResponsibility'
+    Issn:
+      description: International Standard Serial Number [v022sal v700,v710,v711,v773,v776,v777,v780,v785 - sx]
+      type: string
+    EventNotes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    ReproductionNote:
+      description: Reproduction Note [v533]
+      properties:
+        reproductionType:
+          description: sa
+          type: string
+        reproductionPlace:
+          description: sb
+          type: array
+          items:
+            type: string
+        agency:
+          description: sc
+          type: array
+          items:
+            type: string
+        date:
+          description: sd
+          type: string
+        physicalDescription:
+          description: se
+          type: string
+        seriesStatement:
+          description: sf
+          type: array
+          items:
+            type: string
+        datesIssuesReproduced:
+          description: sm
+          type: array
+          items:
+            type: string
+        note:
+          description: sn
+          type: array
+          items:
+            type: string
+        materialSpecified:
+          description: s3
+          type: string
+        institution:
+          description: s5
+          type: string
+    Issns:
+      description: International Standard Serial Numbers
+      type: array
+      items:
+        $ref: '#/components/schemas/Issn'
+    Relator:
+      type: object
+      properties:
+        term:
+          type: string
+        alternateTerm:
+          type: string
+    IsPrimaryCreator:
+      description: whether or not this contributor is the primary one (the 1xx)
+      type: boolean
+    Genres:
+      description: Genre of work [v655sa,b,v,x,y,z v380sa, (v600,v610,v611,v630,v648, v650,v651,v654 sv) v653sa]
+      type: array
+      items:
+        type: string
+    DissertationNotes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Dissertation'
+    CastNotes:
+      description: Cast Notes [v511sa]
+      type: array
+      items:
+        type: string
+    EditionStatement:
+      description: Edition Statement [v250sa]
+      type: string
+    CreditNotes:
+      description: Production Credits Notes [v508sa]
+      type: string
+    Event:
+      description: Notes about event [v518sa,d,o,p,3]
+      type: object
+      properties:
+        compositeNote:
+          type: string
+        eventDate:
+          type: string
+        eventPlace:
+          type: string
+        eventInfo:
+          type: string
+        material:
+          type: string
+    GeneralNotes:
+      description: General Notes [v500sa, v501sa, v590sa,s3, (v59x sa-z)]
+      type: array
+      items:
+        $ref: '#/components/schemas/LocalizableText'
+    SeriesTitle:
+      type: object
+      properties:
+        seriesTitle:
+          $ref: '#/components/schemas/SeriesName'
+        volume:
+          description: '[(v490,v810,v830 - sv)]'
+          type: string
+    AdditionalTitles:
+      description: Added Entry Uniform Titles [v730sa,d,f,g,k,l,m,n,o,p,r,s,i,t,x]
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalRelationship'
+    Title:
+      type: object
+      properties:
+        mainTitles:
+          $ref: '#/components/schemas/MainTitles'
+        seriesTitles:
+          description: Series Titles [(v490,v810,v830 - sa,v)]
+          type: array
+          items:
+            $ref: '#/components/schemas/SeriesTitle'
+        uniformTitles:
+          description: Uniform Titles [(v130,v730,v793,v799 - sa,d,f,g,k,l,m,n,o,p,r,s,t) && v240sa,d,f,g,k,l,m,n,o,p,r,s]
+          type: array
+          items:
+            type: string
+        additionalTitles:
+          $ref: '#/components/schemas/AdditionalTitles'
+  parameters:
+    offset:
+      name: offset
+      in: query
+      description: start position of the bib records to return (0 based), default 0
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
+      example: 10
+    accept:
+      name: Accept
+      in: header
+      description: Content Type the client supports and is requesting (application/json currently supported)
+      schema:
+        type: string
+        default: application/json
+      required: false
+    lbd-control-number:
+      name: controlNumber
+      in: path
+      description: LBD control number
+      required: true
+      schema:
+        type: string
+      example: 588894059
+    limit:
+      name: limit
+      in: query
+      description: maximum number of records to return, maximum 50, default 10
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+      example: 50
+    query:
+      name: q
+      in: query
+      description: query in the form of a keyword search or fielded search, for example  (au:gazihan OR au:womacka) AND kw:java See - https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Bibliographic_records/Bibliographic_record_indexes/Bibliographic_record_index_lists
+      required: true
+      schema:
+        type: string
+      example: 'ti: Simon''s Cat'
+  examples:
+    failed-not-found:
+      summary: Error when resource not found
+      value:
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
+    success-single-lbd:
+      summary: successful search for single bib record
+      value:
+        controlNumber: 588894059
+        oclcNumber: '191865523'
+        title:
+          uniformTitles:
+          - Test Uniform Title
+        contributor:
+          creators:
+          - firstName:
+              text: Karen
+            secondName:
+              text: Jones
+            type: person
+        subjects:
+        - subjectName:
+            text: Test Subject
+        note:
+          generalNotes:
+          - text: Test Note
+        genres:
+        - Humor
+        localSystemNumber: System.Supplied@2021-02-09,11:50:40
+        lastUpdated: 20210209
+    method-not-allowed-error:
+      summary: Error when invalid HTTP method used
+      value:
+        title: NOT_ALLOWED
+        detail: POST method not allowed
+    not-acceptable-error:
+      summary: Error when media type in Accept header not supported
+      value:
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'Media type application/xml not supported. Supported media types: application/json'
+    not-acceptable-error-language:
+      summary: Error when language in Accept-Language header not supported
+      value:
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'en-UK supported. Supported languages: en, es, fr'
+    invalid-control-number:
+      summary: Error returned when accession number isn't valid
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: control number must be a positive whole number
+    success-search-lbds:
+      summary: successful search request for lbds
+      value:
+        numberOfRecords: 1
+        records:
+        - controlNumber: 588894059
+          oclcNumber: '191865523'
+          title:
+            uniformTitles:
+            - Test Uniform Title
+          contributor:
+            creators:
+            - firstName:
+                text: Karen
+              secondName:
+                text: Jones
+              type: person
+          subjects:
+          - subjectName:
+              text: Test Subject
+          note:
+            generalNotes:
+            - text: Test Note
+          genres:
+          - Humor
+          localSystemNumber: System.Supplied@2021-02-09,11:50:40
+          lastUpdated: 20210209
+  responses:
+    lbd_query_error:
+      description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    internal-server-error:
+      description: Something went wrong (hopfully rare) - please try again
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    success-my-local-bib-data:
+      description: successful read my local bib data by control number
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LocalBibData'
+          examples:
+            success-single-lbd:
+              $ref: '#/components/examples/success-single-lbd'
+    failed-not-acceptable:
+      description: Media type not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
+            not-acceptable-error-language:
+              $ref: '#/components/examples/not-acceptable-error-language'
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found:
+              $ref: '#/components/examples/failed-not-found'
+    success-my-local-bib-data-search:
+      description: successful search of my local bib data
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/LBDResultSet'
+          examples:
+            success-search-lbds:
+              $ref: '#/components/examples/success-search-lbds'
+    method-not-supported:
+      description: Method not supported, see response Allow header
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-allowed:
+              $ref: '#/components/examples/method-not-allowed-error'
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references

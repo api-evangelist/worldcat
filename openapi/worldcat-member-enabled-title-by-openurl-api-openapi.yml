@@ -1,0 +1,408 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data Bibliographic Resources Member Enabled Title by OpenURL API
+  description: WorldCat Entity Data
+servers:
+- url: https://id.oclc.org/worldcat
+  description: PROD
+tags:
+- name: Member Enabled Title by OpenURL
+paths:
+  /openurl/resolve:
+    get:
+      tags:
+      - Member Enabled Title by OpenURL
+      summary: Find member enabled title based on OpenURL
+      description: Given an OpenURL find title enabled by member library
+      operationId: find-title-by-openurl
+      parameters:
+      - name: svc_id
+        in: query
+        description: Response format
+        schema:
+          type: string
+          enum:
+          - json
+          - xml
+          default: json
+        required: false
+      - name: rft.title
+        in: query
+        description: Title of item
+        schema:
+          type: string
+        required: false
+      - name: rft.btitle
+        in: query
+        description: Book Title
+        schema:
+          type: string
+      - name: rft.jtitle
+        in: query
+        description: Journal Title
+        schema:
+          type: string
+        required: false
+      - name: rft.issn
+        in: query
+        description: ISSN
+        schema:
+          type: string
+        required: false
+      - name: rft.eissn
+        in: query
+        description: Electronic ISSN
+        schema:
+          type: string
+        required: false
+      - name: rft.isbn
+        in: query
+        description: ISBN
+        schema:
+          type: string
+        required: false
+      - name: rft.oclcnum
+        in: query
+        description: OCLC Number
+        schema:
+          type: string
+        required: false
+      - name: rft.pub
+        in: query
+        description: Publisher name
+        schema:
+          type: string
+        required: false
+      - name: rft.date
+        in: query
+        description: Publication date, in the format YYYY, YYYY-MM, or YYYY-MM-DD
+        schema:
+          type: string
+        required: false
+      - name: rft.volume
+        in: query
+        description: Journal volume
+        schema:
+          type: string
+        required: false
+      - name: rft.issue
+        in: query
+        description: Journal issue
+        schema:
+          type: string
+        required: false
+      - name: rft.spage
+        in: query
+        description: Start page
+        schema:
+          type: string
+        required: false
+      - name: rft.epage
+        in: query
+        description: End page
+        schema:
+          type: string
+        required: false
+      - name: rft.atitle
+        in: query
+        description: Article Title
+        schema:
+          type: string
+        required: false
+      - name: rft.aufirst
+        in: query
+        description: Author first name
+        schema:
+          type: string
+        required: false
+      - name: rft.auinit
+        in: query
+        description: Author initial
+        schema:
+          type: string
+        required: false
+      - name: rft.aulast
+        in: query
+        description: Author Last name
+        schema:
+          type: string
+        required: false
+      - name: rft.sici
+        in: query
+        description: Serial Item and Contribution Identifier
+        schema:
+          type: string
+        required: false
+      - name: rft.provider_uid
+        in: query
+        description: Provider uid as defined by knowledge base
+        schema:
+          type: string
+      - name: rft.collection_uid
+        in: query
+        description: Collection uid as defined by knowledge base
+        schema:
+          type: string
+        required: false
+      - name: rft.content
+        in: query
+        description: Format to return results in. application/xml or application/json
+        schema:
+          type: string
+          default: fulltext
+          enum:
+          - fulltext
+          - selectedft
+          - abstracts
+          - indexed
+          - print
+          - ebook
+          - image
+          - audio
+          - database
+        required: false
+      - name: rft.institution_id
+        in: query
+        description: WorldCat Registry Id for institution
+        schema:
+          type: string
+        required: false
+      - name: rft.jkey
+        in: query
+        description: Vendor defined journal id for particular vendors
+        schema:
+          type: string
+        required: false
+      - name: rft.openaccess
+        in: query
+        description: Open Access flag
+        schema:
+          type: string
+          enum:
+          - none
+          - 'yes'
+          - 'no'
+        required: false
+      - name: rfr_id
+        in: query
+        description: OpenURL referrer identifier
+        schema:
+          type: string
+        required: false
+      - name: rft.id
+        in: query
+        description: identifier for item
+        schema:
+          type: string
+        examples:
+          doi:
+            value: info:doi...
+          pmid:
+            value: info:pmid...
+        required: false
+      - name: rft.force_remote_lookup
+        in: query
+        description: Force PMID/DOI lookup
+        schema:
+          type: string
+          enum:
+          - 'yes'
+          - 'no'
+          default: 'no'
+        required: false
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Title'
+              examples:
+                success-read-collection:
+                  $ref: '#/components/examples/success-openurl-single'
+        '400':
+          description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                missing-query-parameter:
+                  $ref: '#/components/examples/missing-query-parameter'
+        '405':
+          description: Method not supported, see response Allow header
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                summary: Error when invalid HTTP method used
+                value:
+                  title: NOT_ALLOWED
+                  detail: POST method not allowed
+        '500':
+          description: Something went wrong (hopfully rare) - please try again
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - api_key: []
+components:
+  schemas:
+    Title:
+      type: object
+      properties:
+        title:
+          description: Name of title
+          type: string
+        id:
+          description: URL for title in API
+          type: string
+        links:
+          description: links associated with title
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        entry_uid:
+          description: Id for title
+          type: string
+        entry_status:
+          description: status for title. possible values for Entries are raw, copy, and overlay
+          type: string
+        bkey:
+          description: Vendor defined book id
+          type: string
+        jkey:
+          description: Vendor defined journal id
+          type: string
+        collection_uid:
+          description: Id for collection title is part of
+          type: string
+        collection_name:
+          description: Name of collection title is part of
+          type: string
+        provider_uid:
+          description: Id for provider who supplies title
+          type: string
+        provider_name:
+          description: Name of provider who supplies title
+          type: string
+        oclcnum:
+          description: OCLC Number of the title
+          type: string
+        isbn:
+          description: ISBN for title
+          type: string
+        issn:
+          description: ISSN for the title
+          type: string
+        eissn:
+          description: EISSN for the title
+          type: string
+        publisher:
+          description: Publisher of title
+          type: string
+        coverage:
+          description: Coverage for title in date format
+          type: string
+        coverage_enum:
+          description: Coverage statement
+          type: string
+        coll_type:
+          description: Kind of collection
+          type: string
+          enum:
+          - openaccess
+          - browseable
+        coverageenum:
+          description: Coverage enumeration in volume/issue format
+          type: string
+        author:
+          description: Author
+          type: string
+        ext:
+          type: string
+        title_notes:
+          description: institution specific public notes
+          type: string
+        staff_notes:
+          description: institution specific staff notes
+          type: string
+        coverage_notes:
+          description: notes about coverage
+          type: string
+      required:
+      - title
+      - id
+      - links
+      - entry_uid
+      - collection_name
+      - collection_uid
+      - coverage
+      - coverage_enum
+      - provider_name
+      - provider_uid
+      - publisher
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
+  examples:
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
+    success-openurl-single:
+      summary: successful openurl request
+      value:
+      - coverage: ebook@2005-09-26
+        collection_url: http://my.safaribooksonline.com
+        collection_uid: safari.tech
+        oclcnums: 65183407 61260129 878406930 861529762 847462570 61849699 270992543
+        isbn: '9780596007652'
+        provider_uid: safari
+        source: holdings
+        title: Ambient Findability
+        collection_type: browsable
+        content: ebook
+        url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best
+        institution_id:
+        - '128807'
+        uid: '1883656'
+        bkey: 0596007655
+        publisher: O'Reilly Media, Inc. - O'Reilly Media
+        openaccess: 'no'
+        id: d6edd1064311b081e77051faf19e687e
+        provider_name: Safari Books Online
+        collection_name: Safari Tech Books Online
+        oclcnum: '61849699'
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references

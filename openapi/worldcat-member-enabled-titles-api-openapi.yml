@@ -1,0 +1,480 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data Bibliographic Resources Member Enabled Titles API
+  description: WorldCat Entity Data
+servers:
+- url: https://id.oclc.org/worldcat
+  description: PROD
+tags:
+- name: Member Enabled Titles
+paths:
+  /rest/entries/search:
+    get:
+      tags:
+      - Member Enabled Titles
+      summary: Find member enabled titles in the WorldCat Knowledge base
+      description: Given metadata find titles enabled by member library
+      operationId: find-kb-titles
+      parameters:
+      - name: alt
+        in: query
+        description: Format to return results in. application/xml or application/json
+        schema:
+          type: string
+          default: xml
+          enum:
+          - xml
+          - json
+        required: false
+      - name: q
+        in: query
+        description: Keyword query to search by
+        required: false
+        schema:
+          type: string
+        example: Ambient Findability
+      - name: title
+        in: query
+        description: Search by title
+        required: false
+        schema:
+          type: string
+        examples:
+          keyword:
+            value: API Testing
+          exact-match:
+            value: API Testing with Postman
+          starts-with:
+            value: API Testing%
+      - name: provider_uid
+        in: query
+        description: Identifier of the provider associated with the collection
+        required: false
+        schema:
+          type: string
+        example: NPG
+      - name: collection_uid
+        in: query
+        description: Identifier of the collection
+        required: false
+        schema:
+          type: string
+        example: NPG.journals
+      - name: issn
+        in: query
+        description: ISSN match
+        required: false
+        schema:
+          type: string
+        example: 0028-0836
+      - name: isbn
+        in: query
+        description: ISBN match
+        required: false
+        schema:
+          type: string
+        example: 9780596007652
+      - name: oclcnum
+        in: query
+        description: OCLC number match
+        required: false
+        schema:
+          type: string
+        example: 890474283
+      - name: content
+        in: query
+        description: Indicator to select records of a specific content type; possible values are fulltext, selectedft, abstracts, indexed, print, and ebook.
+        required: false
+        schema:
+          type: string
+          enum:
+          - fulltext
+          - selectedft
+          - abstracts
+          - indexed
+          - print
+          - ebook
+          example: ebook
+      - name: search-type
+        in: query
+        description: Restrict to holdings held by Institutions in requested state
+        required: false
+        schema:
+          type: string
+          enum:
+          - search
+          - atoz
+          default: search
+        example: atoz
+      - name: startIndex
+        in: query
+        description: start position of the results to return (1 based), default 1
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+        example: 10
+      - name: itemsPerPage
+        in: query
+        description: maximum number of records to return, maximum 50, default 10
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+        example: 50
+      - name: orderBy
+        in: query
+        description: Criteria for sorting the results. possible sorting criteria are title, relevancy, holdings, preference, issn, isbn, oclcnum
+        required: false
+        schema:
+          type: string
+          default: title asc
+        example: relevancy
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TitleSearchResults'
+              examples:
+                success-search-collection:
+                  $ref: '#/components/examples/success-search-collection'
+        '400':
+          description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                missing-query-parameter:
+                  $ref: '#/components/examples/missing-query-parameter'
+        '405':
+          description: Method not supported, see response Allow header
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                summary: Error when invalid HTTP method used
+                value:
+                  title: NOT_ALLOWED
+                  detail: POST method not allowed
+        '500':
+          description: Something went wrong (hopfully rare) - please try again
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - api_key: []
+  /rest/entries/{entry_uid}:
+    get:
+      tags:
+      - Member Enabled Titles
+      summary: Read member enabled Titles in the WorldCat Knowledge base by ID
+      description: Given metadata find titles enabled by member library
+      operationId: read-kb-title
+      parameters:
+      - name: alt
+        in: query
+        description: Format to return results in. application/xml or application/json
+        schema:
+          type: string
+          default: xml
+          enum:
+          - xml
+          - json
+        required: false
+      - name: entry_uid
+        in: path
+        description: Identifier of the title
+        required: true
+        schema:
+          type: string
+        example: safari.tech,44119961
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Title'
+              examples:
+                success-read-collection:
+                  $ref: '#/components/examples/success-read-entry'
+        '400':
+          description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                missing-query-parameter:
+                  $ref: '#/components/examples/missing-query-parameter'
+        '405':
+          description: Method not supported, see response Allow header
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                summary: Error when invalid HTTP method used
+                value:
+                  title: NOT_ALLOWED
+                  detail: POST method not allowed
+        '500':
+          description: Something went wrong (hopfully rare) - please try again
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - api_key: []
+components:
+  schemas:
+    TitleSearchResults:
+      type: object
+      properties:
+        title:
+          description: name of the results
+          type: string
+        updated:
+          description: date query run
+          type: string
+        id:
+          description: ID for result set
+          type: string
+        author:
+          description: who created the result set
+          type: string
+        links:
+          description: Link to the results
+          type: string
+        totalResults:
+          description: Total number of results
+          type: integer
+          format: int32
+        startIndex:
+          description: start position of the results
+          type: integer
+          format: int32
+        itemsPerPage:
+          description: number of items per page
+          type: integer
+          format: int32
+        Query:
+          description: query sent to API
+          type: string
+        entries:
+          description: actual results
+          type: array
+          items:
+            $ref: '#/components/schemas/Title'
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
+    Title:
+      type: object
+      properties:
+        title:
+          description: Name of title
+          type: string
+        id:
+          description: URL for title in API
+          type: string
+        links:
+          description: links associated with title
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        entry_uid:
+          description: Id for title
+          type: string
+        entry_status:
+          description: status for title. possible values for Entries are raw, copy, and overlay
+          type: string
+        bkey:
+          description: Vendor defined book id
+          type: string
+        jkey:
+          description: Vendor defined journal id
+          type: string
+        collection_uid:
+          description: Id for collection title is part of
+          type: string
+        collection_name:
+          description: Name of collection title is part of
+          type: string
+        provider_uid:
+          description: Id for provider who supplies title
+          type: string
+        provider_name:
+          description: Name of provider who supplies title
+          type: string
+        oclcnum:
+          description: OCLC Number of the title
+          type: string
+        isbn:
+          description: ISBN for title
+          type: string
+        issn:
+          description: ISSN for the title
+          type: string
+        eissn:
+          description: EISSN for the title
+          type: string
+        publisher:
+          description: Publisher of title
+          type: string
+        coverage:
+          description: Coverage for title in date format
+          type: string
+        coverage_enum:
+          description: Coverage statement
+          type: string
+        coll_type:
+          description: Kind of collection
+          type: string
+          enum:
+          - openaccess
+          - browseable
+        coverageenum:
+          description: Coverage enumeration in volume/issue format
+          type: string
+        author:
+          description: Author
+          type: string
+        ext:
+          type: string
+        title_notes:
+          description: institution specific public notes
+          type: string
+        staff_notes:
+          description: institution specific staff notes
+          type: string
+        coverage_notes:
+          description: notes about coverage
+          type: string
+      required:
+      - title
+      - id
+      - links
+      - entry_uid
+      - collection_name
+      - collection_uid
+      - coverage
+      - coverage_enum
+      - provider_name
+      - provider_uid
+      - publisher
+  examples:
+    success-read-entry:
+      summary: successful request to read a title
+      value:
+        title: API Testing with Postman
+        id: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
+        published: '2019-03-16T20:03:56Z'
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961.html
+          rel: alternate
+        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
+          rel: self
+        - href: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F9781789616569%3Ftocview%3Dtrue&linktype=best
+          rel: via
+        - href: http://my.safaribooksonline.com/9781789616569?tocview=true
+          rel: canonical
+        entry_uid: '44119961'
+        entry_status: raw
+        bkey: '9781789616569'
+        collection_uid: safari.tech
+        collection_name: Safari Tech Books Online
+        provider_uid: safari
+        provider_name: Safari Books Online
+        isbn: '9781789616569'
+        publisher: Packt Publishing
+        coverage: ebook@2019-02-28
+        coll_type: browsable
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
+    success-search-collection:
+      summary: successful search of collections
+      value:
+        title: 'WorldCat KnowledgeBase Search: Nature'
+        updated: '2019-12-12T16:44:25.434Z'
+        id: urn:uuid:e318046f4275b7e1dcd64e20a4cd13aa
+        author: OCLC
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/collections/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+          rel: self
+        os:totalResults: '1'
+        os:startIndex: '1'
+        os:itemsPerPage: '10'
+        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+        entries:
+        - title: Nature Open Access Content
+          id: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+          updated: '2019-11-26T16:24:16Z'
+          published: '2012-07-24T01:05:53Z'
+          links:
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+            rel: self
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807.html
+            rel: alternate
+          - href: https://www.nature.com
+            rel: via
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess
+            rel: parent
+          - href: http://worldcat.org/webservices/kb/export/128807/128807_NPG.openAccess_kbart.txt
+            rel: enclosure
+            title: kbart file
+            length: 53000
+          provider_uid: NPG
+          provider_name: Nature Publishing Group
+          collection_uid: NPG.openAccess
+          owner_institution: '128807'
+          source_institution: '6569'
+          collection_status: copy
+          collection_type: autoapprove browsable openaccess
+          title_link_template: '[[localstem]][[url]]'
+          linkscheme: npg
+          uhf_version: release1574104235-NPG
+          wcsync_enabled: 'false'
+          marcdelivery_enabled: 'false'
+          marcdelivery_no_delete: 'false'
+          open: 'false'
+          available_entries: '106'
+          selected_entries: '106'
+          localstem: 'true'
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references

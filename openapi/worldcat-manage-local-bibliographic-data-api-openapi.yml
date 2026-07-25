@@ -1,0 +1,418 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data Bibliographic Resources Manage Local Bibliographic Data API
+  description: WorldCat Entity Data
+servers:
+- url: https://id.oclc.org/worldcat
+  description: PROD
+tags:
+- name: Manage Local Bibliographic Data
+paths:
+  /worldcat/manage/lbds:
+    post:
+      tags:
+      - Manage Local Bibliographic Data
+      summary: Create a Local Bibliographic Data record.
+      description: Given a Local Bibliographic Data record, create it in WorldCat.
+      operationId: lbd-create
+      requestBody:
+        description: The Local Bibliographic Data record that will be created in WorldCat.
+        required: true
+        content:
+          application/marcxml+xml:
+            schema:
+              $ref: '#/components/schemas/MARCXML'
+            examples:
+              MARCXML:
+                $ref: '#/components/examples/lbd-marcxml-new'
+          application/marc:
+            schema:
+              type: string
+            examples:
+              MARC21:
+                $ref: '#/components/examples/lbd-marc-new'
+      responses:
+        '200':
+          description: The Local Bibliographic Data record was created successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/json:
+              examples:
+                lbd-create-has-control-number:
+                  $ref: '#/components/examples/lbd-create-has-control-number'
+                lbd-create-lacks-owning-institution:
+                  $ref: '#/components/examples/lbd-create-lacks-owning-institution'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/403-forbidden-url'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lbds
+  /worldcat/manage/lbds/{controlNumber}:
+    get:
+      tags:
+      - Manage Local Bibliographic Data
+      summary: Retrieve a Local Bibliographic Data record.
+      description: Given a Control Number, retrieve a Local Bibliographic Data record.
+      operationId: lbd-read
+      parameters:
+      - name: controlNumber
+        in: path
+        description: The Control Number associated with the Local Bibliographic Data record.
+        required: true
+        schema:
+          type: integer
+        example: 906268152
+      responses:
+        '200':
+          description: The Local Bibliographic Data record was retrieved successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/json:
+              examples:
+                lbd-read-not-found:
+                  $ref: '#/components/examples/lbd-read-not-found'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/forbidden'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lbds
+    put:
+      tags:
+      - Manage Local Bibliographic Data
+      summary: Replace a Local Bibliographic Data record.
+      description: Given a Control Number, find the associated Local Bibliographic Data record and replace it. If the Control Number is not found in WorldCat, then the provided Local Bibliographic Data record will be created.
+      operationId: lbd-update
+      parameters:
+      - name: controlNumber
+        in: path
+        description: The Control Number associated with the Local Bibliographic Data record in WorldCat
+        required: true
+        schema:
+          type: integer
+        example: 906268152
+      requestBody:
+        description: The provided Local Bibliographic Data record that will replace the Local Bibliographic Data record that matches the same Control Number in WorldCat.
+        required: true
+        content:
+          application/marcxml+xml:
+            schema:
+              $ref: '#/components/schemas/MARCXML'
+            examples:
+              MARCXML:
+                $ref: '#/components/examples/lbd-marcxml-existing'
+          application/marc:
+            schema:
+              type: string
+            examples:
+              MARC21:
+                $ref: '#/components/examples/lbd-marc-existing'
+      responses:
+        '200':
+          description: The Local Bbibliographic Data record was replaced successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/json:
+              examples:
+                lbd-replace-lacks-owning-institution:
+                  $ref: '#/components/examples/lbd-replace-lacks-owning-institution'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/403-forbidden-url'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lbds
+    delete:
+      tags:
+      - Manage Local Bibliographic Data
+      summary: Delete a Local Bibliographic Data record.
+      description: Given a Control Number, delete the associated Local Bibliographic Data record.
+      operationId: lbd-delete
+      parameters:
+      - name: controlNumber
+        in: path
+        description: The Control Number associated with the Local Bibliographic Data record.
+        required: true
+        schema:
+          type: integer
+        example: 90626815
+      responses:
+        '200':
+          description: The Local Bbibliographic Data record was deleted successfully.
+          content:
+            application/marcxml+xml:
+              schema:
+                $ref: '#/components/schemas/MARCXML'
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marcxml-existing'
+            application/marc:
+              examples:
+                success:
+                  $ref: '#/components/examples/lbd-marc-existing'
+        '400':
+          description: Bad request. The request was unacceptable.
+          content:
+            application/json:
+              examples:
+                lbd-delete-not-found:
+                  $ref: '#/components/examples/lbd-read-not-found'
+        '401':
+          $ref: '#/components/responses/unauthorized'
+        '403':
+          $ref: '#/components/responses/403-forbidden-url'
+        '404':
+          $ref: '#/components/responses/failed-not-found'
+        '406':
+          $ref: '#/components/responses/406-accept-header-unacceptable'
+        '500':
+          $ref: '#/components/responses/500-internal-server-error'
+      security:
+      - worldcat_metadata_auth:
+        - WorldCatMetadataAPI:manage_institution_lbds
+components:
+  examples:
+    lbd-create-has-control-number:
+      summary: LBD Has Control Number.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd create operation.
+        detail:
+          summary: LBD_HAS_CONTROL_NUMBER
+          description: The LBD must lack a control number for adds
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    lbd-replace-lacks-owning-institution:
+      summary: LBD Lacks Owning Institution.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd replace operation.
+        detail:
+          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
+          description: The LBD must have an owning institution symbol
+    lbd-create-lacks-owning-institution:
+      summary: LBD Lacks Owning Institution.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd create operation.
+        detail:
+          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
+          description: The LBD must have an owning institution symbol
+    forbidden:
+      summary: Error returned when API credentials not for resource
+      value:
+        message: Forbidden
+    lbd-marcxml-existing:
+      summary: LBD MARC XML Record
+      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n"
+    lbd-read-not-found:
+      summary: LBD Not Found.
+      value:
+        type: NOT_FOUND
+        title: Unable to perform the lbd read operation.
+        detail:
+          summary: NOT_FOUND
+          description: Not able to find the requested LBD
+    lbd-marc-existing:
+      summary: LBD MARC XML Record
+      value: "00136n   a2200085   4500001001000000004000500010005001700015935001000032940000800042\\u001E589046562\\u001E3160\\u001E20210910120824.8\\u001E  \\u001FaMyLSN\\u001E  \\u001FaWAU\\u001E\\u001D   \n"
+    lbd-marcxml-new:
+      summary: LBD MARC XML Record
+      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n"
+    lbd-marc-new:
+      summary: LBD MARC XML Record
+      value: '00086n   a2200061   4500004000600000935001000006940000800016\u001E316d0\u001E  \u001FaMyLSN\u001E  \u001FaWAU\u001E\u001D
+
+        '
+    failed-not-found:
+      summary: Error when resource not found
+      value:
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
+  schemas:
+    MARCXML:
+      description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
+      type: object
+      xml:
+        name: record
+      externalDocs:
+        description: Learn about the Marc Bibliographic Standard
+        url: https://www.loc.gov/standards/marcxml/
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
+  responses:
+    500-internal-server-error:
+      description: Something went wrong (hopefully rare) - please try again.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Unexpected Error.
+              value:
+                type: INTERNAL_SERVER_ERROR
+                title: string
+                detail: string
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          examples:
+            unauthorized:
+              $ref: '#/components/examples/unauthorized'
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found:
+              $ref: '#/components/examples/failed-not-found'
+    406-accept-header-unacceptable:
+      description: Accept Header Media Type is not Supported.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Accept Header Unacceptable
+              value:
+                type: NOT_ACCEPTABLE
+                title: Invalid 'Accept' header.
+                detail: 'A request with an invalid ''Accept'' header was attempted: ....'
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          examples:
+            forbidden:
+              $ref: '#/components/examples/forbidden'
+    403-forbidden-url:
+      description: Forbidden URL.
+      content:
+        application/json:
+          examples:
+            forbidden-url:
+              summary: Forbidden URL
+              value:
+                message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references

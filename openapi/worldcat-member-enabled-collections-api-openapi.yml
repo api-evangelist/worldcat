@@ -1,0 +1,434 @@
+openapi: 3.0.2
+info:
+  version: 1.0.6
+  title: WorldCat Entity Data Bibliographic Resources Member Enabled Collections API
+  description: WorldCat Entity Data
+servers:
+- url: https://id.oclc.org/worldcat
+  description: PROD
+tags:
+- name: Member Enabled Collections
+paths:
+  /rest/collections/search:
+    get:
+      tags:
+      - Member Enabled Collections
+      summary: Find member enabled collections in the WorldCat Knowledge base
+      description: Given metadata find collections enabled by member library
+      operationId: find-kb-collections
+      parameters:
+      - name: alt
+        in: query
+        description: Format to return results in. application/xml or application/json
+        schema:
+          type: string
+          default: xml
+          enum:
+          - xml
+          - json
+        required: false
+      - name: q
+        in: query
+        description: Keyword query to search by
+        required: false
+        schema:
+          type: string
+        example: Nature Publishing Group
+      - name: title
+        in: query
+        description: Search by title
+        required: false
+        schema:
+          type: string
+        examples:
+          keyword:
+            value: Nature
+          exact-match:
+            value: Nature
+          starts-with:
+            value: Nature%
+      - name: provider_uid
+        in: query
+        description: Identifier of the provider associated with the collection
+        required: false
+        schema:
+          type: string
+        example: NPG
+      - name: collection_uid
+        in: query
+        description: Identifier of the collection
+        required: false
+        schema:
+          type: string
+        example: NPG.journals
+      - name: search-type
+        in: query
+        description: Restrict to holdings held by Institutions in requested state
+        required: false
+        schema:
+          type: string
+          enum:
+          - search
+          - atoz
+          default: search
+        example: atoz
+      - name: startIndex
+        in: query
+        description: start position of the results to return (1 based), default 1
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+        example: 10
+      - name: itemsPerPage
+        in: query
+        description: maximum number of records to return, maximum 50, default 10
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 10
+        example: 50
+      - name: orderBy
+        in: query
+        description: Criteria for sorting the results. possible sorting criteria are title, relevancy, holdings, preference, issn, isbn, oclcnum
+        required: false
+        schema:
+          type: string
+          default: title asc
+        example: relevancy
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CollectionSearchResults'
+              examples:
+                success-search-collection:
+                  $ref: '#/components/examples/success-search-collection'
+        '400':
+          description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                missing-query-parameter:
+                  $ref: '#/components/examples/missing-query-parameter'
+        '405':
+          description: Method not supported, see response Allow header
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                summary: Error when invalid HTTP method used
+                value:
+                  title: NOT_ALLOWED
+                  detail: POST method not allowed
+        '500':
+          description: Something went wrong (hopfully rare) - please try again
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - api_key: []
+  /rest/collections/{collection_uid}:
+    get:
+      tags:
+      - Member Enabled Collections
+      summary: Read member enabled collections in the WorldCat Knowledge base by ID
+      description: Given metadata find collections enabled by member library
+      operationId: read-kb-collection
+      parameters:
+      - name: alt
+        in: query
+        description: Format to return results in. application/xml or application/json
+        schema:
+          type: string
+          default: xml
+          enum:
+          - xml
+          - json
+        required: false
+      - name: collection_uid
+        in: path
+        description: Identifier of the collection
+        required: true
+        schema:
+          type: string
+        example: NPG.journals
+      responses:
+        '200':
+          description: Successful search
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Collection'
+              examples:
+                success-read-collection:
+                  $ref: '#/components/examples/success-read-collection'
+        '400':
+          description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+          content:
+            application/json:
+              schema:
+                type: object
+              examples:
+                missing-query-parameter:
+                  $ref: '#/components/examples/missing-query-parameter'
+        '405':
+          description: Method not supported, see response Allow header
+          content:
+            application/json:
+              schema:
+                type: object
+              example:
+                summary: Error when invalid HTTP method used
+                value:
+                  title: NOT_ALLOWED
+                  detail: POST method not allowed
+        '500':
+          description: Something went wrong (hopfully rare) - please try again
+          content:
+            application/json:
+              schema:
+                type: object
+      security:
+      - api_key: []
+components:
+  schemas:
+    CollectionSearchResults:
+      type: object
+      properties:
+        title:
+          description: name of the results
+          type: string
+        updated:
+          description: date query run
+          type: string
+        id:
+          description: ID for result set
+          type: string
+        author:
+          description: who created the result set
+          type: string
+        links:
+          description: Link to the results
+          type: string
+        totalResults:
+          description: Total number of results
+          type: integer
+          format: int32
+        startIndex:
+          description: start position of the results
+          type: integer
+          format: int32
+        itemsPerPage:
+          description: number of items per page
+          type: integer
+          format: int32
+        Query:
+          description: query sent to API
+          type: string
+        entries:
+          description: actual results
+          type: array
+          items:
+            $ref: '#/components/schemas/Collection'
+    Collection:
+      type: object
+      required:
+      - title
+      - id
+      - links
+      - provider_uid
+      - provider_name
+      - collection_uid
+      - available_entries
+      - selected_entries
+      - open
+      properties:
+        title:
+          description: Name of Collection
+          type: string
+        id:
+          description: URL for Collection in API
+          type: string
+        links:
+          description: links associated with Collection
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        provider_uid:
+          description: Id for provider who supplies the collection
+          type: string
+        provider_name:
+          description: name for provider who supplies the collection
+          type: string
+        collection_uid:
+          description: Id for collection
+          type: string
+        owner_institution:
+          description: Institution who has holdings set fo the collection
+          type: string
+        source_institution:
+          description: The institution who originally added the collection to the knowledge base. 6569 represents OCLC
+          type: string
+        collection_status:
+          description: Status of the collection
+          type: string
+          enum:
+          - raw
+          - copy
+          - select
+          - empty
+        collection_type:
+          description: Kind of collection
+          type: string
+          enum:
+          - openaccess
+          - browseable
+        title_link_template:
+          description: pattern for creating link to title
+          type: string
+        uhf_version:
+          description: something
+          type: string
+        marcdelivery_no_delete:
+          description: Whether or not to deliver MARC records for collection
+          type: boolean
+        open:
+          description: If the collection is open access
+          type: boolean
+        available_entries:
+          description: Number of available entries in a collection
+          type: integer
+          format: int32
+        selected_entries:
+          description: Number of selected entries in a collection
+          type: integer
+          format: int32
+        localstem:
+          description: something
+          type: boolean
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
+  examples:
+    success-read-collection:
+      summary: successful request to read a collection
+      value:
+        title: Nature Publishing Group
+        id: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
+        updated: '2014-02-15T20:20:12Z'
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
+          rel: self
+        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals.html
+          rel: alternate
+        - href: http://www.nature.com
+          rel: via
+        - href: http://worldcat.org/webservices/kb/export/6569/6569_NPG.journals_kbart.txt
+          rel: enclosure
+          title: kbart file
+          length: 52000
+        provider_uid: NPG
+        provider_name: Nature Publishing Group
+        collection_uid: NPG.journals
+        owner_institution: '6569'
+        source_institution: '6569'
+        collection_status: raw
+        collection_type: browsable
+        title_link_template: '[[localstem]][[url]]'
+        linkscheme: npg
+        uhf_version: release134
+        marcdelivery_no_delete: 'false'
+        google_scholar_enabled: 'true'
+        open: 'true'
+        available_entries: '104'
+        selected_entries: '104'
+        localstem: 'true'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
+    success-search-collection:
+      summary: successful search of collections
+      value:
+        title: 'WorldCat KnowledgeBase Search: Nature'
+        updated: '2019-12-12T16:44:25.434Z'
+        id: urn:uuid:e318046f4275b7e1dcd64e20a4cd13aa
+        author: OCLC
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/collections/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+          rel: self
+        os:totalResults: '1'
+        os:startIndex: '1'
+        os:itemsPerPage: '10'
+        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+        entries:
+        - title: Nature Open Access Content
+          id: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+          updated: '2019-11-26T16:24:16Z'
+          published: '2012-07-24T01:05:53Z'
+          links:
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+            rel: self
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807.html
+            rel: alternate
+          - href: https://www.nature.com
+            rel: via
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess
+            rel: parent
+          - href: http://worldcat.org/webservices/kb/export/128807/128807_NPG.openAccess_kbart.txt
+            rel: enclosure
+            title: kbart file
+            length: 53000
+          provider_uid: NPG
+          provider_name: Nature Publishing Group
+          collection_uid: NPG.openAccess
+          owner_institution: '128807'
+          source_institution: '6569'
+          collection_status: copy
+          collection_type: autoapprove browsable openaccess
+          title_link_template: '[[localstem]][[url]]'
+          linkscheme: npg
+          uhf_version: release1574104235-NPG
+          wcsync_enabled: 'false'
+          marcdelivery_enabled: 'false'
+          marcdelivery_no_delete: 'false'
+          open: 'false'
+          available_entries: '106'
+          selected_entries: '106'
+          localstem: 'true'
+  securitySchemes:
+    entity_data_auth:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
+        authorizationCode:
+          authorizationUrl: https://oauth.oclc.org/auth
+          tokenUrl: https://oauth.oclc.org/token
+          scopes:
+            publicEntities:read_brief_entities: read brief entity data
+            publicEntities:read_references: read entity references
