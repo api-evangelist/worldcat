@@ -7,7 +7,20 @@ description: >-
   the WorldCat Search API, WorldCat Metadata API, WorldCat Knowledge Base API,
   and WorldCat Entities data API for libraries and developers building discovery
   and cataloging applications.
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: paid
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Paid · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/worldcat.png
 url: https://raw.githubusercontent.com/api-evangelist/worldcat/refs/heads/main/apis.yml
 created: "2026-06-13"
 modified: "2026-06-13"
@@ -24,111 +37,352 @@ tags:
   - Media
   - Linked Data
 apis:
-  - aid: worldcat:worldcat-search-api
-    name: WorldCat Search API
-    description: >-
-      Search WorldCat and retrieve bibliographic records for cataloged items
-      such as books, videos, music and more across 500 million+ holdings.
-      Supports retrieval by OCLC number, ISBN, ISSN, and other identifiers.
-      Also enables finding libraries holding specific items and identifying
-      libraries committed to retention programs.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
-    baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
-    tags:
-      - Search
-      - Bibliographic Records
-      - WorldCat
-      - OCLC
-      - Libraries
-      - Holdings
-    properties:
-      - type: Documentation
-        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
-      - type: OpenAPI
-        url: https://developer.api.oclc.org/wcv2
-    contact:
-      - FN: OCLC Developer Network
-        url: https://www.oclc.org/developer/api.en.html
-        email: devnet@oclc.org
-
-  - aid: worldcat:worldcat-metadata-api
-    name: WorldCat Metadata API
-    description: >-
-      Enables libraries to search, retrieve and maintain their bibliographic,
-      local bibliographic, holdings, and local holdings data in WorldCat.
-      Supports synchronizing local catalog data, discovering shared print
-      retention information, and enhancing metadata quality across the network.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
-    baseURL: https://metadata.api.oclc.org/worldcat
-    tags:
-      - Metadata
-      - Cataloging
-      - Holdings
-      - Bibliographic Records
-      - Libraries
-    properties:
-      - type: Documentation
-        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
-      - type: OpenAPI
-        url: https://developer.api.oclc.org/wc-metadata-v2
-    contact:
-      - FN: OCLC Developer Network
-        url: https://www.oclc.org/developer/api.en.html
-        email: devnet@oclc.org
-
-  - aid: worldcat:worldcat-knowledge-base-api
-    name: WorldCat Knowledge Base API
-    description: >-
-      Provides developer-level access to a library's information in the WorldCat
-      Knowledge Base, combining data about a library's e-content with access
-      through linking features. Supports OpenURL requests for matching citations
-      and retrieving access links, and REST requests for browsing and searching
-      library subscription resources.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
-    baseURL: https://worldcat.org/webservices/kb
-    tags:
-      - Knowledge Base
-      - E-resources
-      - OpenURL
-      - Libraries
-      - Subscriptions
-    properties:
-      - type: Documentation
-        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
-    contact:
-      - FN: OCLC Developer Network
-        url: https://www.oclc.org/developer/api.en.html
-        email: devnet@oclc.org
-
-  - aid: worldcat:worldcat-entities-data-api
-    name: WorldCat Entities Data API
-    description: >-
-      Retrieve a set of properties and data for over 150 million WorldCat
-      Entities using associated uniform resource identifiers (URIs). Supports
-      linked data integration for local discovery applications, research and
-      analysis, and monitoring updates to WorldCat Entities data.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
-    baseURL: https://id.oclc.org/worldcat/entity
-    tags:
-      - Entities
-      - Linked Data
-      - WorldCat
-      - Libraries
-      - Research
-    properties:
-      - type: Documentation
-        url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
-      - type: OpenAPI
-        url: https://developer.api.oclc.org/entity-data
-    contact:
-      - FN: OCLC Developer Network
-        url: https://www.oclc.org/developer/api.en.html
-        email: devnet@oclc.org
-
+- aid: worldcat:worldcat-knowledge-base-api
+  name: WorldCat Knowledge Base API
+  description: >-
+    Provides developer-level access to a library's information in the WorldCat Knowledge Base, combining
+    data about a library's e-content with access through linking features. Supports OpenURL requests for
+    matching citations and retrieving access links, and REST requests for browsing and searching library
+    subscription resources.
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
+  baseURL: https://worldcat.org/webservices/kb
+  tags:
+  - Knowledge Base
+  - E-resources
+  - OpenURL
+  - Libraries
+  - Subscriptions
+  properties:
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
+  contact:
+  - FN: OCLC Developer Network
+    url: https://www.oclc.org/developer/api.en.html
+    email: devnet@oclc.org
+- aid: worldcat:worldcat-bibliographic-resources-api
+  name: WorldCat Bibliographic Resources API
+  description: >-
+    The Bibliographic Resources API from WorldCat — 6 operation(s) for bibliographic resources.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Bibliographic Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-bibliographic-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-local-bib-resources-api
+  name: WorldCat Local Bib Resources API
+  description: The Local Bib Resources API from WorldCat — 2 operation(s) for local bib resources.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Local Bib Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-local-bib-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-local-holdings-resources-api
+  name: WorldCat Local Holdings Resources API
+  description: >-
+    The Local Holdings Resources API from WorldCat — 3 operation(s) for local holdings resources.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Local Holdings Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-local-holdings-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-manage-bibliographic-records-api
+  name: WorldCat Manage Bibliographic Records API
+  description: >-
+    The Manage Bibliographic Records API from WorldCat — 5 operation(s) for manage bibliographic records.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Manage Bibliographic Records
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-manage-bibliographic-records-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-manage-institution-api
+  name: WorldCat Manage Institution API
+  description: The Manage Institution API from WorldCat — 9 operation(s) for manage institution.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Manage Institution
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-manage-institution-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-manage-local-bibliographic-data-api
+  name: WorldCat Manage Local Bibliographic Data API
+  description: >-
+    The Manage Local Bibliographic Data API from WorldCat — 2 operation(s) for manage local bibliographic
+    data.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Manage Local Bibliographic Data
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-manage-local-bibliographic-data-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-manage-local-holdings-records-api
+  name: WorldCat Manage Local Holdings Records API
+  description: >-
+    The Manage Local Holdings Records API from WorldCat — 2 operation(s) for manage local holdings records.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Manage Local Holdings Records
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-manage-local-holdings-records-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-member-enabled-collections-api
+  name: WorldCat Member Enabled Collections API
+  description: >-
+    The Member Enabled Collections API from WorldCat — 2 operation(s) for member enabled collections.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Member Enabled Collections
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-member-enabled-collections-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-member-enabled-providers-api
+  name: WorldCat Member Enabled Providers API
+  description: >-
+    The Member Enabled Providers API from WorldCat — 2 operation(s) for member enabled providers.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Member Enabled Providers
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-member-enabled-providers-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-member-enabled-title-by-openurl-api
+  name: WorldCat Member Enabled Title by OpenURL API
+  description: >-
+    The Member Enabled Title by OpenURL API from WorldCat — 1 operation(s) for member enabled title by
+    openurl.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Member Enabled Title by OpenURL
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-member-enabled-title-by-openurl-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-member-enabled-titles-api
+  name: WorldCat Member Enabled Titles API
+  description: The Member Enabled Titles API from WorldCat — 2 operation(s) for member enabled titles.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Member Enabled Titles
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-member-enabled-titles-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-member-enabled-titles-by-openurl-api
+  name: WorldCat Member Enabled Titles by OpenURL API
+  description: >-
+    The Member Enabled Titles by OpenURL API from WorldCat — 1 operation(s) for member enabled titles
+    by openurl.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Member Enabled Titles by OpenURL
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-member-enabled-titles-by-openurl-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-member-general-holdings-api
+  name: WorldCat Member General Holdings API
+  description: >-
+    The Member General Holdings API from WorldCat — 3 operation(s) for member general holdings.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Member General Holdings
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-member-general-holdings-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-member-shared-print-holdings-api
+  name: WorldCat Member Shared Print Holdings API
+  description: >-
+    The Member Shared Print Holdings API from WorldCat — 1 operation(s) for member shared print holdings.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Member Shared Print Holdings
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-member-shared-print-holdings-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-retrieve-entity-api
+  name: WorldCat Retrieve entity API
+  description: The Retrieve entity API from WorldCat — 1 operation(s) for retrieve entity.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Retrieve entity
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-retrieve-entity-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-search-bibliographic-resources-api
+  name: WorldCat Search Bibliographic Resources API
+  description: >-
+    The Search Bibliographic Resources API from WorldCat — 4 operation(s) for search bibliographic resources.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Search Bibliographic Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-search-bibliographic-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-search-local-holdings-resources-api
+  name: WorldCat Search Local Holdings Resources API
+  description: >-
+    The Search Local Holdings Resources API from WorldCat — 4 operation(s) for search local holdings resources.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Search Local Holdings Resources
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-search-local-holdings-resources-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-search-member-general-holdings-api
+  name: WorldCat Search Member General Holdings API
+  description: >-
+    The Search Member General Holdings API from WorldCat — 2 operation(s) for search member general holdings.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Search Member General Holdings
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-search-member-general-holdings-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
+- aid: worldcat:worldcat-search-member-shared-print-holdings-api
+  name: WorldCat Search Member Shared Print Holdings API
+  description: >-
+    The Search Member Shared Print Holdings API from WorldCat — 1 operation(s) for search member shared
+    print holdings.
+  humanURL: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  baseURL: https://americas.discovery.api.oclc.org/worldcat/search/v2
+  tags:
+  - Search Member Shared Print Holdings
+  properties:
+  - type: OpenAPI
+    url: openapi/worldcat-search-member-shared-print-holdings-api-openapi.yml
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-search-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-metadata-api.en.html
+  - type: Documentation
+    url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
 common:
   - type: AgenticAccess
     url: agentic-access/worldcat-agentic-access.yml
