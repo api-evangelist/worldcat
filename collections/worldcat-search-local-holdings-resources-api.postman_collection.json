@@ -1,0 +1,1680 @@
+{
+  "item": [
+    {
+      "id": "c24d92d6-c4fd-42f0-a633-181548298600",
+      "name": "Search Local Holdings Resources",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "06c0a01b-623e-48a0-9b59-0ca66519e711",
+          "name": "Search for shared print LHR Resources",
+          "request": {
+            "name": "Search for shared print LHR Resources",
+            "description": {
+              "content": "Search for shared print LHR Resources",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "retained-holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumber",
+                  "value": "<long>",
+                  "description": "oclc number of the bibliographic item"
+                },
+                {
+                  "disabled": false,
+                  "key": "barcode",
+                  "value": "<string>",
+                  "description": "barcode"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBy",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBySymbol",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByInstitutionID",
+                  "value": "<integer>,<integer>,<integer>,<integer>,<integer>",
+                  "description": "Institution registryId"
+                },
+                {
+                  "disabled": false,
+                  "key": "spProgram",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index)."
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "oclcSymbol",
+                  "description": "result sort key"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "start position of the bib records to return (0 based), default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "05061e42-6079-47e5-9420-cad62fa19f32",
+              "name": "successful search for retained holdings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfHoldings\": 18,\n  \"detailedHoldings\": [\n    {\n      \"lhrControlNumber\": \"168860541\",\n      \"lhrDateEntered\": \"20180928\",\n      \"lhrLastUpdated\": \"20180928\",\n      \"oclcNumber\": \"25748966\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Adult Non-Fiction\"\n      },\n      \"copyNumber\": \"1\",\n      \"callNumber\": {\n        \"displayCallNumber\": \"655 ART\",\n        \"classificationPart\": \"655\",\n        \"suffixes\": [\n          \"ART\"\n        ]\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"5445454\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"184074541\",\n      \"lhrDateEntered\": \"20170807\",\n      \"lhrLastUpdated\": \"20170807\",\n      \"oclcNumber\": \"880521265\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"WEST\",\n        \"shelvingLocation\": \"Junior Fiction\"\n      },\n      \"copyNumber\": \"1\",\n      \"callNumber\": {\n        \"displayCallNumber\": \"PB 823 WIL\",\n        \"classificationPart\": \"823\",\n        \"prefixes\": [\n          \"PB\"\n        ],\n        \"suffixes\": [\n          \"WIL\"\n        ]\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"38273625\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"161419350\",\n      \"lhrDateEntered\": \"20180928\",\n      \"lhrLastUpdated\": \"20180928\",\n      \"oclcNumber\": \"57358293\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Junior Non-Fiction\"\n      },\n      \"copyNumber\": \"1\",\n      \"callNumber\": {\n        \"displayCallNumber\": \"JF ROW\",\n        \"classificationPart\": \"ROW\",\n        \"prefixes\": [\n          \"JF\"\n        ]\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"741258\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"103218573\",\n      \"lhrDateEntered\": \"20190328\",\n      \"lhrLastUpdated\": \"20190328\",\n      \"oclcNumber\": \"38374762\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Reference\"\n      },\n      \"callNumber\": {\n        \"displayCallNumber\": \"REF 346.94052 REST\",\n        \"classificationPart\": \"REF 346.94052 REST\"\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"980474432\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"103216969\",\n      \"lhrDateEntered\": \"20190328\",\n      \"lhrLastUpdated\": \"20190328\",\n      \"oclcNumber\": \"877594832\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Junior Paperback\"\n      },\n      \"callNumber\": {\n        \"displayCallNumber\": \"JPB DICK\",\n        \"classificationPart\": \"JPB DICK\"\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"980391610\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"195202980\",\n      \"lhrDateEntered\": \"20190328\",\n      \"lhrLastUpdated\": \"20190328\",\n      \"oclcNumber\": \"77485772\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Junior Fiction\"\n      },\n      \"copyNumber\": \"1\",\n      \"callNumber\": {\n        \"displayCallNumber\": \"823 BEI\",\n        \"classificationPart\": \"823\",\n        \"suffixes\": [\n          \"BEI\"\n        ]\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"sharedPrintCommitments\": [\n        {\n          \"actionNote\": \"digitized\",\n          \"materialsSpecified\": \"Scenario 5a\",\n          \"institution\": \"ESBiUD\",\n          \"dateOfAction\": \"20190212\",\n          \"commitmentExpirationDate\": \"20201212\",\n          \"methodOfAction\": \"known A\",\n          \"status\": \"current\",\n          \"publicNote\": \"LHR-3388\"\n        },\n        {\n          \"actionNote\": \"condition reviewed\",\n          \"materialsSpecified\": \"Scenario 5b\",\n          \"institution\": \"ESBiUD\",\n          \"dateOfAction\": \"20190414 20190515\",\n          \"commitmentExpirationDate\": \"20211111 20211010\",\n          \"methodOfAction\": \"unknown unknown B\",\n          \"status\": \"not current\",\n          \"publicNote\": \"LHR-3388\"\n        }\n      ],\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"201010\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"103217002\",\n      \"lhrDateEntered\": \"20191029\",\n      \"lhrLastUpdated\": \"20191029\",\n      \"oclcNumber\": \"40064472\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Junior Fiction\"\n      },\n      \"callNumber\": {\n        \"displayCallNumber\": \"F LEW\",\n        \"classificationPart\": \"F LEW\"\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"sharedPrintCommitments\": [\n        {\n          \"actionNote\": \"committed to retain\",\n          \"materialsSpecified\": \"none\",\n          \"institution\": \"ESBiUD\",\n          \"dateOfAction\": \"20190311\",\n          \"commitmentExpirationDate\": \"20201225\",\n          \"authorization\": \"CLOCKSS\",\n          \"methodOfAction\": \"known\",\n          \"status\": \"current\",\n          \"publicNote\": \"LHR-3486\"\n        }\n      ],\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"61008\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"103349801\",\n      \"lhrDateEntered\": \"20191115\",\n      \"lhrLastUpdated\": \"20191115\",\n      \"oclcNumber\": \"806097045\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Music Cassette\"\n      },\n      \"callNumber\": {\n        \"displayCallNumber\": \"TALKING BOOK CORN\",\n        \"classificationPart\": \"TALKING BOOK CORN\"\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"sharedPrintCommitments\": [\n        {\n          \"actionNote\": \"committed to retain\",\n          \"materialsSpecified\": \"none\",\n          \"institution\": \"ESBiUD\",\n          \"dateOfAction\": \"20190311\",\n          \"commitmentExpirationDate\": \"20201225\",\n          \"authorization\": \"CLOCKSS\",\n          \"methodOfAction\": \"known\",\n          \"status\": \"current\",\n          \"publicNote\": \"update\"\n        }\n      ],\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"980378205\"\n        }\n      ]\n    },\n    {\n      \"lhrControlNumber\": \"225635989\",\n      \"lhrDateEntered\": \"20191115\",\n      \"lhrLastUpdated\": \"20191115\",\n      \"oclcNumber\": \"809427327\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\"\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"sharedPrintCommitments\": [\n        {\n          \"actionNote\": \"committed to retain\",\n          \"materialsSpecified\": \"none\",\n          \"institution\": \"ESBiUD\",\n          \"dateOfAction\": \"20190311\",\n          \"commitmentExpirationDate\": \"20201225\",\n          \"authorization\": \"CLOCKSS\",\n          \"methodOfAction\": \"known\",\n          \"status\": \"current\",\n          \"publicNote\": \"update\"\n        }\n      ],\n      \"summary\": \"Local Holdings Available.\"\n    },\n    {\n      \"lhrControlNumber\": \"187490232\",\n      \"lhrDateEntered\": \"20190328\",\n      \"lhrLastUpdated\": \"20190328\",\n      \"oclcNumber\": \"870425058\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"ANZSL\",\n        \"sublocationCollection\": \"ANZS\",\n        \"shelvingLocation\": \"Junior Non-Fiction\"\n      },\n      \"copyNumber\": \"1\",\n      \"callNumber\": {\n        \"displayCallNumber\": \"933.05092 TRU\",\n        \"classificationPart\": \"933.05092\",\n        \"suffixes\": [\n          \"TRU\"\n        ]\n      },\n      \"hasSharedPrintCommitment\": \"Y\",\n      \"sharedPrintCommitments\": [\n        {\n          \"actionNote\": \"digitized\",\n          \"materialsSpecified\": \"Scenario 3a\",\n          \"institution\": \"ESBiUD\",\n          \"dateOfAction\": \"20190311 20190212\",\n          \"commitmentExpirationDate\": \"20201225 20201212\",\n          \"methodOfAction\": \"known known A\",\n          \"status\": \"current\",\n          \"publicNote\": \"LHR-3388\"\n        }\n      ],\n      \"summary\": \"Local Holdings Available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"564474\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d598c2b-d2c0-4009-a539-45bbd678ab0b",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4b4c0bf-3fa0-4385-b0e9-d04d33f74c6d",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2a988dc-f885-4090-9738-7ce990d608e4",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "94c59183-36d8-4124-b9fe-157bf2780100",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"string\",\n  \"instance\": \"https://JdxmtVWnqXvvGWAIhlqzRBRT.qzxzNbYw1tAfWv9vhi3dVUL8engeFURqAehzu.JEbX-wUwIwG4OIqxErxtIbnFP6dhhW.2qBCMurddh0rO\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "24f16a32-c0f8-4c3f-ab14-313d8515687e",
+          "name": "Retrieve LHR Resource",
+          "request": {
+            "name": "Retrieve LHR Resource",
+            "description": {
+              "content": "Retrieve LHR Resource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "my-holdings",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "controlNumber",
+                  "description": "(Required) LHR control number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "e1de2b58-aefb-4ca4-b9f5-e3a004efd02e",
+              "name": "successful read one of my holdings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LHR control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"lhrControlNumber\": \"132422447\",\n  \"lhrDateEntered\": \"20190816\",\n  \"lhrLastUpdated\": \"20190816\",\n  \"oclcNumber\": \"246197114\",\n  \"format\": \"zu\",\n  \"location\": {\n    \"holdingLocation\": \"OCWMS\",\n    \"sublocationCollection\": \"CENT\",\n    \"shelvingLocation\": \"CENT-STACKS\"\n  },\n  \"copyNumber\": \"1\",\n  \"callNumber\": {\n    \"displayCallNumber\": \"CATS\",\n    \"classificationPart\": \"CATS\"\n  },\n  \"hasSharedPrintCommitment\": \"N\",\n  \"summary\": \"Local holdings available.\",\n  \"holdingParts\": [\n    {\n      \"pieceDesignation\": \"CR963528\",\n      \"temporaryLocation\": \"présêlection\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "53b1bdba-d129-4c3f-a758-ce11e3919446",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LHR control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"control number must be a positive whole number\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21a3ffa4-a68a-4873-a99f-7e23624606d9",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LHR control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "363921af-620b-4fd9-be00-d71004bd1361",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LHR control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c4d5f485-61c1-4754-8e7f-76424158dd27",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LHR control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc2f0703-4bd0-4c99-8272-287db0482cea",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LHR control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE\",\n  \"title\": \"string\",\n  \"instance\": \"http://miAGicRdFwJymiIzZNoOVYUeTfblgKDl.eijbBOHS5N2cSW-3pc2bq6o+BJtOgJBZdxsaSgaj7bxBJf8PJPG8x\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d4ef85c4-57da-40b1-944c-bc110a648263",
+          "name": "Search LHR Resources",
+          "request": {
+            "name": "Search LHR Resources",
+            "description": {
+              "content": "Search LHR Resources",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "my-holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumber",
+                  "value": "<long>",
+                  "description": "oclc number of the bibliographic item"
+                },
+                {
+                  "disabled": false,
+                  "key": "barcode",
+                  "value": "<string>",
+                  "description": "barcode"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "oclcSymbol",
+                  "description": "result sort key"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "start position of the bib records to return (0 based), default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "40044cff-a9d3-4033-8793-6190c249a8ff",
+              "name": "successful search of my holdings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfHoldings\": 1,\n  \"detailedHoldings\": [\n    {\n      \"lhrControlNumber\": \"132422447\",\n      \"lhrDateEntered\": \"20190816\",\n      \"lhrLastUpdated\": \"20190816\",\n      \"oclcNumber\": \"246197114\",\n      \"format\": \"zu\",\n      \"location\": {\n        \"holdingLocation\": \"OCWMS\",\n        \"sublocationCollection\": \"CENT\",\n        \"shelvingLocation\": \"CENT-STACKS\"\n      },\n      \"copyNumber\": \"1\",\n      \"callNumber\": {\n        \"displayCallNumber\": \"CATS\",\n        \"classificationPart\": \"CATS\"\n      },\n      \"hasSharedPrintCommitment\": \"N\",\n      \"summary\": \"Local holdings available.\",\n      \"holdingParts\": [\n        {\n          \"pieceDesignation\": \"CR963528\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b8b56114-a483-4c40-a9ab-333126867871",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "34883422-e660-4860-812a-de5676b9968e",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1bd56d0-c981-4ddb-bd15-f419255b8227",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1d3cb5ae-afb6-4a3d-9d1b-8aa2aed10da7",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "barcode",
+                      "value": "K123456789"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "oclcSymbol"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE\",\n  \"title\": \"string\",\n  \"instance\": \"http://miAGicRdFwJymiIzZNoOVYUeTfblgKDl.eijbBOHS5N2cSW-3pc2bq6o+BJtOgJBZdxsaSgaj7bxBJf8PJPG8x\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "dbeee862-b1b5-4fdb-b096-365b9bb63793",
+          "name": "Browse LHR Resources",
+          "request": {
+            "name": "Browse LHR Resources",
+            "description": {
+              "content": "Browse LHR Resources",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "browse",
+                "my-holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "callNumber",
+                  "value": "<string>",
+                  "description": "The item call number"
+                },
+                {
+                  "disabled": false,
+                  "key": "oclcNumber",
+                  "value": "<long>",
+                  "description": "oclc number of the bibliographic item"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingLocation",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "shelvingLocation",
+                  "value": "<string>",
+                  "description": "(Required) "
+                },
+                {
+                  "disabled": false,
+                  "key": "browsePosition",
+                  "value": "0",
+                  "description": "The position within the browse list where the matching record should be"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "766bf723-f7fc-41e8-b50c-20f3bf2ae2bc",
+              "name": "successful browse my holdings",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "browse",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "holdingLocation",
+                      "value": "MAIN"
+                    },
+                    {
+                      "key": "shelvingLocation",
+                      "value": "MAIN-Stacks"
+                    },
+                    {
+                      "key": "browsePosition",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 2,\n  \"entries\": [\n    {\n      \"displayCallNumber\": \"PN6738 .S56\",\n      \"holdingLocation\": \"MAIN\",\n      \"shelvingLocation\": \"MAIN-Stacks\",\n      \"pieceDesignation\": \"K123456789\",\n      \"oclcNumber\": 318877925,\n      \"title\": \"Simon's cat\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"edition\": \"1st ed.\",\n      \"publisher\": \"Grand Central Pub.\",\n      \"publicationPlace\": \"New York :\"\n    },\n    {\n      \"displayCallNumber\": null,\n      \"holdingLocation\": \"MAIN\",\n      \"shelvingLocation\": \"MAIN-Stacks\",\n      \"pieceDesignation\": null,\n      \"oclcNumber\": null,\n      \"title\": null,\n      \"creator\": null,\n      \"date\": null,\n      \"language\": null,\n      \"generalFormat\": null,\n      \"specificFormat\": null,\n      \"edition\": null,\n      \"publisher\": null,\n      \"publicationPlace\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8098b3e2-0fb9-4681-93e3-3d8c7f0a88f7",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "browse",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "holdingLocation",
+                      "value": "MAIN"
+                    },
+                    {
+                      "key": "shelvingLocation",
+                      "value": "MAIN-Stacks"
+                    },
+                    {
+                      "key": "browsePosition",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "84e9f95f-af6b-445e-b827-c1f764c05a01",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "browse",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "holdingLocation",
+                      "value": "MAIN"
+                    },
+                    {
+                      "key": "shelvingLocation",
+                      "value": "MAIN-Stacks"
+                    },
+                    {
+                      "key": "browsePosition",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8568b02-9c8e-487e-9f06-89b9fe677f84",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "browse",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "holdingLocation",
+                      "value": "MAIN"
+                    },
+                    {
+                      "key": "shelvingLocation",
+                      "value": "MAIN-Stacks"
+                    },
+                    {
+                      "key": "browsePosition",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "863146d0-d4b7-4a80-ab8e-361b920c7194",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "browse",
+                    "my-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "callNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "holdingLocation",
+                      "value": "MAIN"
+                    },
+                    {
+                      "key": "shelvingLocation",
+                      "value": "MAIN-Stacks"
+                    },
+                    {
+                      "key": "browsePosition",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE\",\n  \"title\": \"string\",\n  \"instance\": \"http://miAGicRdFwJymiIzZNoOVYUeTfblgKDl.eijbBOHS5N2cSW-3pc2bq6o+BJtOgJBZdxsaSgaj7bxBJf8PJPG8x\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "76b24375-642c-4d29-b378-798c6d4a510a",
+    "name": "WorldCat Entity Data Bibliographic Resources Search Local Holdings Resources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

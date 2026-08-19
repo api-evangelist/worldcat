@@ -1,0 +1,218 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Search Local Holdings Resources API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search Local Holdings Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Search for shared print LHR Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/retained-holdings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "41266045",
+                "type": "query",
+                "description": "oclc number of the bibliographic item"
+              },
+              {
+                "name": "barcode",
+                "value": "K123456789",
+                "type": "query",
+                "description": "barcode"
+              },
+              {
+                "name": "heldBy",
+                "value": "TXH",
+                "type": "query",
+                "description": "Institution Symbol"
+              },
+              {
+                "name": "heldBySymbol",
+                "value": "",
+                "type": "query",
+                "description": "Institution Symbol"
+              },
+              {
+                "name": "heldByInstitutionID",
+                "value": "",
+                "type": "query",
+                "description": "Institution registryId"
+              },
+              {
+                "name": "spProgram",
+                "value": "WEST",
+                "type": "query",
+                "description": "Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index)."
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "result sort key"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "start position of the bib records to return (0 based), default 0"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "maximum number of records to return, maximum 50, default 10"
+              }
+            ]
+          },
+          "docs": "Search for shared print LHR Resources"
+        },
+        {
+          "info": {
+            "name": "Retrieve LHR Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/my-holdings/:controlNumber",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "238374600",
+                "type": "path",
+                "description": "LHR control number"
+              }
+            ]
+          },
+          "docs": "Retrieve LHR Resource"
+        },
+        {
+          "info": {
+            "name": "Search LHR Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/my-holdings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "41266045",
+                "type": "query",
+                "description": "oclc number of the bibliographic item"
+              },
+              {
+                "name": "barcode",
+                "value": "K123456789",
+                "type": "query",
+                "description": "barcode"
+              },
+              {
+                "name": "orderBy",
+                "value": "",
+                "type": "query",
+                "description": "result sort key"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "start position of the bib records to return (0 based), default 0"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "maximum number of records to return, maximum 50, default 10"
+              }
+            ]
+          },
+          "docs": "Search LHR Resources"
+        },
+        {
+          "info": {
+            "name": "Browse LHR Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/browse/my-holdings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "callNumber",
+                "value": "",
+                "type": "query",
+                "description": "The item call number"
+              },
+              {
+                "name": "oclcNumber",
+                "value": "41266045",
+                "type": "query",
+                "description": "oclc number of the bibliographic item"
+              },
+              {
+                "name": "holdingLocation",
+                "value": "MAIN",
+                "type": "query"
+              },
+              {
+                "name": "shelvingLocation",
+                "value": "MAIN-Stacks",
+                "type": "query"
+              },
+              {
+                "name": "browsePosition",
+                "value": "10",
+                "type": "query",
+                "description": "The position within the browse list where the matching record should be"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "maximum number of records to return, maximum 50, default 10"
+              }
+            ]
+          },
+          "docs": "Browse LHR Resources"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

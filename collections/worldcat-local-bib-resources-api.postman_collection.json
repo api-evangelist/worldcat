@@ -1,0 +1,724 @@
+{
+  "item": [
+    {
+      "id": "288fce8e-5371-42e5-9c63-4646cb7cffac",
+      "name": "Local Bib Resources",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a2c4ed84-7047-4a1e-be9f-80d1cbec1b85",
+          "name": "Retrieve LBD Resource",
+          "request": {
+            "name": "Retrieve LBD Resource",
+            "description": {
+              "content": "Retrieve LBD Resource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "my-local-bib-data",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "controlNumber",
+                  "description": "(Required) LBD control number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6336dca5-6154-495a-8541-5bfa675937e2",
+              "name": "successful read my local bib data by control number",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LBD control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"controlNumber\": 588894059,\n  \"oclcNumber\": \"191865523\",\n  \"title\": {\n    \"uniformTitles\": [\n      \"Test Uniform Title\"\n    ]\n  },\n  \"contributor\": {\n    \"creators\": [\n      {\n        \"firstName\": {\n          \"text\": \"Karen\"\n        },\n        \"secondName\": {\n          \"text\": \"Jones\"\n        },\n        \"type\": \"person\"\n      }\n    ]\n  },\n  \"subjects\": [\n    {\n      \"subjectName\": {\n        \"text\": \"Test Subject\"\n      }\n    }\n  ],\n  \"note\": {\n    \"generalNotes\": [\n      {\n        \"text\": \"Test Note\"\n      }\n    ]\n  },\n  \"genres\": [\n    \"Humor\"\n  ],\n  \"localSystemNumber\": \"System.Supplied@2021-02-09,11:50:40\",\n  \"lastUpdated\": 20210209\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "33903294-ca00-4582-95a6-68703470764b",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LBD control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"control number must be a positive whole number\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f533f337-6476-4d08-9138-33c1ea7e8055",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LBD control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f94b0e13-3714-4ce9-99b3-26213a7cfde9",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LBD control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "abe8b342-50ff-4019-821c-c767d5d146cb",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LBD control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee25f273-4f6f-4361-8689-5383b0a69081",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "controlNumber",
+                      "description": "(Required) LBD control number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/SYNTAX_ERROR\",\n  \"title\": \"string\",\n  \"instance\": \"https://XDnQRrvaCpmquyArc.juaMiVS2N+-.JR-ymbAwEAlWi\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "60f4ca74-59d0-4093-970a-e0ffae734c1b",
+          "name": "Search LBD Resources",
+          "request": {
+            "name": "Search LBD Resources",
+            "description": {
+              "content": "Search LBD Resources <a href=\"https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Local_bibliographic_data_records/Local_bibliographic_data_record_indexes_A-Z\">Learn more about the indexes available</a>\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "my-local-bib-data"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) query in the form of a keyword search or fielded search, for example  (au:gazihan OR au:womacka) AND kw:java See - https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Bibliographic_records/Bibliographic_record_indexes/Bibliographic_record_index_lists"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "start position of the bib records to return (0 based), default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "73253e9f-517c-4932-9040-5f1f23404757",
+              "name": "successful search of my local bib data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 1,\n  \"records\": [\n    {\n      \"controlNumber\": 588894059,\n      \"oclcNumber\": \"191865523\",\n      \"title\": {\n        \"uniformTitles\": [\n          \"Test Uniform Title\"\n        ]\n      },\n      \"contributor\": {\n        \"creators\": [\n          {\n            \"firstName\": {\n              \"text\": \"Karen\"\n            },\n            \"secondName\": {\n              \"text\": \"Jones\"\n            },\n            \"type\": \"person\"\n          }\n        ]\n      },\n      \"subjects\": [\n        {\n          \"subjectName\": {\n            \"text\": \"Test Subject\"\n          }\n        }\n      ],\n      \"note\": {\n        \"generalNotes\": [\n          {\n            \"text\": \"Test Note\"\n          }\n        ]\n      },\n      \"genres\": [\n        \"Humor\"\n      ],\n      \"localSystemNumber\": \"System.Supplied@2021-02-09,11:50:40\",\n      \"lastUpdated\": 20210209\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01b45839-2148-49d7-8393-88670e8c4057",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_DOCUMENT\",\n  \"title\": \"string\",\n  \"instance\": \"http://XYyIMboxAseIQTHMgJUxgV.hndtEb\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10ded122-bbe4-43c3-9c5e-6cb768589411",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d7d963c6-cdab-46c2-b2d9-d667400ea605",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04030d0a-ab38-4627-8825-f5985dbcd53e",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "my-local-bib-data"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_DOCUMENT\",\n  \"title\": \"string\",\n  \"instance\": \"http://XYyIMboxAseIQTHMgJUxgV.hndtEb\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6d7c8687-7f3c-4865-a119-833e6bd4a410",
+    "name": "WorldCat Entity Data Bibliographic Resources Local Bib Resources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

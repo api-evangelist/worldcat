@@ -1,0 +1,2201 @@
+{
+  "item": [
+    {
+      "id": "35fec2ca-1b74-49ae-a9de-80771305623e",
+      "name": "Manage Bibliographic Records",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5fed3089-bdcd-4d9f-a3cb-1d29eee55012",
+          "name": "Validate a Bibliographic Record",
+          "request": {
+            "name": "Validate a Bibliographic Record",
+            "description": {
+              "content": "Given a Bibliographic record, apply the validation rules that conform to MARC standards.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "bibs",
+                "validate",
+                ":validationLevel"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "validateFull",
+                  "key": "validationLevel",
+                  "description": "(Required) Level at which to validate records"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "db001c7d-7d6d-4329-9435-1a37382c77f6",
+              "name": "Validation was successfully applied to the Bibliographic record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "validate",
+                    ":validationLevel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "validateFull",
+                      "key": "validationLevel",
+                      "description": "(Required) Level at which to validate records"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"summary\": \"VALID\",\n    \"description\": \"The provided Bib is valid\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b6fe537-3c26-411c-ad8e-480b5c075d64",
+              "name": "Bad request. The request is unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "validate",
+                    ":validationLevel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "validateFull",
+                      "key": "validationLevel",
+                      "description": "(Required) Level at which to validate records"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"summary\": \"BIB_LACKS_CONTROL_NUMBER\",\n    \"description\": \"Record is missing a control number\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f2f6bcc-3d76-4a14-9103-ac7dc5fedab2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "validate",
+                    ":validationLevel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "validateFull",
+                      "key": "validationLevel",
+                      "description": "(Required) Level at which to validate records"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29fa8295-99d6-41f1-a69c-cb26d7763f66",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "validate",
+                    ":validationLevel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "validateFull",
+                      "key": "validationLevel",
+                      "description": "(Required) Level at which to validate records"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "091caeff-453a-46cc-88ba-956332c43882",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "validate",
+                    ":validationLevel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "validateFull",
+                      "key": "validationLevel",
+                      "description": "(Required) Level at which to validate records"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9bc399d8-beb7-4f0f-bdd2-0943fe43f516",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "validate",
+                    ":validationLevel"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "validateFull",
+                      "key": "validationLevel",
+                      "description": "(Required) Level at which to validate records"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d00b4a3f-5f26-43fb-9acb-979ee720dcc5",
+          "name": "Retrieve the current OCLC Numbers from WorldCat.",
+          "request": {
+            "name": "Retrieve the current OCLC Numbers from WorldCat.",
+            "description": {
+              "content": "Given one or more OCLC Numbers, check WorldCat for those numbers. It will return the most current OCLC Number(s) associated w/ the OCLC Number(s) provided. If an OCLC Number does not exist or is invalid, a result of null is returned for the requested number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "bibs",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumbers",
+                  "value": "<long>",
+                  "description": "(Required) One or more OCLC numbers. Separated by comma if providing multiple."
+                },
+                {
+                  "disabled": false,
+                  "key": "oclcNumbers",
+                  "value": "<long>",
+                  "description": "(Required) One or more OCLC numbers. Separated by comma if providing multiple."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7679b21f-520c-49ea-97be-d7ea8748aa05",
+              "name": "The current OCLC Numbers were retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"controlNumbers\": [\n    {\n      \"requested\": \"1\",\n      \"current\": \"1\"\n    },\n    {\n      \"requested\": \"261176486\",\n      \"current\": \"311684437\"\n    },\n    {\n      \"requested\": \"999999999999\",\n      \"current\": null\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45fd2763-532f-43cb-871e-e90cb88294a2",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Unable to perform retrieve the current OCLC Numbers from WorldCat.\",\n  \"detail\": \"No current found control number\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f5768b1-face-42a9-9cae-6dd84a98d610",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "781ef33a-6bf3-4738-be44-8c36447dc9bb",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dd374693-2385-4506-a78e-5d54e0ba3936",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "68413051-6ea2-45d3-9d94-d7588aab5253",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf502d57-e454-45f9-bae2-a362cac4e436",
+          "name": "Create a Bibliographic Record",
+          "request": {
+            "name": "Create a Bibliographic Record",
+            "description": {
+              "content": "Given a bibliographic record, create it in WorldCat... if it does not exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "bibs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b863279a-8293-4397-92f6-5405d97fa324",
+              "name": "The Bibliographic record is created successfully and returns with an OCLC Number.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "221fad72-4251-4a8f-a677-3239aa9a73a7",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Unable to crosswalk the record.\",\n  \"detail\": \"The record has parsing errors.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbd2e014-5e18-49c2-9f84-a8d4c3583bcf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e504b638-b4ed-416e-ae85-7b57dc38818e",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d20a83c-8dcc-4085-a8fd-e1da15b83f34",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "715fce2c-0830-4034-9664-ae019136c489",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bf735050-dd14-4be2-8bb0-a5a4f9257f3b",
+          "name": "Retrieve a Bibliographic record",
+          "request": {
+            "name": "Retrieve a Bibliographic record",
+            "description": {
+              "content": "Given an OCLC Number, retrieve a Bibliographic record, if it exists in WorldCat.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "bibs",
+                ":oclcNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "oclcNumber",
+                  "description": "(Required) The OCLC number of the Bibliographic record"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "5c04d093-d160-40eb-b529-a466f2844ee3",
+              "name": "The Bibliographic record was retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number of the Bibliographic record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "561b05ab-7241-46f6-84be-f5360c9d0f14",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number of the Bibliographic record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Invalid identifier.\",\n  \"detail\": \"A request with a non-numeric identifier was attempted: ocm12121212\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ae0a560-7421-41c8-8346-bdb3986a0f9c",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number of the Bibliographic record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "23382001-1838-4b5c-a8aa-25d77c9dd184",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number of the Bibliographic record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1964730f-aad2-46be-b67a-4db993d306d3",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number of the Bibliographic record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dce696e0-f802-4963-bf44-10e1f641ae00",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number of the Bibliographic record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99989e88-b938-4aa4-88e8-63ffbdc2b666",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number of the Bibliographic record"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c0bdba05-5c0d-4a39-bbb6-757b9f2c7d00",
+          "name": "Replace a Bibliographic record",
+          "request": {
+            "name": "Replace a Bibliographic record",
+            "description": {
+              "content": "Given an OCLC Number, replace a Bibliographic record.  If the Bibliographic record does not exist, then a new Bibliographic record will be created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "bibs",
+                ":oclcNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "oclcNumber",
+                  "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "316d5df6-57e0-4f00-a71a-53dc4f06d8f6",
+              "name": "The Bibliographic record was replaced successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "bf108ecb-2eac-4a36-8a71-19c2d78321f6",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Unable to crosswalk the record.\",\n  \"detail\": \"The record has parsing errors.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0d3dfec-f8d1-40c2-9389-bbf3c07981f9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "19dbc19f-2c6f-4a8d-ab3e-683b5f7b063e",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "17ec217e-834d-441b-be46-0eac061cd786",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5fdae907-5e17-4c9d-ad2a-767f39a9de7c",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0a08375-65f1-487e-97d5-4cb748ca5eb6",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The OCLC number associated with the Bibliographic record to be replaced."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc7a1159-21cd-450d-bc63-d0ec65d1a3dd",
+          "name": "Match a Bibliographic Record",
+          "request": {
+            "name": "Match a Bibliographic Record",
+            "description": {
+              "content": "Given a Bibliographic record in textual MARC or MARCXML format, apply OCLC matching rules to provide a single best-matched WorldCat result if possible. Bibliographic input record must contain a minimum of a MARC 008 and a MARC 245 field. In the JSON response, numberOfRecords indicates the potentially matched number of records and briefRecords contains the single best-match as determined by the OCLC matching service.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "bibs",
+                "match"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6eed9e4f-14a4-4f45-92e0-0c4e68279a80",
+              "name": "Matching rules were applied to the Bibliographic record.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": \"1,\",\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"44959645\",\n      \"title\": \"Pride and prejudice.\",\n      \"creator\": \"Jane Austen\",\n      \"date\": \"199u\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Project Gutenberg\",\n      \"publicationPlace\": \"Champaign, Ill.\",\n      \"isbns\": [\n        585013365,\n        \"9780585013367\",\n        \"9781925480337\",\n        \"192548033X\"\n      ],\n      \"mergedOclcNumbers\": [\n        \"818363152\",\n        \"854852439\",\n        \"859164912\",\n        \"956345342\"\n      ],\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"N$T\",\n        \"transcribingAgency\": \"N$T\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \"L\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6a1a1ee0-a2f9-4f27-a018-97656b09fa14",
+              "name": "Bad request. The request is unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"status\": {\n    \"summary\": \"BIB_LACKS_CONTROL_NUMBER\",\n    \"description\": \"Record is missing a control number\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb9440d2-c5c9-4c25-bb96-f935de332971",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "481fa858-3445-4283-8b2d-7a4f8e16a534",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f66682d-2e2e-47cc-8d3a-35a8ccb73efb",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "440b59d7-0543-4755-b119-871bb7015422",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "bibs",
+                    "match"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "6b1ce213-d9c8-4a9b-9228-65f4f10ac021",
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Bibliographic Records API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,529 @@
+{
+  "item": [
+    {
+      "id": "5a7a133b-1b45-4a2e-94cc-ae0af60b14e8",
+      "name": "Member Shared Print Holdings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1e61cef2-c241-40b8-8972-19e16d145259",
+          "name": "Find member shared print holdings for a known item",
+          "request": {
+            "name": "Find member shared print holdings for a known item",
+            "description": {
+              "content": "Given a known item, find the member library holdings with a commitment to retain (Shared Print)",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "v2",
+                "bibs-retained-holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumber",
+                  "value": "<long>",
+                  "description": "oclc number of the bibliographic item"
+                },
+                {
+                  "disabled": false,
+                  "key": "isbn",
+                  "value": "<string>",
+                  "description": "isbn of the bibliographic item (bn index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "issn",
+                  "value": "<string>",
+                  "description": "issn of the bibliographic item (in index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByGroup",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Group Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldInState",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2."
+                },
+                {
+                  "disabled": false,
+                  "key": "itemType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemSubType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "start position of the bib records to return (0 based), default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c33f53fc-614d-4b44-873e-13909618a951",
+              "name": "Successful search for retained holdings with bib info",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 1,\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"1752384\",\n      \"title\": \"Human biology.\",\n      \"creator\": \"Raymond Pearl\",\n      \"date\": \"1929\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Jrnl\",\n      \"publisher\": \"Wayne State University Press\",\n      \"publicationPlace\": [\n        \"Detroit\",\n        \"Mich.\",\n        \"etc.\"\n      ],\n      \"mergedOclcNumbers\": [\n        \"51395149\",\n        \"185058739\",\n        \"219847884\"\n      ],\n      \"issns\": [\n        \"0018-7143\"\n      ],\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"MUL\",\n        \"transcribingAgency\": \"MUL\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \" \"\n      },\n      \"institutionHolding\": {\n        \"totalHoldingCount\": 716,\n        \"briefHoldings\": [\n          {\n            \"country\": \"US\",\n            \"state\": \"US-GA\",\n            \"oclcSymbol\": \"EMU\",\n            \"registryId\": 699,\n            \"institutionName\": \"EMORY UNIV\",\n            \"self\": \"https://worldcat.org/oclc-config/institution/data/699\",\n            \"illStatus\": \"S\",\n            \"address\": {\n              \"street1\": \"540 Asbury Circle\",\n              \"city\": \"Atlanta\",\n              \"state\": \"US-GA\",\n              \"postalCode\": 30322,\n              \"country\": \"US\"\n            },\n            \"institutionType\": \"ACADEMIC\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8f4a1c3d-a07d-45b0-8544-2d9779b02cd6",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de80e28b-7162-492d-9711-0e617777b81b",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bebd3ee-704d-4ab8-b00a-892e90b4da08",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c39551c4-fa02-42a0-b799-dafbe8e5315c",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-retained-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_FOUND\",\n  \"title\": \"string\",\n  \"instance\": \"https://QzUqqDxkfbGzvOqKSnkQFzxZhYFXsso.dboets0j,cG+JAdNJ-RpbOXF\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e1fe78d0-d414-4b93-b20c-58880f4c5e19",
+    "name": "WorldCat Entity Data Bibliographic Resources Member Shared Print Holdings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

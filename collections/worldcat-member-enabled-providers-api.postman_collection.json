@@ -1,0 +1,626 @@
+{
+  "item": [
+    {
+      "id": "6769da72-7179-42d9-8298-d7e1cbd68dac",
+      "name": "Member Enabled Providers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c66df0d6-c2a5-462b-81a7-684847642235",
+          "name": "Find member enabled providers in the WorldCat Knowledge base",
+          "request": {
+            "name": "Find member enabled providers in the WorldCat Knowledge base",
+            "description": {
+              "content": "Given metadata find providers enabled by member library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "providers",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alt",
+                  "value": "xml",
+                  "description": "Format to return results in. application/xml or application/json"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Keyword query to search by"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Search by title"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_uid",
+                  "value": "<string>",
+                  "description": "Identifier of the provider associated with the collection"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "start position of the results to return (1 based), default 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemsPerPage",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "title asc",
+                  "description": "Criteria for sorting the results. possible sorting criteria are title, relevancy, holdings, preference, issn, isbn, oclcnum"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "19778e35-ebf3-4731-80d8-c1ee65099f28",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Nature Publishing Group"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Nature"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"WorldCat KnowledgeBase Search: Nature\",\n  \"updated\": \"2020-01-07T21:36:44.887Z\",\n  \"id\": \"urn:uuid:ca4e882b66bd43d6cc0c885337971941\",\n  \"author\": \"OCLC\",\n  \"links\": [\n    {\n      \"href\": \"http://worldcat.org/webservices/kb/rest/providers/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807\",\n      \"rel\": \"self\"\n    }\n  ],\n  \"os:totalResults\": \"1\",\n  \"os:startIndex\": \"1\",\n  \"os:itemsPerPage\": \"10\",\n  \"os:Query\": \"q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807\",\n  \"entries\": [\n    {\n      \"title\": \"Nature Publishing Group\",\n      \"id\": \"http://worldcat.org/webservices/kb/rest/providers/NPG,128807\",\n      \"links\": [\n        {\n          \"href\": \"http://worldcat.org/webservices/kb/rest/providers/NPG,128807\",\n          \"rel\": \"self\"\n        },\n        {\n          \"href\": \"http://www.nature.com\",\n          \"rel\": \"via\"\n        },\n        {\n          \"href\": \"http://worldcat.org/webservices/kb/rest/providers/NPG,128807.html\",\n          \"rel\": \"alternate\"\n        }\n      ],\n      \"kb:provider_uid\": \"NPG\",\n      \"kb:vic_id\": \"572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6\",\n      \"kb:provider_name\": \"Nature Publishing Group\",\n      \"kb:available_collections\": \"19\",\n      \"kb:selected_collections\": \"1\",\n      \"kb:available_entries\": \"980\",\n      \"kb:selected_entries\": \"105\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e3eb702-5621-46bb-bc58-552fe53d1882",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Nature Publishing Group"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Nature"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cd00c77b-d0cb-4cc2-90e3-265c3e36c601",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Nature Publishing Group"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Nature"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Error when invalid HTTP method used\",\n  \"value\": {\n    \"title\": \"NOT_ALLOWED\",\n    \"detail\": \"POST method not allowed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45216f7a-b79d-4d2e-a5d0-86d7214d52f4",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Nature Publishing Group"
+                    },
+                    {
+                      "key": "title",
+                      "value": "Nature"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97295f1a-c891-4a3a-af79-52f331caf4a7",
+          "name": "Read member enabled providers in the WorldCat Knowledge base by ID",
+          "request": {
+            "name": "Read member enabled providers in the WorldCat Knowledge base by ID",
+            "description": {
+              "content": "Given metadata find providers enabled by member library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "providers",
+                ":provider_ID"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alt",
+                  "value": "xml",
+                  "description": "Format to return results in. application/xml or application/json"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "provider_ID",
+                  "description": "(Required) Identifier of the collection"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "039eaac5-6fd9-4ea3-83c5-56a139200290",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    ":provider_ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_ID",
+                      "description": "(Required) Identifier of the collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"Nature Publishing Group\",\n  \"id\": \"http://worldcat.org/webservices/kb/rest/providers/NPG\",\n  \"links\": [\n    {\n      \"href\": \"http://worldcat.org/webservices/kb/rest/providers/NPG\",\n      \"rel\": \"self\"\n    },\n    {\n      \"href\": \"http://www.nature.com\",\n      \"rel\": \"via\"\n    },\n    {\n      \"href\": \"http://worldcat.org/webservices/kb/rest/providers/NPG.html\",\n      \"rel\": \"alternate\"\n    }\n  ],\n  \"provider_uid\": \"NPG\",\n  \"vic_id\": \"572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6\",\n  \"provider_name\": \"Nature Publishing Group\",\n  \"available_collections\": \"22\",\n  \"selected_collections\": \"22\",\n  \"available_entries\": \"1115\",\n  \"selected_entries\": \"1115\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9adfc7e9-fed6-49f1-a1e7-28b83dcfedb4",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    ":provider_ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_ID",
+                      "description": "(Required) Identifier of the collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ca656bee-c423-4f64-aeef-3c8a42733d74",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    ":provider_ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_ID",
+                      "description": "(Required) Identifier of the collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Error when invalid HTTP method used\",\n  \"value\": {\n    \"title\": \"NOT_ALLOWED\",\n    \"detail\": \"POST method not allowed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "110645ad-2b31-44b0-a1f8-8a094064a963",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "providers",
+                    ":provider_ID"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "provider_ID",
+                      "description": "(Required) Identifier of the collection"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b761e135-2629-4ccc-a09e-815410b5633c",
+    "name": "WorldCat Entity Data Bibliographic Resources Member Enabled Providers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

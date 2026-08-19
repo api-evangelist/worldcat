@@ -1,0 +1,758 @@
+{
+  "item": [
+    {
+      "id": "1588cd50-3400-4a56-bd72-801c454a2803",
+      "name": "Member Enabled Titles",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c20b4f78-f1dc-4850-83f6-b07e1cbccd01",
+          "name": "Find member enabled titles in the WorldCat Knowledge base",
+          "request": {
+            "name": "Find member enabled titles in the WorldCat Knowledge base",
+            "description": {
+              "content": "Given metadata find titles enabled by member library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "entries",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alt",
+                  "value": "xml",
+                  "description": "Format to return results in. application/xml or application/json"
+                },
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "Keyword query to search by"
+                },
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Search by title"
+                },
+                {
+                  "disabled": false,
+                  "key": "provider_uid",
+                  "value": "<string>",
+                  "description": "Identifier of the provider associated with the collection"
+                },
+                {
+                  "disabled": false,
+                  "key": "collection_uid",
+                  "value": "<string>",
+                  "description": "Identifier of the collection"
+                },
+                {
+                  "disabled": false,
+                  "key": "issn",
+                  "value": "<string>",
+                  "description": "ISSN match"
+                },
+                {
+                  "disabled": false,
+                  "key": "isbn",
+                  "value": "<string>",
+                  "description": "ISBN match"
+                },
+                {
+                  "disabled": false,
+                  "key": "oclcnum",
+                  "value": "<string>",
+                  "description": "OCLC number match"
+                },
+                {
+                  "disabled": false,
+                  "key": "content",
+                  "value": "<string>",
+                  "description": "Indicator to select records of a specific content type; possible values are fulltext, selectedft, abstracts, indexed, print, and ebook."
+                },
+                {
+                  "disabled": false,
+                  "key": "search-type",
+                  "value": "search",
+                  "description": "Restrict to holdings held by Institutions in requested state"
+                },
+                {
+                  "disabled": false,
+                  "key": "startIndex",
+                  "value": "1",
+                  "description": "start position of the results to return (1 based), default 1"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemsPerPage",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "title asc",
+                  "description": "Criteria for sorting the results. possible sorting criteria are title, relevancy, holdings, preference, issn, isbn, oclcnum"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2827909a-8cbd-4f27-b8f3-e38f87a32b71",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Ambient Findability"
+                    },
+                    {
+                      "key": "title",
+                      "value": "API Testing"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "collection_uid",
+                      "value": "NPG.journals"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0028-0836"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content",
+                      "value": "ebook"
+                    },
+                    {
+                      "key": "search-type",
+                      "value": "atoz"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"WorldCat KnowledgeBase Search: Nature\",\n  \"updated\": \"2019-12-12T16:44:25.434Z\",\n  \"id\": \"urn:uuid:e318046f4275b7e1dcd64e20a4cd13aa\",\n  \"author\": \"OCLC\",\n  \"links\": [\n    {\n      \"href\": \"http://worldcat.org/webservices/kb/rest/collections/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807\",\n      \"rel\": \"self\"\n    }\n  ],\n  \"os:totalResults\": \"1\",\n  \"os:startIndex\": \"1\",\n  \"os:itemsPerPage\": \"10\",\n  \"os:Query\": \"q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807\",\n  \"entries\": [\n    {\n      \"title\": \"Nature Open Access Content\",\n      \"id\": \"http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807\",\n      \"updated\": \"2019-11-26T16:24:16Z\",\n      \"published\": \"2012-07-24T01:05:53Z\",\n      \"links\": [\n        {\n          \"href\": \"http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807\",\n          \"rel\": \"self\"\n        },\n        {\n          \"href\": \"http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807.html\",\n          \"rel\": \"alternate\"\n        },\n        {\n          \"href\": \"https://www.nature.com\",\n          \"rel\": \"via\"\n        },\n        {\n          \"href\": \"http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess\",\n          \"rel\": \"parent\"\n        },\n        {\n          \"href\": \"http://worldcat.org/webservices/kb/export/128807/128807_NPG.openAccess_kbart.txt\",\n          \"rel\": \"enclosure\",\n          \"title\": \"kbart file\",\n          \"length\": 53000\n        }\n      ],\n      \"provider_uid\": \"NPG\",\n      \"provider_name\": \"Nature Publishing Group\",\n      \"collection_uid\": \"NPG.openAccess\",\n      \"owner_institution\": \"128807\",\n      \"source_institution\": \"6569\",\n      \"collection_status\": \"copy\",\n      \"collection_type\": \"autoapprove browsable openaccess\",\n      \"title_link_template\": \"[[localstem]][[url]]\",\n      \"linkscheme\": \"npg\",\n      \"uhf_version\": \"release1574104235-NPG\",\n      \"wcsync_enabled\": \"false\",\n      \"marcdelivery_enabled\": \"false\",\n      \"marcdelivery_no_delete\": \"false\",\n      \"open\": \"false\",\n      \"available_entries\": \"106\",\n      \"selected_entries\": \"106\",\n      \"localstem\": \"true\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99cde787-477b-4d2b-9a64-5ea99952db88",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Ambient Findability"
+                    },
+                    {
+                      "key": "title",
+                      "value": "API Testing"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "collection_uid",
+                      "value": "NPG.journals"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0028-0836"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content",
+                      "value": "ebook"
+                    },
+                    {
+                      "key": "search-type",
+                      "value": "atoz"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "daebb44e-db2e-44ec-b7bf-b4fe94a4a9eb",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Ambient Findability"
+                    },
+                    {
+                      "key": "title",
+                      "value": "API Testing"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "collection_uid",
+                      "value": "NPG.journals"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0028-0836"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content",
+                      "value": "ebook"
+                    },
+                    {
+                      "key": "search-type",
+                      "value": "atoz"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Error when invalid HTTP method used\",\n  \"value\": {\n    \"title\": \"NOT_ALLOWED\",\n    \"detail\": \"POST method not allowed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8646ec8b-ec45-48f8-8505-dff5e5a727ae",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    },
+                    {
+                      "key": "q",
+                      "value": "Ambient Findability"
+                    },
+                    {
+                      "key": "title",
+                      "value": "API Testing"
+                    },
+                    {
+                      "key": "provider_uid",
+                      "value": "NPG"
+                    },
+                    {
+                      "key": "collection_uid",
+                      "value": "NPG.journals"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0028-0836"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "content",
+                      "value": "ebook"
+                    },
+                    {
+                      "key": "search-type",
+                      "value": "atoz"
+                    },
+                    {
+                      "key": "startIndex",
+                      "value": "10"
+                    },
+                    {
+                      "key": "itemsPerPage",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "relevancy"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9775fa1-67a4-4c2a-bbd9-7e5e31107f69",
+          "name": "Read member enabled Titles in the WorldCat Knowledge base by ID",
+          "request": {
+            "name": "Read member enabled Titles in the WorldCat Knowledge base by ID",
+            "description": {
+              "content": "Given metadata find titles enabled by member library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "rest",
+                "entries",
+                ":entry_uid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alt",
+                  "value": "xml",
+                  "description": "Format to return results in. application/xml or application/json"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entry_uid",
+                  "description": "(Required) Identifier of the title"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "72fb9948-3259-40d1-8102-8b94b82911ff",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    ":entry_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry_uid",
+                      "description": "(Required) Identifier of the title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"API Testing with Postman\",\n  \"id\": \"http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961\",\n  \"published\": \"2019-03-16T20:03:56Z\",\n  \"links\": [\n    {\n      \"href\": \"http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961.html\",\n      \"rel\": \"alternate\"\n    },\n    {\n      \"href\": \"http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961\",\n      \"rel\": \"self\"\n    },\n    {\n      \"href\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F9781789616569%3Ftocview%3Dtrue&linktype=best\",\n      \"rel\": \"via\"\n    },\n    {\n      \"href\": \"http://my.safaribooksonline.com/9781789616569?tocview=true\",\n      \"rel\": \"canonical\"\n    }\n  ],\n  \"entry_uid\": \"44119961\",\n  \"entry_status\": \"raw\",\n  \"bkey\": \"9781789616569\",\n  \"collection_uid\": \"safari.tech\",\n  \"collection_name\": \"Safari Tech Books Online\",\n  \"provider_uid\": \"safari\",\n  \"provider_name\": \"Safari Books Online\",\n  \"isbn\": \"9781789616569\",\n  \"publisher\": \"Packt Publishing\",\n  \"coverage\": \"ebook@2019-02-28\",\n  \"coll_type\": \"browsable\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e06985b-79f7-4922-8873-3e8ea4ee088d",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    ":entry_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry_uid",
+                      "description": "(Required) Identifier of the title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b558ec5-54de-470f-b4d6-b7ca894240cc",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    ":entry_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry_uid",
+                      "description": "(Required) Identifier of the title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Error when invalid HTTP method used\",\n  \"value\": {\n    \"title\": \"NOT_ALLOWED\",\n    \"detail\": \"POST method not allowed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "51f1c8de-f7bf-4d96-86c7-d67b0e141a2a",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "rest",
+                    "entries",
+                    ":entry_uid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entry_uid",
+                      "description": "(Required) Identifier of the title"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "75a5230d-0f21-47f7-8391-bf90ec85554d",
+    "name": "WorldCat Entity Data Bibliographic Resources Member Enabled Titles API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

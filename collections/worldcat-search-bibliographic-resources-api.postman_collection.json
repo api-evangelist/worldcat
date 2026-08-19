@@ -1,0 +1,3278 @@
+{
+  "item": [
+    {
+      "id": "65d344d7-83f5-4366-a5c7-88c1800d0ef5",
+      "name": "Search Bibliographic Resources",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "0413e579-d936-4229-85c9-9690f7865ee6",
+          "name": "Search Brief Bibliographic Resources",
+          "request": {
+            "name": "Search Brief Bibliographic Resources",
+            "description": {
+              "content": "Search Brief Bibliographic Resources",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "brief-bibs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "(Required) query in the form of a keyword search or fielded search, for example  (au:gazihan OR au:womacka) AND kw:java See - https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Bibliographic_records/Bibliographic_record_indexes/Bibliographic_record_index_lists"
+                },
+                {
+                  "disabled": false,
+                  "key": "deweyNumber",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the specified dewey classification number(s). For multiple values repeat the URL parameter. (dd index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "datePublished",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to one or more dates or to a range (in index). (2000, 2000-2010, 1990,1991)"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByGroup",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Group Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBy",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBySymbol",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByInstitutionID",
+                  "value": "<integer>,<integer>,<integer>,<integer>,<integer>",
+                  "description": "Institution registryId"
+                },
+                {
+                  "disabled": false,
+                  "key": "inLanguage",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified language (ln index). (eng, fre, ger)"
+                },
+                {
+                  "disabled": false,
+                  "key": "inCatalogLanguage",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified cataloging language (ll index). (dut, eng)"
+                },
+                {
+                  "disabled": false,
+                  "key": "materialType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the specified material type (mt index). (URL, LPS)"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalogSource",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single OCLC symbol as the cataloging source (cs index). (OSL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemSubType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)"
+                },
+                {
+                  "disabled": false,
+                  "key": "retentionCommitments",
+                  "value": "false",
+                  "description": "Limiter to restrict the response to bibliographic records with a retention commitment (l8 index)."
+                },
+                {
+                  "disabled": false,
+                  "key": "spProgram",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index)."
+                },
+                {
+                  "disabled": false,
+                  "key": "genre",
+                  "value": "<string>",
+                  "description": "Genre to limit results to (ge index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "topic to limit results to (s0 index). Based on OCLC Conspectus Division"
+                },
+                {
+                  "disabled": false,
+                  "key": "subtopic",
+                  "value": "<string>",
+                  "description": "subtopic to limit results to (s1 index). Based on OCLC Conspectus Category"
+                },
+                {
+                  "disabled": false,
+                  "key": "audience",
+                  "value": "<string>",
+                  "description": "Audience to limit results to"
+                },
+                {
+                  "disabled": false,
+                  "key": "content",
+                  "value": "<string>",
+                  "description": "Content to limit results to"
+                },
+                {
+                  "disabled": false,
+                  "key": "openAccess",
+                  "value": "<boolean>",
+                  "description": "filter to just open access content"
+                },
+                {
+                  "disabled": false,
+                  "key": "peerReviewed",
+                  "value": "<boolean>",
+                  "description": "filter to just peer reviewed content"
+                },
+                {
+                  "disabled": false,
+                  "key": "facets",
+                  "value": "<string>",
+                  "description": "The requested list of facets requested in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupRelatedEditions",
+                  "value": "false",
+                  "description": "Whether or not to use FRBR grouping. Default is 'false'"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupVariantRecords",
+                  "value": "false",
+                  "description": "Whether or not to group variant records. Default is 'false'"
+                },
+                {
+                  "disabled": false,
+                  "key": "preferredLanguage",
+                  "value": "<string>",
+                  "description": "language user would prefer metadata description in"
+                },
+                {
+                  "disabled": false,
+                  "key": "showHoldingsIndicators",
+                  "value": "false",
+                  "description": "whether or not to show holdings indicators in response"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "latitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "longitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "<integer>",
+                  "description": "distance"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "M",
+                  "description": "distance unit"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "bestMatch",
+                  "description": "result sort key"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "start position of the bib records to return (0 based), default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6e99d51c-ec67-42bf-a605-a33c9953e393",
+              "name": "successful request for brief-bib result set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupRelatedEditions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "bestMatch"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 2,\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"44959645\",\n      \"title\": \"Pride and prejudice.\",\n      \"creator\": \"Jane Austen\",\n      \"date\": \"199u\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Project Gutenberg\",\n      \"publicationPlace\": \"Champaign, Ill.\",\n      \"isbns\": [\n        585013365,\n        \"9780585013367\",\n        \"9781925480337\",\n        \"192548033X\"\n      ],\n      \"mergedOclcNumbers\": [\n        \"818363152\",\n        \"854852439\",\n        \"859164912\",\n        \"956345342\"\n      ],\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"N$T\",\n        \"transcribingAgency\": \"N$T\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \"L\"\n      }\n    },\n    {\n      \"oclcNumber\": \"1103229133\",\n      \"title\": \"Pride and Prejudice [eBook - RBdigital].\",\n      \"creator\": \"Jane Austen\",\n      \"date\": \"1998\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Project Gutenberg Literary Archive Foundation\",\n      \"publicationPlace\": \"Salt Lake City\",\n      \"isbns\": [\n        \"9781470398842\",\n        \"1470398842\"\n      ],\n      \"mergedOclcNumbers\": null,\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"HQD\",\n        \"transcribingAgency\": \"HQD\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \" \"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e41e69d-5c28-44b5-9bf1-e02a67093623",
+              "name": "successful request for brief-bib result set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupRelatedEditions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "bestMatch"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Partial Content",
+              "code": 206,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 2,\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"44959645\",\n      \"title\": \"Pride and prejudice.\",\n      \"creator\": \"Jane Austen\",\n      \"date\": \"199u\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Project Gutenberg\",\n      \"publicationPlace\": \"Champaign, Ill.\",\n      \"isbns\": [\n        585013365,\n        \"9780585013367\",\n        \"9781925480337\",\n        \"192548033X\"\n      ],\n      \"mergedOclcNumbers\": [\n        \"818363152\",\n        \"854852439\",\n        \"859164912\",\n        \"956345342\"\n      ],\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"N$T\",\n        \"transcribingAgency\": \"N$T\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \"L\"\n      }\n    },\n    {\n      \"oclcNumber\": \"1103229133\",\n      \"title\": \"Pride and Prejudice [eBook - RBdigital].\",\n      \"creator\": \"Jane Austen\",\n      \"date\": \"1998\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Project Gutenberg Literary Archive Foundation\",\n      \"publicationPlace\": \"Salt Lake City\",\n      \"isbns\": [\n        \"9781470398842\",\n        \"1470398842\"\n      ],\n      \"mergedOclcNumbers\": null,\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"HQD\",\n        \"transcribingAgency\": \"HQD\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \" \"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdf018d9-adab-4fae-a8e4-c12c157047dd",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupRelatedEditions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "bestMatch"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c456e40c-d8f5-4e82-a76b-57cefb895a1c",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupRelatedEditions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "bestMatch"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e5ee055-ae4b-41a0-8c0b-4b9736a492a9",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupRelatedEditions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "bestMatch"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21c7ff94-b222-4a0d-a3ec-0c88d4425661",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "ti: Simon's Cat"
+                    },
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupRelatedEditions",
+                      "value": "false"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "bestMatch"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_DOCUMENT\",\n  \"title\": \"string\",\n  \"instance\": \"http://ZjG.eepeGnyNfSupOnSiiMXfBK\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e6f75920-c3d3-44b4-86f9-0fa18464ba12",
+          "name": "Retrieve specific Brief Bibliographic Resource",
+          "request": {
+            "name": "Retrieve specific Brief Bibliographic Resource",
+            "description": {
+              "content": "Retrieve specific Bibliographic Resource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "brief-bibs",
+                ":oclcNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "oclcNumber",
+                  "description": "(Required) record OCLC number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "86682b71-fd48-49ee-ab49-d0f93020df68",
+              "name": "successful request for brief-bib result set",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"oclcNumber\": \"318877925\",\n  \"title\": \"Simon's cat / by Simon Tofield.\",\n  \"creator\": \"Simon. Tofield\",\n  \"date\": \"2009.\",\n  \"language\": \"eng\",\n  \"generalFormat\": \"Book\",\n  \"specificFormat\": \"PrintBook\",\n  \"edition\": \"1st ed.\",\n  \"publisher\": \"Grand Central Pub.\",\n  \"publicationPlace\": \"New York :\",\n  \"mergedOclcNumbers\": [\n    \"877908501\"\n  ],\n  \"isbns\": [\n    \"9780446560061\",\n    \"0446560065\"\n  ],\n  \"catalogingInfo\": {\n    \"catalogingAgency\": \"DLC\",\n    \"transcribingAgency\": \"DLC\",\n    \"catalogingLanguage\": \"eng\",\n    \"levelOfCataloging\": \" \"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a008ba13-bd71-40c8-b629-3f04c2f8eb41",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"oclcNumber must be a positive whole number\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "175b7ff1-e756-4976-8ff6-436259c5a051",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2778e92-b40a-4c35-8145-39fea7d97a61",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0874e7ae-7848-4cf9-b647-4870930d1fb6",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7f82ce4-a94e-45d9-ba9f-739152719529",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_FOUND\",\n  \"title\": \"string\",\n  \"instance\": \"http://vYsW.tpihLTE4upaax2rxpX8Gf,1\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "845b7d4f-2557-4bed-bd8b-25d24bc404f3",
+          "name": "Retrieve Other Editions related to a particular Bibliographic Resource",
+          "request": {
+            "name": "Retrieve Other Editions related to a particular Bibliographic Resource",
+            "description": {
+              "content": "Retrieve Other Editions related to a particular Bibliographic Resource",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "brief-bibs",
+                ":oclcNumber",
+                "other-editions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "deweyNumber",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the specified dewey classification number(s). For multiple values repeat the URL parameter. (dd index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "datePublished",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to one or more dates or to a range (in index). (2000, 2000-2010, 1990,1991)"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByGroup",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Group Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBy",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBySymbol",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByInstitutionID",
+                  "value": "<integer>,<integer>,<integer>,<integer>,<integer>",
+                  "description": "Institution registryId"
+                },
+                {
+                  "disabled": false,
+                  "key": "inLanguage",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified language (ln index). (eng, fre, ger)"
+                },
+                {
+                  "disabled": false,
+                  "key": "inCatalogLanguage",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified cataloging language (ll index). (dut, eng)"
+                },
+                {
+                  "disabled": false,
+                  "key": "materialType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the specified material type (mt index). (URL, LPS)"
+                },
+                {
+                  "disabled": false,
+                  "key": "catalogSource",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single OCLC symbol as the cataloging source (cs index). (OSL)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemSubType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)"
+                },
+                {
+                  "disabled": false,
+                  "key": "retentionCommitments",
+                  "value": "false",
+                  "description": "Limiter to restrict the response to bibliographic records with a retention commitment (l8 index)."
+                },
+                {
+                  "disabled": false,
+                  "key": "spProgram",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index)."
+                },
+                {
+                  "disabled": false,
+                  "key": "genre",
+                  "value": "<string>",
+                  "description": "Genre to limit results to (ge index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "topic",
+                  "value": "<string>",
+                  "description": "topic to limit results to (s0 index). Based on OCLC Conspectus Division"
+                },
+                {
+                  "disabled": false,
+                  "key": "subtopic",
+                  "value": "<string>",
+                  "description": "subtopic to limit results to (s1 index). Based on OCLC Conspectus Category"
+                },
+                {
+                  "disabled": false,
+                  "key": "audience",
+                  "value": "<string>",
+                  "description": "Audience to limit results to"
+                },
+                {
+                  "disabled": false,
+                  "key": "content",
+                  "value": "<string>",
+                  "description": "Content to limit results to"
+                },
+                {
+                  "disabled": false,
+                  "key": "openAccess",
+                  "value": "<boolean>",
+                  "description": "filter to just open access content"
+                },
+                {
+                  "disabled": false,
+                  "key": "peerReviewed",
+                  "value": "<boolean>",
+                  "description": "filter to just peer reviewed content"
+                },
+                {
+                  "disabled": false,
+                  "key": "facets",
+                  "value": "<string>",
+                  "description": "The requested list of facets requested in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "groupVariantRecords",
+                  "value": "false",
+                  "description": "Whether or not to group variant records. Default is 'false'"
+                },
+                {
+                  "disabled": false,
+                  "key": "preferredLanguage",
+                  "value": "<string>",
+                  "description": "language user would prefer metadata description in"
+                },
+                {
+                  "disabled": false,
+                  "key": "showHoldingsIndicators",
+                  "value": "false",
+                  "description": "whether or not to show holdings indicators in response"
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "start position of the bib records to return (0 based), default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                },
+                {
+                  "disabled": false,
+                  "key": "orderBy",
+                  "value": "publicationDateDesc",
+                  "description": "how to sort the edition resultsresults"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "oclcNumber",
+                  "description": "(Required) record OCLC number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "24a1675e-3b00-4106-bc52-35afb2edc226",
+              "name": "successful request for other editions",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber",
+                    "other-editions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "language"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 61,\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"318877925\",\n      \"title\": \"Simon's cat / by Simon Tofield.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"edition\": \"1st ed.\",\n      \"publisher\": \"Grand Central Pub.\"\n    },\n    {\n      \"oclcNumber\": \"668192366\",\n      \"title\": \"Simon's cat : beyond the fence.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2011\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"edition\": \"1st ed.\",\n      \"publisher\": \"Grand Central Pub.\"\n    },\n    {\n      \"oclcNumber\": \"426122879\",\n      \"title\": \"Simon's cat.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"publisher\": \"Canongate\"\n    },\n    {\n      \"oclcNumber\": \"698261374\",\n      \"title\": \"Simon's cat : beyond the fence.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2010\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Canongate\"\n    },\n    {\n      \"oclcNumber\": \"716443553\",\n      \"title\": \"Simon's cat beyond the fence.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2010\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"publisher\": \"Canongate\"\n    },\n    {\n      \"oclcNumber\": \"869821272\",\n      \"title\": \"Beyond the fence.\",\n      \"creator\": \"Simon Tofield\",\n      \"date\": \"2011\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Grand Central Publishing\"\n    },\n    {\n      \"oclcNumber\": \"698364575\",\n      \"title\": \"Simon's cat.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"publisher\": \"Canongate\"\n    },\n    {\n      \"oclcNumber\": \"471205692\",\n      \"title\": \"Simon's cat.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"publisher\": \"Canongate\"\n    },\n    {\n      \"oclcNumber\": \"883250952\",\n      \"title\": \"Simon's cat.\",\n      \"creator\": \"Simon Tofield\",\n      \"date\": \"2009\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"Digital\",\n      \"edition\": \"First edition.\",\n      \"publisher\": \"Grand Central Publishing\"\n    },\n    {\n      \"oclcNumber\": \"637439104\",\n      \"title\": \"Simon's cat : beyond the fence.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2010\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"publisher\": \"Penguin Canada\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b98d7b4b-6868-45a5-bf31-31cddf61c8aa",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber",
+                    "other-editions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "language"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"oclcNumber must be a positive whole number\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3963722f-f4c1-4342-8cdd-eee80b4f3e40",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber",
+                    "other-editions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "language"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2c8a3c0-03c9-4d6d-a312-abd0c784c77c",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber",
+                    "other-editions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "language"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "45b7b9c3-c4b1-4f9a-8d19-215b3eb8aa26",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber",
+                    "other-editions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "language"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9444f46-01bd-412e-ab79-3a48e04ba52f",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "brief-bibs",
+                    ":oclcNumber",
+                    "other-editions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "deweyNumber",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "datePublished",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "inLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "inCatalogLanguage",
+                      "value": "eng"
+                    },
+                    {
+                      "key": "materialType",
+                      "value": "URL"
+                    },
+                    {
+                      "key": "catalogSource",
+                      "value": "OCL"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "retentionCommitments",
+                      "value": "false"
+                    },
+                    {
+                      "key": "spProgram",
+                      "value": "WEST"
+                    },
+                    {
+                      "key": "genre",
+                      "value": "fiction"
+                    },
+                    {
+                      "key": "topic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "subtopic",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "audience",
+                      "value": "juv"
+                    },
+                    {
+                      "key": "content",
+                      "value": "fic"
+                    },
+                    {
+                      "key": "openAccess",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "peerReviewed",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "facets",
+                      "value": "creator"
+                    },
+                    {
+                      "key": "groupVariantRecords",
+                      "value": "false"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "showHoldingsIndicators",
+                      "value": "false"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "orderBy",
+                      "value": "language"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_FOUND\",\n  \"title\": \"string\",\n  \"instance\": \"http://vYsW.tpihLTE4upaax2rxpX8Gf,1\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4fd1458c-6db6-469b-91ff-a4e8ef149ea3",
+          "name": "Retrieve classification reccomendations for an oclcNumber",
+          "request": {
+            "name": "Retrieve classification reccomendations for an oclcNumber",
+            "description": {
+              "content": "Retrieve classification reccomendations for an oclcNumber",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "classification-bibs",
+                ":oclcNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "oclcNumber",
+                  "description": "(Required) record OCLC number"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "f309fbc0-e19c-43a4-89b7-b81f53951d0c",
+              "name": "successful request for classifications",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "classification-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"dewey\": {\n    \"mostPopular\": [\n      \"302.30285\"\n    ]\n  },\n  \"lc\": {\n    \"mostPopular\": [\n      \"HM742 .H55 2010\"\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a610b41c-8bf4-4034-ba1f-4ecdafe9d431",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "classification-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"oclcNumber must be a positive whole number\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "32c62c08-01f4-4c19-b158-4c68e812b6f9",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "classification-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d49c18e-3d31-452e-81b5-941232f91362",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "classification-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4027faa5-6c1f-460b-935e-22e469eb828b",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "classification-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "02bec904-d5bf-4586-b30e-79468dfbee33",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "classification-bibs",
+                    ":oclcNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) record OCLC number"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_FOUND\",\n  \"title\": \"string\",\n  \"instance\": \"http://vYsW.tpihLTE4upaax2rxpX8Gf,1\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3f17fbf5-3f2e-4cd9-9acd-9ea9e9758bab",
+    "name": "WorldCat Entity Data Bibliographic Resources Search Bibliographic Resources API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

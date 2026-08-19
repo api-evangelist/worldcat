@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Member Enabled Title by OpenURL API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Enabled Title by OpenURL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find member enabled title based on OpenURL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/openurl/resolve",
+            "params": [
+              {
+                "name": "svc_id",
+                "value": "",
+                "type": "query",
+                "description": "Response format"
+              },
+              {
+                "name": "rft.title",
+                "value": "",
+                "type": "query",
+                "description": "Title of item"
+              },
+              {
+                "name": "rft.btitle",
+                "value": "",
+                "type": "query",
+                "description": "Book Title"
+              },
+              {
+                "name": "rft.jtitle",
+                "value": "",
+                "type": "query",
+                "description": "Journal Title"
+              },
+              {
+                "name": "rft.issn",
+                "value": "",
+                "type": "query",
+                "description": "ISSN"
+              },
+              {
+                "name": "rft.eissn",
+                "value": "",
+                "type": "query",
+                "description": "Electronic ISSN"
+              },
+              {
+                "name": "rft.isbn",
+                "value": "",
+                "type": "query",
+                "description": "ISBN"
+              },
+              {
+                "name": "rft.oclcnum",
+                "value": "",
+                "type": "query",
+                "description": "OCLC Number"
+              },
+              {
+                "name": "rft.pub",
+                "value": "",
+                "type": "query",
+                "description": "Publisher name"
+              },
+              {
+                "name": "rft.date",
+                "value": "",
+                "type": "query",
+                "description": "Publication date, in the format YYYY, YYYY-MM, or YYYY-MM-DD"
+              },
+              {
+                "name": "rft.volume",
+                "value": "",
+                "type": "query",
+                "description": "Journal volume"
+              },
+              {
+                "name": "rft.issue",
+                "value": "",
+                "type": "query",
+                "description": "Journal issue"
+              },
+              {
+                "name": "rft.spage",
+                "value": "",
+                "type": "query",
+                "description": "Start page"
+              },
+              {
+                "name": "rft.epage",
+                "value": "",
+                "type": "query",
+                "description": "End page"
+              },
+              {
+                "name": "rft.atitle",
+                "value": "",
+                "type": "query",
+                "description": "Article Title"
+              },
+              {
+                "name": "rft.aufirst",
+                "value": "",
+                "type": "query",
+                "description": "Author first name"
+              },
+              {
+                "name": "rft.auinit",
+                "value": "",
+                "type": "query",
+                "description": "Author initial"
+              },
+              {
+                "name": "rft.aulast",
+                "value": "",
+                "type": "query",
+                "description": "Author Last name"
+              },
+              {
+                "name": "rft.sici",
+                "value": "",
+                "type": "query",
+                "description": "Serial Item and Contribution Identifier"
+              },
+              {
+                "name": "rft.provider_uid",
+                "value": "",
+                "type": "query",
+                "description": "Provider uid as defined by knowledge base"
+              },
+              {
+                "name": "rft.collection_uid",
+                "value": "",
+                "type": "query",
+                "description": "Collection uid as defined by knowledge base"
+              },
+              {
+                "name": "rft.content",
+                "value": "",
+                "type": "query",
+                "description": "Format to return results in. application/xml or application/json"
+              },
+              {
+                "name": "rft.institution_id",
+                "value": "",
+                "type": "query",
+                "description": "WorldCat Registry Id for institution"
+              },
+              {
+                "name": "rft.jkey",
+                "value": "",
+                "type": "query",
+                "description": "Vendor defined journal id for particular vendors"
+              },
+              {
+                "name": "rft.openaccess",
+                "value": "",
+                "type": "query",
+                "description": "Open Access flag"
+              },
+              {
+                "name": "rfr_id",
+                "value": "",
+                "type": "query",
+                "description": "OpenURL referrer identifier"
+              },
+              {
+                "name": "rft.id",
+                "value": "",
+                "type": "query",
+                "description": "identifier for item"
+              },
+              {
+                "name": "rft.force_remote_lookup",
+                "value": "",
+                "type": "query",
+                "description": "Force PMID/DOI lookup"
+              }
+            ]
+          },
+          "docs": "Given an OpenURL find title enabled by member library"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

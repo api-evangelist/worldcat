@@ -1,0 +1,2069 @@
+{
+  "item": [
+    {
+      "id": "084efd5a-88bf-41c4-bd11-4acd5505a049",
+      "name": "Member General Holdings",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "79f8dcd0-88c5-42a5-b112-68ee51a1f5ab",
+          "name": "Get summary of holdings for a known item",
+          "request": {
+            "name": "Get summary of holdings for a known item",
+            "description": {
+              "content": "Given a known item, get summary of holdings",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "v2",
+                "bibs-summary-holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumber",
+                  "value": "<long>",
+                  "description": "oclc number of the bibliographic item"
+                },
+                {
+                  "disabled": false,
+                  "key": "isbn",
+                  "value": "<string>",
+                  "description": "isbn of the bibliographic item (bn index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "issn",
+                  "value": "<string>",
+                  "description": "issn of the bibliographic item (in index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingsAllEditions",
+                  "value": "<boolean>",
+                  "description": "Get holdings for all editions"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingsAllVariantRecords",
+                  "value": "<boolean>",
+                  "description": "Get holdings for specific edition across variant records"
+                },
+                {
+                  "disabled": false,
+                  "key": "preferredLanguage",
+                  "value": "<string>",
+                  "description": "language user would prefer metadata description in"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingsFilterFormat",
+                  "value": "<string>",
+                  "description": "Get holdings for specific itemSubType"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldInCountry",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by institutions in requested country"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldInState",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2."
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByGroup",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Group Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBy",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBySymbol",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByInstitutionID",
+                  "value": "<integer>,<integer>,<integer>,<integer>,<integer>",
+                  "description": "Institution registryId"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByLibraryType",
+                  "value": "ALL",
+                  "description": "Filter holdings to specified library types"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "latitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "longitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "<integer>",
+                  "description": "distance"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "M",
+                  "description": "distance unit"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "6fca226c-3fa6-49f6-8adb-5b6c878ee317",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-summary-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 1,\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"318877925\",\n      \"title\": \"Simon's cat / by Simon Tofield.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009.\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"edition\": \"1st ed.\",\n      \"publisher\": \"Grand Central Pub.\",\n      \"publicationPlace\": \"New York :\",\n      \"mergedOclcNumbers\": [\n        \"877908501\"\n      ],\n      \"isbns\": [\n        \"9780446560061\",\n        \"0446560065\"\n      ],\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"DLC\",\n        \"transcribingAgency\": \"DLC\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \" \"\n      },\n      \"institutionHolding\": {\n        \"totalHoldingCount\": 464,\n        \"totalSharedPrintCount\": 0,\n        \"totalEditions\": 17\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6dc8808f-4483-4d8e-9b7f-510e0f00b863",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-summary-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6d11b929-215b-4822-9776-f0b43667cde7",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-summary-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ac978ca-268d-45af-beba-3bb14e61d6b8",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-summary-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c58c6aa-ace2-4e1c-bc0f-0130e32a4e68",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-summary-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ELIGIBLE\",\n  \"title\": \"string\",\n  \"instance\": \"http://UvEQTcEKVspCnxuBDZvtjWIBeQE.kapxDEZj5B5uBaSC8OIrl94T4gsSj8yoX\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cd2de529-9ab0-4449-a084-7a43331c6c73",
+          "name": "Find member holdings for a known item",
+          "request": {
+            "name": "Find member holdings for a known item",
+            "description": {
+              "content": "Given a known item, find the member libraries who hold it",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "v2",
+                "bibs-holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumber",
+                  "value": "<long>",
+                  "description": "oclc number of the bibliographic item"
+                },
+                {
+                  "disabled": false,
+                  "key": "isbn",
+                  "value": "<string>",
+                  "description": "isbn of the bibliographic item (bn index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "issn",
+                  "value": "<string>",
+                  "description": "issn of the bibliographic item (in index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingsAllEditions",
+                  "value": "<boolean>",
+                  "description": "Get holdings for all editions"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingsAllVariantRecords",
+                  "value": "<boolean>",
+                  "description": "Get holdings for specific edition across variant records"
+                },
+                {
+                  "disabled": false,
+                  "key": "preferredLanguage",
+                  "value": "<string>",
+                  "description": "language user would prefer metadata description in"
+                },
+                {
+                  "disabled": false,
+                  "key": "holdingsFilterFormat",
+                  "value": "<string>",
+                  "description": "Get holdings for specific itemSubType"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldInCountry",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by institutions in requested country"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldInState",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2."
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBySymbol",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByInstitutionID",
+                  "value": "<integer>,<integer>,<integer>,<integer>,<integer>",
+                  "description": "Institution registryId"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByLibraryType",
+                  "value": "ALL",
+                  "description": "Filter holdings to specified library types"
+                },
+                {
+                  "disabled": false,
+                  "key": "lat",
+                  "value": "<double>",
+                  "description": "latitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "lon",
+                  "value": "<double>",
+                  "description": "longitude"
+                },
+                {
+                  "disabled": false,
+                  "key": "distance",
+                  "value": "<integer>",
+                  "description": "distance"
+                },
+                {
+                  "disabled": false,
+                  "key": "unit",
+                  "value": "M",
+                  "description": "distance unit"
+                },
+                {
+                  "disabled": false,
+                  "key": "numberNearestHoldings",
+                  "value": "<integer>",
+                  "description": "When a lat/lon is passed, the number of nearest holdings to show even if outside the search radius."
+                },
+                {
+                  "disabled": false,
+                  "key": "offset",
+                  "value": "0",
+                  "description": "start position of the bib records to return (0 based), default 0"
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "maximum number of records to return, maximum 50, default 10"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemSubType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7d9b82e3-8296-4661-9468-3ac756b37d9d",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "numberNearestHoldings",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 1,\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"318877925\",\n      \"title\": \"Simon's cat / by Simon Tofield.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009.\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"edition\": \"1st ed.\",\n      \"publisher\": \"Grand Central Pub.\",\n      \"publicationPlace\": \"New York :\",\n      \"mergedOclcNumbers\": [\n        \"877908501\"\n      ],\n      \"isbns\": [\n        \"9780446560061\",\n        \"0446560065\"\n      ],\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"DLC\",\n        \"transcribingAgency\": \"DLC\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \" \"\n      },\n      \"institutionHolding\": {\n        \"totalHoldingCount\": 227,\n        \"totalEditions\": 17,\n        \"briefHoldings\": [\n          {\n            \"country\": \"US\",\n            \"state\": \"PA\",\n            \"oclcSymbol\": \"CPL\",\n            \"registryId\": 14692,\n            \"institutionName\": \"Carnegie Library of Pittsburgh\",\n            \"self\": \"https://worldcat.org/oclc-config/institution/data/14692\",\n            \"illStatus\": \"S\",\n            \"address\": {\n              \"street1\": \"4400 Forbes Avenue\",\n              \"city\": \"Pittsburgh\",\n              \"state\": \"PA\",\n              \"postalCode\": \"15213\",\n              \"country\": \"US\",\n              \"lat\": \"40.4428558\",\n              \"lon\": \"-79.9558487\"\n            },\n            \"institutionType\": \"PUBLIC\"\n          },\n          {\n            \"country\": \"US\",\n            \"state\": \"OH\",\n            \"oclcSymbol\": \"DMM\",\n            \"registryId\": 14235,\n            \"institutionName\": \"Dayton Metro Library\",\n            \"self\": \"https://worldcat.org/oclc-config/institution/data/14235\",\n            \"illStatus\": \"S\",\n            \"address\": {\n              \"street1\": \"215 East Third Street\",\n              \"city\": \"Dayton\",\n              \"state\": \"OH\",\n              \"postalCode\": \"45402-2103\",\n              \"country\": \"US\",\n              \"lat\": \"39.7573013\",\n              \"lon\": \"-84.1862183\"\n            },\n            \"institutionType\": \"PUBLIC\"\n          },\n          {\n            \"country\": \"US\",\n            \"state\": \"OH\",\n            \"oclcSymbol\": \"LAP\",\n            \"registryId\": 14285,\n            \"institutionName\": \"Lakewood Public Library\",\n            \"self\": \"https://worldcat.org/oclc-config/institution/data/14285\",\n            \"illStatus\": \"S\",\n            \"address\": {\n              \"street1\": \"15425 Detroit Ave\",\n              \"city\": \"Lakewood\",\n              \"state\": \"OH\",\n              \"postalCode\": \"44107 2890\",\n              \"country\": \"US\",\n              \"lat\": \"41.4814072\",\n              \"lon\": \"-81.7929535\"\n            },\n            \"institutionType\": \"PUBLIC\"\n          },\n          {\n            \"country\": \"US\",\n            \"state\": \"OH\",\n            \"oclcSymbol\": \"GRC\",\n            \"registryId\": 14415,\n            \"institutionName\": \"Greene County Public Library\",\n            \"self\": \"https://worldcat.org/oclc-config/institution/data/14415\",\n            \"illStatus\": \"S\",\n            \"address\": {\n              \"street1\": \"76 East Market Street\",\n              \"city\": \"Xenia\",\n              \"state\": \"OH\",\n              \"postalCode\": \"45385-0520\",\n              \"country\": \"US\",\n              \"lat\": \"39.6839714\",\n              \"lon\": \"-83.9416656\"\n            },\n            \"institutionType\": \"PUBLIC\"\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1434da94-6e34-4661-8901-b07499963de8",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "numberNearestHoldings",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9cf2ffb0-caad-46c5-bc8a-793f9e24cf47",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "numberNearestHoldings",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2e146f1-200b-4699-abec-d258a5914893",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "numberNearestHoldings",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82f5fc7f-5635-42fa-b583-8091c6f2ee5a",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "holdingsAllEditions",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "holdingsAllVariantRecords",
+                      "value": "<boolean>"
+                    },
+                    {
+                      "key": "preferredLanguage",
+                      "value": "fre"
+                    },
+                    {
+                      "key": "holdingsFilterFormat",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldInCountry",
+                      "value": "US"
+                    },
+                    {
+                      "key": "heldInState",
+                      "value": "US-TX"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "heldByLibraryType",
+                      "value": "PUBLIC"
+                    },
+                    {
+                      "key": "lat",
+                      "value": "37.502508"
+                    },
+                    {
+                      "key": "lon",
+                      "value": "-122.22702"
+                    },
+                    {
+                      "key": "distance",
+                      "value": "10"
+                    },
+                    {
+                      "key": "unit",
+                      "value": "M"
+                    },
+                    {
+                      "key": "numberNearestHoldings",
+                      "value": "20"
+                    },
+                    {
+                      "key": "offset",
+                      "value": "10"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "50"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ALLOWED\",\n  \"title\": \"string\",\n  \"instance\": \"http://paOzmMviAbPKZcMdHiB.wpFyuPSE5GbM9DYPTRVJsWRABPxJ6o8hWD84hnrdS6ulqGBrGmBqon\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "34684883-4034-4b95-b640-c53263739449",
+          "name": "Find detailed info of member holdings for a known item",
+          "request": {
+            "name": "Find detailed info of member holdings for a known item",
+            "description": {
+              "content": "Given a known item, search member library holdings for detailed information",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "v2",
+                "bibs-detailed-holdings"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumber",
+                  "value": "<long>",
+                  "description": "oclc number of the bibliographic item"
+                },
+                {
+                  "disabled": false,
+                  "key": "isbn",
+                  "value": "<string>",
+                  "description": "isbn of the bibliographic item (bn index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "issn",
+                  "value": "<string>",
+                  "description": "issn of the bibliographic item (in index)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)"
+                },
+                {
+                  "disabled": false,
+                  "key": "itemSubType",
+                  "value": "<string>",
+                  "description": "Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByGroup",
+                  "value": "<string>",
+                  "description": "Restrict to holdings held by Group Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBy",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldBySymbol",
+                  "value": "<string>",
+                  "description": "Institution Symbol"
+                },
+                {
+                  "disabled": false,
+                  "key": "heldByInstitutionID",
+                  "value": "<integer>,<integer>,<integer>,<integer>,<integer>",
+                  "description": "Institution registryId"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "0dc4871c-f490-46fe-a130-dc642f479e6c",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-detailed-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"numberOfRecords\": 1,\n  \"briefRecords\": [\n    {\n      \"oclcNumber\": \"318877925\",\n      \"title\": \"Simon's cat / by Simon Tofield.\",\n      \"creator\": \"Simon. Tofield\",\n      \"date\": \"2009.\",\n      \"language\": \"eng\",\n      \"generalFormat\": \"Book\",\n      \"specificFormat\": \"PrintBook\",\n      \"edition\": \"1st ed.\",\n      \"publisher\": \"Grand Central Pub.\",\n      \"publicationPlace\": \"New York :\",\n      \"mergedOclcNumbers\": [\n        \"877908501\"\n      ],\n      \"isbns\": [\n        \"9780446560061\",\n        \"0446560065\"\n      ],\n      \"catalogingInfo\": {\n        \"catalogingAgency\": \"DLC\",\n        \"transcribingAgency\": \"DLC\",\n        \"catalogingLanguage\": \"eng\",\n        \"levelOfCataloging\": \" \"\n      },\n      \"institutionHolding\": {\n        \"totalHoldingCount\": 227,\n        \"detailedHoldings\": [\n          {\n            \"lhrControlNumber\": \"238374600\",\n            \"lhrDateEntered\": \"20190617\",\n            \"lhrLastUpdated\": \"20190617\",\n            \"oclcNumber\": \"318877925\",\n            \"format\": \"zu\",\n            \"location\": {\n              \"holdingLocation\": \"OCPSB\",\n              \"sublocationCollection\": \"MAIN\",\n              \"shelvingLocation\": \"MAIN-STACKS\"\n            },\n            \"copyNumber\": \"1\",\n            \"callNumber\": {\n              \"displayCallNumber\": \"prefix PN6738 .S56 test\",\n              \"classificationPart\": \"PN6738\",\n              \"itemParts\": [\n                \".S56\"\n              ],\n              \"prefixes\": [\n                \"prefix\"\n              ],\n              \"suffixes\": [\n                \"test\"\n              ]\n            },\n            \"hasSharedPrintCommitment\": \"N\",\n            \"holdingParts\": [\n              {\n                \"pieceDesignation\": \"K123456789\"\n              }\n            ]\n          },\n          {\n            \"lhrControlNumber\": \"250915410\",\n            \"lhrLastUpdated\": \"20180416\",\n            \"oclcNumber\": \"318877925\",\n            \"format\": \"zu\",\n            \"location\": {\n              \"holdingLocation\": \"OCPSB\",\n              \"sublocationCollection\": \"MAIN\",\n              \"shelvingLocation\": \"MAIN-STACKS\"\n            },\n            \"copyNumber\": \"2\",\n            \"callNumber\": {\n              \"displayCallNumber\": \"PN6738 .S56\",\n              \"classificationPart\": \"PN6738\",\n              \"itemParts\": [\n                \".S56\"\n              ]\n            },\n            \"hasSharedPrintCommitment\": \"N\",\n            \"holdingParts\": [\n              {\n                \"pieceDesignation\": \"23798749734937\"\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c08809dc-63bf-4962-901f-943be6f3d0ab",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-detailed-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c9bc9516-3011-41e9-9516-68f989a5599a",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-detailed-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9fbe094-a5a7-4c6e-a580-00f35d47e1df",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-detailed-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bbc921b2-09d7-4877-a97c-0858f6082123",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "v2",
+                    "bibs-detailed-holdings"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumber",
+                      "value": "41266045"
+                    },
+                    {
+                      "key": "isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "issn",
+                      "value": "0099-1333"
+                    },
+                    {
+                      "key": "itemType",
+                      "value": "book"
+                    },
+                    {
+                      "key": "itemSubType",
+                      "value": "book-digital"
+                    },
+                    {
+                      "key": "heldByGroup",
+                      "value": "ASRL"
+                    },
+                    {
+                      "key": "heldBy",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldBySymbol",
+                      "value": "TXH"
+                    },
+                    {
+                      "key": "heldByInstitutionID",
+                      "value": "128807"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ALLOWED\",\n  \"title\": \"string\",\n  \"instance\": \"http://paOzmMviAbPKZcMdHiB.wpFyuPSE5GbM9DYPTRVJsWRABPxJ6o8hWD84hnrdS6ulqGBrGmBqon\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7a9783e6-93bb-4d60-a497-38af8a194bb1",
+    "name": "WorldCat Entity Data Bibliographic Resources Member General Holdings API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

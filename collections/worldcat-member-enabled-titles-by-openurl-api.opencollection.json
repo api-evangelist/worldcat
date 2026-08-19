@@ -1,0 +1,43 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Member Enabled Titles by OpenURL API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Enabled Titles by OpenURL",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find member enabled titles based on OpenURL",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/openurl/mresolve",
+            "params": [
+              {
+                "name": "queries",
+                "value": "[object Object]",
+                "type": "query",
+                "description": "JSON object contain queries"
+              },
+              {
+                "name": "alt",
+                "value": "",
+                "type": "query",
+                "description": "Format to return results in. application/xml or application/json"
+              }
+            ]
+          },
+          "docs": "Given an OpenURL find titles enabled by member library"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

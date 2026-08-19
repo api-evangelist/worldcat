@@ -1,0 +1,1521 @@
+{
+  "item": [
+    {
+      "id": "474c5e4c-08b3-42c7-b40a-db246f17668c",
+      "name": "Manage Local Bibliographic Data",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "96a4e9ce-4518-4b04-a599-c65ebef77348",
+          "name": "Create a Local Bibliographic Data record.",
+          "request": {
+            "name": "Create a Local Bibliographic Data record.",
+            "description": {
+              "content": "Given a Local Bibliographic Data record, create it in WorldCat.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lbds"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "8c585d86-484f-41c8-a7db-e79dcdf07eb2",
+              "name": "The Local Bibliographic Data record was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "2cd5480e-e55b-482e-a7b5-b2cf82fa0a6a",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Unable to perform the lbd create operation.\",\n  \"detail\": {\n    \"summary\": \"LBD_HAS_CONTROL_NUMBER\",\n    \"description\": \"The LBD must lack a control number for adds\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35e6bdc7-fc1d-427d-a169-36907a35fc3b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adeee1aa-d3d6-49cd-946e-3e499a2b4be0",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "72f1fa41-afd1-4e69-9d9b-340d001a49e6",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee0fe60c-97b8-413a-8c58-747ab3688e36",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7ab08d93-c838-4c47-bf49-d0c59439595c",
+          "name": "Retrieve a Local Bibliographic Data record.",
+          "request": {
+            "name": "Retrieve a Local Bibliographic Data record.",
+            "description": {
+              "content": "Given a Control Number, retrieve a Local Bibliographic Data record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lbds",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "controlNumber",
+                  "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "d8d7e2a3-77c1-4cd0-8b31-feb1c1ed7456",
+              "name": "The Local Bibliographic Data record was retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "da086c66-77d4-40c5-b5e5-b5c34b6c617c",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Unable to perform the lbd read operation.\",\n  \"detail\": {\n    \"summary\": \"NOT_FOUND\",\n    \"description\": \"Not able to find the requested LBD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e077ce96-9c03-4e78-a496-b6a0347e8511",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01b0e468-dc8a-431b-9d95-4022f23604af",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebeb8e0e-7476-41a7-9601-897c5023e2c0",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "43119262-be18-4f4a-a530-4cdea029387c",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae054c8d-66ed-4679-9b10-37d0dea0d07c",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b338f359-2c80-4c13-8e79-6c61df497ae2",
+          "name": "Replace a Local Bibliographic Data record.",
+          "request": {
+            "name": "Replace a Local Bibliographic Data record.",
+            "description": {
+              "content": "Given a Control Number, find the associated Local Bibliographic Data record and replace it. If the Control Number is not found in WorldCat, then the provided Local Bibliographic Data record will be created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lbds",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "controlNumber",
+                  "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "21584f51-6b1b-450c-81cd-d57bc2775bf7",
+              "name": "The Local Bbibliographic Data record was replaced successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "37a96f5a-17d7-40d5-854e-a0f25033d208",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Unable to perform the lbd replace operation.\",\n  \"detail\": {\n    \"summary\": \"LBD_LACKS_OWNING_INSTITUTION_SYMBOL\",\n    \"description\": \"The LBD must have an owning institution symbol\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93cb1419-55a2-436c-9487-4f145882eedb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "38db9e95-a231-48e4-bc8a-bd5ab6490668",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "add70013-cddd-4ebb-b597-5e6008e69b69",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "899aef9e-b1c9-4428-b261-0c18df38f9bc",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4eed2fa6-e9c6-4cc9-91fb-4bc52b6a4f0c",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record in WorldCat"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e8d87556-b987-4f64-ac18-40682fd2c407",
+          "name": "Delete a Local Bibliographic Data record.",
+          "request": {
+            "name": "Delete a Local Bibliographic Data record.",
+            "description": {
+              "content": "Given a Control Number, delete the associated Local Bibliographic Data record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lbds",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "controlNumber",
+                  "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "2be9d07a-e023-47f2-9fe9-9515c5d4e7ef",
+              "name": "The Local Bbibliographic Data record was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "30a9d16b-db5c-4019-b7c2-2855684ddef5",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Unable to perform the lbd read operation.\",\n  \"detail\": {\n    \"summary\": \"NOT_FOUND\",\n    \"description\": \"Not able to find the requested LBD\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0c5be02-5a21-407a-b839-96aadc29efd5",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1c787cfb-9f70-475a-bb2f-dce9bbbbd958",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80a6e760-2cf1-493d-b9bf-082e546f68f7",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1d9a4b8-3a1c-4c8e-b2f3-025096347626",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9802e7be-5a5a-4726-93df-8027eeeaee0c",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lbds",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Bibliographic Data record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8af946c1-0444-4c52-9d2f-eb624109eeaa",
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Local Bibliographic Data API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

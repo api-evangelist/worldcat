@@ -1,0 +1,832 @@
+{
+  "item": [
+    {
+      "id": "35c2edef-61dd-4f0f-8963-014f11ba3c20",
+      "name": "Member Enabled Title by OpenURL",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1ca9d107-eb35-4d95-ba47-48cc0c2c73db",
+          "name": "Find member enabled title based on OpenURL",
+          "request": {
+            "name": "Find member enabled title based on OpenURL",
+            "description": {
+              "content": "Given an OpenURL find title enabled by member library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "openurl",
+                "resolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "svc_id",
+                  "value": "json",
+                  "description": "Response format"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.title",
+                  "value": "<string>",
+                  "description": "Title of item"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.btitle",
+                  "value": "<string>",
+                  "description": "Book Title"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.jtitle",
+                  "value": "<string>",
+                  "description": "Journal Title"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.issn",
+                  "value": "<string>",
+                  "description": "ISSN"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.eissn",
+                  "value": "<string>",
+                  "description": "Electronic ISSN"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.isbn",
+                  "value": "<string>",
+                  "description": "ISBN"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.oclcnum",
+                  "value": "<string>",
+                  "description": "OCLC Number"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.pub",
+                  "value": "<string>",
+                  "description": "Publisher name"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.date",
+                  "value": "<string>",
+                  "description": "Publication date, in the format YYYY, YYYY-MM, or YYYY-MM-DD"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.volume",
+                  "value": "<string>",
+                  "description": "Journal volume"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.issue",
+                  "value": "<string>",
+                  "description": "Journal issue"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.spage",
+                  "value": "<string>",
+                  "description": "Start page"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.epage",
+                  "value": "<string>",
+                  "description": "End page"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.atitle",
+                  "value": "<string>",
+                  "description": "Article Title"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.aufirst",
+                  "value": "<string>",
+                  "description": "Author first name"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.auinit",
+                  "value": "<string>",
+                  "description": "Author initial"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.aulast",
+                  "value": "<string>",
+                  "description": "Author Last name"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.sici",
+                  "value": "<string>",
+                  "description": "Serial Item and Contribution Identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.provider_uid",
+                  "value": "<string>",
+                  "description": "Provider uid as defined by knowledge base"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.collection_uid",
+                  "value": "<string>",
+                  "description": "Collection uid as defined by knowledge base"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.content",
+                  "value": "fulltext",
+                  "description": "Format to return results in. application/xml or application/json"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.institution_id",
+                  "value": "<string>",
+                  "description": "WorldCat Registry Id for institution"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.jkey",
+                  "value": "<string>",
+                  "description": "Vendor defined journal id for particular vendors"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.openaccess",
+                  "value": "<string>",
+                  "description": "Open Access flag"
+                },
+                {
+                  "disabled": false,
+                  "key": "rfr_id",
+                  "value": "<string>",
+                  "description": "OpenURL referrer identifier"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.id",
+                  "value": "<string>",
+                  "description": "identifier for item"
+                },
+                {
+                  "disabled": false,
+                  "key": "rft.force_remote_lookup",
+                  "value": "no",
+                  "description": "Force PMID/DOI lookup"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "cfb5d003-cd6a-41e9-b081-3c4083103b4b",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "svc_id",
+                      "value": "json"
+                    },
+                    {
+                      "key": "rft.title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.btitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jtitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.eissn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.pub",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.volume",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.spage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.epage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.atitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aufirst",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.auinit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aulast",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.sici",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.provider_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.collection_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.content",
+                      "value": "fulltext"
+                    },
+                    {
+                      "key": "rft.institution_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.openaccess",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rfr_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.id",
+                      "value": "info:doi..."
+                    },
+                    {
+                      "key": "rft.force_remote_lookup",
+                      "value": "no"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"coverage\": \"ebook@2005-09-26\",\n    \"collection_url\": \"http://my.safaribooksonline.com\",\n    \"collection_uid\": \"safari.tech\",\n    \"oclcnums\": \"65183407 61260129 878406930 861529762 847462570 61849699 270992543\",\n    \"isbn\": \"9780596007652\",\n    \"provider_uid\": \"safari\",\n    \"source\": \"holdings\",\n    \"title\": \"Ambient Findability\",\n    \"collection_type\": \"browsable\",\n    \"content\": \"ebook\",\n    \"url\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best\",\n    \"institution_id\": [\n      \"128807\"\n    ],\n    \"uid\": \"1883656\",\n    \"bkey\": 596007655,\n    \"publisher\": \"O'Reilly Media, Inc. - O'Reilly Media\",\n    \"openaccess\": \"no\",\n    \"id\": \"d6edd1064311b081e77051faf19e687e\",\n    \"provider_name\": \"Safari Books Online\",\n    \"collection_name\": \"Safari Tech Books Online\",\n    \"oclcnum\": \"61849699\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3f38f49d-1eb7-496f-b613-a79f47a1791a",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "svc_id",
+                      "value": "json"
+                    },
+                    {
+                      "key": "rft.title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.btitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jtitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.eissn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.pub",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.volume",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.spage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.epage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.atitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aufirst",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.auinit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aulast",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.sici",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.provider_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.collection_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.content",
+                      "value": "fulltext"
+                    },
+                    {
+                      "key": "rft.institution_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.openaccess",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rfr_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.id",
+                      "value": "info:doi..."
+                    },
+                    {
+                      "key": "rft.force_remote_lookup",
+                      "value": "no"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b963b7c9-5648-4791-9ad5-9b4a3d785033",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "svc_id",
+                      "value": "json"
+                    },
+                    {
+                      "key": "rft.title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.btitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jtitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.eissn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.pub",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.volume",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.spage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.epage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.atitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aufirst",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.auinit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aulast",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.sici",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.provider_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.collection_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.content",
+                      "value": "fulltext"
+                    },
+                    {
+                      "key": "rft.institution_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.openaccess",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rfr_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.id",
+                      "value": "info:doi..."
+                    },
+                    {
+                      "key": "rft.force_remote_lookup",
+                      "value": "no"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Error when invalid HTTP method used\",\n  \"value\": {\n    \"title\": \"NOT_ALLOWED\",\n    \"detail\": \"POST method not allowed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5d414fb-bda4-4dbe-92d7-63e9fd65751d",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "resolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "svc_id",
+                      "value": "json"
+                    },
+                    {
+                      "key": "rft.title",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.btitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jtitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.eissn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.isbn",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.oclcnum",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.pub",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.date",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.volume",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.issue",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.spage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.epage",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.atitle",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aufirst",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.auinit",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.aulast",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.sici",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.provider_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.collection_uid",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.content",
+                      "value": "fulltext"
+                    },
+                    {
+                      "key": "rft.institution_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.jkey",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.openaccess",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rfr_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "rft.id",
+                      "value": "info:doi..."
+                    },
+                    {
+                      "key": "rft.force_remote_lookup",
+                      "value": "no"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "33d25f91-90a7-45ff-8168-354446147304",
+    "name": "WorldCat Entity Data Bibliographic Resources Member Enabled Title by OpenURL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

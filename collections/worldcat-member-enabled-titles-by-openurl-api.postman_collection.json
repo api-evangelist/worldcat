@@ -1,0 +1,286 @@
+{
+  "item": [
+    {
+      "id": "c246ecbc-588a-4fa4-a6c7-a83e183d86e6",
+      "name": "Member Enabled Titles by OpenURL",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "fa0fdb8f-4c62-45ae-8d61-c84f444c98c8",
+          "name": "Find member enabled titles based on OpenURL",
+          "request": {
+            "name": "Find member enabled titles based on OpenURL",
+            "description": {
+              "content": "Given an OpenURL find titles enabled by member library",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "openurl",
+                "mresolve"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "alt",
+                  "value": "xml",
+                  "description": "Format to return results in. application/xml or application/json"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "2b04a748-7625-4f9c-8979-66da060b1c89",
+              "name": "Successful search",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "mresolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queryForBook",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForJournal",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForArticle",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"queryForBook\": {\n    \"result\": [\n      {\n        \"coverage\": \"ebook@2005-09-26\",\n        \"collection_url\": \"http://my.safaribooksonline.com\",\n        \"collection_uid\": \"safari.tech\",\n        \"oclcnums\": \"65183407 61260129 878406930 861529762 847462570 61849699 270992543\",\n        \"isbn\": \"9780596007652\",\n        \"provider_uid\": \"safari\",\n        \"source\": \"holdings\",\n        \"title\": \"Ambient Findability\",\n        \"collection_type\": \"browsable\",\n        \"content\": \"ebook\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"1883656\",\n        \"bkey\": 596007655,\n        \"publisher\": \"O'Reilly Media, Inc. - O'Reilly Media\",\n        \"openaccess\": \"no\",\n        \"id\": \"d6edd1064311b081e77051faf19e687e\",\n        \"provider_name\": \"Safari Books Online\",\n        \"collection_name\": \"Safari Tech Books Online\",\n        \"oclcnum\": \"61849699\"\n      }\n    ]\n  },\n  \"queryForJournal\": {\n    \"result\": [\n      {\n        \"coverage\": \"fulltext@2005-10-05~2018-08-29\",\n        \"collection_url\": \"https://www.nature.com\",\n        \"collection_uid\": \"NPG.openAccess\",\n        \"jkey\": \"nature\",\n        \"oclcnums\": \"1058009839 1586310 993757444\",\n        \"provider_uid\": \"NPG\",\n        \"eissn\": \"1476-4687\",\n        \"linkerurl\": \"http://linker2.worldcat.org/?jKey=nature&rft.institution_id=128807&linktype=best&eissn=1476-4687&title=Nature&linkScheme=npg&jHome=https%3A%2F%2Fwww.nature.com%2Fnature&issn=0028-0836&provider=NPG&pkgName=openAccess&linkclass=to_article\",\n        \"source\": \"holdings\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fwww.nature.com%2Fnature&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"40067081\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Nature Publishing Group\",\n        \"openaccess\": \"yes\",\n        \"id\": \"4261821ec9fcc25391bf7643b6a817e5\",\n        \"provider_name\": \"Nature Publishing Group\",\n        \"collection_name\": \"Nature Open Access Content\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"1058009839\"\n      },\n      {\n        \"coverage\": \"fulltext@1878~1922\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.UsDnldRestrict\",\n        \"oclcnums\": \"65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"47723575\",\n        \"bkey\": \"mdp.39015038818442\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan Journals Ltd., etc.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"b93693c2879e9d0f7a9fb5a616ac9dc3\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"65289277\"\n      },\n      {\n        \"coverage\": \"fulltext@1869~1875\",\n        \"collection_uid\": \"global.53639.8.mcgillejournalsopenaccess\",\n        \"oclcnums\": \"65289277 863853449 4285192 297226504 630212514 421716612 942765934 993757444 243591959 933310873 47076528 1087156682 932537059 396102007 740974185 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 466385074 1586310\",\n        \"eissn\": \"1476-4687\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"openaccess deprecated cooperative\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fdigicoll.library.wisc.edu%2Fcgi-bin%2FHistSciTech%2FHistSciTech-idx%3Ftype%3Dbrowse%26scope%3DHISTSCITECH.NATURE&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"issn\": \"0028-0836\",\n        \"openaccess\": \"yes\",\n        \"id\": \"19da7263f842da819060197f40bd7a2b\",\n        \"collection_name\": \"Open Access eJournals (McGill)\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"47076528\"\n      },\n      {\n        \"coverage\": \"fulltext@1870~1875\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.OutsideDnldRestrict\",\n        \"oclcnums\": \"65289277 855510898 4285192 499775149 630212514 421716612 942765934 140122618 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F140122618.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"44464947\",\n        \"bkey\": \"nyp.33433016842746\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan Journals ltd.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"2a5bc70a369aa3e24cf600a1759a0102\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust Outside US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"65289277\"\n      },\n      {\n        \"coverage\": \"fulltext@1869~1878\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.OutsideDnldRestrict\",\n        \"oclcnums\": \"65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"46041304\",\n        \"bkey\": \"uc1.31210005082027\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan Journals Ltd., etc.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"520808ea5f7493ef8fa35210d416b2e8\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust Outside US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"65289277\"\n      },\n      {\n        \"coverage\": \"fulltext@1869~1873\",\n        \"collection_url\": \"http://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.pdAccess\",\n        \"oclcnums\": \"855510898 863853449 297226504 499775149 421716612 505014713 630212514 801435398 47076528 740974185 669712494 7417753 8315982 14638648 252459251 466385074 65289277 4285192 942765934 932537059 396102007 9269265 682135186 433679811 496009298 610353595 1586310\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess deprecated\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"18400864\",\n        \"bkey\": \"coo.31924066893615\",\n        \"issn\": \"0028-0836\",\n        \"openaccess\": \"yes\",\n        \"id\": \"225a22a80d99e3cdf56eb7cc3d326755\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust Public Domain Access\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"47076528\"\n      },\n      {\n        \"coverage\": \"fulltext@1869~1877\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.OutsideDnldRestrict\",\n        \"oclcnums\": \"855510898 863853449 496009298 1586310\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"44552745\",\n        \"bkey\": \"coo.31924066893847\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"9c08d5ef62e46baa383d22075ba88c1e\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust Outside US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"863853449\"\n      },\n      {\n        \"coverage\": \"fulltext@1869~1877\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.UsDnldRestrict\",\n        \"oclcnums\": \"855510898 863853449 496009298 1586310\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"46739507\",\n        \"bkey\": \"coo.31924066893847\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"8587f6072d21eacbc70f57cba481b11b\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"863853449\"\n      },\n      {\n        \"coverage\": \"fulltext@1869~1873\",\n        \"collection_url\": \"http://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.pdAccess\",\n        \"oclcnums\": \"855510898 863853449 297226504 499775149 421716612 505014713 630212514 801435398 47076528 740974185 669712494 7417753 8315982 14638648 252459251 466385074 65289277 4285192 942765934 932537059 396102007 9269265 682135186 433679811 610353595 1586310\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess deprecated\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"5804956\",\n        \"bkey\": \"mdp.39015038818269\",\n        \"issn\": \"0028-0836\",\n        \"openaccess\": \"yes\",\n        \"id\": \"cd7b75934349bf07acf540d350585a62\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust Public Domain Access\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"47076528\"\n      },\n      {\n        \"coverage\": \"fulltext@1869~1878\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.UsDnldRestrict\",\n        \"oclcnums\": \"65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"49229610\",\n        \"bkey\": \"uc1.31210005082027\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan Journals Ltd., etc.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"10ddc9b636369fc35085f416f21e9687\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"65289277\"\n      },\n      {\n        \"coverage\": \"fulltext@1874~1921\",\n        \"collection_url\": \"http://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.pdusAccess\",\n        \"oclcnums\": \"65289277 855510898 863853449 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 496009298 8315982 14638648 610353595 1058009839 466385074 1586310\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess deprecated\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"18690922\",\n        \"bkey\": \"coo.31924072038395\",\n        \"issn\": \"0028-0836\",\n        \"openaccess\": \"yes\",\n        \"id\": \"6d995bedf04219f448356e4e821eea12\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust Public Domain only in US Access\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"863853449\"\n      },\n      {\n        \"coverage\": \"fulltext@1870~1875\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.UsDnldRestrict\",\n        \"oclcnums\": \"65289277 855510898 4285192 499775149 630212514 421716612 942765934 140122618 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F140122618.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"46545263\",\n        \"bkey\": \"nyp.33433016842746\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan Journals ltd.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"b279a6a0bcdbfa8946e649779a74d2bc\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"65289277\"\n      },\n      {\n        \"coverage\": \"fulltext@1878~1887\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.UsDnldRestrict\",\n        \"oclcnums\": \"65289277 855510898 4285192 499775149 630212514 421716612 942765934 140122618 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F140122618.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"46664680\",\n        \"bkey\": \"nyp.33433016842928\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan Journals ltd.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"30b582c98de415a38e3f52d3cf3160ee\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"65289277\"\n      },\n      {\n        \"coverage\": \"fulltext@1873~1987\",\n        \"collection_url\": \"http://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.pdusAccess\",\n        \"oclcnums\": \"65289277 855510898 4285192 499775149 630212514 421716612 942765934 852453895 993757444 933310873 47076528 1087156682 932537059 396102007 740974185 568729044 669712494 9269265 682135186 7417753 8315982 14638648 610353595 1058009839 1586310 466385074\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess deprecated\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=http%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F1586310.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"4278754\",\n        \"bkey\": \"mdp.39015038818343\",\n        \"issn\": \"0028-0836\",\n        \"openaccess\": \"yes\",\n        \"id\": \"0ca4a862ee7f4f817461ec2d1996cd60\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust Public Domain only in US Access\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"568729044\"\n      },\n      {\n        \"coverage\": \"fulltext@1881~1921\",\n        \"collection_url\": \"https://www.hathitrust.org/\",\n        \"collection_uid\": \"hathitrust.UsDnldRestrict\",\n        \"oclcnums\": \"855510898 863853449 496009298 1586310\",\n        \"provider_uid\": \"hathitrust\",\n        \"source\": \"openaccess\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"autoapprove browsable openaccess\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fcatalog.hathitrust.org%2Fapi%2Fvolumes%2Foclc%2F496009298.html&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"46918299\",\n        \"bkey\": \"coo.31924066893904\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Macmillan.\",\n        \"openaccess\": \"yes\",\n        \"id\": \"e64a3f2bf3b30fa2f2ce9f7246069356\",\n        \"provider_name\": \"HathiTrust Digital Library\",\n        \"collection_name\": \"HathiTrust US Access with possible download restrictions\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"863853449\"\n      }\n    ]\n  },\n  \"queryForArticle\": {\n    \"result\": [\n      {\n        \"coverage\": \"fulltext@2005-10-05~2018-08-29\",\n        \"collection_url\": \"https://www.nature.com\",\n        \"collection_uid\": \"NPG.openAccess\",\n        \"jkey\": \"nature\",\n        \"oclcnums\": \"1058009839 1586310 993757444\",\n        \"provider_uid\": \"NPG\",\n        \"eissn\": \"1476-4687\",\n        \"linkerurl\": \"http://linker2.worldcat.org/?date=2010-02-18&issue=7283&jKey=nature&rft.institution_id=128807&linktype=best&spage=850&eissn=1476-4687&title=Nature&atitle=Nature%27s+choices&volume=463&linkScheme=npg&jHome=https%3A%2F%2Fwww.nature.com%2Fnature&issn=0028-0836&provider=NPG&pkgName=openAccess&linkclass=to_article\",\n        \"source\": \"holdings\",\n        \"title\": \"Nature\",\n        \"collection_type\": \"openaccess browsable autoapprove\",\n        \"content\": \"fulltext\",\n        \"url\": \"http://linker2.worldcat.org/?jHome=https%3A%2F%2Fwww.nature.com%2Fnature&linktype=best\",\n        \"institution_id\": [\n          \"128807\"\n        ],\n        \"uid\": \"40067081\",\n        \"issn\": \"0028-0836\",\n        \"publisher\": \"Nature Publishing Group\",\n        \"openaccess\": \"yes\",\n        \"id\": \"4261821ec9fcc25391bf7643b6a817e5\",\n        \"provider_name\": \"Nature Publishing Group\",\n        \"collection_name\": \"Nature Open Access Content\",\n        \"coverage_enum\": \"fulltext\",\n        \"oclcnum\": \"1058009839\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "116449be-f3a0-48e6-80a9-c6a5f469fd77",
+              "name": "Invalid query. The request was unacceptable, often due to missing a required parameter.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "mresolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queryForBook",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForJournal",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForArticle",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"MISSING_QUERY_PARAMETER\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"Required String parameter 'q' is not present\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a941fe2b-98ac-4642-a5a7-8638a72bf1d7",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "mresolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queryForBook",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForJournal",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForArticle",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"summary\": \"Error when invalid HTTP method used\",\n  \"value\": {\n    \"title\": \"NOT_ALLOWED\",\n    \"detail\": \"POST method not allowed\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74c7b65e-aade-48dd-b88c-7736b71c7b04",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "openurl",
+                    "mresolve"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "queryForBook",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForJournal",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "queryForArticle",
+                      "value": "[object Object]"
+                    },
+                    {
+                      "key": "alt",
+                      "value": "xml"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d1b340ef-90bb-420a-ac3b-2a9bbf9c75a5",
+    "name": "WorldCat Entity Data Bibliographic Resources Member Enabled Titles by OpenURL API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

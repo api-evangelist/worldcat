@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Local Holdings Records API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manage Local Holdings Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Local Holdings Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lhrs"
+          },
+          "docs": "Given a Local Holdings Record, create it in WorldCat."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Local Holdings Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lhrs/:controlNumber",
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "906268152",
+                "type": "path",
+                "description": "The Control Number associated with the Local Holdings Record."
+              }
+            ]
+          },
+          "docs": "Given an Accesion Number, retrieve the associated Local Holdings Record."
+        },
+        {
+          "info": {
+            "name": "Replace a Local Holdings Record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lhrs/:controlNumber",
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "906268152",
+                "type": "path",
+                "description": "The Control Number associated with the Local Holdings Record."
+              }
+            ]
+          },
+          "docs": "Given a Control Number, find the associated Local Holdings Record and replace it. If the Control Number is not found in WorldCat, then the provided Local Holdings Record will be created."
+        },
+        {
+          "info": {
+            "name": "Delete a Local Holdings Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lhrs/:controlNumber",
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "90626815",
+                "type": "path",
+                "description": "The Control Number associated with the Local Holdings Record."
+              }
+            ]
+          },
+          "docs": "Given a Control Number, delete a Local Holdings record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,1521 @@
+{
+  "item": [
+    {
+      "id": "d6dd8c56-53e8-4e0a-a892-d3107162f74e",
+      "name": "Manage Local Holdings Records",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "80564d06-3922-4879-baf1-14608cbd606f",
+          "name": "Create a Local Holdings Record",
+          "request": {
+            "name": "Create a Local Holdings Record",
+            "description": {
+              "content": "Given a Local Holdings Record, create it in WorldCat.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lhrs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c3a11855-98ef-40fa-a429-a6f0a13b626a",
+              "name": "The Local Holdings Record was created successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "186f3a00-b89e-4429-be2f-a51610b7f0e3",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "90c284c0-9bba-430c-9738-50788440baeb",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31a38996-63c1-4259-8136-7ce3a1d87da8",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "29741b94-8301-4477-bf08-a9b04cba89e2",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75cf2836-673d-475b-b7c0-21ca750e236d",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "170e055f-ef16-4f82-b2da-8a6b0ce555e2",
+          "name": "Retrieve a Local Holdings Record",
+          "request": {
+            "name": "Retrieve a Local Holdings Record",
+            "description": {
+              "content": "Given an Accesion Number, retrieve the associated Local Holdings Record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lhrs",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "controlNumber",
+                  "description": "(Required) The Control Number associated with the Local Holdings Record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "c7be318e-1bd3-492f-94d1-f9aeeb46ef1c",
+              "name": "The Local Holdings Record was retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "eae9f928-5fd7-4b97-afd5-4ae9e7bc406b",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "34468f76-3b35-4329-a51a-9efe5e1c02a6",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6a7f9ad-54bd-446d-8a3b-9556d2a4d1df",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b6ddaa75-5a63-4421-bfeb-68c89e004a93",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "601abead-eb9b-42be-b806-6241895b70df",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "332ed148-87ad-4123-87bc-ba8108125814",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "17cdb5b2-c5d0-4428-9cea-424a937f0333",
+          "name": "Replace a Local Holdings Record.",
+          "request": {
+            "name": "Replace a Local Holdings Record.",
+            "description": {
+              "content": "Given a Control Number, find the associated Local Holdings Record and replace it. If the Control Number is not found in WorldCat, then the provided Local Holdings Record will be created.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lhrs",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "controlNumber",
+                  "description": "(Required) The Control Number associated with the Local Holdings Record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "3892a73b-eb64-4e7a-87cc-a49cbd983e72",
+              "name": "The Local Holdings Record was replaced successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "62809f0c-6866-4c94-b170-476a58aa54ff",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "25d34e17-d827-42f6-abb5-b94b3a77920d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "13a4e8ee-c8a4-4034-be2a-7adeb2ee47c0",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "56daf8c4-879e-4098-91ab-b44bf9ac8efd",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "03ff6f23-98c7-471a-aaef-9ab858b447bd",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "80c858bb-fb12-481b-b24e-18a5e8056314",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "cb1131b1-611c-43c9-a5b1-cff11c3188b9",
+          "name": "Delete a Local Holdings Record",
+          "request": {
+            "name": "Delete a Local Holdings Record",
+            "description": {
+              "content": "Given a Control Number, delete a Local Holdings record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "lhrs",
+                ":controlNumber"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "controlNumber",
+                  "description": "(Required) The Control Number associated with the Local Holdings Record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/marcxml+xml"
+              }
+            ],
+            "method": "DELETE"
+          },
+          "response": [
+            {
+              "id": "b292c53c-9e12-42cb-bb6f-dd5c97952df9",
+              "name": "The Local Holdings Record was deleted successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "5b6644f4-5de4-4336-a601-35ed0a3612a5",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/marcxml+xml"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/marcxml+xml"
+                }
+              ],
+              "body": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n",
+              "cookie": [],
+              "_postman_previewlanguage": "xml"
+            },
+            {
+              "id": "fdcad694-c4d4-486b-95b9-ec3a0d79b351",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "be1cf61f-b8b1-47bb-9f1f-78d63523817f",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8076782e-8042-4676-bb2b-c286fe89ed3e",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "784e85f0-2d63-4cee-ba73-9a35cc6fdf5a",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5314f3e8-5502-4107-ba9a-994c6ccd020f",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "lhrs",
+                    ":controlNumber"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "controlNumber",
+                      "description": "(Required) The Control Number associated with the Local Holdings Record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a3b7dab3-bcc5-4d3b-8cff-1aff99b1204e",
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Local Holdings Records API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

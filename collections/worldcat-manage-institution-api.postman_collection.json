@@ -1,0 +1,3319 @@
+{
+  "item": [
+    {
+      "id": "d8c2fb90-78c1-4a69-b34d-50d78a1ac122",
+      "name": "Manage Institution",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1c4fe17a-4c1e-4245-8d17-e6e678667653",
+          "name": "Retrieve the current institution holdings for Bibliographic records from WorldCat.",
+          "request": {
+            "name": "Retrieve the current institution holdings for Bibliographic records from WorldCat.",
+            "description": {
+              "content": "Given one or more OCLC Numbers (up to 10), check WorldCat for the institution holdings. It will return current institution holdings information associated w/ the OCLC Number(s) provided. If an OCLC Number does not exist or is invalid, a result of null is returned for the current control number.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution",
+                "holdings",
+                "current"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "oclcNumbers",
+                  "value": "<long>",
+                  "description": "(Required) One or more OCLC numbers. Separated by comma if providing multiple."
+                },
+                {
+                  "disabled": false,
+                  "key": "oclcNumbers",
+                  "value": "<long>",
+                  "description": "(Required) One or more OCLC numbers. Separated by comma if providing multiple."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "069a5261-9780-4b01-bb13-57d46e4438a5",
+              "name": "The current holdings were retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"holdings\": [\n    {\n      \"requestedControlNumber\": \"1\",\n      \"currentControlNumber\": \"1\",\n      \"institutionSymbol\": \"OCWMS\",\n      \"holdingSet\": true\n    },\n    {\n      \"requestedControlNumber\": \"261176486\",\n      \"currentControlNumber\": \"311684437\",\n      \"institutionSymbol\": \"OCWMS\",\n      \"holdingSet\": true\n    },\n    {\n      \"requestedControlNumber\": \"999999999999\",\n      \"currentControlNumber\": null,\n      \"institutionSymbol\": \"OCWMS\",\n      \"holdingSet\": false\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "073e0c1d-8ea8-435e-add0-c524553886a3",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Invalid value provided for query param: oclcNumbers.\",\n  \"detail\": \"A request with an invalid query param value was attempted: oclcNumbers=[abc]\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7de5b811-6311-4888-9641-07a489ff6ab2",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bfa91f29-dbe8-44a1-93dd-f6afb302c02c",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebfb5f0c-b492-4545-9065-f0328ad75554",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d39587f-8317-4749-bf62-a1d4ed8f5e25",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "current"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    },
+                    {
+                      "key": "oclcNumbers",
+                      "value": "<long>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "326c29ee-bc53-4500-b355-32586d7cf571",
+          "name": "Set a holding on a Bibliographic record.",
+          "request": {
+            "name": "Set a holding on a Bibliographic record.",
+            "description": {
+              "content": "Given a Bibliographic record, unset a holding on the record. Note: ONLY one record is allowed in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution",
+                "holdings",
+                "set"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "20cf92d7-b008-4786-b36b-e832a567788b",
+              "name": "The holding was set successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"controlNumber\": \"439887343\",\n  \"requestedControlNumber\": \"439887343\",\n  \"institutionCode\": \"158223\",\n  \"institutionSymbol\": \"OCWMS\",\n  \"success\": true,\n  \"message\": \"Set Holding Succeeded.\",\n  \"action\": \"Set Holdings\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ed6cc3df-9cb4-4084-b994-65233183f840",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Unable to perform the set holding operation.\",\n  \"status\": {\n    \"summary\": \"BIB_LACKS_CONTROL_NUMBER\",\n    \"description\": \"Record is missing a control number\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7fc8c065-0373-4bb0-ad12-a4cbebb17343",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5887e86d-c09d-4faa-b662-4521781f423e",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c8f4be28-1f2a-4d4f-96c5-43300a25eb4a",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "238f03c2-a34c-4017-b02a-aab44bdbe995",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3bc58a83-d7c0-4426-9199-8ab7d4ac2310",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ca81c0a7-265e-4973-9d76-c2b1836d07e7",
+          "name": "Unset a holding on a Bibliographic record.",
+          "request": {
+            "name": "Unset a holding on a Bibliographic record.",
+            "description": {
+              "content": "Given a Bibliographic record, unset a holding on the record. Note: ONLY one record is allowed in the request body.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution",
+                "holdings",
+                "unset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cascadeDelete",
+                  "value": "true",
+                  "description": "Remove associated Local Bibliographic Data and/or Local Holdings Records when unsetting the holding"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/marcxml+xml"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n</record>",
+              "options": {
+                "raw": {
+                  "language": "xml"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6e0fb084-37f7-4fb7-a834-4735252ade53",
+              "name": "The holding was unset successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"controlNumber\": \"439887343\",\n  \"requestedControlNumber\": \"439887343\",\n  \"institutionCode\": \"159782\",\n  \"institutionSymbol\": \"OCWMS\",\n  \"success\": true,\n  \"message\": \"Unset Holdings Succeeded.\",\n  \"action\": \"Unset Holdings\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "078912fd-0b26-46b6-8c53-ff00373701cd",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Invalid value.\",\n  \"detail\": \"A request with a non-boolean value was attempted: test\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f18b8152-b519-46e5-b078-28496e2344f4",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2ccb0c89-8ec1-46e7-b0a2-c99ca24329b3",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3ee454f-493b-4747-8893-8aeca38636b0",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0f3c3942-4f4b-40e8-b315-e353e368a4ec",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c355332f-a857-402f-a751-617417ea06d4",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n",
+                  "options": {
+                    "raw": {
+                      "language": "xml"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1deed98d-2065-48f5-b65f-6f61ed8981b0",
+          "name": "Set the holding on a Bibliographic record for an institution by OCLC Number.",
+          "request": {
+            "name": "Set the holding on a Bibliographic record for an institution by OCLC Number.",
+            "description": {
+              "content": "Given an Identifier (OCLC Number), set the holding on the appropriate Bibliographic record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution",
+                "holdings",
+                ":oclcNumber",
+                "set"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "oclcNumber",
+                  "description": "(Required) The Identifier is the OCLC Number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "db97f34c-f8ef-4003-9425-1d250bd21e86",
+              "name": "The holding was set successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"controlNumber\": \"439887343\",\n  \"requestedControlNumber\": \"439887343\",\n  \"institutionCode\": \"158223\",\n  \"institutionSymbol\": \"OCWMS\",\n  \"success\": true,\n  \"message\": \"Set Holding Succeeded.\",\n  \"action\": \"Set Holdings\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1e70b293-c234-4ba5-8b77-7a523426652a",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Invalid identifier.\",\n  \"detail\": \"A request with a non-numeric identifier was attempted: ocm12121212\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4de252ff-cdfe-4973-88b7-47d71a43eab1",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07f03e6b-2efe-4252-b9f7-715416ac692f",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16692625-df99-47f0-a6ae-8687858464cb",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5d44a360-3d63-401e-adbf-2798d12660b3",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "16143716-0499-4c5b-85b9-427ce93b3e77",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6b7019b1-9aa8-4884-b035-a416aee76162",
+          "name": "Unset the holding on a Bibliographic record for an institution by OCLC Number.",
+          "request": {
+            "name": "Unset the holding on a Bibliographic record for an institution by OCLC Number.",
+            "description": {
+              "content": "Given an Identifier (OCLC Number), unset the holding on the appropriate Bibliographic record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution",
+                "holdings",
+                ":oclcNumber",
+                "unset"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "cascadeDelete",
+                  "value": "true",
+                  "description": "Remove associated Local Bibliographic Data and/or Local Holdings Records when unsetting the holding"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<long>",
+                  "key": "oclcNumber",
+                  "description": "(Required) The Identifier is the OCLC Number."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST"
+          },
+          "response": [
+            {
+              "id": "b717aabd-d919-49f9-b10a-fd68131184bb",
+              "name": "The holding was unset successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"controlNumber\": \"439887343\",\n  \"requestedControlNumber\": \"439887343\",\n  \"institutionCode\": \"159782\",\n  \"institutionSymbol\": \"OCWMS\",\n  \"success\": true,\n  \"message\": \"Unset Holdings Succeeded.\",\n  \"action\": \"Unset Holdings\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d63714af-8af8-4c98-af50-e6b0a540ffcf",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"BAD_REQUEST\",\n  \"title\": \"Invalid value.\",\n  \"detail\": \"A request with a non-boolean value was attempted: test\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79157a1d-565e-4ac8-98fd-238843e27b99",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a7602ee9-bd3b-48df-88d1-09d0f62e719f",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2d83425-1451-42d8-a43c-b629ad46988c",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2d386a27-c458-4867-8ff3-1e9179b3c064",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec2d1378-44d1-43ef-8066-c87be238e893",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    ":oclcNumber",
+                    "unset"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "cascadeDelete",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<long>",
+                      "key": "oclcNumber",
+                      "description": "(Required) The Identifier is the OCLC Number."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "14d49d4b-986c-4fec-ab9c-654f4f997761",
+          "name": "Move a holding from one Bibliographic record to another.",
+          "request": {
+            "name": "Move a holding from one Bibliographic record to another.",
+            "description": {
+              "content": "Given source and target OCLC numbers, move the holdings from the source to the target.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution",
+                "holdings",
+                "move"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"sourceOclcNumber\": \"<string>\",\n  \"targetOclcNumber\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d38c2039-4e86-41bb-b000-104280aa47bb",
+              "name": "The Holding Codes were retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceOclcNumber\": \"1\",\n  \"targetOclcNumber\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"sourceControlNumber\": \"1\"\n  },\n  {\n    \"requestedSourceControlNumber\": \"1\"\n  },\n  {\n    \"targetControlNumber\": \"2\"\n  },\n  {\n    \"requestedTargetControlNumber\": \"2\"\n  },\n  {\n    \"success\": true\n  },\n  {\n    \"message\": \"Successfully set holding and moved local bibliographic data (LBD) to bibliographic record {target OCN}.\"\n  },\n  {\n    \"action\": \"Move Holdings\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "24f416b2-7efb-4793-b095-c432d45f67bb",
+              "name": "Bad request. The request was unacceptable.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceOclcNumber\": \"1\",\n  \"targetOclcNumber\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"type\": \"BAD_REQUEST\"\n  },\n  {\n    \"title\": \"Source OCLC number invalid\"\n  },\n  {\n    \"detail\": \"A non-numeric source OCLC number was provided\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3521246-012c-44b4-863c-2d0f3bfca440",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceOclcNumber\": \"1\",\n  \"targetOclcNumber\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbec0b83-5639-42d0-8a8b-b5dd77762e7d",
+              "name": "Conflict. The request could not be completed due to a conflict with the current state of the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holdings",
+                    "move"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"sourceOclcNumber\": \"1\",\n  \"targetOclcNumber\": null\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"type\": \"CONFLICT\"\n  },\n  {\n    \"title\": \"Source OCLC number not found.\"\n  },\n  {\n    \"detail\": \"Unable to find the provided source OCLC number.\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "d5969903-1562-41d7-a30b-bb867c9aeba3",
+          "name": "Retrieve Holding Codes",
+          "request": {
+            "name": "Retrieve Holding Codes",
+            "description": {
+              "content": "Retrieve all the Holding Codes associated with the authenticated institution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution",
+                "holding-codes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "3bc24566-5532-45db-9abe-afd2006ab18d",
+              "name": "The Holding Codes were retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holding-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"holdingLibraryCodes\": [\n    {\n      \"code\": \"ABCL\",\n      \"name\": \"Engineering Library\"\n    },\n    {\n      \"code\": \"DEFJ\",\n      \"name\": \"Auxilliary Storage\"\n    },\n    {\n      \"code\": \"GHIO\",\n      \"name\": \"Music Library\"\n    },\n    {\n      \"code\": \"JKLU\",\n      \"name\": \"Drama Library\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f2103107-eb04-45bd-bb8d-54267418732b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holding-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3d4f3250-013d-44c6-9bc0-e38343cdcf00",
+              "name": "Forbidden URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holding-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"'tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq' not a valid key=value pair (missing equal-sign) in Authorization header: 'Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de52edc3-c0a9-4ac9-9a08-faf19af6432c",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holding-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_FOUND\",\n  \"title\": \"Resource Not Found\",\n  \"detail\": \"The specified resource was not found at this address.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "014661e7-8294-4b75-993a-49b371345358",
+              "name": "Accept Header Media Type is not Supported.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holding-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Invalid 'Accept' header.\",\n  \"detail\": \"A request with an invalid 'Accept' header was attempted: ....\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "371f6aea-c744-476b-8e59-41ddbedd9e4d",
+              "name": "Something went wrong (hopefully rare) - please try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution",
+                    "holding-codes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_SERVER_ERROR\",\n  \"title\": \"string\",\n  \"detail\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2d72c643-5924-4005-8ce9-63415614475c",
+          "name": "Retrieve branch holding codes and shelving locations",
+          "request": {
+            "name": "Retrieve branch holding codes and shelving locations",
+            "description": {
+              "content": "Retrieve branch holding codes or shelving locations within a branch associated with an authenticated institution.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "manage",
+                "institution-config",
+                "branch-shelving-locations"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeShelvingLocations",
+                  "value": "false",
+                  "description": "whether or not to include shelving location information in the response"
+                },
+                {
+                  "disabled": false,
+                  "key": "branchLocationLimit",
+                  "value": "<integer>",
+                  "description": "branch identifier (registryId) to limit results to"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "50986e29-2f61-40c0-a7bc-ae19560258d0",
+              "name": "Find basic configuration for a specified library",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution-config",
+                    "branch-shelving-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeShelvingLocations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "branchLocationLimit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"91475\",\n  \"institutionNumber\": \"59357\",\n  \"institutionName\": \"OCLC Library\",\n  \"oclcSymbol\": \"OCWMS\",\n  \"branchLocations\": [\n    {\n      \"branchLocationId\": \"125573\",\n      \"branchLocationNumber\": \"33484\",\n      \"branchLocationName\": \"OCLC Library South Branch\"\n    },\n    {\n      \"branchLocationId\": \"125569\",\n      \"branchLocationNumber\": \"33481\",\n      \"branchLocationName\": \"OCLC Library Main Branch\"\n    },\n    {\n      \"branchLocationId\": \"125571\",\n      \"branchLocationNumber\": \"33482\",\n      \"branchLocationName\": \"OCLC Library West Branch\"\n    },\n    {\n      \"branchLocationId\": \"125572\",\n      \"branchLocationNumber\": \"33483\",\n      \"branchLocationName\": \"OCLC Library North Branch OCLC Library North Branch\"\n    },\n    {\n      \"branchLocationId\": \"125575\",\n      \"branchLocationNumber\": \"33485\",\n      \"branchLocationName\": \"OCLC Library East Branch\"\n    },\n    {\n      \"branchLocationId\": \"130456\",\n      \"branchLocationNumber\": \"33486\",\n      \"branchLocationName\": \"OCLC Library Central Branch\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8916d815-75b7-494c-b416-f75cb273cb90",
+              "name": "Bad request. The request was unacceptable, often due to missing required or invalid/unsupported parameter(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution-config",
+                    "branch-shelving-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeShelvingLocations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "branchLocationLimit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"An identifier parameter is required - but only one is permitted: oclcSymbol, registryId or IpAddress\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ee6c70a-95a5-42a8-b566-d6352b7cf970",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution-config",
+                    "branch-shelving-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeShelvingLocations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "branchLocationLimit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87d085d5-a5ae-4379-ae3b-88688ebdd6e2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution-config",
+                    "branch-shelving-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeShelvingLocations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "branchLocationLimit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c7a333b-7558-4ba0-b0b0-4b73113ddec8",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution-config",
+                    "branch-shelving-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeShelvingLocations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "branchLocationLimit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "229e1bca-4ac8-4683-970a-82891f7bcda2",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution-config",
+                    "branch-shelving-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeShelvingLocations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "branchLocationLimit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a175a7d6-0a06-4433-aef4-7a4db076997b",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "manage",
+                    "institution-config",
+                    "branch-shelving-locations"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeShelvingLocations",
+                      "value": "false"
+                    },
+                    {
+                      "key": "branchLocationLimit",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/MISSING_ELEMENT\",\n  \"title\": \"string\",\n  \"instance\": \"http://VyOGpZUBJKvozIqtzzsxPftupDkdBctGV.tnMJc-yXKoeSxQmSETViGgkMKi7If.ucOQPRoDGB.h3M1RTB8KKd8wIhzVpug8OJNR\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e3c36369-d2ef-4a9e-8eb5-5d0b6e4d7d62",
+          "name": "Fetch Identifiers for an Institution",
+          "request": {
+            "name": "Fetch Identifiers for an Institution",
+            "description": {
+              "content": "Fetch Identifiers for an Institution",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "worldcat",
+                "search",
+                "institution"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "registryIds",
+                  "value": "<integer>,<integer>",
+                  "description": "Comma seperated list of registryIds to retrieve"
+                },
+                {
+                  "disabled": false,
+                  "key": "oclcSymbols",
+                  "value": "<string>,<string>",
+                  "description": "Comma seperated list of oclc symbols to retrieve"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "b4a1ab42-1e7f-4be5-9931-6f2e1106d6af",
+              "name": "Find basic configuration for a specified library",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "institution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "registryIds",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "oclcSymbols",
+                      "value": "TXH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"id\": \"91475\",\n  \"institutionNumber\": \"59357\",\n  \"institutionName\": \"OCLC Library\",\n  \"oclcSymbol\": \"OCWMS\",\n  \"branchLocations\": [\n    {\n      \"branchLocationId\": \"125573\",\n      \"branchLocationNumber\": \"33484\",\n      \"branchLocationName\": \"OCLC Library South Branch\"\n    },\n    {\n      \"branchLocationId\": \"125569\",\n      \"branchLocationNumber\": \"33481\",\n      \"branchLocationName\": \"OCLC Library Main Branch\"\n    },\n    {\n      \"branchLocationId\": \"125571\",\n      \"branchLocationNumber\": \"33482\",\n      \"branchLocationName\": \"OCLC Library West Branch\"\n    },\n    {\n      \"branchLocationId\": \"125572\",\n      \"branchLocationNumber\": \"33483\",\n      \"branchLocationName\": \"OCLC Library North Branch OCLC Library North Branch\"\n    },\n    {\n      \"branchLocationId\": \"125575\",\n      \"branchLocationNumber\": \"33485\",\n      \"branchLocationName\": \"OCLC Library East Branch\"\n    },\n    {\n      \"branchLocationId\": \"130456\",\n      \"branchLocationNumber\": \"33486\",\n      \"branchLocationName\": \"OCLC Library Central Branch\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7dc9f327-4b3b-4305-8faa-6637b6662cf8",
+              "name": "Bad request. The request was unacceptable, often due to missing required or invalid/unsupported parameter(s)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "institution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "registryIds",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "oclcSymbols",
+                      "value": "TXH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INVALID_QUERY_PARAMETER_VALUE\",\n  \"title\": \"Validation Failure\",\n  \"detail\": \"An identifier parameter is required - but only one is permitted: oclcSymbol, registryId or IpAddress\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9c3eb959-16f7-4e92-bf39-faee56905759",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "institution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "registryIds",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "oclcSymbols",
+                      "value": "TXH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2fcff7b8-e726-415d-a817-cec0f4f35902",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "institution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "registryIds",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "oclcSymbols",
+                      "value": "TXH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e8a3ef1-585f-43ab-b7c1-9ff9e59c4699",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "institution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "registryIds",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "oclcSymbols",
+                      "value": "TXH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"title\": \"NOT_ALLOWED\",\n  \"detail\": \"POST method not allowed\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2978512c-49ee-4d16-b405-36910b10771e",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "institution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "registryIds",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "oclcSymbols",
+                      "value": "TXH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/NOT_ACCEPTABLE\",\n  \"title\": \"\",\n  \"detail\": \"Media type application/xml not supported. Supported media types: application/json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d43be5c7-c54a-47a3-a9e9-96bb984beae4",
+              "name": "Something went wrong (hopfully rare) - please try again",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "worldcat",
+                    "search",
+                    "institution"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "registryIds",
+                      "value": "128807"
+                    },
+                    {
+                      "key": "oclcSymbols",
+                      "value": "TXH"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "disabled": false,
+                    "description": "Content Type the client supports and is requesting (application/json currently supported)",
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE\",\n  \"title\": \"string\",\n  \"instance\": \"https://dFIiFCteHILuEpolQcfUGwFDfCDvYqU.tyziNdY\",\n  \"detail\": \"string\",\n  \"invalidParams\": [\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    },\n    {\n      \"path\": \"string\",\n      \"name\": \"string\",\n      \"reason\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "e9903fa9-5026-4609-bf67-bd85333cefce",
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Institution API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}

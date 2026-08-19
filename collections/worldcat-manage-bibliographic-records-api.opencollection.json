@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Bibliographic Records API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manage Bibliographic Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Validate a Bibliographic Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/bibs/validate/:validationLevel",
+            "params": [
+              {
+                "name": "validationLevel",
+                "value": "",
+                "type": "path",
+                "description": "Level at which to validate records"
+              }
+            ]
+          },
+          "docs": "Given a Bibliographic record, apply the validation rules that conform to MARC standards."
+        },
+        {
+          "info": {
+            "name": "Retrieve the current OCLC Numbers from WorldCat.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/bibs/current",
+            "params": [
+              {
+                "name": "oclcNumbers",
+                "value": "41266045,1056157740",
+                "type": "query",
+                "description": "One or more OCLC numbers. Separated by comma if providing multiple."
+              }
+            ]
+          },
+          "docs": "Given one or more OCLC Numbers, check WorldCat for those numbers. It will return the most current OCLC Number(s) associated w/ the OCLC Number(s) provided. If an OCLC Number does not exist or is invalid, a result of null is returned for the requested number."
+        },
+        {
+          "info": {
+            "name": "Create a Bibliographic Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/bibs"
+          },
+          "docs": "Given a bibliographic record, create it in WorldCat... if it does not exist."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Bibliographic record",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/bibs/:oclcNumber",
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "41266045",
+                "type": "path",
+                "description": "The OCLC number of the Bibliographic record"
+              }
+            ]
+          },
+          "docs": "Given an OCLC Number, retrieve a Bibliographic record, if it exists in WorldCat."
+        },
+        {
+          "info": {
+            "name": "Replace a Bibliographic record",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/bibs/:oclcNumber",
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "",
+                "type": "path",
+                "description": "The OCLC number associated with the Bibliographic record to be replaced."
+              }
+            ]
+          },
+          "docs": "Given an OCLC Number, replace a Bibliographic record.  If the Bibliographic record does not exist, then a new Bibliographic record will be created."
+        },
+        {
+          "info": {
+            "name": "Match a Bibliographic Record",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/bibs/match"
+          },
+          "docs": "Given a Bibliographic record in textual MARC or MARCXML format, apply OCLC matching rules to provide a single best-matched WorldCat result if possible. Bibliographic input record must contain a minimum of a MARC 008 and a MARC 245 field. In the JSON response, numberOfRecords indicates the potentially matched number of records and briefRecords contains the single best-match as determined by the OCLC matching service."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

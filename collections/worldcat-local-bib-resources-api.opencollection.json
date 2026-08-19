@@ -1,0 +1,80 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Local Bib Resources API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Local Bib Resources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve LBD Resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/my-local-bib-data/:controlNumber",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "588894059",
+                "type": "path",
+                "description": "LBD control number"
+              }
+            ]
+          },
+          "docs": "Retrieve LBD Resource"
+        },
+        {
+          "info": {
+            "name": "Search LBD Resources",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/my-local-bib-data",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "ti: Simon's Cat",
+                "type": "query",
+                "description": "query in the form of a keyword search or fielded search, for example  (au:gazihan OR au:womacka) AND kw:java See - https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Bibliographic_records/Bibliographic_record_indexes/Bibliographic_record_index_lists"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "start position of the bib records to return (0 based), default 0"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "maximum number of records to return, maximum 50, default 10"
+              }
+            ]
+          },
+          "docs": "Search LBD Resources <a href=\"https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Local_bibliographic_data_records/Local_bibliographic_data_record_indexes_A-Z\">Learn more about the indexes available</a>\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

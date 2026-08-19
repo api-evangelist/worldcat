@@ -1,0 +1,134 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Member Enabled Titles API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Enabled Titles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find member enabled titles in the WorldCat Knowledge base",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/rest/entries/search",
+            "params": [
+              {
+                "name": "alt",
+                "value": "",
+                "type": "query",
+                "description": "Format to return results in. application/xml or application/json"
+              },
+              {
+                "name": "q",
+                "value": "Ambient Findability",
+                "type": "query",
+                "description": "Keyword query to search by"
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Search by title"
+              },
+              {
+                "name": "provider_uid",
+                "value": "NPG",
+                "type": "query",
+                "description": "Identifier of the provider associated with the collection"
+              },
+              {
+                "name": "collection_uid",
+                "value": "NPG.journals",
+                "type": "query",
+                "description": "Identifier of the collection"
+              },
+              {
+                "name": "issn",
+                "value": "0028-0836",
+                "type": "query",
+                "description": "ISSN match"
+              },
+              {
+                "name": "isbn",
+                "value": "9780596007652",
+                "type": "query",
+                "description": "ISBN match"
+              },
+              {
+                "name": "oclcnum",
+                "value": "890474283",
+                "type": "query",
+                "description": "OCLC number match"
+              },
+              {
+                "name": "content",
+                "value": "",
+                "type": "query",
+                "description": "Indicator to select records of a specific content type; possible values are fulltext, selectedft, abstracts, indexed, print, and ebook."
+              },
+              {
+                "name": "search-type",
+                "value": "atoz",
+                "type": "query",
+                "description": "Restrict to holdings held by Institutions in requested state"
+              },
+              {
+                "name": "startIndex",
+                "value": "10",
+                "type": "query",
+                "description": "start position of the results to return (1 based), default 1"
+              },
+              {
+                "name": "itemsPerPage",
+                "value": "50",
+                "type": "query",
+                "description": "maximum number of records to return, maximum 50, default 10"
+              },
+              {
+                "name": "orderBy",
+                "value": "relevancy",
+                "type": "query",
+                "description": "Criteria for sorting the results. possible sorting criteria are title, relevancy, holdings, preference, issn, isbn, oclcnum"
+              }
+            ]
+          },
+          "docs": "Given metadata find titles enabled by member library"
+        },
+        {
+          "info": {
+            "name": "Read member enabled Titles in the WorldCat Knowledge base by ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/rest/entries/:entry_uid",
+            "params": [
+              {
+                "name": "alt",
+                "value": "",
+                "type": "query",
+                "description": "Format to return results in. application/xml or application/json"
+              },
+              {
+                "name": "entry_uid",
+                "value": "safari.tech,44119961",
+                "type": "path",
+                "description": "Identifier of the title"
+              }
+            ]
+          },
+          "docs": "Given metadata find titles enabled by member library"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

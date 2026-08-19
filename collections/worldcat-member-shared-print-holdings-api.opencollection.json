@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Member Shared Print Holdings API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Member Shared Print Holdings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Find member shared print holdings for a known item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/v2/bibs-retained-holdings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "41266045",
+                "type": "query",
+                "description": "oclc number of the bibliographic item"
+              },
+              {
+                "name": "isbn",
+                "value": "439136350",
+                "type": "query",
+                "description": "isbn of the bibliographic item (bn index)"
+              },
+              {
+                "name": "issn",
+                "value": "0099-1333",
+                "type": "query",
+                "description": "issn of the bibliographic item (in index)"
+              },
+              {
+                "name": "heldByGroup",
+                "value": "ASRL",
+                "type": "query",
+                "description": "Restrict to holdings held by Group Symbol"
+              },
+              {
+                "name": "heldInState",
+                "value": "US-TX",
+                "type": "query",
+                "description": "Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2."
+              },
+              {
+                "name": "itemType",
+                "value": "",
+                "type": "query",
+                "description": "Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)"
+              },
+              {
+                "name": "itemSubType",
+                "value": "",
+                "type": "query",
+                "description": "Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)"
+              },
+              {
+                "name": "offset",
+                "value": "10",
+                "type": "query",
+                "description": "start position of the bib records to return (0 based), default 0"
+              },
+              {
+                "name": "limit",
+                "value": "50",
+                "type": "query",
+                "description": "maximum number of records to return, maximum 50, default 10"
+              }
+            ]
+          },
+          "docs": "Given a known item, find the member library holdings with a commitment to retain (Shared Print)"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

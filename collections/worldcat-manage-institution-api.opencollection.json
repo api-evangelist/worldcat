@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Institution API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manage Institution",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve the current institution holdings for Bibliographic records from WorldCat.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution/holdings/current",
+            "params": [
+              {
+                "name": "oclcNumbers",
+                "value": "41266045,1056157740",
+                "type": "query",
+                "description": "One or more OCLC numbers. Separated by comma if providing multiple."
+              }
+            ]
+          },
+          "docs": "Given one or more OCLC Numbers (up to 10), check WorldCat for the institution holdings. It will return current institution holdings information associated w/ the OCLC Number(s) provided. If an OCLC Number does not exist or is invalid, a result of null is returned for the current control number."
+        },
+        {
+          "info": {
+            "name": "Set a holding on a Bibliographic record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution/holdings/set"
+          },
+          "docs": "Given a Bibliographic record, unset a holding on the record. Note: ONLY one record is allowed in the request body."
+        },
+        {
+          "info": {
+            "name": "Unset a holding on a Bibliographic record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution/holdings/unset",
+            "params": [
+              {
+                "name": "cascadeDelete",
+                "value": "",
+                "type": "query",
+                "description": "Remove associated Local Bibliographic Data and/or Local Holdings Records when unsetting the holding"
+              }
+            ]
+          },
+          "docs": "Given a Bibliographic record, unset a holding on the record. Note: ONLY one record is allowed in the request body."
+        },
+        {
+          "info": {
+            "name": "Set the holding on a Bibliographic record for an institution by OCLC Number.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution/holdings/:oclcNumber/set",
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "",
+                "type": "path",
+                "description": "The Identifier is the OCLC Number."
+              }
+            ]
+          },
+          "docs": "Given an Identifier (OCLC Number), set the holding on the appropriate Bibliographic record."
+        },
+        {
+          "info": {
+            "name": "Unset the holding on a Bibliographic record for an institution by OCLC Number.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution/holdings/:oclcNumber/unset",
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "",
+                "type": "path",
+                "description": "The Identifier is the OCLC Number."
+              },
+              {
+                "name": "cascadeDelete",
+                "value": "",
+                "type": "query",
+                "description": "Remove associated Local Bibliographic Data and/or Local Holdings Records when unsetting the holding"
+              }
+            ]
+          },
+          "docs": "Given an Identifier (OCLC Number), unset the holding on the appropriate Bibliographic record."
+        },
+        {
+          "info": {
+            "name": "Move a holding from one Bibliographic record to another.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution/holdings/move",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Given source and target OCLC numbers, move the holdings from the source to the target."
+        },
+        {
+          "info": {
+            "name": "Retrieve Holding Codes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution/holding-codes"
+          },
+          "docs": "Retrieve all the Holding Codes associated with the authenticated institution."
+        },
+        {
+          "info": {
+            "name": "Retrieve branch holding codes and shelving locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/institution-config/branch-shelving-locations",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "includeShelvingLocations",
+                "value": "",
+                "type": "query",
+                "description": "whether or not to include shelving location information in the response"
+              },
+              {
+                "name": "branchLocationLimit",
+                "value": "",
+                "type": "query",
+                "description": "branch identifier (registryId) to limit results to"
+              }
+            ]
+          },
+          "docs": "Retrieve branch holding codes or shelving locations within a branch associated with an authenticated institution."
+        },
+        {
+          "info": {
+            "name": "Fetch Identifiers for an Institution",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/institution",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "registryIds",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of registryIds to retrieve"
+              },
+              {
+                "name": "oclcSymbols",
+                "value": "",
+                "type": "query",
+                "description": "Comma seperated list of oclc symbols to retrieve"
+              }
+            ]
+          },
+          "docs": "Fetch Identifiers for an Institution"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

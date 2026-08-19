@@ -1,0 +1,86 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Manage Local Bibliographic Data API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Manage Local Bibliographic Data",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a Local Bibliographic Data record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lbds"
+          },
+          "docs": "Given a Local Bibliographic Data record, create it in WorldCat."
+        },
+        {
+          "info": {
+            "name": "Retrieve a Local Bibliographic Data record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lbds/:controlNumber",
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "906268152",
+                "type": "path",
+                "description": "The Control Number associated with the Local Bibliographic Data record."
+              }
+            ]
+          },
+          "docs": "Given a Control Number, retrieve a Local Bibliographic Data record."
+        },
+        {
+          "info": {
+            "name": "Replace a Local Bibliographic Data record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lbds/:controlNumber",
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "906268152",
+                "type": "path",
+                "description": "The Control Number associated with the Local Bibliographic Data record in WorldCat"
+              }
+            ]
+          },
+          "docs": "Given a Control Number, find the associated Local Bibliographic Data record and replace it. If the Control Number is not found in WorldCat, then the provided Local Bibliographic Data record will be created."
+        },
+        {
+          "info": {
+            "name": "Delete a Local Bibliographic Data record.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://id.oclc.org/worldcat/worldcat/manage/lbds/:controlNumber",
+            "params": [
+              {
+                "name": "controlNumber",
+                "value": "90626815",
+                "type": "path",
+                "description": "The Control Number associated with the Local Bibliographic Data record."
+              }
+            ]
+          },
+          "docs": "Given a Control Number, delete the associated Local Bibliographic Data record."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,248 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "WorldCat Entity Data Bibliographic Resources Search Member General Holdings API",
+    "version": "1.0.6"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search Member General Holdings",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get summary of holdings for a known item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/bibs-summary-holdings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "41266045",
+                "type": "query",
+                "description": "oclc number of the bibliographic item"
+              },
+              {
+                "name": "isbn",
+                "value": "439136350",
+                "type": "query",
+                "description": "isbn of the bibliographic item (bn index)"
+              },
+              {
+                "name": "issn",
+                "value": "0099-1333",
+                "type": "query",
+                "description": "issn of the bibliographic item (in index)"
+              },
+              {
+                "name": "holdingsAllEditions",
+                "value": "",
+                "type": "query",
+                "description": "Get holdings for all editions"
+              },
+              {
+                "name": "holdingsAllVariantRecords",
+                "value": "",
+                "type": "query",
+                "description": "Get holdings for specific edition across variant records"
+              },
+              {
+                "name": "preferredLanguage",
+                "value": "",
+                "type": "query",
+                "description": "language user would prefer metadata description in"
+              },
+              {
+                "name": "holdingsFilterFormat",
+                "value": "",
+                "type": "query",
+                "description": "Get holdings for specific itemSubType"
+              },
+              {
+                "name": "heldInCountry",
+                "value": "US",
+                "type": "query",
+                "description": "Restrict to holdings held by institutions in requested country"
+              },
+              {
+                "name": "heldInState",
+                "value": "US-TX",
+                "type": "query",
+                "description": "Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2."
+              },
+              {
+                "name": "heldByGroup",
+                "value": "ASRL",
+                "type": "query",
+                "description": "Restrict to holdings held by Group Symbol"
+              },
+              {
+                "name": "heldBy",
+                "value": "TXH",
+                "type": "query",
+                "description": "Institution Symbol"
+              },
+              {
+                "name": "heldBySymbol",
+                "value": "",
+                "type": "query",
+                "description": "Institution Symbol"
+              },
+              {
+                "name": "heldByInstitutionID",
+                "value": "",
+                "type": "query",
+                "description": "Institution registryId"
+              },
+              {
+                "name": "heldByLibraryType",
+                "value": "",
+                "type": "query",
+                "description": "Filter holdings to specified library types"
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "latitude"
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "longitude"
+              },
+              {
+                "name": "distance",
+                "value": "10",
+                "type": "query",
+                "description": "distance"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "distance unit"
+              }
+            ]
+          },
+          "docs": "Given a known item, get summary of holdings"
+        },
+        {
+          "info": {
+            "name": "Get summary of holdings for a known item",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://id.oclc.org/worldcat/worldcat/search/summary-holdings",
+            "headers": [
+              {
+                "name": "Accept",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "oclcNumber",
+                "value": "41266045",
+                "type": "query",
+                "description": "oclc number of the bibliographic item"
+              },
+              {
+                "name": "holdingsAllEditions",
+                "value": "",
+                "type": "query",
+                "description": "Get holdings for all editions"
+              },
+              {
+                "name": "holdingsAllVariantRecords",
+                "value": "",
+                "type": "query",
+                "description": "Get holdings for specific edition across variant records"
+              },
+              {
+                "name": "holdingsFilterFormat",
+                "value": "",
+                "type": "query",
+                "description": "Get holdings for specific itemSubType"
+              },
+              {
+                "name": "heldInCountry",
+                "value": "US",
+                "type": "query",
+                "description": "Restrict to holdings held by institutions in requested country"
+              },
+              {
+                "name": "heldInState",
+                "value": "US-TX",
+                "type": "query",
+                "description": "Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2."
+              },
+              {
+                "name": "heldByGroup",
+                "value": "ASRL",
+                "type": "query",
+                "description": "Restrict to holdings held by Group Symbol"
+              },
+              {
+                "name": "heldBySymbol",
+                "value": "",
+                "type": "query",
+                "description": "Institution Symbol"
+              },
+              {
+                "name": "heldByInstitutionID",
+                "value": "",
+                "type": "query",
+                "description": "Institution registryId"
+              },
+              {
+                "name": "heldByLibraryType",
+                "value": "",
+                "type": "query",
+                "description": "Filter holdings to specified library types"
+              },
+              {
+                "name": "lat",
+                "value": "",
+                "type": "query",
+                "description": "latitude"
+              },
+              {
+                "name": "lon",
+                "value": "",
+                "type": "query",
+                "description": "longitude"
+              },
+              {
+                "name": "distance",
+                "value": "10",
+                "type": "query",
+                "description": "distance"
+              },
+              {
+                "name": "unit",
+                "value": "",
+                "type": "query",
+                "description": "distance unit"
+              }
+            ]
+          },
+          "docs": "Given a known item, get summary of holdings"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,682 @@
+{
+  "item": [
+    {
+      "id": "0431703f-1110-47a3-bba7-03b50b94f147",
+      "name": "Retrieve entity",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "111d9fac-d617-4489-aaed-f60687a21353",
+          "name": "Get an entity or entities by IDs",
+          "request": {
+            "name": "Get an entity or entities by IDs",
+            "description": {
+              "content": "Given a known entity ID, or IDs of multiple entities in a comma-separated list, find information about the entity for each identifier provided",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entity",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Singular Entity ID"
+                }
+              ]
+            },
+            "header": [
+              {
+                "disabled": false,
+                "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                "key": "If-None-Match",
+                "value": "<string>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/ld+json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "oauth2",
+              "oauth2": [
+                {
+                  "key": "scope",
+                  "value": "publicEntities:read_brief_entities publicEntities:read_references"
+                },
+                {
+                  "key": "accessTokenUrl",
+                  "value": "https://oauth.oclc.org/token"
+                },
+                {
+                  "key": "grant_type",
+                  "value": "client_credentials"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "f1ba35a5-bedd-4a58-a910-a847622f6d9c",
+              "name": "Client request has succeeded",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/ld+json"
+                }
+              ],
+              "body": "{\n  \"@context\": \"https://id.oclc.org/api/context.json\",\n  \"@id\": \"E39PBJt8mDMYddfbpGdp8bFYfq\",\n  \"type\": [\n    \"Person\",\n    \"Person\"\n  ],\n  \"prefLabel\": {\n    \"az\": \"Fred Kilgur\",\n    \"es\": \"Frederick Kilgour\",\n    \"en\": \"Fred Kilgour\"\n  },\n  \"altLabel\": {\n    \"en\": [\n      \"Frederick Gridley Kilgour\",\n      \"Frederick Gridley Kilgour\"\n    ],\n    \"es\": [\n      \"Fred Kilgour\",\n      \"Fred Kilgour\"\n    ]\n  },\n  \"description\": {\n    \"en\": \"American librarian (1914-2006)\",\n    \"es\": \"bibliotecario estadounidense\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2e949ad1-84f9-4e6e-8870-4983987231be",
+              "name": "The client has performed a conditional GET request and access is allowed, but the document has not been modified.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Modified",
+              "code": 304,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Transmits a variety of cache control directives that typically override default caching algorithms.",
+                  "key": "Cache-Control",
+                  "value": "string"
+                },
+                {
+                  "disabled": false,
+                  "description": "Identifier for a specific version of a resource.",
+                  "key": "ETag",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5cfbf68a-63c0-4f27-b260-bc33d2c183bf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f89d3b6b-9e62-4069-8e23-8baa7d3fade2",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Forbidden\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f3a0d595-2e9e-4e8a-9cf6-40f5a1865a3c",
+              "name": "Failed operation - resource not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"ITEM_NOT_FOUND\",\n  \"title\": \"Item was not found\",\n  \"timestamp\": \"2024-01-01T20:00:39.647Z\",\n  \"detail\": \"Entity ID E39PBJpjdHFcRjmdvjWFr33fb is not found\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd516aac-b914-4850-9583-8b20df22b3b3",
+              "name": "Method not supported, see response Allow header",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Method Not Allowed",
+              "code": 405,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"METHOD_NOT_ALLOWED\",\n  \"title\": \"Method not allowed\",\n  \"timestamp\": \"2024-01-01T20:00:39.647\",\n  \"detail\": \"Request method 'POST' is not supported\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aa23eb7c-10b9-4879-bd01-2c1b8598d969",
+              "name": "Media type not supported",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Acceptable",
+              "code": 406,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"NOT_ACCEPTABLE\",\n  \"title\": \"Not acceptable\",\n  \"timestamp\": \"2020-01-01T20:00:39.647634\",\n  \"detail\": \"Acceptable representations: application/json;charset=UTF-8, application/problem+json\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee0810cf-019b-4115-a733-84bee1b813e2",
+              "name": "Internal server error",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"type\": \"INTERNAL_ERROR\",\n  \"title\": \"Internal error\",\n  \"timestamp\": \"2020-01-01T20:00:39.647634\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "646739fb-031c-4e44-a8c2-867c0bf70ec2",
+              "name": "Bad Gateway",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Singular Entity ID"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Format of response, current support is application/ld+json",
+                    "key": "Accept",
+                    "value": "application/ld+json"
+                  },
+                  {
+                    "disabled": false,
+                    "description": "Makes the request conditional. A client that has one or more entities previously obtained from the resource can verify that none of those entities is current by including a list of their associated entity tags in this header field.",
+                    "key": "If-None-Match",
+                    "value": "\"0e91bff9e85b0e77dc2c53db82519e987\""
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Gateway",
+              "code": 502,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"message\": \"Bad Gateway\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://id.oclc.org/worldcat",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "25a4108e-67c6-4c41-9d0c-e94e40f1b252",
+    "name": "WorldCat Entity Data Bibliographic Resources Retrieve entity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "WorldCat Entity Data",
+      "type": "text/plain"
+    }
+  }
+}
