@@ -52,6 +52,12 @@ apis:
   - E-resources
   - OpenURL
   - Libraries
+  - Subscription
+  tags_raw:
+  - Knowledge Base
+  - E-resources
+  - OpenURL
+  - Libraries
   - Subscriptions
   properties:
   - type: Documentation
