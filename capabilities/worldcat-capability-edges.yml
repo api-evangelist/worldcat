@@ -1,0 +1,147 @@
+slug: worldcat
+provider: WorldCat
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Education
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 14
+edges:
+- tag: Manage Local Holdings Records
+  spec_file: worldcat-manage-local-holdings-records-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.8
+  evidence: POST /worldcat/manage/lhrs  lhr-create  Create a Local Holdings Record; MARCXML
+  reason: CRUD over a library's Local Holdings Records in MARCXML is library cataloguing/collection record-keeping,
+    i.e. library and information resource operations, not generic master data admin.
+- tag: Member General Holdings
+  spec_file: worldcat-member-general-holdings-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.8
+  evidence: find-bib-holdings  Find member holdings for a known item; schemas InstitutionHolding, CallNumber,
+    TextualHoldingsStatement
+  reason: Retrieval of institutional library holdings, call numbers and holdings statements for a bibliographic
+    item is core library collection/holdings operations.
+- tag: Search Bibliographic Resources
+  spec_file: worldcat-search-bibliographic-resources-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.8
+  evidence: search-brief-bibs  Search Brief Bibliographic Resources; get-classifications  Retrieve classification
+    reccomendations
+  reason: Bibliographic search and classification recommendation are library catalogue and information-resource
+    operations.
+- tag: Search Local Holdings Resources
+  spec_file: worldcat-search-local-holdings-resources-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.8
+  evidence: search-lhr  Search LHR Resources; DisplayCallNumber, SublocationCollection
+  reason: Searching and browsing the library's own local holdings records with call numbers and sublocations
+    is library collection/holdings administration.
+- tag: Search Member General Holdings
+  spec_file: worldcat-search-member-general-holdings-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.8
+  evidence: find-holdings  Get summary of holdings for a known item; SummaryOfHoldings
+  reason: Summary holdings lookup across member libraries is library information-resource/holdings operations.
+- tag: Bibliographic Resources
+  spec_file: worldcat-bibliographic-resources-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.75
+  evidence: GET /worldcat/search/v2/bibs  search-bibs  Search Bibliographic Resources; schema BibRecord,
+    CatalogingLanguage
+  reason: Search and retrieval of library bibliographic (catalogue) records across library holdings —
+    this is library catalogue/information-resource operations, the closest and only fitting capability.
+    Some ambiguity as it could be read as generic metadata management.
+- tag: Manage Bibliographic Records
+  spec_file: worldcat-manage-bibliographic-records-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.75
+  evidence: POST /worldcat/manage/bibs  bib-create  Create a Bibliographic Record
+  reason: Create/replace/validate/match of bibliographic catalogue records — cataloguing work of a library
+    information-resource function.
+- tag: Member Shared Print Holdings
+  spec_file: worldcat-member-shared-print-holdings-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.75
+  evidence: find-bib-retained-holdings  Find member shared print holdings for a known item; SharedPrintCommitment
+  reason: Shared print retention commitments are cooperative library collection management, mapped to
+    library and information resource operations.
+- tag: Local Holdings Resources
+  spec_file: worldcat-local-holdings-resources-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.72
+  evidence: GET /worldcat/search/v2/my-holdings  search-lhr  Search LHR Resources; schemas SummaryOfHoldings,
+    ShelvingLocation, SharedPrintCommitment
+  reason: Library holdings records including shelving locations and shared-print commitments — library
+    collection/holdings operations rather than commercial inventory management.
+- tag: Local Bib Resources
+  spec_file: worldcat-local-bib-resources-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.7
+  evidence: GET /worldcat/search/my-local-bib-data  search-lbd  Search LBD Resources
+  reason: Search of an institution's local bibliographic data records — library catalogue operations.
+    Thin operation set, hence moderate confidence.
+- tag: Manage Local Bibliographic Data
+  spec_file: worldcat-manage-local-bibliographic-data-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.7
+  evidence: POST /worldcat/manage/lbds  lbd-create  Create a Local Bibliographic Data record.
+  reason: CRUD over local bibliographic data records (MARCXML) — library cataloguing/collection record
+    maintenance.
+- tag: Member Enabled Collections
+  spec_file: worldcat-member-enabled-collections-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.7
+  evidence: find-kb-collections  Find member enabled collections in the WorldCat Knowledge base
+  reason: Knowledge-base collections represent the e-resource collections a member library has enabled
+    — library collection development and holdings administration.
+- tag: Member Enabled Titles
+  spec_file: worldcat-member-enabled-titles-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.7
+  evidence: find-kb-titles  Find member enabled titles in the WorldCat Knowledge base
+  reason: Search and read of the titles a member library has enabled is library collection/holdings inventory
+    access.
+- tag: Search Member Shared Print Holdings
+  spec_file: worldcat-search-member-shared-print-holdings-api-openapi.yml
+  capability_id: BC-4790.40
+  capability_id_l1: BC-4790
+  capability_name: Library & Information Resource Operations
+  confidence: 0.7
+  evidence: GET /worldcat/search/bibs-retained-holdings — 'Find member shared print holdings for a known
+    item'; schemas SummaryOfHoldings, CallNumber, BibBriefResultSet
+  reason: Operation searches library bibliographic and shared-print holdings records across member libraries,
+    which is library collection / information-resource operations. Mapped to L2 for library resource operations;
+    some ambiguity since this is discovery metadata rather than internal collection development.

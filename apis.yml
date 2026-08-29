@@ -402,6 +402,9 @@ apis:
   - type: Documentation
     url: https://www.oclc.org/developer/api/oclc-apis/worldcat-entities-data.en.html
 common:
+  - type: CapabilityMap
+    url: capabilities/worldcat-capability-edges.yml
+    name: WorldCat Business Capability Map
   - type: AgenticAccess
     url: agentic-access/worldcat-agentic-access.yml
   - type: DomainSecurity
