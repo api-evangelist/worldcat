@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Retrieve entity API
+  title: WorldCat Entity Data Retrieve entity API
   description: WorldCat Entity Data
 servers:
 - url: https://id.oclc.org/worldcat
@@ -47,7 +47,56 @@ paths:
       - entity_data_auth:
         - publicEntities:read_brief_entities
 components:
+  examples:
+    internal-error:
+      summary: Unexpected server error
+      value:
+        type: INTERNAL_ERROR
+        title: Internal error
+        timestamp: '2020-01-01T20:00:39.647634'
+    bad-gateway-error:
+      summary: Unexpected server error
+      value:
+        message: Bad Gateway
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    forbidden:
+      summary: Error returned when API credentials not for resource
+      value:
+        message: Forbidden
+    post-not-allowed-error:
+      summary: Error when invalid HTTP method used
+      value:
+        type: METHOD_NOT_ALLOWED
+        title: Method not allowed
+        timestamp: '2024-01-01T20:00:39.647'
+        detail: Request method 'POST' is not supported
+    not-acceptable-error:
+      summary: Error when media type in Accept header not supported
+      value:
+        type: NOT_ACCEPTABLE
+        title: Not acceptable
+        timestamp: '2020-01-01T20:00:39.647634'
+        detail: 'Acceptable representations: application/json;charset=UTF-8, application/problem+json'
+    failed-not-found:
+      summary: Entity is not found
+      value:
+        type: ITEM_NOT_FOUND
+        title: Item was not found
+        timestamp: '2024-01-01T20:00:39.647Z'
+        detail: Entity ID E39PBJpjdHFcRjmdvjWFr33fb is not found
   responses:
+    post-not-supported:
+      description: Method not supported, see response Allow header
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-allowed:
+              $ref: '#/components/examples/post-not-allowed-error'
     bad-gateway-error:
       description: Bad Gateway
       content:
@@ -66,15 +115,6 @@ components:
           examples:
             access-denied-error:
               $ref: '#/components/examples/internal-error'
-    post-not-supported:
-      description: Method not supported, see response Allow header
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-allowed:
-              $ref: '#/components/examples/post-not-allowed-error'
     unauthorized:
       description: Unauthorized
       content:
@@ -91,24 +131,6 @@ components:
           $ref: '#/components/headers/Cache-Control'
         ETag:
           $ref: '#/components/headers/ETag'
-    failed-not-acceptable:
-      description: Media type not supported
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-acceptable-error:
-              $ref: '#/components/examples/not-acceptable-error'
-    failed-not-found:
-      description: Failed operation - resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            failed-not-found-user:
-              $ref: '#/components/examples/failed-not-found'
     forbidden:
       description: Forbidden
       content:
@@ -118,55 +140,24 @@ components:
           examples:
             forbidden:
               $ref: '#/components/examples/forbidden'
-  headers:
-    ETag:
-      schema:
-        type: string
-      description: Identifier for a specific version of a resource.
-    Cache-Control:
-      schema:
-        type: string
-      description: Transmits a variety of cache control directives that typically override default caching algorithms.
-  examples:
-    post-not-allowed-error:
-      summary: Error when invalid HTTP method used
-      value:
-        type: METHOD_NOT_ALLOWED
-        title: Method not allowed
-        timestamp: '2024-01-01T20:00:39.647'
-        detail: Request method 'POST' is not supported
-    internal-error:
-      summary: Unexpected server error
-      value:
-        type: INTERNAL_ERROR
-        title: Internal error
-        timestamp: '2020-01-01T20:00:39.647634'
-    bad-gateway-error:
-      summary: Unexpected server error
-      value:
-        message: Bad Gateway
-    unauthorized:
-      summary: Error returned when valid API credentials not sent or invalid
-      value:
-        message: Unauthorized
-    not-acceptable-error:
-      summary: Error when media type in Accept header not supported
-      value:
-        type: NOT_ACCEPTABLE
-        title: Not acceptable
-        timestamp: '2020-01-01T20:00:39.647634'
-        detail: 'Acceptable representations: application/json;charset=UTF-8, application/problem+json'
-    forbidden:
-      summary: Error returned when API credentials not for resource
-      value:
-        message: Forbidden
     failed-not-found:
-      summary: Entity is not found
-      value:
-        type: ITEM_NOT_FOUND
-        title: Item was not found
-        timestamp: '2024-01-01T20:00:39.647Z'
-        detail: Entity ID E39PBJpjdHFcRjmdvjWFr33fb is not found
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found-user:
+              $ref: '#/components/examples/failed-not-found'
+    failed-not-acceptable:
+      description: Media type not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
   parameters:
     if-none-match:
       name: If-None-Match
@@ -195,6 +186,15 @@ components:
       schema:
         type: string
         example: E39PBJcGmbT4qdMwCHRrCypHG3
+  headers:
+    ETag:
+      schema:
+        type: string
+      description: Identifier for a specific version of a resource.
+    Cache-Control:
+      schema:
+        type: string
+      description: Transmits a variety of cache control directives that typically override default caching algorithms.
   schemas:
     ProblemGateway:
       type: object

@@ -1,11 +1,12 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Member Enabled Collections API
-  description: WorldCat Entity Data
+  description: WorldCat Knowledge base API
+  version: 1.0.0
+  title: WorldCat Knowledge Base Member Enabled Collections API
 servers:
-- url: https://id.oclc.org/worldcat
-  description: PROD
+- url: https://worldcat.org/webservices/kb
+security:
+- api_key: []
 tags:
 - name: Member Enabled Collections
 paths:
@@ -200,6 +201,95 @@ paths:
       security:
       - api_key: []
 components:
+  examples:
+    success-read-collection:
+      summary: successful request to read a collection
+      value:
+        title: Nature Publishing Group
+        id: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
+        updated: '2014-02-15T20:20:12Z'
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
+          rel: self
+        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals.html
+          rel: alternate
+        - href: http://www.nature.com
+          rel: via
+        - href: http://worldcat.org/webservices/kb/export/6569/6569_NPG.journals_kbart.txt
+          rel: enclosure
+          title: kbart file
+          length: 52000
+        provider_uid: NPG
+        provider_name: Nature Publishing Group
+        collection_uid: NPG.journals
+        owner_institution: '6569'
+        source_institution: '6569'
+        collection_status: raw
+        collection_type: browsable
+        title_link_template: '[[localstem]][[url]]'
+        linkscheme: npg
+        uhf_version: release134
+        marcdelivery_no_delete: 'false'
+        google_scholar_enabled: 'true'
+        open: 'true'
+        available_entries: '104'
+        selected_entries: '104'
+        localstem: 'true'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
+    success-search-collection:
+      summary: successful search of collections
+      value:
+        title: 'WorldCat KnowledgeBase Search: Nature'
+        updated: '2019-12-12T16:44:25.434Z'
+        id: urn:uuid:e318046f4275b7e1dcd64e20a4cd13aa
+        author: OCLC
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/collections/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+          rel: self
+        os:totalResults: '1'
+        os:startIndex: '1'
+        os:itemsPerPage: '10'
+        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+        entries:
+        - title: Nature Open Access Content
+          id: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+          updated: '2019-11-26T16:24:16Z'
+          published: '2012-07-24T01:05:53Z'
+          links:
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+            rel: self
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807.html
+            rel: alternate
+          - href: https://www.nature.com
+            rel: via
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess
+            rel: parent
+          - href: http://worldcat.org/webservices/kb/export/128807/128807_NPG.openAccess_kbart.txt
+            rel: enclosure
+            title: kbart file
+            length: 53000
+          provider_uid: NPG
+          provider_name: Nature Publishing Group
+          collection_uid: NPG.openAccess
+          owner_institution: '128807'
+          source_institution: '6569'
+          collection_status: copy
+          collection_type: autoapprove browsable openaccess
+          title_link_template: '[[localstem]][[url]]'
+          linkscheme: npg
+          uhf_version: release1574104235-NPG
+          wcsync_enabled: 'false'
+          marcdelivery_enabled: 'false'
+          marcdelivery_no_delete: 'false'
+          open: 'false'
+          available_entries: '106'
+          selected_entries: '106'
+          localstem: 'true'
   schemas:
     CollectionSearchResults:
       type: object
@@ -328,107 +418,11 @@ components:
           - parent
           - enclosure
           - via
-  examples:
-    success-read-collection:
-      summary: successful request to read a collection
-      value:
-        title: Nature Publishing Group
-        id: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
-        updated: '2014-02-15T20:20:12Z'
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
-          rel: self
-        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals.html
-          rel: alternate
-        - href: http://www.nature.com
-          rel: via
-        - href: http://worldcat.org/webservices/kb/export/6569/6569_NPG.journals_kbart.txt
-          rel: enclosure
-          title: kbart file
-          length: 52000
-        provider_uid: NPG
-        provider_name: Nature Publishing Group
-        collection_uid: NPG.journals
-        owner_institution: '6569'
-        source_institution: '6569'
-        collection_status: raw
-        collection_type: browsable
-        title_link_template: '[[localstem]][[url]]'
-        linkscheme: npg
-        uhf_version: release134
-        marcdelivery_no_delete: 'false'
-        google_scholar_enabled: 'true'
-        open: 'true'
-        available_entries: '104'
-        selected_entries: '104'
-        localstem: 'true'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
-    success-search-collection:
-      summary: successful search of collections
-      value:
-        title: 'WorldCat KnowledgeBase Search: Nature'
-        updated: '2019-12-12T16:44:25.434Z'
-        id: urn:uuid:e318046f4275b7e1dcd64e20a4cd13aa
-        author: OCLC
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/collections/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
-          rel: self
-        os:totalResults: '1'
-        os:startIndex: '1'
-        os:itemsPerPage: '10'
-        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
-        entries:
-        - title: Nature Open Access Content
-          id: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
-          updated: '2019-11-26T16:24:16Z'
-          published: '2012-07-24T01:05:53Z'
-          links:
-          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
-            rel: self
-          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807.html
-            rel: alternate
-          - href: https://www.nature.com
-            rel: via
-          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess
-            rel: parent
-          - href: http://worldcat.org/webservices/kb/export/128807/128807_NPG.openAccess_kbart.txt
-            rel: enclosure
-            title: kbart file
-            length: 53000
-          provider_uid: NPG
-          provider_name: Nature Publishing Group
-          collection_uid: NPG.openAccess
-          owner_institution: '128807'
-          source_institution: '6569'
-          collection_status: copy
-          collection_type: autoapprove browsable openaccess
-          title_link_template: '[[localstem]][[url]]'
-          linkscheme: npg
-          uhf_version: release1574104235-NPG
-          wcsync_enabled: 'false'
-          marcdelivery_enabled: 'false'
-          marcdelivery_no_delete: 'false'
-          open: 'false'
-          available_entries: '106'
-          selected_entries: '106'
-          localstem: 'true'
   securitySchemes:
-    entity_data_auth:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
-        authorizationCode:
-          authorizationUrl: https://oauth.oclc.org/auth
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+    api_key:
+      type: apiKey
+      name: wskey
+      in: query
+externalDocs:
+  description: Find out more about WorldCat Knowledge Base API
+  url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html

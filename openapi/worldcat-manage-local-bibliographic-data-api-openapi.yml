@@ -1,11 +1,14 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Manage Local Bibliographic Data API
-  description: WorldCat Entity Data
+  description: WorldCat Metadata API
+  version: 2.0.0
+  title: WorldCat Metadata Manage Local Bibliographic Data API
 servers:
-- url: https://id.oclc.org/worldcat
+- url: https://metadata.api.oclc.org
   description: PROD
+security:
+- worldcat_metadata_auth:
+  - WorldCatMetadataAPI
 tags:
 - name: Manage Local Bibliographic Data
 paths:
@@ -237,33 +240,9 @@ components:
         detail:
           summary: LBD_HAS_CONTROL_NUMBER
           description: The LBD must lack a control number for adds
-    unauthorized:
-      summary: Error returned when valid API credentials not sent or invalid
-      value:
-        message: Unauthorized
-    lbd-replace-lacks-owning-institution:
-      summary: LBD Lacks Owning Institution.
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the lbd replace operation.
-        detail:
-          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
-          description: The LBD must have an owning institution symbol
-    lbd-create-lacks-owning-institution:
-      summary: LBD Lacks Owning Institution.
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the lbd create operation.
-        detail:
-          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
-          description: The LBD must have an owning institution symbol
-    forbidden:
-      summary: Error returned when API credentials not for resource
-      value:
-        message: Forbidden
-    lbd-marcxml-existing:
+    lbd-marcxml-new:
       summary: LBD MARC XML Record
-      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n"
+      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n"
     lbd-read-not-found:
       summary: LBD Not Found.
       value:
@@ -272,12 +251,36 @@ components:
         detail:
           summary: NOT_FOUND
           description: Not able to find the requested LBD
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    forbidden:
+      summary: Error returned when API credentials not for resource
+      value:
+        message: Forbidden
+    lbd-marcxml-existing:
+      summary: LBD MARC XML Record
+      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n"
     lbd-marc-existing:
       summary: LBD MARC XML Record
       value: "00136n   a2200085   4500001001000000004000500010005001700015935001000032940000800042\\u001E589046562\\u001E3160\\u001E20210910120824.8\\u001E  \\u001FaMyLSN\\u001E  \\u001FaWAU\\u001E\\u001D   \n"
-    lbd-marcxml-new:
-      summary: LBD MARC XML Record
-      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n"
+    lbd-create-lacks-owning-institution:
+      summary: LBD Lacks Owning Institution.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd create operation.
+        detail:
+          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
+          description: The LBD must have an owning institution symbol
+    lbd-replace-lacks-owning-institution:
+      summary: LBD Lacks Owning Institution.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd replace operation.
+        detail:
+          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
+          description: The LBD must have an owning institution symbol
     lbd-marc-new:
       summary: LBD MARC XML Record
       value: '00086n   a2200061   4500004000600000935001000006940000800016\u001E316d0\u001E  \u001FaMyLSN\u001E  \u001FaWAU\u001E\u001D
@@ -298,6 +301,25 @@ components:
       externalDocs:
         description: Learn about the Marc Bibliographic Standard
         url: https://www.loc.gov/standards/marcxml/
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
     Problem:
       type: object
       description: RFC 7807 description of an error.
@@ -327,53 +349,7 @@ components:
                 type: string
               reason:
                 type: string
-    ProblemType:
-      description: A URI reference [RFC3986] that identifies the problem type.
-      type: string
-      format: uri
-      enum:
-      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-      - https://developer.api.oclc.org/errors/NOT_ALLOWED
-      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
-      - https://developer.api.oclc.org/errors/BAD_REQUEST
-      - https://developer.api.oclc.org/errors/NOT_FOUND
-      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
-      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
-      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
-      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
-      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
-      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
   responses:
-    500-internal-server-error:
-      description: Something went wrong (hopefully rare) - please try again.
-      content:
-        application/json:
-          examples:
-            accept-header-unacceptable:
-              summary: Unexpected Error.
-              value:
-                type: INTERNAL_SERVER_ERROR
-                title: string
-                detail: string
-    unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          examples:
-            unauthorized:
-              $ref: '#/components/examples/unauthorized'
-    failed-not-found:
-      description: Failed operation - resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            failed-not-found:
-              $ref: '#/components/examples/failed-not-found'
     406-accept-header-unacceptable:
       description: Accept Header Media Type is not Supported.
       content:
@@ -385,6 +361,24 @@ components:
                 type: NOT_ACCEPTABLE
                 title: Invalid 'Accept' header.
                 detail: 'A request with an invalid ''Accept'' header was attempted: ....'
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          examples:
+            unauthorized:
+              $ref: '#/components/examples/unauthorized'
+    500-internal-server-error:
+      description: Something went wrong (hopefully rare) - please try again.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Unexpected Error.
+              value:
+                type: INTERNAL_SERVER_ERROR
+                title: string
+                detail: string
     forbidden:
       description: Forbidden
       content:
@@ -392,6 +386,15 @@ components:
           examples:
             forbidden:
               $ref: '#/components/examples/forbidden'
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found:
+              $ref: '#/components/examples/failed-not-found'
     403-forbidden-url:
       description: Forbidden URL.
       content:
@@ -402,17 +405,46 @@ components:
               value:
                 message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
   securitySchemes:
-    entity_data_auth:
+    worldcat_metadata_auth:
       type: oauth2
       flows:
         clientCredentials:
           tokenUrl: https://oauth.oclc.org/token
           scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+            WorldCatMetadataAPI:view_brief_bib: view brief bibliographic data
+            WorldCatMetadataAPI:view_bib: view full bibliographic data
+            WorldCatMetadataAPI:view_marc_bib: view marc bibliographic data
+            WorldCatMetadataAPI:match_bibs: match bibliographic records
+            WorldCatMetadataAPI:get_holding_codes: retrieve holding codes
+            WorldCatMetadataAPI:manage_bibs: manage bibliographic data
+            WorldCatMetadataAPI:view_retained_holdings: view holdings which libraries have chosen to retain
+            WorldCatMetadataAPI:view_summary_holdings: view summary information about library holdings
+            WorldCatMetadataAPI:view_my_holdings: view detailed information about the authentication institution's holdings
+            WorldCatMetadataAPI:view_my_holdings_private_notes: view private notes in holdings data
+            WorldCatMetadataAPI:manage_institution_holdings: manage institution holdings
+            WorldCatMetadataAPI:view_my_local_bib_data: view local bibliographic data from the authenticate institution
+            WorldCatMetadataAPI:manage_institution_lbds: manage institution local bibliographic data records
+            WorldCatMetadataAPI:manage_institution_lhrs: manage institution local holdings data records
+            enhMetadataAPI:fieldTransfer: field transfer functionality
         authorizationCode:
           authorizationUrl: https://oauth.oclc.org/auth
           tokenUrl: https://oauth.oclc.org/token
           scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+            WorldCatMetadataAPI:view_brief_bib: view brief bibliographic data
+            WorldCatMetadataAPI:view_bib: view full bibliographic data
+            WorldCatMetadataAPI:view_marc_bib: view marc bibliographic data
+            WorldCatMetadataAPI:match_bibs: match bibliographic records
+            WorldCatMetadataAPI:get_holding_codes: retrieve holding codes
+            WorldCatMetadataAPI:manage_bibs: manage bibliographic data
+            WorldCatMetadataAPI:view_retained_holdings: view holdings which libraries have chosen to retain
+            WorldCatMetadataAPI:view_summary_holdings: view summary information about library holdings
+            WorldCatMetadataAPI:view_my_holdings: view detailed information about the authentication institution's holdings
+            WorldCatMetadataAPI:view_my_holdings_private_notes: view private notes in holdings data
+            WorldCatMetadataAPI:manage_institution_holdings: manage institution holdings
+            WorldCatMetadataAPI:view_my_local_bib_data: view local bibliographic data from the authenticate institution
+            WorldCatMetadataAPI:manage_institution_lbds: manage institution local bibliographic data records
+            WorldCatMetadataAPI:manage_institution_lhrs: manage institution local holdings data records
+            enhMetadataAPI:fieldTransfer: field transfer functionality
+externalDocs:
+  description: Find out more about WorldCatMetadata API
+  url: https://www.oclc.org/developer/develop/web-services/worldcat-metadata-api.en.html

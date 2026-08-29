@@ -1,11 +1,12 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Member Enabled Title by OpenURL API
-  description: WorldCat Entity Data
+  description: WorldCat Knowledge base API
+  version: 1.0.0
+  title: WorldCat Knowledge Base Member Enabled Title by OpenURL API
 servers:
-- url: https://id.oclc.org/worldcat
-  description: PROD
+- url: https://worldcat.org/webservices/kb
+security:
+- api_key: []
 tags:
 - name: Member Enabled Title by OpenURL
 paths:
@@ -252,6 +253,37 @@ paths:
       security:
       - api_key: []
 components:
+  examples:
+    success-openurl-single:
+      summary: successful openurl request
+      value:
+      - coverage: ebook@2005-09-26
+        collection_url: http://my.safaribooksonline.com
+        collection_uid: safari.tech
+        oclcnums: 65183407 61260129 878406930 861529762 847462570 61849699 270992543
+        isbn: '9780596007652'
+        provider_uid: safari
+        source: holdings
+        title: Ambient Findability
+        collection_type: browsable
+        content: ebook
+        url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best
+        institution_id:
+        - '128807'
+        uid: '1883656'
+        bkey: 0596007655
+        publisher: O'Reilly Media, Inc. - O'Reilly Media
+        openaccess: 'no'
+        id: d6edd1064311b081e77051faf19e687e
+        provider_name: Safari Books Online
+        collection_name: Safari Tech Books Online
+        oclcnum: '61849699'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
   schemas:
     Title:
       type: object
@@ -360,49 +392,11 @@ components:
           - parent
           - enclosure
           - via
-  examples:
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
-    success-openurl-single:
-      summary: successful openurl request
-      value:
-      - coverage: ebook@2005-09-26
-        collection_url: http://my.safaribooksonline.com
-        collection_uid: safari.tech
-        oclcnums: 65183407 61260129 878406930 861529762 847462570 61849699 270992543
-        isbn: '9780596007652'
-        provider_uid: safari
-        source: holdings
-        title: Ambient Findability
-        collection_type: browsable
-        content: ebook
-        url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best
-        institution_id:
-        - '128807'
-        uid: '1883656'
-        bkey: 0596007655
-        publisher: O'Reilly Media, Inc. - O'Reilly Media
-        openaccess: 'no'
-        id: d6edd1064311b081e77051faf19e687e
-        provider_name: Safari Books Online
-        collection_name: Safari Tech Books Online
-        oclcnum: '61849699'
   securitySchemes:
-    entity_data_auth:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
-        authorizationCode:
-          authorizationUrl: https://oauth.oclc.org/auth
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+    api_key:
+      type: apiKey
+      name: wskey
+      in: query
+externalDocs:
+  description: Find out more about WorldCat Knowledge Base API
+  url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html

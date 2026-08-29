@@ -1,11 +1,14 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Manage Bibliographic Records API
-  description: WorldCat Entity Data
+  description: WorldCat Metadata API
+  version: 2.0.0
+  title: WorldCat Metadata Manage Bibliographic Records API
 servers:
-- url: https://id.oclc.org/worldcat
+- url: https://metadata.api.oclc.org
   description: PROD
+security:
+- worldcat_metadata_auth:
+  - WorldCatMetadataAPI
 tags:
 - name: Manage Bibliographic Records
 paths:
@@ -377,42 +380,225 @@ paths:
         - WorldCatMetadataAPI:match_bibs
 components:
   schemas:
-    SharedPrintCommitment:
+    MergedOclcNumbers:
+      description: Merged OCLC numbers [v019sa]
+      type: array
+      items:
+        type: string
+    Address:
       type: object
       properties:
-        actionNote:
-          description: Action Note [LHR -> HldDetRec/v583sa]
+        street1:
+          description: Name of street
           type: string
-        materialsSpecified:
-          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
+        street2:
+          description: Name of street 2
           type: string
-        institution:
-          description: Institution to which applies [LHR -> HldDetRec/v583s5]
+        city:
+          description: Name of city
           type: string
-        dateOfAction:
-          description: date of action [LHR -> HldDetRec/v583sc]
+        state:
+          $ref: '#/components/schemas/State'
+        postalCode:
+          $ref: '#/components/schemas/PostalCode'
+        country:
+          $ref: '#/components/schemas/Country'
+        lat:
+          $ref: '#/components/schemas/Latitude'
+        lon:
+          $ref: '#/components/schemas/Longitude'
+    DisplayCallNumber:
+      description: Display call Number [LHR -> v852 |k,h,i,m / |j/ |l]
+      type: string
+    Longitude:
+      description: Longitude
+      type: number
+      format: double
+      example: -122.22702
+    schemas-OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+      example: 61253844
+    ItemLanguage:
+      description: Language of the item [v041sa,j]
+      type: string
+    TextualHoldingsStatement:
+      description: '[866-8 |a]'
+      type: string
+    CreatorString:
+      description: List of creators as single string
+      type: string
+    SummaryOfHoldings:
+      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
+      type: string
+    HoldingDetail:
+      type: object
+      properties:
+        lhrControlNumber:
+          description: LHR Control Number [LHR -> HldDetRec/c001]
           type: string
-        commitmentExpirationDate:
-          description: commitment expiration date [LHR -> HldDetRec/v583sd]
+        lhrDateEntered:
+          description: LHR Date Entered [LHR -> HldDetRec/Admin/CreateDate]
           type: string
-        authorization:
-          description: Authorization [LHR -> HldDetRec/v583sf]
+        lhrLastUpdated:
+          description: LHR Date Last Used [LHR -> HldDetRec/Admin/ReplacedDate]
           type: string
-        methodOfAction:
-          description: Method of Action [LHR -> HldDetRec/v583si]
+        oclcNumber:
+          description: OCLC Number [LHR -> HldDetRec/c004]
           type: string
-        siteOfAction:
-          description: Site of Action [LHR -> HldDetRec/v583sj]
+        format:
+          description: material format [LHR -> HldDetRec/c007]
           type: string
-        status:
-          description: Status [LHR -> HldDetRec/v583sl]
+        location:
+          $ref: '#/components/schemas/HoldingLocation'
+        copyNumber:
+          description: copy number [LHR -> HldDetRec/v852st]
           type: string
-        uri:
-          description: URI [LHR -> HldDetRec/v583su]
+        callNumber:
+          $ref: '#/components/schemas/CallNumber'
+        lendingPolicy:
+          description: local lending policy [LHR -> HldDetRec/Admin/Lend]
           type: string
-        publicNote:
-          description: Public Note [LHR -> HldDetRec/v583sz]
+        hasSharedPrintCommitment:
+          $ref: '#/components/schemas/HasSharedPrintCommitment'
+        sharedPrintCommitments:
+          description: shared print details [LHR -> HldDetRec/v583]
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedPrintCommitment'
+        summary:
+          description: summary statement [LHR -> HldSummRec/v966sa]
           type: string
+        holdingParts:
+          description: Textual Holding [LHR -> HldDetRec/v866,v867,v868] Item Information Holding [LHR -> HldDetRec/v876,v877,v878] Enumeration Chronology Holding [LHR -> HldDetRec/v863,v864,v865]
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingPart'
+      required:
+      - lhrControlNumber
+      - lhrDateEntered
+      - lhrLastUpdated
+      - oclcNumber
+      - format
+      - lendingPolicy
+      - hasSharedPrintCommitment
+    SublocationCollection:
+      description: Sublocation or collection [LHR -> v852sb]
+      type: string
+    CallNumber:
+      description: Local call number [LHR -> v852sh,i,j,k,l,m]
+      type: object
+      properties:
+        displayCallNumber:
+          $ref: '#/components/schemas/DisplayCallNumber'
+        classificationPart:
+          description: LHR -> v852sh
+          type: string
+        itemParts:
+          description: LHR -> v852si
+          type: array
+          items:
+            type: string
+        shelvingControlNumber:
+          description: LHR -> v852sj
+          type: string
+        prefixes:
+          description: LHR -> v852sk
+          type: array
+          items:
+            type: string
+        shelvingForm:
+          description: LHR -> v852sl
+          type: string
+        suffixes:
+          description: LHR -> v852sm
+          type: array
+          items:
+            type: string
+        shelvingScheme:
+          description: Shelving scheme based on 852 field 1st indicator [LHR -> v852 ind1]
+          type: string
+          enum:
+          - Library of Congress classification
+          - Dewey Decimal classification
+          - National Library of Medicine classification
+          - Superintendent of Documents classification
+          - Shelving control number
+          - Title
+          - Shelved separately
+          - Other scheme
+        privateNotes:
+          description: Private notes from 852$x field [LHR -> v852sx]
+          type: array
+          items:
+            type: string
+    GeneralFormat:
+      description: General Format Type [Admin/OCLCDef/StdRT]
+      type: string
+      enum:
+      - Archv
+      - ArtChapter
+      - AudioBook
+      - Book
+      - CompFile
+      - Encyc
+      - Game
+      - Image
+      - IntMM
+      - Jrnl
+      - Kit
+      - Map
+      - MsScr
+      - Music
+      - News
+      - Object
+      - Snd
+      - Toy
+      - Video
+      - Vis
+      - Web
+    Country:
+      description: Two-character Country Code, per ISO 3166.
+      type: string
+    detailedHoldings:
+      type: array
+      items:
+        $ref: '#/components/schemas/HoldingDetail'
+    BibMatchResult:
+      type: object
+      properties:
+        numberOfRecords:
+          type: integer
+          format: int32
+        briefRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/BibRecordBrief'
+    briefHoldings:
+      type: array
+      items:
+        $ref: '#/components/schemas/HoldingBrief'
+    OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+    HoldingRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+    State:
+      description: Name of the State/Province, per ISO 3166-2.
+      type: string
+    PieceDesignation:
+      description: Piece Designation [852/863-865/866-868/876-878 |p]
+      type: string
+    SimpleTitle:
+      description: Linked [v880sa,b] if present or [v245sa,b]
+      type: string
     HoldingPart:
       type: object
       properties:
@@ -471,104 +657,12 @@ components:
           type: array
           items:
             type: string
-    PostalCode:
-      description: Postal Code
+    CatalogingLanguage:
+      description: Language record was cataloged in [v040sb]
       type: string
-    DisplayCallNumber:
-      description: Display call Number [LHR -> v852 |k,h,i,m / |j/ |l]
-      type: string
-    SpecificFormat:
-      description: Specific Format Type [Admin/OCLCDef/StdRT2]
-      type: string
-      enum:
-      - 2D
-      - Artcl
-      - Bluray
-      - Braille
-      - Cassette
-      - CD
-      - Chptr
-      - Continuing
-      - Digital
-      - DVD
-      - Encyc
-      - Film
-      - LargePrint
-      - LP
-      - Mic
-      - mss
-      - PrintBook
-      - rec
-      - Thsis
-      - VHS
-    TotalEditions:
-      description: Total number of editions in the workgroup
+    RegistryId:
+      description: The identifier in the WorldCat Registry for the institution
       type: integer
-      format: int32
-    HoldingDetail:
-      type: object
-      properties:
-        lhrControlNumber:
-          description: LHR Control Number [LHR -> HldDetRec/c001]
-          type: string
-        lhrDateEntered:
-          description: LHR Date Entered [LHR -> HldDetRec/Admin/CreateDate]
-          type: string
-        lhrLastUpdated:
-          description: LHR Date Last Used [LHR -> HldDetRec/Admin/ReplacedDate]
-          type: string
-        oclcNumber:
-          description: OCLC Number [LHR -> HldDetRec/c004]
-          type: string
-        format:
-          description: material format [LHR -> HldDetRec/c007]
-          type: string
-        location:
-          $ref: '#/components/schemas/HoldingLocation'
-        copyNumber:
-          description: copy number [LHR -> HldDetRec/v852st]
-          type: string
-        callNumber:
-          $ref: '#/components/schemas/CallNumber'
-        lendingPolicy:
-          description: local lending policy [LHR -> HldDetRec/Admin/Lend]
-          type: string
-        hasSharedPrintCommitment:
-          $ref: '#/components/schemas/HasSharedPrintCommitment'
-        sharedPrintCommitments:
-          description: shared print details [LHR -> HldDetRec/v583]
-          type: array
-          items:
-            $ref: '#/components/schemas/SharedPrintCommitment'
-        summary:
-          description: summary statement [LHR -> HldSummRec/v966sa]
-          type: string
-        holdingParts:
-          description: Textual Holding [LHR -> HldDetRec/v866,v867,v868] Item Information Holding [LHR -> HldDetRec/v876,v877,v878] Enumeration Chronology Holding [LHR -> HldDetRec/v863,v864,v865]
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingPart'
-      required:
-      - lhrControlNumber
-      - lhrDateEntered
-      - lhrLastUpdated
-      - oclcNumber
-      - format
-      - lendingPolicy
-      - hasSharedPrintCommitment
-    schemas-OclcNumber:
-      description: the oclc number of a given bibliographic record
-      type: integer
-      format: int64
-      example: 61253844
-    MergedOclcNumbers:
-      description: Merged OCLC numbers [v019sa]
-      type: array
-      items:
-        type: string
-    SublocationCollection:
-      description: Sublocation or collection [LHR -> v852sb]
-      type: string
     CatalogingInfo:
       type: object
       properties:
@@ -583,21 +677,77 @@ components:
         levelOfCataloging:
           description: Level of cataloging [LDR position 5]
           type: string
-    PieceDesignation:
-      description: Piece Designation [852/863-865/866-868/876-878 |p]
-      type: string
-    briefHoldings:
+    Isbns:
+      description: International Standard Book Number [v020sa]
       type: array
       items:
-        $ref: '#/components/schemas/HoldingBrief'
-    Longitude:
-      description: Longitude
-      type: number
-      format: double
-      example: -122.22702
-    Country:
-      description: Two-character Country Code, per ISO 3166.
+        type: string
+    MARCXML:
+      description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
+      type: object
+      xml:
+        name: record
+      externalDocs:
+        description: Learn about the Marc Bibliographic Standard
+        url: https://www.loc.gov/standards/marcxml/
+    HoldingLocation:
+      description: Local holding location [LHR -> v852sa,b,c]
+      type: object
+      properties:
+        holdingLocation:
+          description: Institution Symbol [LHR -> v852sa]
+          type: string
+        sublocationCollection:
+          $ref: '#/components/schemas/SublocationCollection'
+        shelvingLocation:
+          $ref: '#/components/schemas/ShelvingLocation'
+    Issn:
+      description: International Standard Serial Number [v022sal v700,v710,v711,v773,v776,v777,v780,v785 - sx]
       type: string
+    CaptionValuePair:
+      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
+      type: object
+      properties:
+        caption:
+          type: string
+        value:
+          type: string
+    SharedPrintCommitment:
+      type: object
+      properties:
+        actionNote:
+          description: Action Note [LHR -> HldDetRec/v583sa]
+          type: string
+        materialsSpecified:
+          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
+          type: string
+        institution:
+          description: Institution to which applies [LHR -> HldDetRec/v583s5]
+          type: string
+        dateOfAction:
+          description: date of action [LHR -> HldDetRec/v583sc]
+          type: string
+        commitmentExpirationDate:
+          description: commitment expiration date [LHR -> HldDetRec/v583sd]
+          type: string
+        authorization:
+          description: Authorization [LHR -> HldDetRec/v583sf]
+          type: string
+        methodOfAction:
+          description: Method of Action [LHR -> HldDetRec/v583si]
+          type: string
+        siteOfAction:
+          description: Site of Action [LHR -> HldDetRec/v583sj]
+          type: string
+        status:
+          description: Status [LHR -> HldDetRec/v583sl]
+          type: string
+        uri:
+          description: URI [LHR -> HldDetRec/v583su]
+          type: string
+        publicNote:
+          description: Public Note [LHR -> HldDetRec/v583sz]
+          type: string
     InstitutionType:
       description: The type of institution
       enum:
@@ -611,119 +761,6 @@ components:
       - LAW
       - MUSIC
       - LIBRARY_NETWORK_GROUP
-      type: string
-    MARCXML:
-      description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
-      type: object
-      xml:
-        name: record
-      externalDocs:
-        description: Learn about the Marc Bibliographic Standard
-        url: https://www.loc.gov/standards/marcxml/
-    InstitutionHolding:
-      type: object
-      properties:
-        totalHoldingCount:
-          description: Number of holdings for this item [Holdings/TotalLibCount || FRBRHoldings/B]
-          type: integer
-          format: int32
-        totalWorksHoldingCount:
-          description: Number of holdings in the workset [FRBRHoldings/B]
-          type: integer
-          format: int32
-        totalEditions:
-          $ref: '#/components/schemas/TotalEditions'
-      oneOf:
-      - $ref: '#/components/schemas/briefHoldings'
-      - $ref: '#/components/schemas/detailedHoldings'
-    State:
-      description: Name of the State/Province, per ISO 3166-2.
-      type: string
-    OclcNumber:
-      description: the oclc number of a given bibliographic record
-      type: integer
-      format: int64
-    Date:
-      description: machine readable date 008
-      type: string
-    Problem:
-      type: object
-      description: RFC 7807 description of an error.
-      properties:
-        type:
-          $ref: '#/components/schemas/ProblemType'
-        title:
-          description: A short, human-readable summary of the problem type.
-          type: string
-        instance:
-          description: A URI reference that identifies the specific occurrence of the problem.
-          type: string
-          format: uri
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.,
-          type: string
-        invalidParams:
-          description: An array of validation errors.
-          type: array
-          items:
-            description: The validation error descriptor.
-            type: object
-            properties:
-              path:
-                type: string
-              name:
-                type: string
-              reason:
-                type: string
-    Address:
-      type: object
-      properties:
-        street1:
-          description: Name of street
-          type: string
-        street2:
-          description: Name of street 2
-          type: string
-        city:
-          description: Name of city
-          type: string
-        state:
-          $ref: '#/components/schemas/State'
-        postalCode:
-          $ref: '#/components/schemas/PostalCode'
-        country:
-          $ref: '#/components/schemas/Country'
-        lat:
-          $ref: '#/components/schemas/Latitude'
-        lon:
-          $ref: '#/components/schemas/Longitude'
-    GeneralFormat:
-      description: General Format Type [Admin/OCLCDef/StdRT]
-      type: string
-      enum:
-      - Archv
-      - ArtChapter
-      - AudioBook
-      - Book
-      - CompFile
-      - Encyc
-      - Game
-      - Image
-      - IntMM
-      - Jrnl
-      - Kit
-      - Map
-      - MsScr
-      - Music
-      - News
-      - Object
-      - Snd
-      - Toy
-      - Video
-      - Vis
-      - Web
-    SimpleTitle:
-      description: Linked [v880sa,b] if present or [v245sa,b]
       type: string
     ProblemType:
       description: A URI reference [RFC3986] that identifies the problem type.
@@ -744,183 +781,6 @@ components:
       - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
       - https://developer.api.oclc.org/errors/MISSING_ELEMENT
       - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
-    CallNumber:
-      description: Local call number [LHR -> v852sh,i,j,k,l,m]
-      type: object
-      properties:
-        displayCallNumber:
-          $ref: '#/components/schemas/DisplayCallNumber'
-        classificationPart:
-          description: LHR -> v852sh
-          type: string
-        itemParts:
-          description: LHR -> v852si
-          type: array
-          items:
-            type: string
-        shelvingControlNumber:
-          description: LHR -> v852sj
-          type: string
-        prefixes:
-          description: LHR -> v852sk
-          type: array
-          items:
-            type: string
-        shelvingForm:
-          description: LHR -> v852sl
-          type: string
-        suffixes:
-          description: LHR -> v852sm
-          type: array
-          items:
-            type: string
-        shelvingScheme:
-          description: Shelving scheme based on 852 field 1st indicator [LHR -> v852 ind1]
-          type: string
-          enum:
-          - Library of Congress classification
-          - Dewey Decimal classification
-          - National Library of Medicine classification
-          - Superintendent of Documents classification
-          - Shelving control number
-          - Title
-          - Shelved separately
-          - Other scheme
-        privateNotes:
-          description: Private notes from 852$x field [LHR -> v852sx]
-          type: array
-          items:
-            type: string
-    Isbns:
-      description: International Standard Book Number [v020sa]
-      type: array
-      items:
-        type: string
-    RegistryId:
-      description: The identifier in the WorldCat Registry for the institution
-      type: integer
-    SummaryOfHoldings:
-      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
-      type: string
-    HasSharedPrintCommitment:
-      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
-      type: string
-      enum:
-      - Y
-      - N
-    HoldingLocation:
-      description: Local holding location [LHR -> v852sa,b,c]
-      type: object
-      properties:
-        holdingLocation:
-          description: Institution Symbol [LHR -> v852sa]
-          type: string
-        sublocationCollection:
-          $ref: '#/components/schemas/SublocationCollection'
-        shelvingLocation:
-          $ref: '#/components/schemas/ShelvingLocation'
-    BibMatchResult:
-      type: object
-      properties:
-        numberOfRecords:
-          type: integer
-          format: int32
-        briefRecords:
-          type: array
-          items:
-            $ref: '#/components/schemas/BibRecordBrief'
-    Issn:
-      description: International Standard Serial Number [v022sal v700,v710,v711,v773,v776,v777,v780,v785 - sx]
-      type: string
-    Issns:
-      description: International Standard Serial Numbers
-      type: array
-      items:
-        $ref: '#/components/schemas/Issn'
-    TextualHoldingsStatement:
-      description: '[866-8 |a]'
-      type: string
-    CatalogingLanguage:
-      description: Language record was cataloged in [v040sb]
-      type: string
-    detailedHoldings:
-      type: array
-      items:
-        $ref: '#/components/schemas/HoldingDetail'
-    BibRecordBrief:
-      type: object
-      properties:
-        oclcNumber:
-          $ref: '#/components/schemas/OclcNumber'
-        title:
-          $ref: '#/components/schemas/SimpleTitle'
-        creator:
-          $ref: '#/components/schemas/CreatorString'
-        date:
-          $ref: '#/components/schemas/Date'
-        language:
-          $ref: '#/components/schemas/ItemLanguage'
-        generalFormat:
-          $ref: '#/components/schemas/GeneralFormat'
-        specificFormat:
-          $ref: '#/components/schemas/SpecificFormat'
-        edition:
-          $ref: '#/components/schemas/EditionStatement'
-        publisher:
-          type: string
-        isbns:
-          $ref: '#/components/schemas/Isbns'
-        issns:
-          $ref: '#/components/schemas/Issns'
-        mergedOclcNumbers:
-          $ref: '#/components/schemas/MergedOclcNumbers'
-        catalogingInfo:
-          $ref: '#/components/schemas/CatalogingInfo'
-        institutionHolding:
-          $ref: '#/components/schemas/InstitutionHolding'
-      required:
-      - oclcNumber
-      - title
-      - creator
-      - date
-      - language
-      - edition
-      - publisher
-    Latitude:
-      description: Latitude
-      type: number
-      format: double
-      example: 37.502508
-    ItemLanguage:
-      description: Language of the item [v041sa,j]
-      type: string
-    HoldingRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    MaterialSpecified:
-      description: '[876-8 |3]'
-      type: string
-    EditionStatement:
-      description: Edition Statement [v250sa]
-      type: string
-    CreatorString:
-      description: List of creators as single string
-      type: string
-    ShelvingLocation:
-      description: Shelving location [LHR -> v852sc]
-      type: string
-    CaptionValuePair:
-      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
-      type: object
-      properties:
-        caption:
-          type: string
-        value:
-          type: string
     HoldingBrief:
       type: object
       properties:
@@ -967,15 +827,209 @@ components:
           enum:
           - Y
           - N
+    Latitude:
+      description: Latitude
+      type: number
+      format: double
+      example: 37.502508
+    PostalCode:
+      description: Postal Code
+      type: string
     TemporaryLocation:
       description: Temporary location [876-878 |l]
       type: string
+    HasSharedPrintCommitment:
+      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
+      type: string
+      enum:
+      - Y
+      - N
+    BibRecordBrief:
+      type: object
+      properties:
+        oclcNumber:
+          $ref: '#/components/schemas/OclcNumber'
+        title:
+          $ref: '#/components/schemas/SimpleTitle'
+        creator:
+          $ref: '#/components/schemas/CreatorString'
+        date:
+          $ref: '#/components/schemas/Date'
+        language:
+          $ref: '#/components/schemas/ItemLanguage'
+        generalFormat:
+          $ref: '#/components/schemas/GeneralFormat'
+        specificFormat:
+          $ref: '#/components/schemas/SpecificFormat'
+        edition:
+          $ref: '#/components/schemas/EditionStatement'
+        publisher:
+          type: string
+        isbns:
+          $ref: '#/components/schemas/Isbns'
+        issns:
+          $ref: '#/components/schemas/Issns'
+        mergedOclcNumbers:
+          $ref: '#/components/schemas/MergedOclcNumbers'
+        catalogingInfo:
+          $ref: '#/components/schemas/CatalogingInfo'
+        institutionHolding:
+          $ref: '#/components/schemas/InstitutionHolding'
+      required:
+      - oclcNumber
+      - title
+      - creator
+      - date
+      - language
+      - edition
+      - publisher
+    ShelvingLocation:
+      description: Shelving location [LHR -> v852sc]
+      type: string
+    Date:
+      description: machine readable date 008
+      type: string
+    InstitutionHolding:
+      type: object
+      properties:
+        totalHoldingCount:
+          description: Number of holdings for this item [Holdings/TotalLibCount || FRBRHoldings/B]
+          type: integer
+          format: int32
+        totalWorksHoldingCount:
+          description: Number of holdings in the workset [FRBRHoldings/B]
+          type: integer
+          format: int32
+        totalEditions:
+          $ref: '#/components/schemas/TotalEditions'
+      oneOf:
+      - $ref: '#/components/schemas/briefHoldings'
+      - $ref: '#/components/schemas/detailedHoldings'
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    Issns:
+      description: International Standard Serial Numbers
+      type: array
+      items:
+        $ref: '#/components/schemas/Issn'
+    TotalEditions:
+      description: Total number of editions in the workgroup
+      type: integer
+      format: int32
+    SpecificFormat:
+      description: Specific Format Type [Admin/OCLCDef/StdRT2]
+      type: string
+      enum:
+      - 2D
+      - Artcl
+      - Bluray
+      - Braille
+      - Cassette
+      - CD
+      - Chptr
+      - Continuing
+      - Digital
+      - DVD
+      - Encyc
+      - Film
+      - LargePrint
+      - LP
+      - Mic
+      - mss
+      - PrintBook
+      - rec
+      - Thsis
+      - VHS
+    EditionStatement:
+      description: Edition Statement [v250sa]
+      type: string
+    MaterialSpecified:
+      description: '[876-8 |3]'
+      type: string
   examples:
+    bib-marc-new:
+      summary: Bibliographic MARC record
+      value: "00266nam a2200097 a 4500008004100000010001700041040002200058100002700080245001600107500004500123\\u001E120827s2012    nyua          000 0 eng d\\u001E  \\u001Fa   63011276 \\u001E  \\u001FaOCWMS\\u001Fbeng\\u001FcOCWMS\\u001E0 \\u001FaOCLC Developer Network\\u001E10\\u001FaTest Record\\u001E  \\u001FaFOR OCLC DEVELOPER NETWORK DOCUMENTATION\\u001E\\u001D    \n"
+    bib-not-found:
+      summary: Bibliographic Record Not Found
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the bib read operation.
+        detail:
+          summary: NOT_FOUND
+          description: Not able to find the requested Bib
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    bib-marc-existing:
+      summary: Bibliographic MARC record
+      value: "00291nam a2200109 a 4500001001300000008004100013010001700054040002200071100002700093245001600120500004500136\\u001Eocn970988303\\u001E120827s2012    nyua          000 0 eng d\\u001E  \\u001Fa   63011276 \\u001E  \\u001FaOCWMS\\u001Fbeng\\u001FcOCWMS\\u001E0 \\u001FaOCLC Developer Network\\u001E10\\u001FaTest Record\\u001E  \\u001FaFOR OCLC DEVELOPER NETWORK DOCUMENTATION\\u001E\\u001D      \n"
+    bib-marcxml-existing:
+      summary: Bibliographic MARC XML record
+      value: "<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n"
     bib-match-unmatched:
       summary: Not matched Bib Result
       value:
         numberOfRecords: 0,
         briefRecords: []
+    xml-has-missing-or-unusable-data:
+      summary: Bibliographic record has missing or unusable data
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform bib create.
+        detail: Fixed field does not have usable data
+    xml-has-validation-errors:
+      summary: Bibliographic record has bad data
+      value:
+        errorCount: 1,
+        errors: -"Invalid symbol OCWMS in 1st $c in 040."
+        variableFieldErrors:
+          -tag: '040'
+          errorLevel: CRITICAL
+          message: Invalid symbol OCWMS in 1st $c in 040.
+    bib-marcxml-new:
+      summary: Bibliographic MARC XML record
+      value: "<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n"
+    non-numeric-oclc-number:
+      summary: Non-Numeric OCLC Number
+      value:
+        type: BAD_REQUEST
+        title: Invalid identifier.
+        detail: 'A request with a non-numeric identifier was attempted: ocm12121212'
+    xml-has-parsing-errors:
+      summary: Bibliographic record has parsing errors
+      value:
+        type: BAD_REQUEST
+        title: Unable to crosswalk the record.
+        detail: The record has parsing errors.
     bib-match-matched:
       summary: Matched Bib Result
       value:
@@ -1005,57 +1059,6 @@ components:
             transcribingAgency: N$T
             catalogingLanguage: eng
             levelOfCataloging: L
-    unauthorized:
-      summary: Error returned when valid API credentials not sent or invalid
-      value:
-        message: Unauthorized
-    bib-marc-new:
-      summary: Bibliographic MARC record
-      value: "00266nam a2200097 a 4500008004100000010001700041040002200058100002700080245001600107500004500123\\u001E120827s2012    nyua          000 0 eng d\\u001E  \\u001Fa   63011276 \\u001E  \\u001FaOCWMS\\u001Fbeng\\u001FcOCWMS\\u001E0 \\u001FaOCLC Developer Network\\u001E10\\u001FaTest Record\\u001E  \\u001FaFOR OCLC DEVELOPER NETWORK DOCUMENTATION\\u001E\\u001D    \n"
-    xml-has-parsing-errors:
-      summary: Bibliographic record has parsing errors
-      value:
-        type: BAD_REQUEST
-        title: Unable to crosswalk the record.
-        detail: The record has parsing errors.
-    bib-marc-existing:
-      summary: Bibliographic MARC record
-      value: "00291nam a2200109 a 4500001001300000008004100013010001700054040002200071100002700093245001600120500004500136\\u001Eocn970988303\\u001E120827s2012    nyua          000 0 eng d\\u001E  \\u001Fa   63011276 \\u001E  \\u001FaOCWMS\\u001Fbeng\\u001FcOCWMS\\u001E0 \\u001FaOCLC Developer Network\\u001E10\\u001FaTest Record\\u001E  \\u001FaFOR OCLC DEVELOPER NETWORK DOCUMENTATION\\u001E\\u001D      \n"
-    non-numeric-oclc-number:
-      summary: Non-Numeric OCLC Number
-      value:
-        type: BAD_REQUEST
-        title: Invalid identifier.
-        detail: 'A request with a non-numeric identifier was attempted: ocm12121212'
-    bib-marcxml-new:
-      summary: Bibliographic MARC XML record
-      value: "<record>\n    <leader>00000nam a2200000 a 4500</leader>\n    <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n    <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">   63011276 </subfield>\n    </datafield>\n    <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">OCWMS</subfield>\n        <subfield code=\"b\">eng</subfield>\n        <subfield code=\"c\">OCWMS</subfield>\n    </datafield>\n    <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n        <subfield code=\"a\">OCLC Developer Network</subfield>\n    </datafield>\n    <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n        <subfield code=\"a\">Test Record</subfield>\n    </datafield>\n    <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n        <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n    </datafield>\n</record>    \n"
-    bib-not-found:
-      summary: Bibliographic Record Not Found
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the bib read operation.
-        detail:
-          summary: NOT_FOUND
-          description: Not able to find the requested Bib
-    xml-has-missing-or-unusable-data:
-      summary: Bibliographic record has missing or unusable data
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform bib create.
-        detail: Fixed field does not have usable data
-    xml-has-validation-errors:
-      summary: Bibliographic record has bad data
-      value:
-        errorCount: 1,
-        errors: -"Invalid symbol OCWMS in 1st $c in 040."
-        variableFieldErrors:
-          -tag: '040'
-          errorLevel: CRITICAL
-          message: Invalid symbol OCWMS in 1st $c in 040.
-    bib-marcxml-existing:
-      summary: Bibliographic MARC XML record
-      value: "<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n"
     validate-multiple-errors:
       summary: Multiple Errors
       value:
@@ -1089,6 +1092,14 @@ components:
         title: Resource Not Found
         detail: The specified resource was not found at this address.
   parameters:
+    oclcNumberAsId:
+      name: oclcNumber
+      in: path
+      description: The OCLC number of the Bibliographic record
+      required: true
+      schema:
+        $ref: '#/components/schemas/schemas-OclcNumber'
+      example: 41266045
     oclcNumberListReq:
       name: oclcNumbers
       in: query
@@ -1099,42 +1110,7 @@ components:
         items:
           $ref: '#/components/schemas/OclcNumber'
       example: 41266045,1056157740
-    oclcNumberAsId:
-      name: oclcNumber
-      in: path
-      description: The OCLC number of the Bibliographic record
-      required: true
-      schema:
-        $ref: '#/components/schemas/schemas-OclcNumber'
-      example: 41266045
   responses:
-    500-internal-server-error:
-      description: Something went wrong (hopefully rare) - please try again.
-      content:
-        application/json:
-          examples:
-            accept-header-unacceptable:
-              summary: Unexpected Error.
-              value:
-                type: INTERNAL_SERVER_ERROR
-                title: string
-                detail: string
-    unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          examples:
-            unauthorized:
-              $ref: '#/components/examples/unauthorized'
-    failed-not-found:
-      description: Failed operation - resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            failed-not-found:
-              $ref: '#/components/examples/failed-not-found'
     406-accept-header-unacceptable:
       description: Accept Header Media Type is not Supported.
       content:
@@ -1146,6 +1122,33 @@ components:
                 type: NOT_ACCEPTABLE
                 title: Invalid 'Accept' header.
                 detail: 'A request with an invalid ''Accept'' header was attempted: ....'
+    unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          examples:
+            unauthorized:
+              $ref: '#/components/examples/unauthorized'
+    500-internal-server-error:
+      description: Something went wrong (hopefully rare) - please try again.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Unexpected Error.
+              value:
+                type: INTERNAL_SERVER_ERROR
+                title: string
+                detail: string
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found:
+              $ref: '#/components/examples/failed-not-found'
     403-forbidden-url:
       description: Forbidden URL.
       content:
@@ -1156,17 +1159,46 @@ components:
               value:
                 message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
   securitySchemes:
-    entity_data_auth:
+    worldcat_metadata_auth:
       type: oauth2
       flows:
         clientCredentials:
           tokenUrl: https://oauth.oclc.org/token
           scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+            WorldCatMetadataAPI:view_brief_bib: view brief bibliographic data
+            WorldCatMetadataAPI:view_bib: view full bibliographic data
+            WorldCatMetadataAPI:view_marc_bib: view marc bibliographic data
+            WorldCatMetadataAPI:match_bibs: match bibliographic records
+            WorldCatMetadataAPI:get_holding_codes: retrieve holding codes
+            WorldCatMetadataAPI:manage_bibs: manage bibliographic data
+            WorldCatMetadataAPI:view_retained_holdings: view holdings which libraries have chosen to retain
+            WorldCatMetadataAPI:view_summary_holdings: view summary information about library holdings
+            WorldCatMetadataAPI:view_my_holdings: view detailed information about the authentication institution's holdings
+            WorldCatMetadataAPI:view_my_holdings_private_notes: view private notes in holdings data
+            WorldCatMetadataAPI:manage_institution_holdings: manage institution holdings
+            WorldCatMetadataAPI:view_my_local_bib_data: view local bibliographic data from the authenticate institution
+            WorldCatMetadataAPI:manage_institution_lbds: manage institution local bibliographic data records
+            WorldCatMetadataAPI:manage_institution_lhrs: manage institution local holdings data records
+            enhMetadataAPI:fieldTransfer: field transfer functionality
         authorizationCode:
           authorizationUrl: https://oauth.oclc.org/auth
           tokenUrl: https://oauth.oclc.org/token
           scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+            WorldCatMetadataAPI:view_brief_bib: view brief bibliographic data
+            WorldCatMetadataAPI:view_bib: view full bibliographic data
+            WorldCatMetadataAPI:view_marc_bib: view marc bibliographic data
+            WorldCatMetadataAPI:match_bibs: match bibliographic records
+            WorldCatMetadataAPI:get_holding_codes: retrieve holding codes
+            WorldCatMetadataAPI:manage_bibs: manage bibliographic data
+            WorldCatMetadataAPI:view_retained_holdings: view holdings which libraries have chosen to retain
+            WorldCatMetadataAPI:view_summary_holdings: view summary information about library holdings
+            WorldCatMetadataAPI:view_my_holdings: view detailed information about the authentication institution's holdings
+            WorldCatMetadataAPI:view_my_holdings_private_notes: view private notes in holdings data
+            WorldCatMetadataAPI:manage_institution_holdings: manage institution holdings
+            WorldCatMetadataAPI:view_my_local_bib_data: view local bibliographic data from the authenticate institution
+            WorldCatMetadataAPI:manage_institution_lbds: manage institution local bibliographic data records
+            WorldCatMetadataAPI:manage_institution_lhrs: manage institution local holdings data records
+            enhMetadataAPI:fieldTransfer: field transfer functionality
+externalDocs:
+  description: Find out more about WorldCatMetadata API
+  url: https://www.oclc.org/developer/develop/web-services/worldcat-metadata-api.en.html

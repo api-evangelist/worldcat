@@ -1,11 +1,12 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Member Enabled Providers API
-  description: WorldCat Entity Data
+  description: WorldCat Knowledge base API
+  version: 1.0.0
+  title: WorldCat Knowledge Base Member Enabled Providers API
 servers:
-- url: https://id.oclc.org/worldcat
-  description: PROD
+- url: https://worldcat.org/webservices/kb
+security:
+- api_key: []
 tags:
 - name: Member Enabled Providers
 paths:
@@ -182,64 +183,56 @@ paths:
       security:
       - api_key: []
 components:
-  examples:
-    success-read-provider:
-      summary: successful request to read a provider
-      value:
-        title: Nature Publishing Group
-        id: http://worldcat.org/webservices/kb/rest/providers/NPG
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/providers/NPG
-          rel: self
-        - href: http://www.nature.com
-          rel: via
-        - href: http://worldcat.org/webservices/kb/rest/providers/NPG.html
-          rel: alternate
-        provider_uid: NPG
-        vic_id: 572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6
-        provider_name: Nature Publishing Group
-        available_collections: '22'
-        selected_collections: '22'
-        available_entries: '1115'
-        selected_entries: '1115'
-    success-search-provider:
-      summary: successful search of providers
-      value:
-        title: 'WorldCat KnowledgeBase Search: Nature'
-        updated: '2020-01-07T21:36:44.887Z'
-        id: urn:uuid:ca4e882b66bd43d6cc0c885337971941
-        author: OCLC
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/providers/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
-          rel: self
-        os:totalResults: '1'
-        os:startIndex: '1'
-        os:itemsPerPage: '10'
-        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
-        entries:
-        - title: Nature Publishing Group
-          id: http://worldcat.org/webservices/kb/rest/providers/NPG,128807
-          links:
-          - href: http://worldcat.org/webservices/kb/rest/providers/NPG,128807
-            rel: self
-          - href: http://www.nature.com
-            rel: via
-          - href: http://worldcat.org/webservices/kb/rest/providers/NPG,128807.html
-            rel: alternate
-          kb:provider_uid: NPG
-          kb:vic_id: 572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6
-          kb:provider_name: Nature Publishing Group
-          kb:available_collections: '19'
-          kb:selected_collections: '1'
-          kb:available_entries: '980'
-          kb:selected_entries: '105'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
   schemas:
+    Provider:
+      type: object
+      required:
+      - title
+      - id
+      - links
+      - provider_uid
+      - provider_name
+      - available_collections
+      - selected_collection
+      - available_entries
+      - selected_entries
+      properties:
+        title:
+          description: Name of Provider
+          type: string
+        id:
+          description: URL for Provider in API
+          type: string
+        links:
+          description: links associated with Provider
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        provider_uid:
+          description: Id for provider
+          type: string
+        provider_name:
+          description: name for provider
+          type: string
+        vic_id:
+          description: id for provider in vendor information center
+          type: string
+        available_collections:
+          description: number of available collection associated with provider
+          type: integer
+          format: int32
+        selected_collection:
+          description: Number of collections from provider selected by institution
+          type: integer
+          format: int32
+        available_entries:
+          description: Number of available titles from provider
+          type: integer
+          format: int32
+        selected_entries:
+          description: Number of selected titles from provider selected by institution
+          type: integer
+          format: int32
     ProviderSearchResults:
       type: object
       properties:
@@ -291,67 +284,68 @@ components:
           - parent
           - enclosure
           - via
-    Provider:
-      type: object
-      required:
-      - title
-      - id
-      - links
-      - provider_uid
-      - provider_name
-      - available_collections
-      - selected_collection
-      - available_entries
-      - selected_entries
-      properties:
-        title:
-          description: Name of Provider
-          type: string
-        id:
-          description: URL for Provider in API
-          type: string
+  examples:
+    success-read-provider:
+      summary: successful request to read a provider
+      value:
+        title: Nature Publishing Group
+        id: http://worldcat.org/webservices/kb/rest/providers/NPG
         links:
-          description: links associated with Provider
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-        provider_uid:
-          description: Id for provider
-          type: string
-        provider_name:
-          description: name for provider
-          type: string
-        vic_id:
-          description: id for provider in vendor information center
-          type: string
-        available_collections:
-          description: number of available collection associated with provider
-          type: integer
-          format: int32
-        selected_collection:
-          description: Number of collections from provider selected by institution
-          type: integer
-          format: int32
-        available_entries:
-          description: Number of available titles from provider
-          type: integer
-          format: int32
-        selected_entries:
-          description: Number of selected titles from provider selected by institution
-          type: integer
-          format: int32
+        - href: http://worldcat.org/webservices/kb/rest/providers/NPG
+          rel: self
+        - href: http://www.nature.com
+          rel: via
+        - href: http://worldcat.org/webservices/kb/rest/providers/NPG.html
+          rel: alternate
+        provider_uid: NPG
+        vic_id: 572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6
+        provider_name: Nature Publishing Group
+        available_collections: '22'
+        selected_collections: '22'
+        available_entries: '1115'
+        selected_entries: '1115'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
+    success-search-provider:
+      summary: successful search of providers
+      value:
+        title: 'WorldCat KnowledgeBase Search: Nature'
+        updated: '2020-01-07T21:36:44.887Z'
+        id: urn:uuid:ca4e882b66bd43d6cc0c885337971941
+        author: OCLC
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/providers/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+          rel: self
+        os:totalResults: '1'
+        os:startIndex: '1'
+        os:itemsPerPage: '10'
+        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+        entries:
+        - title: Nature Publishing Group
+          id: http://worldcat.org/webservices/kb/rest/providers/NPG,128807
+          links:
+          - href: http://worldcat.org/webservices/kb/rest/providers/NPG,128807
+            rel: self
+          - href: http://www.nature.com
+            rel: via
+          - href: http://worldcat.org/webservices/kb/rest/providers/NPG,128807.html
+            rel: alternate
+          kb:provider_uid: NPG
+          kb:vic_id: 572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6
+          kb:provider_name: Nature Publishing Group
+          kb:available_collections: '19'
+          kb:selected_collections: '1'
+          kb:available_entries: '980'
+          kb:selected_entries: '105'
   securitySchemes:
-    entity_data_auth:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
-        authorizationCode:
-          authorizationUrl: https://oauth.oclc.org/auth
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+    api_key:
+      type: apiKey
+      name: wskey
+      in: query
+externalDocs:
+  description: Find out more about WorldCat Knowledge Base API
+  url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html

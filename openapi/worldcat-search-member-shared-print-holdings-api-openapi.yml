@@ -1,11 +1,14 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Search Member Shared Print Holdings API
-  description: WorldCat Entity Data
+  description: WorldCat Metadata API
+  version: 2.0.0
+  title: WorldCat Metadata Search Member Shared Print Holdings API
 servers:
-- url: https://id.oclc.org/worldcat
+- url: https://metadata.api.oclc.org
   description: PROD
+security:
+- worldcat_metadata_auth:
+  - WorldCatMetadataAPI
 tags:
 - name: Search Member Shared Print Holdings
 paths:
@@ -41,134 +44,64 @@ paths:
         - WorldCatMetadataAPI:view_retained_holdings
 components:
   schemas:
-    SharedPrintCommitment:
+    MergedOclcNumbers:
+      description: Merged OCLC numbers [v019sa]
+      type: array
+      items:
+        type: string
+    Address:
       type: object
       properties:
-        actionNote:
-          description: Action Note [LHR -> HldDetRec/v583sa]
+        street1:
+          description: Name of street
           type: string
-        materialsSpecified:
-          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
+        street2:
+          description: Name of street 2
           type: string
-        institution:
-          description: Institution to which applies [LHR -> HldDetRec/v583s5]
+        city:
+          description: Name of city
           type: string
-        dateOfAction:
-          description: date of action [LHR -> HldDetRec/v583sc]
-          type: string
-        commitmentExpirationDate:
-          description: commitment expiration date [LHR -> HldDetRec/v583sd]
-          type: string
-        authorization:
-          description: Authorization [LHR -> HldDetRec/v583sf]
-          type: string
-        methodOfAction:
-          description: Method of Action [LHR -> HldDetRec/v583si]
-          type: string
-        siteOfAction:
-          description: Site of Action [LHR -> HldDetRec/v583sj]
-          type: string
-        status:
-          description: Status [LHR -> HldDetRec/v583sl]
-          type: string
-        uri:
-          description: URI [LHR -> HldDetRec/v583su]
-          type: string
-        publicNote:
-          description: Public Note [LHR -> HldDetRec/v583sz]
-          type: string
-    HoldingPart:
+        state:
+          $ref: '#/components/schemas/State'
+        postalCode:
+          $ref: '#/components/schemas/PostalCode'
+        country:
+          $ref: '#/components/schemas/Country'
+        lat:
+          $ref: '#/components/schemas/Latitude'
+        lon:
+          $ref: '#/components/schemas/Longitude'
+    SubFacet:
       type: object
       properties:
-        linkingAndSequenceNumber:
-          description: Field link and sequence number [852/863-865/866-868/876-878 | s8]
+        index:
           type: string
-        summaryOfHoldings:
-          $ref: '#/components/schemas/SummaryOfHoldings'
-        enumerations:
-          description: Enumerations [853-855/863-865 |a-h]
-          type: array
-          items:
-            $ref: '#/components/schemas/CaptionValuePair'
-        chronologies:
-          description: Chronologies [853-855/863-865 |i-v]
-          type: array
-          items:
-            $ref: '#/components/schemas/CaptionValuePair'
-        textualHoldings:
-          $ref: '#/components/schemas/TextualHoldingsStatement'
-        itemMaterialSpecified:
-          $ref: '#/components/schemas/MaterialSpecified'
-        pieceDesignation:
-          $ref: '#/components/schemas/PieceDesignation'
-        cancelledPieceDesignations:
-          description: Cancelled Piece Designation [876-878 |r]
-          type: array
-          items:
-            type: string
-        temporaryLocation:
-          $ref: '#/components/schemas/TemporaryLocation'
-        publicNotes:
-          description: Public notes [852/863-865/866-868/876-878 |z]
-          type: array
-          items:
-            type: string
-        yearRanges:
-          description: Year as Range [si]
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingRange'
-        volumeRanges:
-          description: Volume Number As Range [sb]
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingRange'
-        itemType:
-          description: Category of holding based on MARC field patterns [LHR -> v853,v863,v866,v876 for basic; v854,v864,v867,v877 for supplementary; v855,v865,v868,v878 for index]
+        facetType:
           type: string
-          enum:
-          - basic
-          - supplementary
-          - index
-        privateNotes:
-          description: Private notes from 87X$x field [LHR -> v87Xsx]
+        values:
           type: array
           items:
-            type: string
-    PostalCode:
-      description: Postal Code
-      type: string
+            $ref: '#/components/schemas/SubFacetValue'
     DisplayCallNumber:
       description: Display call Number [LHR -> v852 |k,h,i,m / |j/ |l]
       type: string
-    SpecificFormat:
-      description: Specific Format Type [Admin/OCLCDef/StdRT2]
+    Longitude:
+      description: Longitude
+      type: number
+      format: double
+      example: -122.22702
+    TextualHoldingsStatement:
+      description: '[866-8 |a]'
       type: string
-      enum:
-      - 2D
-      - Artcl
-      - Bluray
-      - Braille
-      - Cassette
-      - CD
-      - Chptr
-      - Continuing
-      - Digital
-      - DVD
-      - Encyc
-      - Film
-      - LargePrint
-      - LP
-      - Mic
-      - mss
-      - PrintBook
-      - rec
-      - Thsis
-      - VHS
-    TotalEditions:
-      description: Total number of editions in the workgroup
-      type: integer
-      format: int32
+    ItemLanguage:
+      description: Language of the item [v041sa,j]
+      type: string
+    CreatorString:
+      description: List of creators as single string
+      type: string
+    SummaryOfHoldings:
+      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
+      type: string
     HoldingDetail:
       type: object
       properties:
@@ -220,169 +153,8 @@ components:
       - format
       - lendingPolicy
       - hasSharedPrintCommitment
-    MergedOclcNumbers:
-      description: Merged OCLC numbers [v019sa]
-      type: array
-      items:
-        type: string
     SublocationCollection:
       description: Sublocation or collection [LHR -> v852sb]
-      type: string
-    briefHoldings:
-      type: array
-      items:
-        $ref: '#/components/schemas/HoldingBrief'
-    CatalogingInfo:
-      type: object
-      properties:
-        catalogingAgency:
-          description: Cataloging Agency [v040/sa]
-          type: string
-        transcribingAgency:
-          description: Transcribing Agency [v040/sc]
-          type: string
-        catalogingLanguage:
-          $ref: '#/components/schemas/CatalogingLanguage'
-        levelOfCataloging:
-          description: Level of cataloging [LDR position 5]
-          type: string
-    PieceDesignation:
-      description: Piece Designation [852/863-865/866-868/876-878 |p]
-      type: string
-    Country:
-      description: Two-character Country Code, per ISO 3166.
-      type: string
-    Longitude:
-      description: Longitude
-      type: number
-      format: double
-      example: -122.22702
-    SubFacetValue:
-      type: object
-      properties:
-        value:
-          type: string
-        count:
-          type: integer
-          format: int32
-    InstitutionType:
-      description: The type of institution
-      enum:
-      - ACADEMIC
-      - PUBLIC
-      - REGIONAL_OR_NATIONAL
-      - OTHER
-      - CORPORATE_SPECIAL_LIBRARY
-      - HEALTH
-      - MUSEUM_OR_ARCHIVES
-      - LAW
-      - MUSIC
-      - LIBRARY_NETWORK_GROUP
-      type: string
-    InstitutionHolding:
-      type: object
-      properties:
-        totalHoldingCount:
-          description: Number of holdings for this item [Holdings/TotalLibCount || FRBRHoldings/B]
-          type: integer
-          format: int32
-        totalWorksHoldingCount:
-          description: Number of holdings in the workset [FRBRHoldings/B]
-          type: integer
-          format: int32
-        totalEditions:
-          $ref: '#/components/schemas/TotalEditions'
-      oneOf:
-      - $ref: '#/components/schemas/briefHoldings'
-      - $ref: '#/components/schemas/detailedHoldings'
-    State:
-      description: Name of the State/Province, per ISO 3166-2.
-      type: string
-    OclcNumber:
-      description: the oclc number of a given bibliographic record
-      type: integer
-      format: int64
-    Date:
-      description: machine readable date 008
-      type: string
-    Problem:
-      type: object
-      description: RFC 7807 description of an error.
-      properties:
-        type:
-          $ref: '#/components/schemas/ProblemType'
-        title:
-          description: A short, human-readable summary of the problem type.
-          type: string
-        instance:
-          description: A URI reference that identifies the specific occurrence of the problem.
-          type: string
-          format: uri
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.,
-          type: string
-        invalidParams:
-          description: An array of validation errors.
-          type: array
-          items:
-            description: The validation error descriptor.
-            type: object
-            properties:
-              path:
-                type: string
-              name:
-                type: string
-              reason:
-                type: string
-    Address:
-      type: object
-      properties:
-        street1:
-          description: Name of street
-          type: string
-        street2:
-          description: Name of street 2
-          type: string
-        city:
-          description: Name of city
-          type: string
-        state:
-          $ref: '#/components/schemas/State'
-        postalCode:
-          $ref: '#/components/schemas/PostalCode'
-        country:
-          $ref: '#/components/schemas/Country'
-        lat:
-          $ref: '#/components/schemas/Latitude'
-        lon:
-          $ref: '#/components/schemas/Longitude'
-    GeneralFormat:
-      description: General Format Type [Admin/OCLCDef/StdRT]
-      type: string
-      enum:
-      - Archv
-      - ArtChapter
-      - AudioBook
-      - Book
-      - CompFile
-      - Encyc
-      - Game
-      - Image
-      - IntMM
-      - Jrnl
-      - Kit
-      - Map
-      - MsScr
-      - Music
-      - News
-      - Object
-      - Snd
-      - Toy
-      - Video
-      - Vis
-      - Web
-    SimpleTitle:
-      description: Linked [v880sa,b] if present or [v245sa,b]
       type: string
     CallNumber:
       description: Local call number [LHR -> v852sh,i,j,k,l,m]
@@ -431,14 +203,34 @@ components:
           type: array
           items:
             type: string
-    Isbns:
-      description: International Standard Book Number [v020sa]
-      type: array
-      items:
-        type: string
-    RegistryId:
-      description: The identifier in the WorldCat Registry for the institution
-      type: integer
+    GeneralFormat:
+      description: General Format Type [Admin/OCLCDef/StdRT]
+      type: string
+      enum:
+      - Archv
+      - ArtChapter
+      - AudioBook
+      - Book
+      - CompFile
+      - Encyc
+      - Game
+      - Image
+      - IntMM
+      - Jrnl
+      - Kit
+      - Map
+      - MsScr
+      - Music
+      - News
+      - Object
+      - Snd
+      - Toy
+      - Video
+      - Vis
+      - Web
+    Country:
+      description: Two-character Country Code, per ISO 3166.
+      type: string
     BibBriefResultSet:
       type: object
       properties:
@@ -453,9 +245,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SearchFacet'
-    SummaryOfHoldings:
-      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
-      type: string
     ItemSubType:
       description: Facet values returned and possible filter Values itemSubType [Admin/OCLCDef/StdRT1 + Admin/OCLCDef/StdRT2]
       type: string
@@ -520,6 +309,242 @@ components:
       - web-digital
       - web-dwn2d
       - web-
+    detailedHoldings:
+      type: array
+      items:
+        $ref: '#/components/schemas/HoldingDetail'
+    OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+    briefHoldings:
+      type: array
+      items:
+        $ref: '#/components/schemas/HoldingBrief'
+    State:
+      description: Name of the State/Province, per ISO 3166-2.
+      type: string
+    SubFacetValue:
+      type: object
+      properties:
+        value:
+          type: string
+        count:
+          type: integer
+          format: int32
+    HoldingRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+    FacetValue:
+      type: object
+      properties:
+        value:
+          type: string
+        count:
+          type: integer
+          format: int32
+        subFacet:
+          $ref: '#/components/schemas/SubFacet'
+        subFacetItemBrief:
+          $ref: '#/components/schemas/SubFacet'
+    SimpleTitle:
+      description: Linked [v880sa,b] if present or [v245sa,b]
+      type: string
+    HoldingPart:
+      type: object
+      properties:
+        linkingAndSequenceNumber:
+          description: Field link and sequence number [852/863-865/866-868/876-878 | s8]
+          type: string
+        summaryOfHoldings:
+          $ref: '#/components/schemas/SummaryOfHoldings'
+        enumerations:
+          description: Enumerations [853-855/863-865 |a-h]
+          type: array
+          items:
+            $ref: '#/components/schemas/CaptionValuePair'
+        chronologies:
+          description: Chronologies [853-855/863-865 |i-v]
+          type: array
+          items:
+            $ref: '#/components/schemas/CaptionValuePair'
+        textualHoldings:
+          $ref: '#/components/schemas/TextualHoldingsStatement'
+        itemMaterialSpecified:
+          $ref: '#/components/schemas/MaterialSpecified'
+        pieceDesignation:
+          $ref: '#/components/schemas/PieceDesignation'
+        cancelledPieceDesignations:
+          description: Cancelled Piece Designation [876-878 |r]
+          type: array
+          items:
+            type: string
+        temporaryLocation:
+          $ref: '#/components/schemas/TemporaryLocation'
+        publicNotes:
+          description: Public notes [852/863-865/866-868/876-878 |z]
+          type: array
+          items:
+            type: string
+        yearRanges:
+          description: Year as Range [si]
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingRange'
+        volumeRanges:
+          description: Volume Number As Range [sb]
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingRange'
+        itemType:
+          description: Category of holding based on MARC field patterns [LHR -> v853,v863,v866,v876 for basic; v854,v864,v867,v877 for supplementary; v855,v865,v868,v878 for index]
+          type: string
+          enum:
+          - basic
+          - supplementary
+          - index
+        privateNotes:
+          description: Private notes from 87X$x field [LHR -> v87Xsx]
+          type: array
+          items:
+            type: string
+    PieceDesignation:
+      description: Piece Designation [852/863-865/866-868/876-878 |p]
+      type: string
+    SearchFacet:
+      type: object
+      properties:
+        index:
+          type: string
+        facetType:
+          type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacetValue'
+    RegistryId:
+      description: The identifier in the WorldCat Registry for the institution
+      type: integer
+    CatalogingLanguage:
+      description: Language record was cataloged in [v040sb]
+      type: string
+    CatalogingInfo:
+      type: object
+      properties:
+        catalogingAgency:
+          description: Cataloging Agency [v040/sa]
+          type: string
+        transcribingAgency:
+          description: Transcribing Agency [v040/sc]
+          type: string
+        catalogingLanguage:
+          $ref: '#/components/schemas/CatalogingLanguage'
+        levelOfCataloging:
+          description: Level of cataloging [LDR position 5]
+          type: string
+    Isbns:
+      description: International Standard Book Number [v020sa]
+      type: array
+      items:
+        type: string
+    HoldingLocation:
+      description: Local holding location [LHR -> v852sa,b,c]
+      type: object
+      properties:
+        holdingLocation:
+          description: Institution Symbol [LHR -> v852sa]
+          type: string
+        sublocationCollection:
+          $ref: '#/components/schemas/SublocationCollection'
+        shelvingLocation:
+          $ref: '#/components/schemas/ShelvingLocation'
+    MaterialSpecified:
+      description: '[876-8 |3]'
+      type: string
+    Issn:
+      description: International Standard Serial Number [v022sal v700,v710,v711,v773,v776,v777,v780,v785 - sx]
+      type: string
+    SharedPrintCommitment:
+      type: object
+      properties:
+        actionNote:
+          description: Action Note [LHR -> HldDetRec/v583sa]
+          type: string
+        materialsSpecified:
+          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
+          type: string
+        institution:
+          description: Institution to which applies [LHR -> HldDetRec/v583s5]
+          type: string
+        dateOfAction:
+          description: date of action [LHR -> HldDetRec/v583sc]
+          type: string
+        commitmentExpirationDate:
+          description: commitment expiration date [LHR -> HldDetRec/v583sd]
+          type: string
+        authorization:
+          description: Authorization [LHR -> HldDetRec/v583sf]
+          type: string
+        methodOfAction:
+          description: Method of Action [LHR -> HldDetRec/v583si]
+          type: string
+        siteOfAction:
+          description: Site of Action [LHR -> HldDetRec/v583sj]
+          type: string
+        status:
+          description: Status [LHR -> HldDetRec/v583sl]
+          type: string
+        uri:
+          description: URI [LHR -> HldDetRec/v583su]
+          type: string
+        publicNote:
+          description: Public Note [LHR -> HldDetRec/v583sz]
+          type: string
+    CaptionValuePair:
+      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
+      type: object
+      properties:
+        caption:
+          type: string
+        value:
+          type: string
+    InstitutionType:
+      description: The type of institution
+      enum:
+      - ACADEMIC
+      - PUBLIC
+      - REGIONAL_OR_NATIONAL
+      - OTHER
+      - CORPORATE_SPECIAL_LIBRARY
+      - HEALTH
+      - MUSEUM_OR_ARCHIVES
+      - LAW
+      - MUSIC
+      - LIBRARY_NETWORK_GROUP
+      type: string
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
     ItemType:
       description: Filter values for General Format
       type: string
@@ -545,168 +570,6 @@ components:
       - video
       - vis
       - web
-    HasSharedPrintCommitment:
-      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
-      type: string
-      enum:
-      - Y
-      - N
-    HoldingLocation:
-      description: Local holding location [LHR -> v852sa,b,c]
-      type: object
-      properties:
-        holdingLocation:
-          description: Institution Symbol [LHR -> v852sa]
-          type: string
-        sublocationCollection:
-          $ref: '#/components/schemas/SublocationCollection'
-        shelvingLocation:
-          $ref: '#/components/schemas/ShelvingLocation'
-    Issn:
-      description: International Standard Serial Number [v022sal v700,v710,v711,v773,v776,v777,v780,v785 - sx]
-      type: string
-    SearchFacet:
-      type: object
-      properties:
-        index:
-          type: string
-        facetType:
-          type: string
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/FacetValue'
-    Issns:
-      description: International Standard Serial Numbers
-      type: array
-      items:
-        $ref: '#/components/schemas/Issn'
-    TextualHoldingsStatement:
-      description: '[866-8 |a]'
-      type: string
-    CatalogingLanguage:
-      description: Language record was cataloged in [v040sb]
-      type: string
-    detailedHoldings:
-      type: array
-      items:
-        $ref: '#/components/schemas/HoldingDetail'
-    BibRecordBrief:
-      type: object
-      properties:
-        oclcNumber:
-          $ref: '#/components/schemas/OclcNumber'
-        title:
-          $ref: '#/components/schemas/SimpleTitle'
-        creator:
-          $ref: '#/components/schemas/CreatorString'
-        date:
-          $ref: '#/components/schemas/Date'
-        language:
-          $ref: '#/components/schemas/ItemLanguage'
-        generalFormat:
-          $ref: '#/components/schemas/GeneralFormat'
-        specificFormat:
-          $ref: '#/components/schemas/SpecificFormat'
-        edition:
-          $ref: '#/components/schemas/EditionStatement'
-        publisher:
-          type: string
-        isbns:
-          $ref: '#/components/schemas/Isbns'
-        issns:
-          $ref: '#/components/schemas/Issns'
-        mergedOclcNumbers:
-          $ref: '#/components/schemas/MergedOclcNumbers'
-        catalogingInfo:
-          $ref: '#/components/schemas/CatalogingInfo'
-        institutionHolding:
-          $ref: '#/components/schemas/InstitutionHolding'
-      required:
-      - oclcNumber
-      - title
-      - creator
-      - date
-      - language
-      - edition
-      - publisher
-    Latitude:
-      description: Latitude
-      type: number
-      format: double
-      example: 37.502508
-    ItemLanguage:
-      description: Language of the item [v041sa,j]
-      type: string
-    HoldingRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    SubFacet:
-      type: object
-      properties:
-        index:
-          type: string
-        facetType:
-          type: string
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/SubFacetValue'
-    MaterialSpecified:
-      description: '[876-8 |3]'
-      type: string
-    EditionStatement:
-      description: Edition Statement [v250sa]
-      type: string
-    FacetValue:
-      type: object
-      properties:
-        value:
-          type: string
-        count:
-          type: integer
-          format: int32
-        subFacet:
-          $ref: '#/components/schemas/SubFacet'
-        subFacetItemBrief:
-          $ref: '#/components/schemas/SubFacet'
-    CreatorString:
-      description: List of creators as single string
-      type: string
-    ProblemType:
-      description: A URI reference [RFC3986] that identifies the problem type.
-      type: string
-      format: uri
-      enum:
-      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-      - https://developer.api.oclc.org/errors/NOT_ALLOWED
-      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
-      - https://developer.api.oclc.org/errors/BAD_REQUEST
-      - https://developer.api.oclc.org/errors/NOT_FOUND
-      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
-      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
-      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
-      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
-      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
-      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
-    ShelvingLocation:
-      description: Shelving location [LHR -> v852sc]
-      type: string
-    CaptionValuePair:
-      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
-      type: object
-      properties:
-        caption:
-          type: string
-        value:
-          type: string
     HoldingBrief:
       type: object
       properties:
@@ -753,73 +616,150 @@ components:
           enum:
           - Y
           - N
+    Latitude:
+      description: Latitude
+      type: number
+      format: double
+      example: 37.502508
+    PostalCode:
+      description: Postal Code
+      type: string
+    TotalEditions:
+      description: Total number of editions in the workgroup
+      type: integer
+      format: int32
     TemporaryLocation:
       description: Temporary location [876-878 |l]
       type: string
-  responses:
-    internal-server-error:
-      description: Something went wrong (hopfully rare) - please try again
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-    failed-not-acceptable:
-      description: Media type not supported
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-acceptable-error:
-              $ref: '#/components/examples/not-acceptable-error'
-            not-acceptable-error-language:
-              $ref: '#/components/examples/not-acceptable-error-language'
-    method-not-supported:
-      description: Method not supported, see response Allow header
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-allowed:
-              $ref: '#/components/examples/method-not-allowed-error'
-    bib_holding_query_error:
-      description: Invalid query. The request was unacceptable, often due to missing a required parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            missing-query-parameter:
-              $ref: '#/components/examples/missing-query-parameter'
-            missing-query-parameter-value:
-              $ref: '#/components/examples/missing-query-parameter-value'
-            invalid-oclc-number:
-              $ref: '#/components/examples/invalid-oclc-number'
-    success-bibs-retained-holdings:
-      description: Successful search for retained holdings with bib info
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BibBriefResultSet'
-          examples:
-            success-bibs-retained-holdings:
-              $ref: '#/components/examples/success-bibs-retained-holdings'
-            success-bibs-retained-holdings-monograph:
-              $ref: '#/components/examples/success-bibs-retained-holdings-monograph'
-            success-bibs-retained-holdings-serial:
-              $ref: '#/components/examples/success-bibs-retained-holdings-serial'
-            success-bibs-retained-holdings-serial-2:
-              $ref: '#/components/examples/success-bibs-retained-holdings-serial-2'
+    HasSharedPrintCommitment:
+      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
+      type: string
+      enum:
+      - Y
+      - N
+    BibRecordBrief:
+      type: object
+      properties:
+        oclcNumber:
+          $ref: '#/components/schemas/OclcNumber'
+        title:
+          $ref: '#/components/schemas/SimpleTitle'
+        creator:
+          $ref: '#/components/schemas/CreatorString'
+        date:
+          $ref: '#/components/schemas/Date'
+        language:
+          $ref: '#/components/schemas/ItemLanguage'
+        generalFormat:
+          $ref: '#/components/schemas/GeneralFormat'
+        specificFormat:
+          $ref: '#/components/schemas/SpecificFormat'
+        edition:
+          $ref: '#/components/schemas/EditionStatement'
+        publisher:
+          type: string
+        isbns:
+          $ref: '#/components/schemas/Isbns'
+        issns:
+          $ref: '#/components/schemas/Issns'
+        mergedOclcNumbers:
+          $ref: '#/components/schemas/MergedOclcNumbers'
+        catalogingInfo:
+          $ref: '#/components/schemas/CatalogingInfo'
+        institutionHolding:
+          $ref: '#/components/schemas/InstitutionHolding'
+      required:
+      - oclcNumber
+      - title
+      - creator
+      - date
+      - language
+      - edition
+      - publisher
+    ShelvingLocation:
+      description: Shelving location [LHR -> v852sc]
+      type: string
+    Date:
+      description: machine readable date 008
+      type: string
+    InstitutionHolding:
+      type: object
+      properties:
+        totalHoldingCount:
+          description: Number of holdings for this item [Holdings/TotalLibCount || FRBRHoldings/B]
+          type: integer
+          format: int32
+        totalWorksHoldingCount:
+          description: Number of holdings in the workset [FRBRHoldings/B]
+          type: integer
+          format: int32
+        totalEditions:
+          $ref: '#/components/schemas/TotalEditions'
+      oneOf:
+      - $ref: '#/components/schemas/briefHoldings'
+      - $ref: '#/components/schemas/detailedHoldings'
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    Issns:
+      description: International Standard Serial Numbers
+      type: array
+      items:
+        $ref: '#/components/schemas/Issn'
+    SpecificFormat:
+      description: Specific Format Type [Admin/OCLCDef/StdRT2]
+      type: string
+      enum:
+      - 2D
+      - Artcl
+      - Bluray
+      - Braille
+      - Cassette
+      - CD
+      - Chptr
+      - Continuing
+      - Digital
+      - DVD
+      - Encyc
+      - Film
+      - LargePrint
+      - LP
+      - Mic
+      - mss
+      - PrintBook
+      - rec
+      - Thsis
+      - VHS
+    EditionStatement:
+      description: Edition Statement [v250sa]
+      type: string
   parameters:
-    issn:
-      name: issn
-      in: query
-      description: issn of the bibliographic item (in index)
-      required: false
-      schema:
-        type: string
-      example: 0099-1333
     heldByGroup:
       name: heldByGroup
       in: query
@@ -828,6 +768,30 @@ components:
       schema:
         type: string
       example: ASRL
+    issn:
+      name: issn
+      in: query
+      description: issn of the bibliographic item (in index)
+      required: false
+      schema:
+        type: string
+      example: 0099-1333
+    isbn:
+      name: isbn
+      in: query
+      description: isbn of the bibliographic item (bn index)
+      required: false
+      schema:
+        type: string
+      example: 439136350
+    heldInState:
+      name: heldInState
+      in: query
+      description: Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2.
+      required: false
+      schema:
+        $ref: '#/components/schemas/State'
+      example: US-TX
     itemType:
       name: itemType
       in: query
@@ -856,14 +820,6 @@ components:
         type: string
         default: application/json
       required: false
-    oclcNumber:
-      name: oclcNumber
-      in: query
-      description: oclc number of the bibliographic item
-      required: false
-      schema:
-        $ref: '#/components/schemas/OclcNumber'
-      example: 41266045
     itemSubType:
       name: itemSubType
       in: query
@@ -884,88 +840,38 @@ components:
           value:
           - book-digital
           - audiobook-digital
-    isbn:
-      name: isbn
+    oclcNumber:
+      name: oclcNumber
       in: query
-      description: isbn of the bibliographic item (bn index)
+      description: oclc number of the bibliographic item
       required: false
       schema:
-        type: string
-      example: 439136350
-    heldInState:
-      name: heldInState
-      in: query
-      description: Restrict to holdings held by Institutions in requested State/Province, per ISO 3166-2.
-      required: false
-      schema:
-        $ref: '#/components/schemas/State'
-      example: US-TX
+        $ref: '#/components/schemas/OclcNumber'
+      example: 41266045
   examples:
-    success-bibs-retained-holdings-monograph:
-      summary: successful request for bibs retained-holdings monograph
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
       value:
-        numberOfRecords: 1
-        briefRecords:
-        - oclcNumber: '27972555'
-          title: Design, form, and chaos
-          creator: Paul Rand
-          date: '1993'
-          language: eng
-          generalFormat: Book
-          specificFormat: PrintBook
-          publisher: Yale University Press
-          publicationPlace: 'New Haven :'
-          mergedOclcNumbers:
-          - '1008281567'
-          isbns:
-          - '0300055536'
-          - '9780300055535'
-          catalogingInfo:
-            catalogingAgency: DLC
-            transcribingAgency: DLC
-            catalogingLanguage: eng
-            levelOfCataloging: ' '
-          institutionHolding:
-            totalHoldingCount: 904
-            briefHoldings:
-            - country: US
-              state: US-NY
-              oclcSymbol: VKM
-              registryId: 2012
-              institutionName: SIENA COL
-              self: https://worldcat.org/oclc-config/institution/data/2012
-              illStatus: S
-              address:
-                street1: Standish Library,  Siena College
-                street2: 515 Loudon Road
-                city: Loudonville
-                state: US-NY
-                postalCode: 12211-1462
-                country: US
-              institutionType: ACADEMIC
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
     method-not-allowed-error:
       summary: Error when invalid HTTP method used
       value:
         title: NOT_ALLOWED
         detail: POST method not allowed
-    not-acceptable-error:
-      summary: Error when media type in Accept header not supported
+    missing-query-parameter-value:
+      summary: Error returned when query parameter value not valid
       value:
-        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-        title: ''
-        detail: 'Media type application/xml not supported. Supported media types: application/json'
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: Query term is not provided.
     invalid-oclc-number:
       summary: Error returned when oclc number isn't valid
       value:
         type: INVALID_QUERY_PARAMETER_VALUE
         title: Validation Failure
         detail: oclcNumber must be a positive whole number
-    not-acceptable-error-language:
-      summary: Error when language in Accept-Language header not supported
-      value:
-        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-        title: ''
-        detail: 'en-UK supported. Supported languages: en, es, fr'
     success-bibs-retained-holdings-serial-2:
       summary: successful request for bibs retained-holdings serial with enumeration/caption/summary
       value:
@@ -1006,6 +912,12 @@ components:
                 postalCode: 12211-1462
                 country: US
               institutionType: ACADEMIC
+    not-acceptable-error:
+      summary: Error when media type in Accept header not supported
+      value:
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'Media type application/xml not supported. Supported media types: application/json'
     success-bibs-retained-holdings:
       summary: successful request for bibs retained-holdings
       value:
@@ -1050,12 +962,12 @@ components:
                 postalCode: 30322
                 country: US
               institutionType: ACADEMIC
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
+    not-acceptable-error-language:
+      summary: Error when language in Accept-Language header not supported
       value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'en-UK supported. Supported languages: en, es, fr'
     success-bibs-retained-holdings-serial:
       summary: successful request for bibs retained-holdings serial
       value:
@@ -1097,24 +1009,144 @@ components:
                 postalCode: 60637
                 country: US
               institutionType: ACADEMIC
-    missing-query-parameter-value:
-      summary: Error returned when query parameter value not valid
+    success-bibs-retained-holdings-monograph:
+      summary: successful request for bibs retained-holdings monograph
       value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: Query term is not provided.
+        numberOfRecords: 1
+        briefRecords:
+        - oclcNumber: '27972555'
+          title: Design, form, and chaos
+          creator: Paul Rand
+          date: '1993'
+          language: eng
+          generalFormat: Book
+          specificFormat: PrintBook
+          publisher: Yale University Press
+          publicationPlace: 'New Haven :'
+          mergedOclcNumbers:
+          - '1008281567'
+          isbns:
+          - '0300055536'
+          - '9780300055535'
+          catalogingInfo:
+            catalogingAgency: DLC
+            transcribingAgency: DLC
+            catalogingLanguage: eng
+            levelOfCataloging: ' '
+          institutionHolding:
+            totalHoldingCount: 904
+            briefHoldings:
+            - country: US
+              state: US-NY
+              oclcSymbol: VKM
+              registryId: 2012
+              institutionName: SIENA COL
+              self: https://worldcat.org/oclc-config/institution/data/2012
+              illStatus: S
+              address:
+                street1: Standish Library,  Siena College
+                street2: 515 Loudon Road
+                city: Loudonville
+                state: US-NY
+                postalCode: 12211-1462
+                country: US
+              institutionType: ACADEMIC
+  responses:
+    internal-server-error:
+      description: Something went wrong (hopfully rare) - please try again
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    bib_holding_query_error:
+      description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            missing-query-parameter:
+              $ref: '#/components/examples/missing-query-parameter'
+            missing-query-parameter-value:
+              $ref: '#/components/examples/missing-query-parameter-value'
+            invalid-oclc-number:
+              $ref: '#/components/examples/invalid-oclc-number'
+    method-not-supported:
+      description: Method not supported, see response Allow header
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-allowed:
+              $ref: '#/components/examples/method-not-allowed-error'
+    failed-not-acceptable:
+      description: Media type not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
+            not-acceptable-error-language:
+              $ref: '#/components/examples/not-acceptable-error-language'
+    success-bibs-retained-holdings:
+      description: Successful search for retained holdings with bib info
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BibBriefResultSet'
+          examples:
+            success-bibs-retained-holdings:
+              $ref: '#/components/examples/success-bibs-retained-holdings'
+            success-bibs-retained-holdings-monograph:
+              $ref: '#/components/examples/success-bibs-retained-holdings-monograph'
+            success-bibs-retained-holdings-serial:
+              $ref: '#/components/examples/success-bibs-retained-holdings-serial'
+            success-bibs-retained-holdings-serial-2:
+              $ref: '#/components/examples/success-bibs-retained-holdings-serial-2'
   securitySchemes:
-    entity_data_auth:
+    worldcat_metadata_auth:
       type: oauth2
       flows:
         clientCredentials:
           tokenUrl: https://oauth.oclc.org/token
           scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+            WorldCatMetadataAPI:view_brief_bib: view brief bibliographic data
+            WorldCatMetadataAPI:view_bib: view full bibliographic data
+            WorldCatMetadataAPI:view_marc_bib: view marc bibliographic data
+            WorldCatMetadataAPI:match_bibs: match bibliographic records
+            WorldCatMetadataAPI:get_holding_codes: retrieve holding codes
+            WorldCatMetadataAPI:manage_bibs: manage bibliographic data
+            WorldCatMetadataAPI:view_retained_holdings: view holdings which libraries have chosen to retain
+            WorldCatMetadataAPI:view_summary_holdings: view summary information about library holdings
+            WorldCatMetadataAPI:view_my_holdings: view detailed information about the authentication institution's holdings
+            WorldCatMetadataAPI:view_my_holdings_private_notes: view private notes in holdings data
+            WorldCatMetadataAPI:manage_institution_holdings: manage institution holdings
+            WorldCatMetadataAPI:view_my_local_bib_data: view local bibliographic data from the authenticate institution
+            WorldCatMetadataAPI:manage_institution_lbds: manage institution local bibliographic data records
+            WorldCatMetadataAPI:manage_institution_lhrs: manage institution local holdings data records
+            enhMetadataAPI:fieldTransfer: field transfer functionality
         authorizationCode:
           authorizationUrl: https://oauth.oclc.org/auth
           tokenUrl: https://oauth.oclc.org/token
           scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+            WorldCatMetadataAPI:view_brief_bib: view brief bibliographic data
+            WorldCatMetadataAPI:view_bib: view full bibliographic data
+            WorldCatMetadataAPI:view_marc_bib: view marc bibliographic data
+            WorldCatMetadataAPI:match_bibs: match bibliographic records
+            WorldCatMetadataAPI:get_holding_codes: retrieve holding codes
+            WorldCatMetadataAPI:manage_bibs: manage bibliographic data
+            WorldCatMetadataAPI:view_retained_holdings: view holdings which libraries have chosen to retain
+            WorldCatMetadataAPI:view_summary_holdings: view summary information about library holdings
+            WorldCatMetadataAPI:view_my_holdings: view detailed information about the authentication institution's holdings
+            WorldCatMetadataAPI:view_my_holdings_private_notes: view private notes in holdings data
+            WorldCatMetadataAPI:manage_institution_holdings: manage institution holdings
+            WorldCatMetadataAPI:view_my_local_bib_data: view local bibliographic data from the authenticate institution
+            WorldCatMetadataAPI:manage_institution_lbds: manage institution local bibliographic data records
+            WorldCatMetadataAPI:manage_institution_lhrs: manage institution local holdings data records
+            enhMetadataAPI:fieldTransfer: field transfer functionality
+externalDocs:
+  description: Find out more about WorldCatMetadata API
+  url: https://www.oclc.org/developer/develop/web-services/worldcat-metadata-api.en.html

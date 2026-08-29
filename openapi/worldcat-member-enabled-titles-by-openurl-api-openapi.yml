@@ -1,11 +1,12 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
-  version: 1.0.6
-  title: WorldCat Entity Data Bibliographic Resources Member Enabled Titles by OpenURL API
-  description: WorldCat Entity Data
+  description: WorldCat Knowledge base API
+  version: 1.0.0
+  title: WorldCat Knowledge Base Member Enabled Titles by OpenURL API
 servers:
-- url: https://id.oclc.org/worldcat
-  description: PROD
+- url: https://worldcat.org/webservices/kb
+security:
+- api_key: []
 tags:
 - name: Member Enabled Titles by OpenURL
 paths:
@@ -86,12 +87,6 @@ paths:
       - api_key: []
 components:
   examples:
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
     success-openurl-multiple:
       summary: successful openurl request for multiple items
       value:
@@ -469,18 +464,17 @@ components:
             collection_name: Nature Open Access Content
             coverage_enum: fulltext
             oclcnum: '1058009839'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
   securitySchemes:
-    entity_data_auth:
-      type: oauth2
-      flows:
-        clientCredentials:
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
-        authorizationCode:
-          authorizationUrl: https://oauth.oclc.org/auth
-          tokenUrl: https://oauth.oclc.org/token
-          scopes:
-            publicEntities:read_brief_entities: read brief entity data
-            publicEntities:read_references: read entity references
+    api_key:
+      type: apiKey
+      name: wskey
+      in: query
+externalDocs:
+  description: Find out more about WorldCat Knowledge Base API
+  url: https://www.oclc.org/developer/api/oclc-apis/worldcat-knowledge-base-api.en.html
