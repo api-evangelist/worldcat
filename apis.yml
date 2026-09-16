@@ -61,7 +61,7 @@ apis:
   baseURL: https://worldcat.org/webservices/kb
   tags:
   - Knowledge Base
-  - E-resources
+  - E-Resources
   - OpenURL
   - Libraries
   - Subscription
