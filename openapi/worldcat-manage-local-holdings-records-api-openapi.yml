@@ -125,7 +125,7 @@ paths:
     put:
       tags:
       - Manage Local Holdings Records
-      summary: Replace a Local Holdings Record.
+      summary: Replace a Local Holdings Record
       description: Given a Control Number, find the associated Local Holdings Record and replace it. If the Control Number is not found in WorldCat, then the provided Local Holdings Record will be created.
       operationId: lhr-update
       parameters:
@@ -239,34 +239,39 @@ paths:
       - worldcat_metadata_auth:
         - WorldCatMetadataAPI:manage_institution_lhrs
 components:
-  responses:
-    403-forbidden-url:
-      description: Forbidden URL.
-      content:
-        application/json:
-          examples:
-            forbidden-url:
-              summary: Forbidden URL
-              value:
-                message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
-    406-accept-header-unacceptable:
-      description: Accept Header Media Type is not Supported.
-      content:
-        application/json:
-          examples:
-            accept-header-unacceptable:
-              summary: Accept Header Unacceptable
-              value:
-                type: NOT_ACCEPTABLE
-                title: Invalid 'Accept' header.
-                detail: 'A request with an invalid ''Accept'' header was attempted: ....'
+  examples:
+    lhr-marcxml-new:
+      summary: LHR MARC XML Record
+      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n"
+    lhr-marcxml-shared-print:
+      summary: LHR MARC XML Record with Shared Print Commitments
+      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield tag=\"583\" ind1=\"1\" ind2=\" \">\n    <subfield code=\"a\">committed to retain</subfield>\n    <subfield code=\"c\">20210630</subfield>\n    <subfield code=\"d\">20210630</subfield>\n    <subfield code=\"f\">EAST</subfield>      \n    <subfield code=\"u\">http://eastlibraries.org/retained-materials<</subfield>\n    <subfield code=\"z\">EAST</subfield>\n    <subfield code=\"2\">pda</subfield>\n    <subfield code=\"5\">NHemH</subfield>\n  </datafield>      \n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n  </datafield>\n\n</record>\n"
+    lhr-marc-new:
+      summary: LHR MARC Record
+      value: "00209nx  a2200097zi 4500004000700000007000300007008003300010852002900043876001100072538002800083\\u001E312010\\u001Ezu\\u001E1103280p    0   4001uueng0110328\\u001E  \\u001FaOCPSB\\u001FbEAST\\u001FcEAST-STACKS\\u001E  \\u001Fp879456\\u001E  \\u001FWMAPI test create marc 1\\u001E\\u001D    \n"
+    failed-not-found:
+      summary: Error when resource not found
+      value:
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
     unauthorized:
-      description: Unauthorized
-      content:
-        application/json:
-          examples:
-            unauthorized:
-              $ref: '#/components/examples/unauthorized'
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    lhr-marcxml-existing:
+      summary: LHR MARC XML Record
+      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n"
+    lhr-marc-existing:
+      summary: LHR MARC Record
+      value: "00260nx  a2200121zi 4500001001000000004000700010005001700017007000300034008003300037852002900070876001100099538002800110\\u001E227503625\\u001E312010\\u001E20210831082208.5\\u001Ezu\\u001E1103280p    0   4001uueng0110328\\u001E  \\u001FaOCPSB\\u001FbEAST\\u001FcEAST-STACKS\\u001E  \\u001Fp879456\\u001E  \\u001FWMAPI test update marc 1\\u001E\\u001D        \n"
+    generic-bad-request:
+      summary: Bad Request.
+      value:
+        type: BAD_REQUEST
+        title: string
+        detail: string
+  responses:
     500-internal-server-error:
       description: Something went wrong (hopefully rare) - please try again.
       content:
@@ -278,6 +283,26 @@ components:
                 type: INTERNAL_SERVER_ERROR
                 title: string
                 detail: string
+    406-accept-header-unacceptable:
+      description: Accept Header Media Type is not Supported.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Accept Header Unacceptable
+              value:
+                type: NOT_ACCEPTABLE
+                title: Invalid 'Accept' header.
+                detail: 'A request with an invalid ''Accept'' header was attempted: ....'
+    403-forbidden-url:
+      description: Forbidden URL.
+      content:
+        application/json:
+          examples:
+            forbidden-url:
+              summary: Forbidden URL
+              value:
+                message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
     failed-not-found:
       description: Failed operation - resource not found
       content:
@@ -287,38 +312,13 @@ components:
           examples:
             failed-not-found:
               $ref: '#/components/examples/failed-not-found'
-  examples:
-    lhr-marcxml-new:
-      summary: LHR MARC XML Record
-      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n"
-    lhr-marc-existing:
-      summary: LHR MARC Record
-      value: "00260nx  a2200121zi 4500001001000000004000700010005001700017007000300034008003300037852002900070876001100099538002800110\\u001E227503625\\u001E312010\\u001E20210831082208.5\\u001Ezu\\u001E1103280p    0   4001uueng0110328\\u001E  \\u001FaOCPSB\\u001FbEAST\\u001FcEAST-STACKS\\u001E  \\u001Fp879456\\u001E  \\u001FWMAPI test update marc 1\\u001E\\u001D        \n"
-    lhr-marcxml-shared-print:
-      summary: LHR MARC XML Record with Shared Print Commitments
-      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield tag=\"583\" ind1=\"1\" ind2=\" \">\n    <subfield code=\"a\">committed to retain</subfield>\n    <subfield code=\"c\">20210630</subfield>\n    <subfield code=\"d\">20210630</subfield>\n    <subfield code=\"f\">EAST</subfield>      \n    <subfield code=\"u\">http://eastlibraries.org/retained-materials<</subfield>\n    <subfield code=\"z\">EAST</subfield>\n    <subfield code=\"2\">pda</subfield>\n    <subfield code=\"5\">NHemH</subfield>\n  </datafield>      \n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n  </datafield>\n\n</record>\n"
     unauthorized:
-      summary: Error returned when valid API credentials not sent or invalid
-      value:
-        message: Unauthorized
-    failed-not-found:
-      summary: Error when resource not found
-      value:
-        type: NOT_FOUND
-        title: Resource Not Found
-        detail: The specified resource was not found at this address.
-    lhr-marcxml-existing:
-      summary: LHR MARC XML Record
-      value: "<record>\n  <leader>00000nx  a2200000zi 4500</leader>\n  <controlfield tag='001'>227523461</controlfield>\n  <controlfield tag='004'>312010</controlfield>\n  <controlfield tag='005'>20210908085741.4</controlfield>\n  <controlfield tag='007'>zu</controlfield>\n  <controlfield tag='008'>1103280p    0   4001uueng0210908</controlfield>\n  <datafield ind2=' ' ind1=' ' tag='852'>\n    <subfield code='a'>OCWMS</subfield>\n    <subfield code='b'>EAST</subfield>\n    <subfield code='c'>EAST-STACKS</subfield>\n  </datafield>\n  <datafield ind2=' ' ind1=' ' tag='876'>\n    <subfield code='p'>879456</subfield>\n  </datafield>\n</record>\n"
-    generic-bad-request:
-      summary: Bad Request.
-      value:
-        type: BAD_REQUEST
-        title: string
-        detail: string
-    lhr-marc-new:
-      summary: LHR MARC Record
-      value: "00209nx  a2200097zi 4500004000700000007000300007008003300010852002900043876001100072538002800083\\u001E312010\\u001Ezu\\u001E1103280p    0   4001uueng0110328\\u001E  \\u001FaOCPSB\\u001FbEAST\\u001FcEAST-STACKS\\u001E  \\u001Fp879456\\u001E  \\u001FWMAPI test create marc 1\\u001E\\u001D    \n"
+      description: Unauthorized
+      content:
+        application/json:
+          examples:
+            unauthorized:
+              $ref: '#/components/examples/unauthorized'
   schemas:
     MARCXML:
       description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
@@ -328,6 +328,25 @@ components:
       externalDocs:
         description: Learn about the Marc Bibliographic Standard
         url: https://www.loc.gov/standards/marcxml/
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
     Problem:
       type: object
       description: RFC 7807 description of an error.
@@ -357,25 +376,6 @@ components:
                 type: string
               reason:
                 type: string
-    ProblemType:
-      description: A URI reference [RFC3986] that identifies the problem type.
-      type: string
-      format: uri
-      enum:
-      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-      - https://developer.api.oclc.org/errors/NOT_ALLOWED
-      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
-      - https://developer.api.oclc.org/errors/BAD_REQUEST
-      - https://developer.api.oclc.org/errors/NOT_FOUND
-      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
-      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
-      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
-      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
-      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
-      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
   securitySchemes:
     worldcat_metadata_auth:
       type: oauth2

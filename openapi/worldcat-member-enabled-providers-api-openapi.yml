@@ -184,55 +184,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    Provider:
-      type: object
-      required:
-      - title
-      - id
-      - links
-      - provider_uid
-      - provider_name
-      - available_collections
-      - selected_collection
-      - available_entries
-      - selected_entries
-      properties:
-        title:
-          description: Name of Provider
-          type: string
-        id:
-          description: URL for Provider in API
-          type: string
-        links:
-          description: links associated with Provider
-          type: array
-          items:
-            $ref: '#/components/schemas/Link'
-        provider_uid:
-          description: Id for provider
-          type: string
-        provider_name:
-          description: name for provider
-          type: string
-        vic_id:
-          description: id for provider in vendor information center
-          type: string
-        available_collections:
-          description: number of available collection associated with provider
-          type: integer
-          format: int32
-        selected_collection:
-          description: Number of collections from provider selected by institution
-          type: integer
-          format: int32
-        available_entries:
-          description: Number of available titles from provider
-          type: integer
-          format: int32
-        selected_entries:
-          description: Number of selected titles from provider selected by institution
-          type: integer
-          format: int32
     ProviderSearchResults:
       type: object
       properties:
@@ -284,6 +235,55 @@ components:
           - parent
           - enclosure
           - via
+    Provider:
+      type: object
+      required:
+      - title
+      - id
+      - links
+      - provider_uid
+      - provider_name
+      - available_collections
+      - selected_collection
+      - available_entries
+      - selected_entries
+      properties:
+        title:
+          description: Name of Provider
+          type: string
+        id:
+          description: URL for Provider in API
+          type: string
+        links:
+          description: links associated with Provider
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+        provider_uid:
+          description: Id for provider
+          type: string
+        provider_name:
+          description: name for provider
+          type: string
+        vic_id:
+          description: id for provider in vendor information center
+          type: string
+        available_collections:
+          description: number of available collection associated with provider
+          type: integer
+          format: int32
+        selected_collection:
+          description: Number of collections from provider selected by institution
+          type: integer
+          format: int32
+        available_entries:
+          description: Number of available titles from provider
+          type: integer
+          format: int32
+        selected_entries:
+          description: Number of selected titles from provider selected by institution
+          type: integer
+          format: int32
   examples:
     success-read-provider:
       summary: successful request to read a provider
@@ -304,12 +304,6 @@ components:
         selected_collections: '22'
         available_entries: '1115'
         selected_entries: '1115'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
     success-search-provider:
       summary: successful search of providers
       value:
@@ -341,6 +335,12 @@ components:
           kb:selected_collections: '1'
           kb:available_entries: '980'
           kb:selected_entries: '105'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
   securitySchemes:
     api_key:
       type: apiKey

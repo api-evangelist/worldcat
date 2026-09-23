@@ -236,89 +236,20 @@ paths:
       security:
       - api_key: []
 components:
-  examples:
-    success-read-entry:
-      summary: successful request to read a title
-      value:
-        title: API Testing with Postman
-        id: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
-        published: '2019-03-16T20:03:56Z'
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961.html
-          rel: alternate
-        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
-          rel: self
-        - href: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F9781789616569%3Ftocview%3Dtrue&linktype=best
-          rel: via
-        - href: http://my.safaribooksonline.com/9781789616569?tocview=true
-          rel: canonical
-        entry_uid: '44119961'
-        entry_status: raw
-        bkey: '9781789616569'
-        collection_uid: safari.tech
-        collection_name: Safari Tech Books Online
-        provider_uid: safari
-        provider_name: Safari Books Online
-        isbn: '9781789616569'
-        publisher: Packt Publishing
-        coverage: ebook@2019-02-28
-        coll_type: browsable
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
-    success-search-collection:
-      summary: successful search of collections
-      value:
-        title: 'WorldCat KnowledgeBase Search: Nature'
-        updated: '2019-12-12T16:44:25.434Z'
-        id: urn:uuid:e318046f4275b7e1dcd64e20a4cd13aa
-        author: OCLC
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/collections/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
-          rel: self
-        os:totalResults: '1'
-        os:startIndex: '1'
-        os:itemsPerPage: '10'
-        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
-        entries:
-        - title: Nature Open Access Content
-          id: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
-          updated: '2019-11-26T16:24:16Z'
-          published: '2012-07-24T01:05:53Z'
-          links:
-          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
-            rel: self
-          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807.html
-            rel: alternate
-          - href: https://www.nature.com
-            rel: via
-          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess
-            rel: parent
-          - href: http://worldcat.org/webservices/kb/export/128807/128807_NPG.openAccess_kbart.txt
-            rel: enclosure
-            title: kbart file
-            length: 53000
-          provider_uid: NPG
-          provider_name: Nature Publishing Group
-          collection_uid: NPG.openAccess
-          owner_institution: '128807'
-          source_institution: '6569'
-          collection_status: copy
-          collection_type: autoapprove browsable openaccess
-          title_link_template: '[[localstem]][[url]]'
-          linkscheme: npg
-          uhf_version: release1574104235-NPG
-          wcsync_enabled: 'false'
-          marcdelivery_enabled: 'false'
-          marcdelivery_no_delete: 'false'
-          open: 'false'
-          available_entries: '106'
-          selected_entries: '106'
-          localstem: 'true'
   schemas:
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
     Title:
       type: object
       properties:
@@ -451,19 +382,88 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Title'
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        rel:
-          type: string
-          enum:
-          - self
-          - alternate
-          - parent
-          - enclosure
-          - via
+  examples:
+    success-read-entry:
+      summary: successful request to read a title
+      value:
+        title: API Testing with Postman
+        id: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
+        published: '2019-03-16T20:03:56Z'
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961.html
+          rel: alternate
+        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
+          rel: self
+        - href: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F9781789616569%3Ftocview%3Dtrue&linktype=best
+          rel: via
+        - href: http://my.safaribooksonline.com/9781789616569?tocview=true
+          rel: canonical
+        entry_uid: '44119961'
+        entry_status: raw
+        bkey: '9781789616569'
+        collection_uid: safari.tech
+        collection_name: Safari Tech Books Online
+        provider_uid: safari
+        provider_name: Safari Books Online
+        isbn: '9781789616569'
+        publisher: Packt Publishing
+        coverage: ebook@2019-02-28
+        coll_type: browsable
+    success-search-collection:
+      summary: successful search of collections
+      value:
+        title: 'WorldCat KnowledgeBase Search: Nature'
+        updated: '2019-12-12T16:44:25.434Z'
+        id: urn:uuid:e318046f4275b7e1dcd64e20a4cd13aa
+        author: OCLC
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/collections/search?q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+          rel: self
+        os:totalResults: '1'
+        os:startIndex: '1'
+        os:itemsPerPage: '10'
+        os:Query: q=Nature&startIndex=1&search-type=search&itemsPerPage=10&scope=my&orderBy=title+asc&institution_id=128807
+        entries:
+        - title: Nature Open Access Content
+          id: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+          updated: '2019-11-26T16:24:16Z'
+          published: '2012-07-24T01:05:53Z'
+          links:
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807
+            rel: self
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess,128807.html
+            rel: alternate
+          - href: https://www.nature.com
+            rel: via
+          - href: http://worldcat.org/webservices/kb/rest/collections/NPG.openAccess
+            rel: parent
+          - href: http://worldcat.org/webservices/kb/export/128807/128807_NPG.openAccess_kbart.txt
+            rel: enclosure
+            title: kbart file
+            length: 53000
+          provider_uid: NPG
+          provider_name: Nature Publishing Group
+          collection_uid: NPG.openAccess
+          owner_institution: '128807'
+          source_institution: '6569'
+          collection_status: copy
+          collection_type: autoapprove browsable openaccess
+          title_link_template: '[[localstem]][[url]]'
+          linkscheme: npg
+          uhf_version: release1574104235-NPG
+          wcsync_enabled: 'false'
+          marcdelivery_enabled: 'false'
+          marcdelivery_no_delete: 'false'
+          open: 'false'
+          available_entries: '106'
+          selected_entries: '106'
+          localstem: 'true'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
   securitySchemes:
     api_key:
       type: apiKey

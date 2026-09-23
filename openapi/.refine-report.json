@@ -56,7 +56,8 @@
     "worldcat-search-api.yml: declared missing tag: Local Holdings Resources",
     "worldcat-search-api.yml: declared missing tag: Member General Holdings",
     "worldcat-search-api.yml: declared missing tag: Member Shared Print Holdings",
-    "tag 'Bibliographic Resources' spans 2 source specs (worldcat-metadata-api.yml, worldcat-search-api.yml): per-path servers applied"
+    "tag 'Bibliographic Resources' spans 2 source specs (worldcat-metadata-api.yml, worldcat-search-api.yml): per-path servers applied",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "worldcat-bibliographic-resources-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -253,38 +253,20 @@ paths:
       security:
       - api_key: []
 components:
-  examples:
-    success-openurl-single:
-      summary: successful openurl request
-      value:
-      - coverage: ebook@2005-09-26
-        collection_url: http://my.safaribooksonline.com
-        collection_uid: safari.tech
-        oclcnums: 65183407 61260129 878406930 861529762 847462570 61849699 270992543
-        isbn: '9780596007652'
-        provider_uid: safari
-        source: holdings
-        title: Ambient Findability
-        collection_type: browsable
-        content: ebook
-        url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best
-        institution_id:
-        - '128807'
-        uid: '1883656'
-        bkey: 0596007655
-        publisher: O'Reilly Media, Inc. - O'Reilly Media
-        openaccess: 'no'
-        id: d6edd1064311b081e77051faf19e687e
-        provider_name: Safari Books Online
-        collection_name: Safari Tech Books Online
-        oclcnum: '61849699'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
   schemas:
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
     Title:
       type: object
       properties:
@@ -379,19 +361,37 @@ components:
       - provider_name
       - provider_uid
       - publisher
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        rel:
-          type: string
-          enum:
-          - self
-          - alternate
-          - parent
-          - enclosure
-          - via
+  examples:
+    success-openurl-single:
+      summary: successful openurl request
+      value:
+      - coverage: ebook@2005-09-26
+        collection_url: http://my.safaribooksonline.com
+        collection_uid: safari.tech
+        oclcnums: 65183407 61260129 878406930 861529762 847462570 61849699 270992543
+        isbn: '9780596007652'
+        provider_uid: safari
+        source: holdings
+        title: Ambient Findability
+        collection_type: browsable
+        content: ebook
+        url: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F0596007655%3Ftocview%3Dtrue&linktype=best
+        institution_id:
+        - '128807'
+        uid: '1883656'
+        bkey: 0596007655
+        publisher: O'Reilly Media, Inc. - O'Reilly Media
+        openaccess: 'no'
+        id: d6edd1064311b081e77051faf19e687e
+        provider_name: Safari Books Online
+        collection_name: Safari Tech Books Online
+        oclcnum: '61849699'
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
   securitySchemes:
     api_key:
       type: apiKey
