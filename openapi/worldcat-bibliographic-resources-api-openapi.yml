@@ -121,7 +121,7 @@ paths:
       - Bibliographic Resources
       summary: Retrieve specific Bibliographic Resource
       description: Retrieve specific Bibliographic Resource. Returns detailed bibliographic data.
-      operationId: retrieve-bib
+      operationId: getWorldcatSearchV2BibsByOclcNumber
       parameters:
       - $ref: '#/components/parameters/accept'
       - $ref: '#/components/parameters/oclcNumberAsId'
@@ -149,6 +149,8 @@ paths:
       security:
       - worldcat_search_auth:
         - wcapi:view_bib
+      x-operation-id-source: normalized
+      x-operation-id-original: retrieve-bib
     servers:
     - url: https://americas.discovery.api.oclc.org
       description: PROD
@@ -326,41 +328,151 @@ paths:
     - url: https://americas.discovery.api.oclc.org
       description: PROD
 components:
+  responses:
+    internal-server-error:
+      description: Something went wrong (hopfully rare) - please try again
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found:
+              $ref: '#/components/examples/failed-not-found'
+    failed-not-acceptable:
+      description: Media type not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
+            not-acceptable-error-language:
+              $ref: '#/components/examples/not-acceptable-error-language'
+    success-single-bib:
+      description: successful request for single bib record
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BibRecord'
+          examples:
+            success-bibs-oclcnumber:
+              $ref: '#/components/examples/success-bibs-oclcnumber'
+    method-not-supported:
+      description: Method not supported, see response Allow header
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-allowed:
+              $ref: '#/components/examples/method-not-allowed-error'
+    bib_query_error:
+      description: Invalid query. The request was unacceptable, often due to missing a required parameter.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            missing-query-parameter:
+              $ref: '#/components/examples/missing-query-parameter'
+            missing-query-parameter-value:
+              $ref: '#/components/examples/missing-query-parameter-value'
+            invalid-query-parameter-bad-index:
+              $ref: '#/components/examples/invalid-query-parameter-bad-index'
+            invalid-query-parameter-bad-facet-name:
+              $ref: '#/components/examples/invalid-query-parameter-bad-facet-name'
+            invalid-query-parameter-bad-facet-number:
+              $ref: '#/components/examples/invalid-query-parameter-bad-facet-number'
+            invalid-query-parameter-bad-orderBy:
+              $ref: '#/components/examples/invalid-query-parameter-bad-orderBy'
+    success-single-brief-bib:
+      description: successful request for brief-bib result set
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BibRecordBrief'
+          examples:
+            success-brief-bibs-oclcnumber:
+              $ref: '#/components/examples/success-brief-bibs-oclcnumber'
+            success-brief-bibs-ebook:
+              $ref: '#/components/examples/success-brief-bibs-ebook'
+            success-brief-bibs-chapter:
+              $ref: '#/components/examples/success-brief-bibs-chapter'
+            success-brief-bibs-article:
+              $ref: '#/components/examples/success-brief-bibs-article'
+            success-brief-bibs-digital_article:
+              $ref: '#/components/examples/success-brief-bibs-digital_article'
+            success-brief-bibs-dissertation:
+              $ref: '#/components/examples/success-brief-bibs-film'
+            success-brief-bibs-film:
+              $ref: '#/components/examples/success-brief-bibs-film'
+            success-brief-bibs-painting:
+              $ref: '#/components/examples/success-brief-bibs-painting'
+            success-brief-bibs-photo:
+              $ref: '#/components/examples/success-brief-bibs-photo'
+            success-brief-bibs-website:
+              $ref: '#/components/examples/success-brief-bibs-website'
+    success-brief-bib-search:
+      description: successful request for brief-bib result set
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BibBriefResultSet'
+          examples:
+            success-brief-bibs-search:
+              $ref: '#/components/examples/success-brief-bibs-search'
+            success-brief-bibs-highlights:
+              $ref: '#/components/examples/bibRecordBrief-highlights'
+    success-bibs-search:
+      description: successful request for bib result set
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BibResultSet'
+          examples:
+            success-bibs:
+              $ref: '#/components/examples/success-bibs'
+            success-bibs-highlights:
+              $ref: '#/components/examples/bibRecord-highlights'
+            success-single-bib:
+              $ref: '#/components/examples/success-single-bib'
+    success-other-editions:
+      description: successful request for other editions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/BibBriefResultSet'
+          examples:
+            success-brief-bibs-other-editions:
+              $ref: '#/components/examples/success-brief-bibs-other-editions'
+            success-brief-bibs-other-editions-holding-indicators:
+              $ref: '#/components/examples/success-brief-bibs-other-editions-holding-indicators'
   schemas:
-    GeneralNotes:
-      description: General Notes [v500sa, v501sa, v590sa,s3, (v59x sa-z)]
-      type: array
-      items:
-        $ref: '#/components/schemas/LocalizableText'
-    LanguageNotes:
-      description: language note [v546sa]
-      type: array
-      items:
-        type: string
-    ArticleWorkset:
-      type: object
-      properties:
-        databaseCollection:
-          type: string
-        oclcNumber:
-          $ref: '#/components/schemas/OclcNumber'
-    InternationalText:
-      type: object
-      properties:
-        text:
-          type: string
-        romanizedText:
-          type: string
-        languageCode:
-          type: string
-        textDirection:
-          type: string
-          enum:
-          - RTL
-          - LTR
-    EditionStatement:
-      description: Edition Statement [v250sa]
+    AudienceNote:
+      description: Target Audience Note [v521sa]
       type: string
+    Work:
+      type: object
+      properties:
+        id:
+          description: Id of the workset [Admin/Work/ID]
+          type: string
+        count:
+          description: Number of items in Workset [Admin/Work/Count]
+          type: integer
+          format: int32
+        articleCluster:
+          description: Items in Article Workset [WorkSet/NO]
+          type: array
+          items:
+            $ref: '#/components/schemas/ArticleWorkset'
     Related:
       description: Related [v787] Preceeding [v780] Succeeding [v785] (sa,b,c,d,g,h,i,k,m,n,o,r,s,t,u,w,x,y,z)
       type: object
@@ -386,22 +498,62 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/IssuedWithEntry'
-    AdditionalTitles:
-      description: Added Entry Uniform Titles [v730sa,d,f,g,k,l,m,n,o,p,r,s,i,t,x]
-      type: array
-      items:
-        $ref: '#/components/schemas/AdditionalRelationship'
-    PeerReviewed:
-      description: Is this a peer reviewed work [Admin/OCLCDef/PR]
+    EditionIdentifier:
+      description: An id associated with a particular edition cluster [Admin/Edition/ID]
       type: string
-      enum:
-      - Y
-      - N
+    EditionStatement:
+      description: Edition Statement [v250sa]
+      type: string
     CartographicData:
       description: Cartographic Mathematical Data [v255sa,b,c]
       type: array
       items:
         type: string
+    MaterialsSpecified:
+      description: Materials specified |3
+      type: string
+    LocalizableText:
+      type: object
+      properties:
+        text:
+          type: string
+        private:
+          description: 1st indicator of 590
+          type: boolean
+          default: false
+    PerformerNotes:
+      description: Performers Notes [v511sa]
+      type: array
+      items:
+        type: string
+    TotalEditions:
+      description: Total number of editions in the workgroup
+      type: integer
+      format: int32
+    Edition:
+      type: object
+      properties:
+        id:
+          $ref: '#/components/schemas/EditionIdentifier'
+        count:
+          description: Number of items in edition cluster
+          type: integer
+          format: int32
+    LanguageNotes:
+      description: language note [v546sa]
+      type: array
+      items:
+        type: string
+    Isbns:
+      description: International Standard Book Number [v020sa]
+      type: array
+      items:
+        type: string
+    ReproductionNotes:
+      description: Reproduction Notes [v533]
+      type: array
+      items:
+        $ref: '#/components/schemas/ReproductionNote'
     DigitalAccessAndLocation:
       type: object
       required:
@@ -432,78 +584,52 @@ components:
           type: string
         relationship:
           $ref: '#/components/schemas/LinkRelationship'
-    PublicationPlace:
-      description: Publication Place [v260sa v264sa]
-      type: string
-    Format:
+    InternationalText:
       type: object
       properties:
-        generalFormat:
-          $ref: '#/components/schemas/GeneralFormat'
-        specificFormat:
-          $ref: '#/components/schemas/SpecificFormat'
-        materialTypes:
-          $ref: '#/components/schemas/MaterialTypes'
-    AdditionalRelationship:
+        text:
+          type: string
+        romanizedText:
+          type: string
+        languageCode:
+          type: string
+        textDirection:
+          type: string
+          enum:
+          - RTL
+          - LTR
+    IssuedWithEntry:
       type: object
       properties:
-        relationshipInfo:
+        displayConstant:
           type: string
         titles:
           type: array
           items:
             type: string
-        issns:
-          $ref: '#/components/schemas/Issns'
-        relators:
+        recordControlOclcNumbers:
           type: array
           items:
-            $ref: '#/components/schemas/Relator'
-        relatedData:
+            type: string
+        issns:
+          $ref: '#/components/schemas/Issns'
+        isbns:
+          $ref: '#/components/schemas/Isbns'
+        mainEntryHeadings:
+          type: array
+          items:
+            type: string
+        relatedParts:
+          type: array
+          items:
+            type: string
+        uniformTitle:
           type: string
-        additionalRelationshipInfo:
-          type: string
-    LinkRelationship:
-      description: Relationship to the item described in the record as a whole [v856 second indicator]
-      type: string
-      enum:
-      - unknown
-      - resource
-      - version of resource
-      - related resource
-    MediumOfPerformance:
+    FormOfWorks:
+      description: Form of Work [v380sa]
       type: array
       items:
         type: string
-    Problem:
-      type: object
-      description: RFC 7807 description of an error.
-      properties:
-        type:
-          $ref: '#/components/schemas/ProblemType'
-        title:
-          description: A short, human-readable summary of the problem type.
-          type: string
-        instance:
-          description: A URI reference that identifies the specific occurrence of the problem.
-          type: string
-          format: uri
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.,
-          type: string
-        invalidParams:
-          description: An array of validation errors.
-          type: array
-          items:
-            description: The validation error descriptor.
-            type: object
-            properties:
-              path:
-                type: string
-              name:
-                type: string
-              reason:
-                type: string
     Identifier:
       type: object
       properties:
@@ -536,47 +662,100 @@ components:
           $ref: '#/components/schemas/MergedOclcNumbers'
         gpoNumber:
           $ref: '#/components/schemas/GpoNumber'
-    Content:
-      description: Formatted Contents Note [v505sa,t,r,g,u]
+    EventNotes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Event'
+    Format:
       type: object
       properties:
-        contentNote:
-          $ref: '#/components/schemas/InternationalText'
-        titles:
+        generalFormat:
+          $ref: '#/components/schemas/GeneralFormat'
+        specificFormat:
+          $ref: '#/components/schemas/SpecificFormat'
+        materialTypes:
+          $ref: '#/components/schemas/MaterialTypes'
+    ItemLanguage:
+      description: Language of the item [v041sa,j]
+      type: string
+    EditionInfo:
+      type: object
+      properties:
+        statement:
+          $ref: '#/components/schemas/EditionStatement'
+    CreditNotes:
+      description: Production Credits Notes [v508sa]
+      type: string
+    RelatedItem:
+      type: object
+      properties:
+        typeOfRelationship:
+          type: string
+        relatedItemTitle:
+          type: string
+        relationshipInfo:
           type: array
           items:
             type: string
-        miscellaneousInfo:
+        relatedParts:
           type: array
           items:
             type: string
-        statementsOfResponsibility:
+        mainEntryHeading:
+          type: string
+        edition:
+          $ref: '#/components/schemas/EditionStatement'
+        qualifyingInfo:
+          type: string
+        publicationInfo:
+          type: string
+        physicalDescription:
+          type: string
+        seriesData:
           type: array
           items:
             type: string
-        uris:
+        materialSpecificDetail:
+          type: string
+        relatedItemNotes:
           type: array
           items:
             type: string
-    UseAndReproductionNotes:
-      description: Terms Governing Use and Reproduction [v540sa]
+        otherItemIdentifiers:
+          type: array
+          items:
+            type: string
+        reportNumbers:
+          type: array
+          items:
+            type: string
+        uniformTitle:
+          type: string
+        standardTechReportNumber:
+          type: string
+        recordControlNumbers:
+          type: array
+          items:
+            type: string
+        issns:
+          $ref: '#/components/schemas/Issns'
+        coden:
+          type: string
+        isbns:
+          $ref: '#/components/schemas/Isbns'
+    Publisher:
+      description: Publisher Information [v260sa,b v264sa,b v880sa,b]
+      type: object
+      properties:
+        publisherName:
+          $ref: '#/components/schemas/PublisherName'
+        publicationPlace:
+          $ref: '#/components/schemas/PublicationPlace'
+    LinkText:
+      description: Text associated with a link |y
       type: array
       items:
         type: string
-    Classification:
-      type: object
-      properties:
-        dewey:
-          description: Dewey Decimal Classification Number [v082sa,b]
-          type: string
-        lc:
-          description: Library of Congress Call Number [v050sa,b]
-          type: string
-        nlm:
-          description: National Library of Medicine Call Number [v060sa,b]
-          type: string
-        govDoc:
-          $ref: '#/components/schemas/GovDocClassificationNumber'
     ReproductionNote:
       description: Reproduction Note [v533]
       properties:
@@ -620,15 +799,83 @@ components:
         institution:
           description: s5
           type: string
-    MaterialTypes:
-      description: Material Types [Admin/OCLCDef/MT[@form='gen']]
+    Relator:
+      type: object
+      properties:
+        term:
+          type: string
+        alternateTerm:
+          type: string
+    CastNotes:
+      description: Cast Notes [v511sa]
       type: array
       items:
         type: string
-    TotalEditions:
-      description: Total number of editions in the workgroup
-      type: integer
-      format: int32
+    SpecificFormat:
+      description: Specific Format Type [Admin/OCLCDef/StdRT2]
+      type: string
+      enum:
+      - 2D
+      - Artcl
+      - Bluray
+      - Braille
+      - Cassette
+      - CD
+      - Chptr
+      - Continuing
+      - Digital
+      - DVD
+      - Encyc
+      - Film
+      - LargePrint
+      - LP
+      - Mic
+      - mss
+      - PrintBook
+      - rec
+      - Thsis
+      - VHS
+    Contributor:
+      type: object
+      properties:
+        creators:
+          description: Creators of work
+          type: array
+          items:
+            $ref: '#/components/schemas/Creator'
+        additionalCreators:
+          description: Additional creators of work [(v700,v710,v711,v790,v791,v792,v796,v797,v798) - sa,b,c,d,q,n,k,e,j,4]
+          type: array
+          items:
+            $ref: '#/components/schemas/AdditionalRelationship'
+        statementOfResponsibility:
+          description: 245 |c
+          allOf:
+          - $ref: '#/components/schemas/StatementOfResponsibility'
+    SeriesTitle:
+      type: object
+      properties:
+        seriesTitle:
+          $ref: '#/components/schemas/SeriesName'
+        volume:
+          description: '[(v490,v810,v830 - sv)]'
+          type: string
+    IsPrimaryCreator:
+      description: whether or not this contributor is the primary one (the 1xx)
+      type: boolean
+    MediumOfPerformance:
+      type: array
+      items:
+        type: string
+    Database:
+      type: object
+      properties:
+        source:
+          description: Source Collection [Admin/SourceCol]
+          type: string
+        collection:
+          description: Db Collection [root collection attribute]
+          type: string
     BibRecord:
       type: object
       properties:
@@ -692,18 +939,137 @@ components:
           $ref: '#/components/schemas/Note'
         localGenres:
           $ref: '#/components/schemas/Genres'
-    FormOfWorks:
-      description: Form of Work [v380sa]
+    Dissertation:
+      description: Disseration notes [v502sa,b,c,d,g,o]
+      type: object
+      properties:
+        disserationNote:
+          type: string
+        type:
+          type: string
+        institution:
+          type: string
+        year:
+          type: string
+        id:
+          type: string
+        miscellaneousInfo:
+          type: string
+    Source:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/SimpleSource'
+      properties:
+        supplements:
+          description: Supplements [v949sd]
+          type: array
+          items:
+            type: string
+        firstPages:
+          description: First Page [v949sf]
+          type: array
+          items:
+            type: string
+        issueDates:
+          description: Issue Dates [v949se]
+          type: array
+          items:
+            type: string
+        mainEntry:
+          description: Main Entry [v773sa]
+          type: string
+        otherPublicationData:
+          description: Other Publication Data [v799sa,d,g,o]
+          type: array
+          items:
+            type: string
+    Language:
+      type: object
+      properties:
+        itemLanguage:
+          $ref: '#/components/schemas/ItemLanguage'
+        catalogingLanguage:
+          $ref: '#/components/schemas/CatalogingLanguage'
+    GeneralFormat:
+      description: General Format Type [Admin/OCLCDef/StdRT]
+      type: string
+      enum:
+      - Archv
+      - ArtChapter
+      - AudioBook
+      - Book
+      - CompFile
+      - Encyc
+      - Game
+      - Image
+      - IntMM
+      - Jrnl
+      - Kit
+      - Map
+      - MsScr
+      - Music
+      - News
+      - Object
+      - Snd
+      - Toy
+      - Video
+      - Vis
+      - Web
+    DateObject:
+      type: object
+      properties:
+        publicationDate:
+          description: Date of Publication [v260sc || c008(bytes 07-14) || v264sc || v362sa]
+          type: string
+        publicationSequentialDesignationDate:
+          description: Chronological issue designations [v362sa]
+          type: string
+        currentPublicationFrequency:
+          description: Frequency of Publication [v310sa]
+          type: string
+        createDate:
+          description: Date Record was Created [Admin/CreateDate]
+          type: string
+        replaceDate:
+          description: Date Record was last Updated [Admin/ReplacedDate]
+          type: string
+    GovDocClassificationNumber:
+      description: Government Doc number [v086sa]
       type: array
       items:
         type: string
-    CreditNotes:
-      description: Production Credits Notes [v508sa]
-      type: string
-    OclcNumber:
-      description: the oclc number of a given bibliographic record
-      type: integer
-      format: int64
+    MaterialTypes:
+      description: Material Types [Admin/OCLCDef/MT[@form='gen']]
+      type: array
+      items:
+        type: string
+    Issns:
+      description: International Standard Serial Numbers
+      type: array
+      items:
+        $ref: '#/components/schemas/Issn'
+    Content:
+      description: Formatted Contents Note [v505sa,t,r,g,u]
+      type: object
+      properties:
+        contentNote:
+          $ref: '#/components/schemas/InternationalText'
+        titles:
+          type: array
+          items:
+            type: string
+        miscellaneousInfo:
+          type: array
+          items:
+            type: string
+        statementsOfResponsibility:
+          type: array
+          items:
+            type: string
+        uris:
+          type: array
+          items:
+            type: string
     Instrumentation:
       description: Instrumentation [v382sa,b,d,e,n,p,r,s,t,v]
       type: object
@@ -736,33 +1102,45 @@ components:
           type: string
         numberOfEnsembles:
           type: string
-    Issn:
-      description: International Standard Serial Number [v022sal v700,v710,v711,v773,v776,v777,v780,v785 - sx]
+    MainTitles:
+      description: Main Titles [v245sa,b,c,f,g,k,n,p,s]
+      type: array
+      items:
+        $ref: '#/components/schemas/InternationalText'
+    PeerReviewed:
+      description: Is this a peer reviewed work [Admin/OCLCDef/PR]
       type: string
-    SeriesName:
-      description: '[(v490,v810,v830 - sa)]'
-      type: string
-    MusicInfo:
+      enum:
+      - Y
+      - N
+    PublisherName:
+      description: Publisher Name [v260sb v264sb v880b]
+      allOf:
+      - $ref: '#/components/schemas/InternationalText'
+    Event:
+      description: Notes about event [v518sa,d,o,p,3]
       type: object
       properties:
-        instrumentations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Instrumentation'
-        musicalKey:
-          description: Musical Key [v384sa]
+        compositeNote:
           type: string
-        instrumentsCodes:
-          description: Musical Instruments [v048sa,b]
-          type: array
-          items:
-            type: string
-        numericDesignation:
-          description: Numeric Designation of Musical Work [v383sa,b,c]
+        eventDate:
           type: string
-        musicalPresentationStatement:
-          description: Musical Presentation Statement [v254sa]
+        eventPlace:
           type: string
+        eventInfo:
+          type: string
+        material:
+          type: string
+    GpoNumber:
+      description: GPO Item number [v074sa]
+      type: array
+      items:
+        type: string
+    AdditionalTitles:
+      description: Added Entry Uniform Titles [v730sa,d,f,g,k,l,m,n,o,p,r,s,i,t,x]
+      type: array
+      items:
+        $ref: '#/components/schemas/AdditionalRelationship'
     Subject:
       type: object
       description: Subjects [v600sa,b,c,d,n,v,x,y,z,e,j,4 v610sa,b,n,v,x,y,z,e,j,4 v611sa,c,d,n,v,x,y,z,e,j,4 v630sa,d,e,f,k,l,m,n,o,d,p,r,s,v,x,y,z,e,j,4 v650sa,b,x,y,z,v,e,j,4 v651sa,x,y,z,v,e,j,4 v655sa,b,c,v,x,y,z,e,j,4 v648sa,v,w,x,y,z,e,j,4 v653sa,e,j,4 v656sa,k,v,x,y,z,3,e,j,4 v657sa,v,x,y,z,3,e,j,4 (v690,v691,v695,v696,v697,v698,v699 sa,b,c,d,e,f,k,l,m,n,o,p,r,s,v,x,y,z,e,j,4)]
@@ -781,563 +1159,21 @@ components:
         uri:
           type: string
           description: URI [6xx s1]
-    EditionInfo:
-      type: object
-      properties:
-        statement:
-          $ref: '#/components/schemas/EditionStatement'
-    IssuedWithEntry:
-      type: object
-      properties:
-        displayConstant:
-          type: string
-        titles:
-          type: array
-          items:
-            type: string
-        recordControlOclcNumbers:
-          type: array
-          items:
-            type: string
-        issns:
-          $ref: '#/components/schemas/Issns'
-        isbns:
-          $ref: '#/components/schemas/Isbns'
-        mainEntryHeadings:
-          type: array
-          items:
-            type: string
-        relatedParts:
-          type: array
-          items:
-            type: string
-        uniformTitle:
-          type: string
-    CatalogingLanguage:
-      description: Language record was cataloged in [v040sb]
-      type: string
-    Source:
-      type: object
-      allOf:
-      - $ref: '#/components/schemas/SimpleSource'
-      properties:
-        supplements:
-          description: Supplements [v949sd]
-          type: array
-          items:
-            type: string
-        firstPages:
-          description: First Page [v949sf]
-          type: array
-          items:
-            type: string
-        issueDates:
-          description: Issue Dates [v949se]
-          type: array
-          items:
-            type: string
-        mainEntry:
-          description: Main Entry [v773sa]
-          type: string
-        otherPublicationData:
-          description: Other Publication Data [v799sa,d,g,o]
-          type: array
-          items:
-            type: string
-    LinkPublicNote:
-      description: A note pertaining to the electronic location of the source identified in the field |z
-      type: array
-      items:
-        type: string
-    MaterialsSpecified:
-      description: Materials specified |3
-      type: string
-    ReproductionNotes:
-      description: Reproduction Notes [v533]
-      type: array
-      items:
-        $ref: '#/components/schemas/ReproductionNote'
-    GeneralFormat:
-      description: General Format Type [Admin/OCLCDef/StdRT]
-      type: string
-      enum:
-      - Archv
-      - ArtChapter
-      - AudioBook
-      - Book
-      - CompFile
-      - Encyc
-      - Game
-      - Image
-      - IntMM
-      - Jrnl
-      - Kit
-      - Map
-      - MsScr
-      - Music
-      - News
-      - Object
-      - Snd
-      - Toy
-      - Video
-      - Vis
-      - Web
-    Contributor:
-      type: object
-      properties:
-        creators:
-          description: Creators of work
-          type: array
-          items:
-            $ref: '#/components/schemas/Creator'
-        additionalCreators:
-          description: Additional creators of work [(v700,v710,v711,v790,v791,v792,v796,v797,v798) - sa,b,c,d,q,n,k,e,j,4]
-          type: array
-          items:
-            $ref: '#/components/schemas/AdditionalRelationship'
-        statementOfResponsibility:
-          description: 245 |c
-          allOf:
-          - $ref: '#/components/schemas/StatementOfResponsibility'
-    MergedOclcNumbers:
-      description: Merged OCLC numbers [v019sa]
-      type: array
-      items:
-        type: string
-    ExternalIdentifier:
-      type: object
-      properties:
-        oclcSymbol:
-          type: string
-        systemControlNumber:
-          type: string
-        oaiSetName:
-          type: string
-        contentTypeId:
-          type: string
-    StandardIdentifier:
-      type: object
-      properties:
-        type:
-          type: string
-        id:
-          type: string
-    ProblemType:
-      description: A URI reference [RFC3986] that identifies the problem type.
-      type: string
-      format: uri
-      enum:
-      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-      - https://developer.api.oclc.org/errors/NOT_ALLOWED
-      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
-      - https://developer.api.oclc.org/errors/BAD_REQUEST
-      - https://developer.api.oclc.org/errors/NOT_FOUND
-      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
-      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
-      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
-      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
-      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
-      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
-    Title:
-      type: object
-      properties:
-        mainTitles:
-          $ref: '#/components/schemas/MainTitles'
-        seriesTitles:
-          description: Series Titles [(v490,v810,v830 - sa,v)]
-          type: array
-          items:
-            $ref: '#/components/schemas/SeriesTitle'
-        uniformTitles:
-          description: Uniform Titles [(v130,v730,v793,v799 - sa,d,f,g,k,l,m,n,o,p,r,s,t) && v240sa,d,f,g,k,l,m,n,o,p,r,s]
-          type: array
-          items:
-            type: string
-        additionalTitles:
-          $ref: '#/components/schemas/AdditionalTitles'
-    RelatedItem:
-      type: object
-      properties:
-        typeOfRelationship:
-          type: string
-        relatedItemTitle:
-          type: string
-        relationshipInfo:
-          type: array
-          items:
-            type: string
-        relatedParts:
-          type: array
-          items:
-            type: string
-        mainEntryHeading:
-          type: string
-        edition:
-          $ref: '#/components/schemas/EditionStatement'
-        qualifyingInfo:
-          type: string
-        publicationInfo:
-          type: string
-        physicalDescription:
-          type: string
-        seriesData:
-          type: array
-          items:
-            type: string
-        materialSpecificDetail:
-          type: string
-        relatedItemNotes:
-          type: array
-          items:
-            type: string
-        otherItemIdentifiers:
-          type: array
-          items:
-            type: string
-        reportNumbers:
-          type: array
-          items:
-            type: string
-        uniformTitle:
-          type: string
-        standardTechReportNumber:
-          type: string
-        recordControlNumbers:
-          type: array
-          items:
-            type: string
-        issns:
-          $ref: '#/components/schemas/Issns'
-        coden:
-          type: string
-        isbns:
-          $ref: '#/components/schemas/Isbns'
-    GovDocClassificationNumber:
-      description: Government Doc number [v086sa]
-      type: array
-      items:
-        type: string
-    LinkText:
-      description: Text associated with a link |y
-      type: array
-      items:
-        type: string
-    Issns:
-      description: International Standard Serial Numbers
-      type: array
-      items:
-        $ref: '#/components/schemas/Issn'
-    ItemLanguage:
-      description: Language of the item [v041sa,j]
-      type: string
-    SpecificFormat:
-      description: Specific Format Type [Admin/OCLCDef/StdRT2]
-      type: string
-      enum:
-      - 2D
-      - Artcl
-      - Bluray
-      - Braille
-      - Cassette
-      - CD
-      - Chptr
-      - Continuing
-      - Digital
-      - DVD
-      - Encyc
-      - Film
-      - LargePrint
-      - LP
-      - Mic
-      - mss
-      - PrintBook
-      - rec
-      - Thsis
-      - VHS
-    Database:
-      type: object
-      properties:
-        source:
-          description: Source Collection [Admin/SourceCol]
-          type: string
-        collection:
-          description: Db Collection [root collection attribute]
-          type: string
-    PhysicalDescription:
-      description: Physical Description [v300sa,b,c,d,e,f,g,3]
-      type: string
-    Event:
-      description: Notes about event [v518sa,d,o,p,3]
-      type: object
-      properties:
-        compositeNote:
-          type: string
-        eventDate:
-          type: string
-        eventPlace:
-          type: string
-        eventInfo:
-          type: string
-        material:
-          type: string
-    Dissertation:
-      description: Disseration notes [v502sa,b,c,d,g,o]
-      type: object
-      properties:
-        disserationNote:
-          type: string
-        type:
-          type: string
-        institution:
-          type: string
-        year:
-          type: string
-        id:
-          type: string
-        miscellaneousInfo:
-          type: string
     Genres:
       description: Genre of work [v655sa,b,v,x,y,z v380sa, (v600,v610,v611,v630,v648, v650,v651,v654 sv) v653sa]
       type: array
       items:
         type: string
-    Publisher:
-      description: Publisher Information [v260sa,b v264sa,b v880sa,b]
-      type: object
-      properties:
-        publisherName:
-          $ref: '#/components/schemas/PublisherName'
-        publicationPlace:
-          $ref: '#/components/schemas/PublicationPlace'
-    Edition:
-      type: object
-      properties:
-        id:
-          $ref: '#/components/schemas/EditionIdentifier'
-        count:
-          description: Number of items in edition cluster
-          type: integer
-          format: int32
-    EventNotes:
-      type: array
-      items:
-        $ref: '#/components/schemas/Event'
-    SimpleSource:
-      type: object
-      properties:
-        relatedParts:
-          description: Related Parts [v773sg]
-          type: array
-          items:
-            type: string
-        sourceTitle:
-          description: Source Title [v799st v773st]
-          type: string
-        sourceIssn:
-          description: Source ISSN [v773sx]
-          type: string
-        sourceIsbns:
-          description: Source ISBNs [v799sz]
-          type: array
-          items:
-            type: string
-        sourceAuthor:
-          description: Source Author [v799sa]
-          type: string
-        publicationInformation:
-          description: Publication Information [v773sd]
-          type: string
-        volumes:
-          description: Volumes [v799sm v949sa]
-          type: array
-          items:
-            type: string
-        issues:
-          description: Issues [v799sp v949sb]
-          type: array
-          items:
-            type: string
-        pageRanges:
-          description: Page Range [v949sc]
-          type: array
-          items:
-            type: string
-    GpoNumber:
-      description: GPO Item number [v074sa]
-      type: array
-      items:
-        type: string
-    DateObject:
-      type: object
-      properties:
-        publicationDate:
-          description: Date of Publication [v260sc || c008(bytes 07-14) || v264sc || v362sa]
-          type: string
-        publicationSequentialDesignationDate:
-          description: Chronological issue designations [v362sa]
-          type: string
-        currentPublicationFrequency:
-          description: Frequency of Publication [v310sa]
-          type: string
-        createDate:
-          description: Date Record was Created [Admin/CreateDate]
-          type: string
-        replaceDate:
-          description: Date Record was last Updated [Admin/ReplacedDate]
-          type: string
-    MainTitles:
-      description: Main Titles [v245sa,b,c,f,g,k,n,p,s]
-      type: array
-      items:
-        $ref: '#/components/schemas/InternationalText'
-    Work:
-      type: object
-      properties:
-        id:
-          description: Id of the workset [Admin/Work/ID]
-          type: string
-        count:
-          description: Number of items in Workset [Admin/Work/Count]
-          type: integer
-          format: int32
-        articleCluster:
-          description: Items in Article Workset [WorkSet/NO]
-          type: array
-          items:
-            $ref: '#/components/schemas/ArticleWorkset'
-    AudienceNote:
-      description: Target Audience Note [v521sa]
+    PhysicalDescription:
+      description: Physical Description [v300sa,b,c,d,e,f,g,3]
       type: string
-    Description:
+    ArticleWorkset:
       type: object
       properties:
-        physicalDescription:
-          $ref: '#/components/schemas/PhysicalDescription'
-        digitalGraphicRepresentation:
-          description: Digital Graphic Representation [v352sa,b,c,i,q]
+        databaseCollection:
           type: string
-        genres:
-          $ref: '#/components/schemas/Genres'
-        cartographicData:
-          $ref: '#/components/schemas/CartographicData'
-        computerFilesCharacteristics:
-          description: Computer File Characteristics [v256sa]
-          type: array
-          items:
-            type: string
-        formOfWorks:
-          $ref: '#/components/schemas/FormOfWorks'
-        abstracts:
-          description: Abstract [v520sa,b,c]
-          type: array
-          items:
-            $ref: '#/components/schemas/InternationalText'
-        summaries:
-          description: Summary [v520sa,b,c]
-          type: array
-          items:
-            $ref: '#/components/schemas/InternationalText'
-        contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/Content'
-        bibliographies:
-          description: Bibliography [v504sa]
-          type: array
-          items:
-            $ref: '#/components/schemas/InternationalText'
-        peerReviewed:
-          $ref: '#/components/schemas/PeerReviewed'
-    PerformerNotes:
-      description: Performers Notes [v511sa]
-      type: array
-      items:
-        type: string
-    Creator:
-      description: '[v100sa,q,b,c,d,e,4,k v110sa,q,b,c,d,e,4,k,n v111sa,q,c,d,e,j,k,n v700sa,q,b,c,d,e,4,k v710sa,q,b,c,d,e,4,k,n v720sa v711 sa,q,c,d,e,j,k,n v790sa,q,c,d,e,j,k,n v791sa,q,b,c,d,e,4,k v792sa,b,q,c, d,e,j,k,n v796 sa,q,b,c,d,e,4,k v797sa,q,b,c,d,e,4,k,n v798sa,b,q,c, d,e,j,k,n]'
-      type: object
-      properties:
-        firstName:
-          $ref: '#/components/schemas/InternationalText'
-        secondName:
-          $ref: '#/components/schemas/InternationalText'
-        nonPersonName:
-          $ref: '#/components/schemas/InternationalText'
-        type:
-          type: string
-        creatorNotes:
-          description: subfield d
-          type: array
-          items:
-            type: string
-        relators:
-          description: subfield e
-          type: array
-          items:
-            $ref: '#/components/schemas/Relator'
-        affiliation:
-          description: subfield u
-          type: string
-        isPrimary:
-          $ref: '#/components/schemas/IsPrimaryCreator'
-        relatedItem:
-          $ref: '#/components/schemas/RelatedItem'
-    DissertationNotes:
-      type: array
-      items:
-        $ref: '#/components/schemas/Dissertation'
-    PublisherName:
-      description: Publisher Name [v260sb v264sb v880b]
-      allOf:
-      - $ref: '#/components/schemas/InternationalText'
-    Isbns:
-      description: International Standard Book Number [v020sa]
-      type: array
-      items:
-        type: string
-    IsPrimaryCreator:
-      description: whether or not this contributor is the primary one (the 1xx)
-      type: boolean
-    Language:
-      type: object
-      properties:
-        itemLanguage:
-          $ref: '#/components/schemas/ItemLanguage'
-        catalogingLanguage:
-          $ref: '#/components/schemas/CatalogingLanguage'
-    Relator:
-      type: object
-      properties:
-        term:
-          type: string
-        alternateTerm:
-          type: string
-    StatementOfResponsibility:
-      allOf:
-      - $ref: '#/components/schemas/InternationalText'
-    EditionIdentifier:
-      description: An id associated with a particular edition cluster [Admin/Edition/ID]
-      type: string
-    LocalizableText:
-      type: object
-      properties:
-        text:
-          type: string
-        private:
-          description: 1st indicator of 590
-          type: boolean
-          default: false
-    SeriesTitle:
-      type: object
-      properties:
-        seriesTitle:
-          $ref: '#/components/schemas/SeriesName'
-        volume:
-          description: '[(v490,v810,v830 - sv)]'
-          type: string
+        oclcNumber:
+          $ref: '#/components/schemas/OclcNumber'
     Note:
       type: object
       properties:
@@ -1380,220 +1216,309 @@ components:
           type: string
         languageNotes:
           $ref: '#/components/schemas/LanguageNotes'
-    CastNotes:
-      description: Cast Notes [v511sa]
+    MusicInfo:
+      type: object
+      properties:
+        instrumentations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Instrumentation'
+        musicalKey:
+          description: Musical Key [v384sa]
+          type: string
+        instrumentsCodes:
+          description: Musical Instruments [v048sa,b]
+          type: array
+          items:
+            type: string
+        numericDesignation:
+          description: Numeric Designation of Musical Work [v383sa,b,c]
+          type: string
+        musicalPresentationStatement:
+          description: Musical Presentation Statement [v254sa]
+          type: string
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    StandardIdentifier:
+      type: object
+      properties:
+        type:
+          type: string
+        id:
+          type: string
+    UseAndReproductionNotes:
+      description: Terms Governing Use and Reproduction [v540sa]
       type: array
       items:
         type: string
+    SeriesName:
+      description: '[(v490,v810,v830 - sa)]'
+      type: string
+    DissertationNotes:
+      type: array
+      items:
+        $ref: '#/components/schemas/Dissertation'
+    Issn:
+      description: International Standard Serial Number [v022sal v700,v710,v711,v773,v776,v777,v780,v785 - sx]
+      type: string
+    StatementOfResponsibility:
+      allOf:
+      - $ref: '#/components/schemas/InternationalText'
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
+    MergedOclcNumbers:
+      description: Merged OCLC numbers [v019sa]
+      type: array
+      items:
+        type: string
+    GeneralNotes:
+      description: General Notes [v500sa, v501sa, v590sa,s3, (v59x sa-z)]
+      type: array
+      items:
+        $ref: '#/components/schemas/LocalizableText'
+    SimpleSource:
+      type: object
+      properties:
+        relatedParts:
+          description: Related Parts [v773sg]
+          type: array
+          items:
+            type: string
+        sourceTitle:
+          description: Source Title [v799st v773st]
+          type: string
+        sourceIssn:
+          description: Source ISSN [v773sx]
+          type: string
+        sourceIsbns:
+          description: Source ISBNs [v799sz]
+          type: array
+          items:
+            type: string
+        sourceAuthor:
+          description: Source Author [v799sa]
+          type: string
+        publicationInformation:
+          description: Publication Information [v773sd]
+          type: string
+        volumes:
+          description: Volumes [v799sm v949sa]
+          type: array
+          items:
+            type: string
+        issues:
+          description: Issues [v799sp v949sb]
+          type: array
+          items:
+            type: string
+        pageRanges:
+          description: Page Range [v949sc]
+          type: array
+          items:
+            type: string
+    Classification:
+      type: object
+      properties:
+        dewey:
+          description: Dewey Decimal Classification Number [v082sa,b]
+          type: string
+        lc:
+          description: Library of Congress Call Number [v050sa,b]
+          type: string
+        nlm:
+          description: National Library of Medicine Call Number [v060sa,b]
+          type: string
+        govDoc:
+          $ref: '#/components/schemas/GovDocClassificationNumber'
+    AdditionalRelationship:
+      type: object
+      properties:
+        relationshipInfo:
+          type: string
+        titles:
+          type: array
+          items:
+            type: string
+        issns:
+          $ref: '#/components/schemas/Issns'
+        relators:
+          type: array
+          items:
+            $ref: '#/components/schemas/Relator'
+        relatedData:
+          type: string
+        additionalRelationshipInfo:
+          type: string
+    ExternalIdentifier:
+      type: object
+      properties:
+        oclcSymbol:
+          type: string
+        systemControlNumber:
+          type: string
+        oaiSetName:
+          type: string
+        contentTypeId:
+          type: string
+    OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+    LinkRelationship:
+      description: Relationship to the item described in the record as a whole [v856 second indicator]
+      type: string
+      enum:
+      - unknown
+      - resource
+      - version of resource
+      - related resource
+    Description:
+      type: object
+      properties:
+        physicalDescription:
+          $ref: '#/components/schemas/PhysicalDescription'
+        digitalGraphicRepresentation:
+          description: Digital Graphic Representation [v352sa,b,c,i,q]
+          type: string
+        genres:
+          $ref: '#/components/schemas/Genres'
+        cartographicData:
+          $ref: '#/components/schemas/CartographicData'
+        computerFilesCharacteristics:
+          description: Computer File Characteristics [v256sa]
+          type: array
+          items:
+            type: string
+        formOfWorks:
+          $ref: '#/components/schemas/FormOfWorks'
+        abstracts:
+          description: Abstract [v520sa,b,c]
+          type: array
+          items:
+            $ref: '#/components/schemas/InternationalText'
+        summaries:
+          description: Summary [v520sa,b,c]
+          type: array
+          items:
+            $ref: '#/components/schemas/InternationalText'
+        contents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Content'
+        bibliographies:
+          description: Bibliography [v504sa]
+          type: array
+          items:
+            $ref: '#/components/schemas/InternationalText'
+        peerReviewed:
+          $ref: '#/components/schemas/PeerReviewed'
+    Creator:
+      description: '[v100sa,q,b,c,d,e,4,k v110sa,q,b,c,d,e,4,k,n v111sa,q,c,d,e,j,k,n v700sa,q,b,c,d,e,4,k v710sa,q,b,c,d,e,4,k,n v720sa v711 sa,q,c,d,e,j,k,n v790sa,q,c,d,e,j,k,n v791sa,q,b,c,d,e,4,k v792sa,b,q,c, d,e,j,k,n v796 sa,q,b,c,d,e,4,k v797sa,q,b,c,d,e,4,k,n v798sa,b,q,c, d,e,j,k,n]'
+      type: object
+      properties:
+        firstName:
+          $ref: '#/components/schemas/InternationalText'
+        secondName:
+          $ref: '#/components/schemas/InternationalText'
+        nonPersonName:
+          $ref: '#/components/schemas/InternationalText'
+        type:
+          type: string
+        creatorNotes:
+          description: subfield d
+          type: array
+          items:
+            type: string
+        relators:
+          description: subfield e
+          type: array
+          items:
+            $ref: '#/components/schemas/Relator'
+        affiliation:
+          description: subfield u
+          type: string
+        isPrimary:
+          $ref: '#/components/schemas/IsPrimaryCreator'
+        relatedItem:
+          $ref: '#/components/schemas/RelatedItem'
+    CatalogingLanguage:
+      description: Language record was cataloged in [v040sb]
+      type: string
+    LinkPublicNote:
+      description: A note pertaining to the electronic location of the source identified in the field |z
+      type: array
+      items:
+        type: string
+    PublicationPlace:
+      description: Publication Place [v260sa v264sa]
+      type: string
+    Title:
+      type: object
+      properties:
+        mainTitles:
+          $ref: '#/components/schemas/MainTitles'
+        seriesTitles:
+          description: Series Titles [(v490,v810,v830 - sa,v)]
+          type: array
+          items:
+            $ref: '#/components/schemas/SeriesTitle'
+        uniformTitles:
+          description: Uniform Titles [(v130,v730,v793,v799 - sa,d,f,g,k,l,m,n,o,p,r,s,t) && v240sa,d,f,g,k,l,m,n,o,p,r,s]
+          type: array
+          items:
+            type: string
+        additionalTitles:
+          $ref: '#/components/schemas/AdditionalTitles'
     OCLCSymbol:
       description: institution OCLC Symbol. Special characters need to be encoded properly.
       type: string
       minLength: 3
       maxLength: 8
       pattern: ^[a-zA-Z0-9@*&#%+$/]{1,}$
-    SublocationCollection:
-      description: Sublocation or collection [LHR -> v852sb]
-      type: string
-    ShelvingLocation:
-      description: Shelving location [LHR -> v852sc]
-      type: string
-    Longitude:
-      description: Longitude
-      type: number
-      format: double
-      example: -122.22702
-    CreatorString:
-      description: List of creators as single string
-      type: string
-    SimpleTitle:
-      description: Linked [v880sa,b] if present or [v245sa,b]
-      type: string
-    CaptionValuePair:
-      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
-      type: object
-      properties:
-        caption:
-          type: string
-        value:
-          type: string
-    HoldingLocation:
-      description: Local holding location [LHR -> v852sa,b,c]
-      type: object
-      properties:
-        holdingLocation:
-          description: Institution Symbol [LHR -> v852sa]
-          type: string
-        sublocationCollection:
-          $ref: '#/components/schemas/SublocationCollection'
-        shelvingLocation:
-          $ref: '#/components/schemas/ShelvingLocation'
-    CallNumber:
-      description: Local call number [LHR -> v852sh,i,j,k,l,m]
-      type: object
-      properties:
-        displayCallNumber:
-          $ref: '#/components/schemas/DisplayCallNumber'
-        classificationPart:
-          description: LHR -> v852sh
-          type: string
-        itemParts:
-          description: LHR -> v852si
-          type: array
-          items:
-            type: string
-        shelvingControlNumber:
-          description: LHR -> v852sj
-          type: string
-        prefixes:
-          description: LHR -> v852sk
-          type: array
-          items:
-            type: string
-        shelvingForm:
-          description: LHR -> v852sl
-          type: string
-        suffixes:
-          description: LHR -> v852sm
-          type: array
-          items:
-            type: string
-        shelvingScheme:
-          description: Shelving scheme based on 852 field 1st indicator [LHR -> v852 ind1]
-          type: string
-          enum:
-          - Library of Congress classification
-          - Dewey Decimal classification
-          - National Library of Medicine classification
-          - Superintendent of Documents classification
-          - Shelving control number
-          - Title
-          - Shelved separately
-          - Other scheme
-        privateNotes:
-          description: Private notes from 852$x field [LHR -> v852sx]
-          type: array
-          items:
-            type: string
-    InstitutionType:
-      description: The type of institution
-      enum:
-      - ACADEMIC
-      - PUBLIC
-      - REGIONAL_OR_NATIONAL
-      - OTHER
-      - CORPORATE_SPECIAL_LIBRARY
-      - HEALTH
-      - MUSEUM_OR_ARCHIVES
-      - LAW
-      - MUSIC
-      - LIBRARY_NETWORK_GROUP
-      type: string
-    SearchFacet:
-      type: object
-      properties:
-        index:
-          type: string
-        facetType:
-          type: string
-        values:
-          type: array
-          items:
-            $ref: '#/components/schemas/FacetValue'
-    RegistryId:
-      description: The identifier in the WorldCat Registry for the institution
-      type: integer
-    Latitude:
-      description: Latitude
-      type: number
-      format: double
-      example: 37.502508
-    BibBriefResultSet:
-      type: object
-      properties:
-        numberOfRecords:
-          type: integer
-          format: int32
-        briefRecords:
-          type: array
-          items:
-            $ref: '#/components/schemas/BibRecordBrief'
-        searchFacets:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchFacet'
-    BibResultSet:
-      type: object
-      properties:
-        numberOfRecords:
-          type: integer
-          format: int32
-        bibRecords:
-          type: array
-          items:
-            $ref: '#/components/schemas/BibRecord'
-        searchFacets:
-          type: array
-          items:
-            $ref: '#/components/schemas/SearchFacet'
-    SummaryOfHoldings:
-      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
-      type: string
-    Unit:
-      description: The unit of measure is either (M) for miles or (K) for kilometers
-      enum:
-      - M
-      - K
-      type: string
-      default: M
-    DisplayCallNumber:
-      description: Display call Number [LHR -> v852 |k,h,i,m / |j/ |l]
-      type: string
-    HoldingBrief:
-      type: object
-      properties:
-        country:
-          description: Country of holding institution [Holdings/Library/Country]
-          type: string
-        state:
-          description: State of holding institution [Holdings/Library/State]
-          type: string
-        oclcSymbol:
-          description: Oclc Symbol of holding institution [Holdings/Library/InstSym]
-          type: string
-        registryId:
-          $ref: '#/components/schemas/RegistryId'
-        institutionName:
-          description: Name of holding institution [Holdings/Library/InstName]
-          type: string
-        alsoCalled:
-          description: Some name the library might also be called
-          type: string
-        address:
-          $ref: '#/components/schemas/Address'
-        institutionType:
-          $ref: '#/components/schemas/InstitutionType'
-        hasOPACLink:
-          description: Whether or not the library has an OPAC deep links
-          type: boolean
-        distance:
-          description: Distance from location if lat/log was specified
-          type: string
-        self:
-          description: URI to find more info about the institution
-          type: string
-          format: uri
-        illStatus:
-          description: ILL status [Holdings/Library/ILLStatus]
-          type: string
-        illGroup:
-          description: ILL group [Holdings/Library/ILLGroup]
-          type: string
-        hasSharedPrintCommitment:
-          description: institution has shared print commitment [Holdings/LibHasSharedPrint]
-          type: string
-          enum:
-          - Y
-          - N
     FacetValue:
       type: object
       properties:
@@ -1606,70 +1531,136 @@ components:
           $ref: '#/components/schemas/SubFacet'
         subFacetItemBrief:
           $ref: '#/components/schemas/SubFacet'
-    ItemSubType:
-      description: Facet values returned and possible filter Values itemSubType [Admin/OCLCDef/StdRT1 + Admin/OCLCDef/StdRT2]
+    SummaryOfHoldings:
+      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
+      type: string
+    briefHoldings:
+      type: array
+      items:
+        $ref: '#/components/schemas/HoldingBrief'
+    detailedHoldings:
+      type: array
+      items:
+        $ref: '#/components/schemas/HoldingDetail'
+    HasSharedPrintCommitment:
+      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
       type: string
       enum:
-      - archv-digital
-      - archv-
-      - artchap-artcl
-      - artchap-chptr
-      - artchap-digital
-      - artchap-mss
-      - audiobook-cd
-      - audiobook-cassette
-      - audiobook-digital
-      - audiobook-lp
-      - audiobook-
-      - book-printbook
-      - book-digital
-      - book-mic
-      - book-thsis
-      - book-mss
-      - book-largeprint
-      - book-braille
-      - book-continuing
-      - book-
-      - compfile-digital
-      - compfile-
-      - encyc-
-      - game-digital
-      - game-
-      - image-2d
-      - intmm-digital
-      - intmm-
-      - jrnl-print
-      - jrnl-digital
-      - kit-
-      - map-
-      - map-mss
-      - map-digital
-      - msscr-digital
-      - msscr-mss
-      - msscr-
-      - music-cd
-      - music-lp
-      - music-digital
-      - music-cassette
-      - music-
-      - news-digital
-      - news-print
-      - object-digital
-      - object-
-      - snd-
-      - snd-rec
-      - toy-
-      - video-dvd
-      - video-vhs
-      - video-digital
-      - video-film
-      - video-bluray
-      - video-
-      - vis-digital
-      - vis-
-      - web-digital
-      - web-dwn2d
-      - web-
+      - Y
+      - N
+    Unit:
+      description: The unit of measure is either (M) for miles or (K) for kilometers
+      enum:
+      - M
+      - K
+      type: string
+      default: M
+    SublocationCollection:
+      description: Sublocation or collection [LHR -> v852sb]
+      type: string
+    CreatorString:
+      description: List of creators as single string
+      type: string
+    Latitude:
+      description: Latitude
+      type: number
+      format: double
+      example: 37.502508
+    SearchFacet:
+      type: object
+      properties:
+        index:
+          type: string
+        facetType:
+          type: string
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/FacetValue'
+    Longitude:
+      description: Longitude
+      type: number
+      format: double
+      example: -122.22702
+    Address:
+      type: object
+      properties:
+        street1:
+          description: Name of street
+          type: string
+        street2:
+          description: Name of street 2
+          type: string
+        city:
+          description: Name of city
+          type: string
+        state:
+          $ref: '#/components/schemas/State'
+        postalCode:
+          $ref: '#/components/schemas/PostalCode'
+        country:
+          $ref: '#/components/schemas/Country'
+        lat:
+          $ref: '#/components/schemas/Latitude'
+        lon:
+          $ref: '#/components/schemas/Longitude'
+    SubFacetValue:
+      type: object
+      properties:
+        value:
+          type: string
+        count:
+          type: integer
+          format: int32
+    HoldingRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+    DisplayCallNumber:
+      description: Display call Number [LHR -> v852 |k,h,i,m / |j/ |l]
+      type: string
+    Country:
+      description: Two-character Country Code, per ISO 3166.
+      type: string
+    SharedPrintCommitment:
+      type: object
+      properties:
+        actionNote:
+          description: Action Note [LHR -> HldDetRec/v583sa]
+          type: string
+        materialsSpecified:
+          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
+          type: string
+        institution:
+          description: Institution to which applies [LHR -> HldDetRec/v583s5]
+          type: string
+        dateOfAction:
+          description: date of action [LHR -> HldDetRec/v583sc]
+          type: string
+        commitmentExpirationDate:
+          description: commitment expiration date [LHR -> HldDetRec/v583sd]
+          type: string
+        authorization:
+          description: Authorization [LHR -> HldDetRec/v583sf]
+          type: string
+        methodOfAction:
+          description: Method of Action [LHR -> HldDetRec/v583si]
+          type: string
+        siteOfAction:
+          description: Site of Action [LHR -> HldDetRec/v583sj]
+          type: string
+        status:
+          description: Status [LHR -> HldDetRec/v583sl]
+          type: string
+        uri:
+          description: URI [LHR -> HldDetRec/v583su]
+          type: string
+        publicNote:
+          description: Public Note [LHR -> HldDetRec/v583sz]
+          type: string
     InstitutionHolding:
       type: object
       properties:
@@ -1686,128 +1677,6 @@ components:
       oneOf:
       - $ref: '#/components/schemas/briefHoldings'
       - $ref: '#/components/schemas/detailedHoldings'
-    ItemType:
-      description: Filter values for General Format
-      type: string
-      enum:
-      - archv
-      - artchapter
-      - audiobook
-      - book
-      - compfile
-      - encyc
-      - game
-      - image
-      - intmm
-      - jrnl
-      - kit
-      - map
-      - msscr
-      - music
-      - news
-      - object
-      - snd
-      - toy
-      - video
-      - vis
-      - web
-    HoldingPart:
-      type: object
-      properties:
-        linkingAndSequenceNumber:
-          description: Field link and sequence number [852/863-865/866-868/876-878 | s8]
-          type: string
-        summaryOfHoldings:
-          $ref: '#/components/schemas/SummaryOfHoldings'
-        enumerations:
-          description: Enumerations [853-855/863-865 |a-h]
-          type: array
-          items:
-            $ref: '#/components/schemas/CaptionValuePair'
-        chronologies:
-          description: Chronologies [853-855/863-865 |i-v]
-          type: array
-          items:
-            $ref: '#/components/schemas/CaptionValuePair'
-        textualHoldings:
-          $ref: '#/components/schemas/TextualHoldingsStatement'
-        itemMaterialSpecified:
-          $ref: '#/components/schemas/MaterialSpecified'
-        pieceDesignation:
-          $ref: '#/components/schemas/PieceDesignation'
-        cancelledPieceDesignations:
-          description: Cancelled Piece Designation [876-878 |r]
-          type: array
-          items:
-            type: string
-        temporaryLocation:
-          $ref: '#/components/schemas/TemporaryLocation'
-        publicNotes:
-          description: Public notes [852/863-865/866-868/876-878 |z]
-          type: array
-          items:
-            type: string
-        yearRanges:
-          description: Year as Range [si]
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingRange'
-        volumeRanges:
-          description: Volume Number As Range [sb]
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingRange'
-        itemType:
-          description: Category of holding based on MARC field patterns [LHR -> v853,v863,v866,v876 for basic; v854,v864,v867,v877 for supplementary; v855,v865,v868,v878 for index]
-          type: string
-          enum:
-          - basic
-          - supplementary
-          - index
-        privateNotes:
-          description: Private notes from 87X$x field [LHR -> v87Xsx]
-          type: array
-          items:
-            type: string
-    BibRecordBrief:
-      type: object
-      properties:
-        oclcNumber:
-          $ref: '#/components/schemas/OclcNumber'
-        title:
-          $ref: '#/components/schemas/SimpleTitle'
-        creator:
-          $ref: '#/components/schemas/CreatorString'
-        date:
-          $ref: '#/components/schemas/Date'
-        language:
-          $ref: '#/components/schemas/ItemLanguage'
-        generalFormat:
-          $ref: '#/components/schemas/GeneralFormat'
-        specificFormat:
-          $ref: '#/components/schemas/SpecificFormat'
-        edition:
-          $ref: '#/components/schemas/EditionStatement'
-        publisher:
-          type: string
-        isbns:
-          $ref: '#/components/schemas/Isbns'
-        issns:
-          $ref: '#/components/schemas/Issns'
-        mergedOclcNumbers:
-          $ref: '#/components/schemas/MergedOclcNumbers'
-        catalogingInfo:
-          $ref: '#/components/schemas/CatalogingInfo'
-        institutionHolding:
-          $ref: '#/components/schemas/InstitutionHolding'
-      required:
-      - oclcNumber
-      - title
-      - creator
-      - date
-      - language
-      - edition
-      - publisher
     SubFacet:
       type: object
       properties:
@@ -1819,8 +1688,37 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/SubFacetValue'
+    RegistryId:
+      description: The identifier in the WorldCat Registry for the institution
+      type: integer
+    BibBriefResultSet:
+      type: object
+      properties:
+        numberOfRecords:
+          type: integer
+          format: int32
+        briefRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/BibRecordBrief'
+        searchFacets:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchFacet'
+    State:
+      description: Name of the State/Province, per ISO 3166-2.
+      type: string
+    Date:
+      description: machine readable date 008
+      type: string
+    ShelvingLocation:
+      description: Shelving location [LHR -> v852sc]
+      type: string
     PieceDesignation:
       description: Piece Designation [852/863-865/866-868/876-878 |p]
+      type: string
+    TemporaryLocation:
+      description: Temporary location [876-878 |l]
       type: string
     HoldingDetail:
       type: object
@@ -1887,241 +1785,906 @@ components:
         levelOfCataloging:
           description: Level of cataloging [LDR position 5]
           type: string
-    MaterialSpecified:
-      description: '[876-8 |3]'
-      type: string
-    SubFacetValue:
-      type: object
-      properties:
-        value:
-          type: string
-        count:
-          type: integer
-          format: int32
-    HasSharedPrintCommitment:
-      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
+    ItemType:
+      description: Filter values for General Format
       type: string
       enum:
-      - Y
-      - N
-    Address:
+      - archv
+      - artchapter
+      - audiobook
+      - book
+      - compfile
+      - encyc
+      - game
+      - image
+      - intmm
+      - jrnl
+      - kit
+      - map
+      - msscr
+      - music
+      - news
+      - object
+      - snd
+      - toy
+      - video
+      - vis
+      - web
+    HoldingBrief:
       type: object
       properties:
-        street1:
-          description: Name of street
-          type: string
-        street2:
-          description: Name of street 2
-          type: string
-        city:
-          description: Name of city
+        country:
+          description: Country of holding institution [Holdings/Library/Country]
           type: string
         state:
-          $ref: '#/components/schemas/State'
-        postalCode:
-          $ref: '#/components/schemas/PostalCode'
-        country:
-          $ref: '#/components/schemas/Country'
-        lat:
-          $ref: '#/components/schemas/Latitude'
-        lon:
-          $ref: '#/components/schemas/Longitude'
-    SharedPrintCommitment:
+          description: State of holding institution [Holdings/Library/State]
+          type: string
+        oclcSymbol:
+          description: Oclc Symbol of holding institution [Holdings/Library/InstSym]
+          type: string
+        registryId:
+          $ref: '#/components/schemas/RegistryId'
+        institutionName:
+          description: Name of holding institution [Holdings/Library/InstName]
+          type: string
+        alsoCalled:
+          description: Some name the library might also be called
+          type: string
+        address:
+          $ref: '#/components/schemas/Address'
+        institutionType:
+          $ref: '#/components/schemas/InstitutionType'
+        hasOPACLink:
+          description: Whether or not the library has an OPAC deep links
+          type: boolean
+        distance:
+          description: Distance from location if lat/log was specified
+          type: string
+        self:
+          description: URI to find more info about the institution
+          type: string
+          format: uri
+        illStatus:
+          description: ILL status [Holdings/Library/ILLStatus]
+          type: string
+        illGroup:
+          description: ILL group [Holdings/Library/ILLGroup]
+          type: string
+        hasSharedPrintCommitment:
+          description: institution has shared print commitment [Holdings/LibHasSharedPrint]
+          type: string
+          enum:
+          - Y
+          - N
+    CallNumber:
+      description: Local call number [LHR -> v852sh,i,j,k,l,m]
       type: object
       properties:
-        actionNote:
-          description: Action Note [LHR -> HldDetRec/v583sa]
+        displayCallNumber:
+          $ref: '#/components/schemas/DisplayCallNumber'
+        classificationPart:
+          description: LHR -> v852sh
           type: string
-        materialsSpecified:
-          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
+        itemParts:
+          description: LHR -> v852si
+          type: array
+          items:
+            type: string
+        shelvingControlNumber:
+          description: LHR -> v852sj
           type: string
-        institution:
-          description: Institution to which applies [LHR -> HldDetRec/v583s5]
+        prefixes:
+          description: LHR -> v852sk
+          type: array
+          items:
+            type: string
+        shelvingForm:
+          description: LHR -> v852sl
           type: string
-        dateOfAction:
-          description: date of action [LHR -> HldDetRec/v583sc]
+        suffixes:
+          description: LHR -> v852sm
+          type: array
+          items:
+            type: string
+        shelvingScheme:
+          description: Shelving scheme based on 852 field 1st indicator [LHR -> v852 ind1]
           type: string
-        commitmentExpirationDate:
-          description: commitment expiration date [LHR -> HldDetRec/v583sd]
-          type: string
-        authorization:
-          description: Authorization [LHR -> HldDetRec/v583sf]
-          type: string
-        methodOfAction:
-          description: Method of Action [LHR -> HldDetRec/v583si]
-          type: string
-        siteOfAction:
-          description: Site of Action [LHR -> HldDetRec/v583sj]
-          type: string
-        status:
-          description: Status [LHR -> HldDetRec/v583sl]
-          type: string
-        uri:
-          description: URI [LHR -> HldDetRec/v583su]
-          type: string
-        publicNote:
-          description: Public Note [LHR -> HldDetRec/v583sz]
-          type: string
-    HoldingRange:
+          enum:
+          - Library of Congress classification
+          - Dewey Decimal classification
+          - National Library of Medicine classification
+          - Superintendent of Documents classification
+          - Shelving control number
+          - Title
+          - Shelved separately
+          - Other scheme
+        privateNotes:
+          description: Private notes from 852$x field [LHR -> v852sx]
+          type: array
+          items:
+            type: string
+    BibRecordBrief:
       type: object
       properties:
-        from:
+        oclcNumber:
+          $ref: '#/components/schemas/OclcNumber'
+        title:
+          $ref: '#/components/schemas/SimpleTitle'
+        creator:
+          $ref: '#/components/schemas/CreatorString'
+        date:
+          $ref: '#/components/schemas/Date'
+        language:
+          $ref: '#/components/schemas/ItemLanguage'
+        generalFormat:
+          $ref: '#/components/schemas/GeneralFormat'
+        specificFormat:
+          $ref: '#/components/schemas/SpecificFormat'
+        edition:
+          $ref: '#/components/schemas/EditionStatement'
+        publisher:
           type: string
-        to:
+        isbns:
+          $ref: '#/components/schemas/Isbns'
+        issns:
+          $ref: '#/components/schemas/Issns'
+        mergedOclcNumbers:
+          $ref: '#/components/schemas/MergedOclcNumbers'
+        catalogingInfo:
+          $ref: '#/components/schemas/CatalogingInfo'
+        institutionHolding:
+          $ref: '#/components/schemas/InstitutionHolding'
+      required:
+      - oclcNumber
+      - title
+      - creator
+      - date
+      - language
+      - edition
+      - publisher
+    HoldingPart:
+      type: object
+      properties:
+        linkingAndSequenceNumber:
+          description: Field link and sequence number [852/863-865/866-868/876-878 | s8]
           type: string
-    Country:
-      description: Two-character Country Code, per ISO 3166.
-      type: string
-    Date:
-      description: machine readable date 008
-      type: string
-    TemporaryLocation:
-      description: Temporary location [876-878 |l]
-      type: string
-    detailedHoldings:
-      type: array
-      items:
-        $ref: '#/components/schemas/HoldingDetail'
-    briefHoldings:
-      type: array
-      items:
-        $ref: '#/components/schemas/HoldingBrief'
-    State:
-      description: Name of the State/Province, per ISO 3166-2.
-      type: string
+        summaryOfHoldings:
+          $ref: '#/components/schemas/SummaryOfHoldings'
+        enumerations:
+          description: Enumerations [853-855/863-865 |a-h]
+          type: array
+          items:
+            $ref: '#/components/schemas/CaptionValuePair'
+        chronologies:
+          description: Chronologies [853-855/863-865 |i-v]
+          type: array
+          items:
+            $ref: '#/components/schemas/CaptionValuePair'
+        textualHoldings:
+          $ref: '#/components/schemas/TextualHoldingsStatement'
+        itemMaterialSpecified:
+          $ref: '#/components/schemas/MaterialSpecified'
+        pieceDesignation:
+          $ref: '#/components/schemas/PieceDesignation'
+        cancelledPieceDesignations:
+          description: Cancelled Piece Designation [876-878 |r]
+          type: array
+          items:
+            type: string
+        temporaryLocation:
+          $ref: '#/components/schemas/TemporaryLocation'
+        publicNotes:
+          description: Public notes [852/863-865/866-868/876-878 |z]
+          type: array
+          items:
+            type: string
+        yearRanges:
+          description: Year as Range [si]
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingRange'
+        volumeRanges:
+          description: Volume Number As Range [sb]
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingRange'
+        itemType:
+          description: Category of holding based on MARC field patterns [LHR -> v853,v863,v866,v876 for basic; v854,v864,v867,v877 for supplementary; v855,v865,v868,v878 for index]
+          type: string
+          enum:
+          - basic
+          - supplementary
+          - index
+        privateNotes:
+          description: Private notes from 87X$x field [LHR -> v87Xsx]
+          type: array
+          items:
+            type: string
     TextualHoldingsStatement:
       description: '[866-8 |a]'
+      type: string
+    BibResultSet:
+      type: object
+      properties:
+        numberOfRecords:
+          type: integer
+          format: int32
+        bibRecords:
+          type: array
+          items:
+            $ref: '#/components/schemas/BibRecord'
+        searchFacets:
+          type: array
+          items:
+            $ref: '#/components/schemas/SearchFacet'
+    InstitutionType:
+      description: The type of institution
+      enum:
+      - ACADEMIC
+      - PUBLIC
+      - REGIONAL_OR_NATIONAL
+      - OTHER
+      - CORPORATE_SPECIAL_LIBRARY
+      - HEALTH
+      - MUSEUM_OR_ARCHIVES
+      - LAW
+      - MUSIC
+      - LIBRARY_NETWORK_GROUP
       type: string
     PostalCode:
       description: Postal Code
       type: string
-  responses:
-    failed-not-acceptable:
-      description: Media type not supported
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-acceptable-error:
-              $ref: '#/components/examples/not-acceptable-error'
-            not-acceptable-error-language:
-              $ref: '#/components/examples/not-acceptable-error-language'
-    method-not-supported:
-      description: Method not supported, see response Allow header
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-allowed:
-              $ref: '#/components/examples/method-not-allowed-error'
-    success-single-bib:
-      description: successful request for single bib record
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BibRecord'
-          examples:
-            success-bibs-oclcnumber:
-              $ref: '#/components/examples/success-bibs-oclcnumber'
-    internal-server-error:
-      description: Something went wrong (hopfully rare) - please try again
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-    failed-not-found:
-      description: Failed operation - resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            failed-not-found:
-              $ref: '#/components/examples/failed-not-found'
-    success-bibs-search:
-      description: successful request for bib result set
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BibResultSet'
-          examples:
-            success-bibs:
-              $ref: '#/components/examples/success-bibs'
-            success-bibs-highlights:
-              $ref: '#/components/examples/bibRecord-highlights'
-            success-single-bib:
-              $ref: '#/components/examples/success-single-bib'
-    success-other-editions:
-      description: successful request for other editions
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BibBriefResultSet'
-          examples:
-            success-brief-bibs-other-editions:
-              $ref: '#/components/examples/success-brief-bibs-other-editions'
-            success-brief-bibs-other-editions-holding-indicators:
-              $ref: '#/components/examples/success-brief-bibs-other-editions-holding-indicators'
-    success-single-brief-bib:
-      description: successful request for brief-bib result set
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BibRecordBrief'
-          examples:
-            success-brief-bibs-oclcnumber:
-              $ref: '#/components/examples/success-brief-bibs-oclcnumber'
-            success-brief-bibs-ebook:
-              $ref: '#/components/examples/success-brief-bibs-ebook'
-            success-brief-bibs-chapter:
-              $ref: '#/components/examples/success-brief-bibs-chapter'
-            success-brief-bibs-article:
-              $ref: '#/components/examples/success-brief-bibs-article'
-            success-brief-bibs-digital_article:
-              $ref: '#/components/examples/success-brief-bibs-digital_article'
-            success-brief-bibs-dissertation:
-              $ref: '#/components/examples/success-brief-bibs-film'
-            success-brief-bibs-film:
-              $ref: '#/components/examples/success-brief-bibs-film'
-            success-brief-bibs-painting:
-              $ref: '#/components/examples/success-brief-bibs-painting'
-            success-brief-bibs-photo:
-              $ref: '#/components/examples/success-brief-bibs-photo'
-            success-brief-bibs-website:
-              $ref: '#/components/examples/success-brief-bibs-website'
-    bib_query_error:
-      description: Invalid query. The request was unacceptable, often due to missing a required parameter.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            missing-query-parameter:
-              $ref: '#/components/examples/missing-query-parameter'
-            missing-query-parameter-value:
-              $ref: '#/components/examples/missing-query-parameter-value'
-            invalid-query-parameter-bad-index:
-              $ref: '#/components/examples/invalid-query-parameter-bad-index'
-            invalid-query-parameter-bad-facet-name:
-              $ref: '#/components/examples/invalid-query-parameter-bad-facet-name'
-            invalid-query-parameter-bad-facet-number:
-              $ref: '#/components/examples/invalid-query-parameter-bad-facet-number'
-            invalid-query-parameter-bad-orderBy:
-              $ref: '#/components/examples/invalid-query-parameter-bad-orderBy'
-    success-brief-bib-search:
-      description: successful request for brief-bib result set
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/BibBriefResultSet'
-          examples:
-            success-brief-bibs-search:
-              $ref: '#/components/examples/success-brief-bibs-search'
-            success-brief-bibs-highlights:
-              $ref: '#/components/examples/bibRecordBrief-highlights'
+    ItemSubType:
+      description: Facet values returned and possible filter Values itemSubType [Admin/OCLCDef/StdRT1 + Admin/OCLCDef/StdRT2]
+      type: string
+      enum:
+      - archv-digital
+      - archv-
+      - artchap-artcl
+      - artchap-chptr
+      - artchap-digital
+      - artchap-mss
+      - audiobook-cd
+      - audiobook-cassette
+      - audiobook-digital
+      - audiobook-lp
+      - audiobook-
+      - book-printbook
+      - book-digital
+      - book-mic
+      - book-thsis
+      - book-mss
+      - book-largeprint
+      - book-braille
+      - book-continuing
+      - book-
+      - compfile-digital
+      - compfile-
+      - encyc-
+      - game-digital
+      - game-
+      - image-2d
+      - intmm-digital
+      - intmm-
+      - jrnl-print
+      - jrnl-digital
+      - kit-
+      - map-
+      - map-mss
+      - map-digital
+      - msscr-digital
+      - msscr-mss
+      - msscr-
+      - music-cd
+      - music-lp
+      - music-digital
+      - music-cassette
+      - music-
+      - news-digital
+      - news-print
+      - object-digital
+      - object-
+      - snd-
+      - snd-rec
+      - toy-
+      - video-dvd
+      - video-vhs
+      - video-digital
+      - video-film
+      - video-bluray
+      - video-
+      - vis-digital
+      - vis-
+      - web-digital
+      - web-dwn2d
+      - web-
+    HoldingLocation:
+      description: Local holding location [LHR -> v852sa,b,c]
+      type: object
+      properties:
+        holdingLocation:
+          description: Institution Symbol [LHR -> v852sa]
+          type: string
+        sublocationCollection:
+          $ref: '#/components/schemas/SublocationCollection'
+        shelvingLocation:
+          $ref: '#/components/schemas/ShelvingLocation'
+    CaptionValuePair:
+      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
+      type: object
+      properties:
+        caption:
+          type: string
+        value:
+          type: string
+    MaterialSpecified:
+      description: '[876-8 |3]'
+      type: string
+    SimpleTitle:
+      description: Linked [v880sa,b] if present or [v245sa,b]
+      type: string
+  parameters:
+    parameters-oclcNumberAsId:
+      name: oclcNumber
+      in: path
+      description: record OCLC number
+      required: true
+      schema:
+        $ref: '#/components/schemas/OclcNumber'
+      example: 41266045
+    accept:
+      name: Accept
+      in: header
+      description: Content Type the client supports and is requesting (application/json currently supported)
+      schema:
+        type: string
+        default: application/json
+      required: false
+    catalogSource:
+      name: catalogSource
+      in: query
+      description: Limiter to restrict the response to the single OCLC symbol as the cataloging source (cs index). (OSL)
+      required: false
+      schema:
+        type: string
+      example: OCL
+    groupRelatedEditions:
+      name: groupRelatedEditions
+      in: query
+      description: Whether or not to use FRBR grouping. Default is 'false'
+      required: false
+      schema:
+        type: boolean
+        default: false
+    preferredLanguage:
+      name: preferredLanguage
+      in: query
+      description: language user would prefer metadata description in
+      required: false
+      schema:
+        description: three character MARC code for language to prefer records in
+        type: string
+        example: fre
+    query:
+      name: q
+      in: query
+      description: query in the form of a keyword search or fielded search, for example  (au:gazihan OR au:womacka) AND kw:java See - https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Bibliographic_records/Bibliographic_record_indexes/Bibliographic_record_index_lists
+      required: true
+      schema:
+        type: string
+      example: 'ti: Simon''s Cat'
+    heldByGroup:
+      name: heldByGroup
+      in: query
+      description: Restrict to holdings held by Group Symbol
+      required: false
+      schema:
+        type: string
+      example: ASRL
+    heldByInstitutionID:
+      name: heldByInstitutionID
+      in: query
+      description: Institution registryId
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/RegistryId'
+        minItems: 0
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - 128807
+        multiple:
+          value:
+          - 128807
+          - 91475
+    itemType:
+      name: itemType
+      in: query
+      description: Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ItemType'
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - book
+        multiple:
+          value:
+          - book
+          - audiobook
+    inCatalogLanguage:
+      name: inCatalogLanguage
+      in: query
+      description: Limiter to restrict the response to the single specified cataloging language (ll index). (dut, eng)
+      required: false
+      schema:
+        type: string
+      example: eng
+    dbIds:
+      name: dbIds
+      in: query
+      description: The database IDs to filter to
+      required: false
+      schema:
+        type: array
+        items:
+          type: integer
+        minItems: 1
+      explode: false
+    datePublished:
+      name: datePublished
+      in: query
+      description: Limiter to restrict the response to one or more dates or to a range (in index). (2000, 2000-2010, 1990,1991)
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single_date:
+          value:
+          - 2000
+        multiple_dates:
+          value:
+          - 1990
+          - 1991
+        range:
+          value:
+          - 2000-2010
+    distance:
+      name: distance
+      in: query
+      description: distance
+      required: false
+      schema:
+        type: integer
+        format: int32
+      example: 10
+    limit:
+      name: limit
+      in: query
+      description: maximum number of records to return, maximum 50, default 10
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+      example: 50
+    deweyNumber:
+      name: deweyNumber
+      in: query
+      description: Limiter to restrict the response to the specified dewey classification number(s). For multiple values repeat the URL parameter. (dd index)
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - 870
+    lat:
+      name: lat
+      in: query
+      description: latitude
+      required: false
+      schema:
+        $ref: '#/components/schemas/Latitude'
+    openAccess:
+      name: openAccess
+      in: query
+      description: filter to just open access content
+      required: false
+      schema:
+        type: boolean
+    enableSearchExpansion:
+      name: enableSearchExpansion
+      in: query
+      description: whether or not to expand search terms
+      schema:
+        type: boolean
+        default: false
+    inLanguage:
+      name: inLanguage
+      in: query
+      description: Limiter to restrict the response to the single specified language (ln index). (eng, fre, ger)
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - eng
+        multiple:
+          value:
+          - eng
+          - fre
+          - ger
+    newsArticles:
+      name: newsArticles
+      in: query
+      description: Filter results to include, exclude, or only show news articles
+      required: false
+      schema:
+        type: string
+        enum:
+        - include
+        - exclude
+        - only
+        default: exclude
+      example: exclude
+    topic:
+      name: topic
+      in: query
+      description: topic to limit results to (s0 index). Based on OCLC Conspectus Division
+      required: false
+      schema:
+        type: string
+      example: 34000000
+    spProgram:
+      name: spProgram
+      in: query
+      description: Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index).
+      required: false
+      schema:
+        type: string
+      example: WEST
+    audience:
+      name: audience
+      in: query
+      description: Audience to limit results to
+      required: false
+      schema:
+        type: string
+        enum:
+        - juv
+        - nonJuv
+      example: juv
+    heldByRelevanceGroup:
+      name: heldByRelevanceGroup
+      in: query
+      description: Filter holdings to specified relevance groups
+      required: false
+      schema:
+        type: array
+        items:
+          type: integer
+        minItems: 1
+        maxItems: 5
+      explode: false
+    creator:
+      name: creator
+      in: query
+      description: creator strings to filter to
+      required: false
+      schema:
+        description: pipe delimited set of creator strings to filter to
+        type: array
+        items:
+          type: string
+        minItems: 1
+        maxItems: 5
+        example:
+        - austen
+        - jane|bronte
+        - emily
+      explode: false
+      style: pipeDelimited
+    itemSubType:
+      name: itemSubType
+      in: query
+      description: Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/ItemSubType'
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - book-digital
+        multiple:
+          value:
+          - book-digital
+          - audiobook-digital
+    retentionCommitments:
+      name: retentionCommitments
+      in: query
+      description: Limiter to restrict the response to bibliographic records with a retention commitment (l8 index).
+      required: false
+      schema:
+        type: boolean
+        default: false
+    oclcNumberAsId:
+      name: oclcNumber
+      in: path
+      description: record OCLC number
+      required: true
+      schema:
+        $ref: '#/components/schemas/OclcNumber'
+      example: 41266045
+    content:
+      name: content
+      in: query
+      description: Content to limit results to
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - fic
+          - nonFic
+          - bio
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - fic
+        multiple:
+          value:
+          - fic
+          - bio
+    materialType:
+      name: materialType
+      in: query
+      description: Limiter to restrict the response to the specified material type (mt index). (URL, LPS)
+      required: false
+      schema:
+        type: string
+      example: URL
+    heldBySymbol:
+      name: heldBySymbol
+      in: query
+      description: Institution Symbol
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/OCLCSymbol'
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - TXH
+        multiple:
+          value:
+          - TXH
+          - YSM
+    offset:
+      name: offset
+      in: query
+      description: start position of the bib records to return (0 based), default 0
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
+      example: 10
+    bookReviews:
+      name: bookReviews
+      in: query
+      description: Filter results to include, exclude, or only show book reviews
+      required: false
+      schema:
+        type: string
+        enum:
+        - include
+        - exclude
+        - only
+        default: exclude
+      example: exclude
+    showHoldingIndicators:
+      name: showHoldingsIndicators
+      in: query
+      description: whether or not to show holdings indicators in response
+      required: false
+      schema:
+        type: boolean
+        default: false
+    groupVariantRecords:
+      name: groupVariantRecords
+      in: query
+      description: Whether or not to group variant records. Default is 'false'
+      required: false
+      schema:
+        type: boolean
+        default: false
+    lon:
+      name: lon
+      in: query
+      description: longitude
+      required: false
+      schema:
+        $ref: '#/components/schemas/Longitude'
+    subtopic:
+      name: subtopic
+      in: query
+      description: subtopic to limit results to (s1 index). Based on OCLC Conspectus Category
+      required: false
+      schema:
+        type: string
+      example: 34932000
+    editionOrderBy:
+      name: orderBy
+      in: query
+      description: how to sort the edition resultsresults
+      schema:
+        type: string
+        enum:
+        - library
+        - recency
+        - bestMatch
+        - creator
+        - publicationDateAsc
+        - publicationDateDesc
+        - language
+        - mostWidelyHeld
+        - title
+        default: publicationDateDesc
+      example: language
+    genre:
+      name: genre
+      in: query
+      description: Genre to limit results to (ge index)
+      required: false
+      schema:
+        type: string
+      example: fiction
+    showLocalBibData:
+      name: showLocalBibData
+      in: query
+      description: whether or not to show local bibliographic data in response
+      required: false
+      schema:
+        type: boolean
+        default: false
+    peerReviewed:
+      name: peerReviewed
+      in: query
+      description: filter to just peer reviewed content
+      required: false
+      schema:
+        type: boolean
+    orderBy:
+      name: orderBy
+      in: query
+      description: result sort key
+      required: false
+      schema:
+        type: string
+        default: bestMatch
+        enum:
+        - library
+        - recency
+        - bestMatch
+        - creator
+        - publicationDateAsc
+        - publicationDateDesc
+        - mostWidelyHeld
+        - title
+    facets:
+      name: facets
+      in: query
+      description: The requested list of facets requested in the response
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - subject
+          - creator
+          - datePublished
+          - genre
+          - itemType
+          - itemSubTypeBrief
+          - itemSubType
+          - language
+          - topic
+          - subtopic
+          - content
+          - audience
+          - databases
+        minItems: 1
+        maxItems: 13
+      explode: false
+      examples:
+        single:
+          value:
+          - creator
+        multiple:
+          value:
+          - creator
+          - itemType
+    unit:
+      name: unit
+      in: query
+      description: distance unit
+      required: false
+      schema:
+        $ref: '#/components/schemas/Unit'
+    heldBy:
+      name: heldBy
+      in: query
+      description: Institution Symbol
+      deprecated: true
+      required: false
+      schema:
+        type: string
+      example: TXH
+    heldByBranchID:
+      name: heldByBranchID
+      in: query
+      description: Filter holdings to specified branch IDs
+      required: false
+      schema:
+        type: array
+        items:
+          type: integer
+        minItems: 1
+        maxItems: 5
+      explode: false
   examples:
+    invalid-oclc-number:
+      summary: Error returned when oclc number isn't valid
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: oclcNumber must be a positive whole number
+    failed-not-found:
+      summary: Error when resource not found
+      value:
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
     success-bibs-oclcnumber:
       summary: successful request a bib record by OCLC Number
       value:
@@ -2424,59 +2987,42 @@ components:
         database:
           source: xwc
           collection: xwc
-    invalid-oclc-number:
-      summary: Error returned when oclc number isn't valid
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: oclcNumber must be a positive whole number
-    not-acceptable-error-language:
-      summary: Error when language in Accept-Language header not supported
-      value:
-        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-        title: ''
-        detail: 'en-UK supported. Supported languages: en, es, fr'
     method-not-allowed-error:
       summary: Error when invalid HTTP method used
       value:
         title: NOT_ALLOWED
         detail: POST method not allowed
-    failed-not-found:
-      summary: Error when resource not found
-      value:
-        type: NOT_FOUND
-        title: Resource Not Found
-        detail: The specified resource was not found at this address.
     not-acceptable-error:
       summary: Error when media type in Accept header not supported
       value:
         type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
         title: ''
         detail: 'Media type application/xml not supported. Supported media types: application/json'
-    success-brief-bibs-digital_article:
-      summary: OCLC Number for article material format
+    not-acceptable-error-language:
+      summary: Error when language in Accept-Language header not supported
       value:
-        oclcNumber: '316235490'
-        title: 'Tables of difference of latitude and departure : constructed to every quarter of a degree of thr [sic] quadrant, and continued from one, to the distance of one hundred miles or chains.'
-        creator: J. Robertson
-        date: '1785.'
-        language: eng
-        generalFormat: ArtChap
-        specificFormat: Digital
-        publisher: Printed and sold by Joseph Crukshank, in Market-Street, between Second and Third-Streets
-        publicationPlace: 'Philadelphia: :'
-        catalogingInfo:
-          catalogingAgency: LGG
-          transcribingAgency: LGG
-          catalogingLanguage: eng
-          levelOfCataloging: ' '
-    success-brief-bibs-search:
-      summary: successful search request for brief-bibs
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'en-UK supported. Supported languages: en, es, fr'
+    invalid-query-parameter-bad-facet-name:
+      summary: Error returned when facet parameter contains invalid value
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: 'Facet name ''author'' is invalid. Acceptable facet name: [datePublished, creator, itemType, subject, genre, itemSubType, language]'
+    missing-query-parameter-value:
+      summary: Error returned when query parameter value not valid
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: Query term is not provided.
+    bibRecordBrief-highlights:
+      summary: successful request for searching brief bibs with highlights on
       value:
         numberOfRecords: 2
         briefRecords:
         - oclcNumber: '44959645'
-          title: Pride and prejudice.
+          title: Pride and prejudice
           creator: Jane Austen
           date: 199u
           language: eng
@@ -2499,8 +3045,14 @@ components:
             transcribingAgency: N$T
             catalogingLanguage: eng
             levelOfCataloging: L
+          termHighlights:
+            highlightFields:
+            - title
+            totalHighlights: 1
+          termHighlightedRecord:
+            title: '{{term}}Pride and prejudice{{/term}'
         - oclcNumber: '1103229133'
-          title: Pride and Prejudice [eBook - RBdigital].
+          title: Pride and Prejudice [eBook - RBdigital]
           creator: Jane Austen
           date: '1998'
           language: eng
@@ -2517,862 +3069,12 @@ components:
             transcribingAgency: HQD
             catalogingLanguage: eng
             levelOfCataloging: ' '
-    success-brief-bibs-oclcnumber:
-      summary: successful request a brief bib record by OCLC Number
-      value:
-        oclcNumber: '318877925'
-        title: Simon's cat / by Simon Tofield.
-        creator: Simon. Tofield
-        date: '2009.'
-        language: eng
-        generalFormat: Book
-        specificFormat: PrintBook
-        edition: 1st ed.
-        publisher: Grand Central Pub.
-        publicationPlace: 'New York :'
-        mergedOclcNumbers:
-        - '877908501'
-        isbns:
-        - '9780446560061'
-        - '0446560065'
-        catalogingInfo:
-          catalogingAgency: DLC
-          transcribingAgency: DLC
-          catalogingLanguage: eng
-          levelOfCataloging: ' '
-    success-brief-bibs-photo:
-      summary: OCLC Number for photo material format
-      value:
-        oclcNumber: '722875457'
-        title: NRCS photo gallery.
-        creator: United States.
-        date: 200u
-        language: eng
-        generalFormat: Vis
-        specificFormat: Digital
-        publisher: U.S. Dept. of Agriculture, Natural Resources Conservation Service
-        publicationPlace: '[Washington, D.C.] :'
-        catalogingInfo:
-          catalogingAgency: GPO
-          transcribingAgency: GPO
-          catalogingLanguage: eng
-          levelOfCataloging: ' '
-    success-brief-bibs-ebook:
-      summary: OCLC Number for ebook material format
-      value:
-        oclcNumber: '43475873'
-        title: 'EBay the smart way : selling, buying, and profiting on the Webʼs #1 auction site'
-        creator: Joseph T. Sinclair
-        date: '1999.'
-        language: eng
-        generalFormat: Book
-        specificFormat: Digital
-        publisher: American Management Association
-        publicationPlace: 'New York :'
-        mergedOclcNumbers:
-        - '152077258'
-        - '532484211'
-        isbns:
-        - 058510414X
-        - '9780585104140'
-        catalogingInfo:
-          catalogingAgency: N$T
-          transcribingAgency: N$T
-          catalogingLanguage: eng
-          levelOfCataloging: ' '
-    success-brief-bibs-other-editions:
-      summary: successful request for brief-bibs other editions
-      value:
-        numberOfRecords: 61
-        briefRecords:
-        - oclcNumber: '318877925'
-          title: Simon's cat / by Simon Tofield.
-          creator: Simon. Tofield
-          date: '2009'
-          language: eng
-          generalFormat: Book
-          specificFormat: PrintBook
-          edition: 1st ed.
-          publisher: Grand Central Pub.
-        - oclcNumber: '668192366'
-          title: 'Simon''s cat : beyond the fence.'
-          creator: Simon. Tofield
-          date: '2011'
-          language: eng
-          generalFormat: Book
-          specificFormat: PrintBook
-          edition: 1st ed.
-          publisher: Grand Central Pub.
-        - oclcNumber: '426122879'
-          title: Simon's cat.
-          creator: Simon. Tofield
-          date: '2009'
-          language: eng
-          generalFormat: Book
-          specificFormat: PrintBook
-          publisher: Canongate
-        - oclcNumber: '698261374'
-          title: 'Simon''s cat : beyond the fence.'
-          creator: Simon. Tofield
-          date: '2010'
-          language: eng
-          generalFormat: Book
-          specificFormat: Digital
-          publisher: Canongate
-        - oclcNumber: '716443553'
-          title: Simon's cat beyond the fence.
-          creator: Simon. Tofield
-          date: '2010'
-          language: eng
-          generalFormat: Book
-          specificFormat: PrintBook
-          publisher: Canongate
-        - oclcNumber: '869821272'
-          title: Beyond the fence.
-          creator: Simon Tofield
-          date: '2011'
-          language: eng
-          generalFormat: Book
-          specificFormat: Digital
-          publisher: Grand Central Publishing
-        - oclcNumber: '698364575'
-          title: Simon's cat.
-          creator: Simon. Tofield
-          date: '2009'
-          language: eng
-          generalFormat: Book
-          specificFormat: Digital
-          publisher: Canongate
-        - oclcNumber: '471205692'
-          title: Simon's cat.
-          creator: Simon. Tofield
-          date: '2009'
-          language: eng
-          generalFormat: Book
-          specificFormat: PrintBook
-          publisher: Canongate
-        - oclcNumber: '883250952'
-          title: Simon's cat.
-          creator: Simon Tofield
-          date: '2009'
-          language: eng
-          generalFormat: Book
-          specificFormat: Digital
-          edition: First edition.
-          publisher: Grand Central Publishing
-        - oclcNumber: '637439104'
-          title: 'Simon''s cat : beyond the fence.'
-          creator: Simon. Tofield
-          date: '2010'
-          language: eng
-          generalFormat: Book
-          specificFormat: PrintBook
-          publisher: Penguin Canada
-    bibRecord-highlights:
-      summary: successful search for bibs with highlights
-      value:
-      - identifier:
-          oclcNumber: '868267173'
-          isbns:
-          - 130629827X
-          - '9781306298278'
-          - '9781467732390'
-          - '1467732397'
-          - '9781467749787'
-          - '1467749788'
-          - '1467768413'
-          - '9781467768412'
-          mergedOclcNumbers:
-          - '872549825'
-          - '1044824718'
-          - '1045477205'
-          - '1046106765'
-          - '1046636937'
-          - '1049594666'
-        title:
-          mainTitles:
-          - text: Pride and prejudice / by Jane Austen.
-          seriesTitles:
-          - seriesTitle: First Avenue Classics Ser.
-          - seriesTitle: First Avenue Classics Ser.
-        contributor:
-          creators:
-          - firstName:
-              text: Jane
-            secondName:
-              text: Austen
-            type: person
-            creatorNotes:
-            - 1775-1817, author.
-            relators:
-            - term: Author.
-              alternateTerm: aut
-        subjects:
-        - subjectName:
-            text: Social classes Fiction.
-          vocabulary: Library of Congress Subject Headings
-          subjectType: topic
-        - subjectName:
-            text: Young women Fiction.
-          vocabulary: Library of Congress Subject Headings
-          subjectType: topic
-        - subjectName:
-            text: Courtship Fiction.
-          vocabulary: Library of Congress Subject Headings
-          subjectType: topic
-        - subjectName:
-            text: Sisters Fiction.
-          vocabulary: Library of Congress Subject Headings
-          subjectType: topic
-        - subjectName:
-            text: LITERARY CRITICISM European English, Irish, Scottish, Welsh.
-          vocabulary: bisacsh
-          subjectType: topic
-        - subjectName:
-            text: Courtship.
-          vocabulary: fast
-          subjectType: topic
-        - subjectName:
-            text: Sisters.
-          vocabulary: fast
-          subjectType: topic
-        - subjectName:
-            text: Social classes.
-          vocabulary: fast
-          subjectType: topic
-        - subjectName:
-            text: Young women.
-          vocabulary: fast
-          subjectType: topic
-        - subjectName:
-            text: England Fiction.
-          vocabulary: Library of Congress Subject Headings
-          subjectType: geographicalTerm
-        - subjectName:
-            text: England.
-          vocabulary: fast
-          subjectType: geographicalTerm
-        - subjectName:
-            text: Domestic fiction.
-          vocabulary: Library of Congress Subject Headings
-          subjectType: genreFormTerm
-        - subjectName:
-            text: Fiction.
-          vocabulary: fast
-          subjectType: genreFormTerm
-        - subjectName:
-            text: Domestic fiction.
-          vocabulary: lcgft
-          subjectType: genreFormTerm
-        - subjectName:
-            text: Electronic books.
-          vocabulary: lcgft
-          subjectType: genreFormTerm
-        classification:
-          dewey: '823.7'
-          lc: PR4034
-        publishers:
-        - publisherName:
-            text: First Avenue Editions, a division of Lerner Publishing Group
-          publicationPlace: 'Minneapolis, MN :'
-        date:
-          publicationDate: '[2014]'
-          createDate: '20140117'
-          replaceDate: '20191023'
-        language:
-          catalogingLanguage: eng
-        edition: {}
-        note: {}
-        format:
-          generalFormat: Book
-          specificFormat: Digital
-          materialTypes:
-          - dct
-          - fic
-          - url
-        musicInfo: {}
-        digitalAccessAndLocations:
-        - uri: http://search.ebscohost.com/login.aspx?direct=true&scope=site&db=nlebk&db=nlabk&AN=687384
-          materialSpecified: EBSCOhost
-        - uri: http://www.myilibrary.com?id=561078
-          materialSpecified: MyiLibrary
-        - uri: https://www.overdrive.com/search?q=C0633B4B-E547-44B3-BE08-5AD6247CFEBF
-          materialSpecified: OverDrive
-        - uri: http://rbdigital.oneclickdigital.com
-        - uri: https://samples.overdrive.com/pride-and-prejudice-c0633b?.epub-sample.overdrive.com
-          materialSpecified: Excerpt
-        - uri: http://images.contentreserve.com/ImageType-100/0955-1/{C0633B4B-E547-44B3-BE08-5AD6247CFEBF}Img100.jpg
-          materialSpecified: Image
-        - uri: http://public.ebookcentral.proquest.com/choice/publicfullrecord.aspx?p=5445266
-          publicNote: Click here to view book
-        - uri: http://public.ebookcentral.proquest.com/choice/publicfullrecord.aspx?p=5444679
-          publicNote: Click here to view book
-        - uri: https://www.hoopladigital.com/title/11273197
-          materialSpecified: Access ebook here.
-          publicNote: Instantly available on hoopla.
-        - uri: https://d2snwnmzyr8jue.cloudfront.net/lpg_9781467768412_180.jpeg
-          materialSpecified: Access ebook here.
-          publicNote: Cover image
-        - uri: https://ebookcentral.proquest.com/lib/soas-ebooks/detail.action?docID=5445266
-          publicNote: Connect to electronic book via Ebook Central.
-        - uri: https://ebookcentral.proquest.com/lib/columbia/detail.action?docID=5445266
-          publicNote: Ebook Central Academic Complete
-        - uri: https://ebookcentral.proquest.com/lib/ucm/detail.action?docID=5445266
-          publicNote: View Full Text
-        - uri: http://ra.ocls.ca/ra/login.aspx?inst=stlawrence&url=https://ebookcentral.proquest.com/lib/stlawrence-ebooks/detail.action?docID=5445266
-        description:
-          physicalDescription: 1 online resource
-          genres:
-          - Domestic fiction.
-          - Electronic books.
-          - Fiction.
-          summaries:
-          - text: Elizabeth Bennet and her four sisters need husbands, according to their mother. Hope soars when a wealthy bachelor moves in nearby. Filled with romance and heartbreak, the story warns of judging by first impressions and being prideful.
-          contents:
-          - contentNote:
-              text: Cover; Title Page; Copyright Page; Contents; Chapter 1; Chapter 2; Chapter 3; Chapter 4; Chapter 5; Chapter 6; Chapter 7; Chapter 8; Chapter 9; Chapter 10; Chapter 11; Chapter 12; Chapter 13; Chapter 14; Chapter 15; Chapter 16; Chapter 17; Chapter 18; Chapter 19; Chapter 20; Chapter 21; Chapter 22; Chapter 23; Chapter 24; Chapter 25; Chapter 26; Chapter 27; Chapter 28; Chapter 29; Chapter 30; Chapter 31; Chapter 32; Chapter 33; Chapter 34; Chapter 35; Chapter 36; Chapter 37; Chapter 38; Chapter 39; Chapter 40; Chapter 41; Chapter 42; Chapter 43; Chapter 44; Chapter 45; Chapter 46; Chapter 47
-          - contentNote:
-              text: Chapter 48Chapter 49; Chapter 50; Chapter 51; Chapter 52; Chapter 53; Chapter 54; Chapter 55; Chapter 56; Chapter 57; Chapter 58; Chapter 59; Chapter 60; Chapter 61; Back Cover
-          peerReviewed: N
-        related:
-          additionalPhysicalFormEntries:
-          - displayConstant: 'Print version:'
-            isbns:
-            - '9781306298278'
-        work:
-          id: '1881837462'
-          count: 4503
-        editionCluster:
-          id: f7489b4b967ebd9ff6a0858ffb7e7378
-          count: 2
-        totalEditions: 2218
-        database:
-          source: xwc
-          collection: xwc
-      - identifier:
-          oclcNumber: '670411708'
-          isbns:
-          - '9781602918771'
-          - '1602918775'
-          externalIdentifiers:
-          - oclcSymbol: AU@
-            systemControlNumber: 48820984
-        title:
-          mainTitles:
-          - text: Pride and prejudice / Jane Austen.
-          seriesTitles:
-          - seriesTitle: Timeless classics study guide
-          - seriesTitle: Timeless classics study guide.
-        contributor:
-          creators:
-          - firstName:
-              text: Jane
-            secondName:
-              text: Austen
-            type: person
-            creatorNotes:
-            - 1775-1817.
-          - nonPersonName:
-              text: Saddleback Educational Publishing.
-            type: corporation
-        subjects:
-        - subjectName:
-            text: Austen, Jane, 1775-1817.
-          vocabulary: Library of Congress Subject Headings
-          subjectType: personalName
-        - subjectName:
-            text: Pride and prejudice (Austen, Jane)
-          vocabulary: fast
-          subjectType: uniformTitle
-        - subjectName:
-            text: LITERARY CRITICISM European English, Irish, Scottish, Welsh.
-          vocabulary: bisacsh
-          subjectType: topic
-        classification:
-          dewey: 823/.7
-          lc: PR4034.P7
-        publishers:
-        - publisherName:
-            text: Saddleback Educational Pub.
-          publicationPlace: 'Irvine :'
-        date:
-          publicationDate: '2010.'
-          createDate: '20101018'
-          replaceDate: '20191022'
-        language:
-          catalogingLanguage: eng
-        edition: {}
-        note: {}
-        format:
-          generalFormat: Book
-          specificFormat: Digital
-          materialTypes:
-          - dct
-          - url
-        musicInfo: {}
-        digitalAccessAndLocations:
-        - uri: http://public.ebookcentral.proquest.com/choice/publicfullrecord.aspx?p=589483
-          materialSpecified: ProQuest Ebook Central
-        - uri: http://search.ebscohost.com/login.aspx?direct=true&scope=site&db=nlebk&db=nlabk&AN=435912
-          materialSpecified: EBSCOhost
-        - uri: https://www.overdrive.com/search?q=2B6712AA-E584-4F22-AAD8-1F3A7FAB5F6D
-          materialSpecified: OverDrive
-        - uri: http://images.contentreserve.com/ImageType-100/2671-1/{2B6712AA-E584-4F22-AAD8-1F3A7FAB5F6D}Img100.jpg
-          materialSpecified: Image
-        description:
-          physicalDescription: 1 online resource (50 pages).
-          genres:
-          - Electronic books.
-          summaries:
-          - text: Thirty-five reproducible activities per guide reiforce basic reading and comprehension skills while teaching higher-order critical thinking. Also included are teaching suggestions, background notes, summaries, and answer keys.
-          contents:
-          - contentNote:
-              text: Table of contents; teacher notes; author facts; character facts; chapter summaries; answer key; glossary; activities.
-          peerReviewed: N
-        related:
-          additionalPhysicalFormEntries:
-          - displayConstant: 'Print version:'
-            titles:
-            - Pride and Prejudice Study Guide.
-            isbns:
-            - '9781616511463'
-            mainEntryHeadings:
-            - Publishing, Saddleback Educational.
-        work:
-          id: '1881837462'
-          count: 4503
-        editionCluster:
-          id: 77ff4ccd62041d39ac73b22eaf92a78b
-          count: 2
-        totalEditions: 2218
-        database:
-          source: xwc
-          collection: xwc
-    invalid-query-parameter-bad-facet-number:
-      summary: Error returned when facet parameter contains invalid value
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: Number of facet is not numeric.
-    success-brief-bibs-painting:
-      summary: OCLC Number for painting material format
-      value:
-        oclcNumber: '879604262'
-        title: Chinese painting & calligraphy.
-        creator: Seattle Art Museum
-        date: '2011'
-        language: eng
-        generalFormat: Vis
-        specificFormat: Digital
-        publisher: Seattle Art Museum
-        publicationPlace: 'Seattle :'
-        catalogingInfo:
-          catalogingAgency: SA1
-          transcribingAgency: SA1
-          catalogingLanguage: eng
-          levelOfCataloging: ' '
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
-    success-single-bib:
-      summary: successful search for single bib record
-      value:
-        numberOfRecords: 1
-        bibRecords:
-        - identifier:
-            oclcNumber: '311684437'
-            lccn: '2008937609'
-            isbns:
-            - '9781594743344'
-            - '1594743347'
-            - '9781594743351'
-            - '1594743355'
-            - '9781594744518'
-            - '1594744513'
-            externalIdentifiers:
-            - oclcSymbol: AU@
-              systemControlNumber: 43839587
-            - oclcSymbol: AU@
-              systemControlNumber: '000044205433'
-            - oclcSymbol: AU@
-              systemControlNumber: 44218081
-            - oclcSymbol: AU@
-              systemControlNumber: 54552395
-            - oclcSymbol: CBK
-              systemControlNumber: '120281791'
-            - oclcSymbol: COVCL
-              systemControlNumber: '1594743347'
-            - oclcSymbol: DEBBG
-              systemControlNumber: BV035970551
-            - oclcSymbol: LBRUT
-              systemControlNumber: '1594743347'
-            - oclcSymbol: NLGGC
-              systemControlNumber: '321202333'
-            - oclcSymbol: NLNZL
-              systemControlNumber: '9913384163502836'
-            - oclcSymbol: NOK
-              systemControlNumber: '1594743347'
-            - oclcSymbol: NOK
-              systemControlNumber: '1594744513'
-            - oclcSymbol: NZ1
-              systemControlNumber: '12866253'
-            - oclcSymbol: NZ1
-              systemControlNumber: '1338416'
-            - oclcSymbol: NZ1
-              systemControlNumber: '14508856'
-            - oclcSymbol: OXFCL
-              systemControlNumber: '1594743347'
-            - oclcSymbol: REABC
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKBCI
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKBCI
-              systemControlNumber: 12033044X
-            - oclcSymbol: UKBED
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKBFB
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKBNS
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKBNS
-              systemControlNumber: 12033044X
-            - oclcSymbol: UKBNT
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKBOR
-              systemControlNumber: 12033044X
-            - oclcSymbol: UKBUR
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKCHS
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKDEL
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKDLI
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKDON
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKDOR
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKGTH
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKJSY
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKKCC
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKKUT
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKLBB
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKLCL
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKLLS
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKNLL
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKNWH
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKNWP
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKPMH
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKSCO
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKSCO
-              systemControlNumber: 12033044X
-            - oclcSymbol: UKSCO
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKSFD
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKSGC
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKSGC
-              systemControlNumber: 12033044X
-            - oclcSymbol: UKSGC
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKSOM
-              systemControlNumber: '120281791'
-            - oclcSymbol: UKSOM
-              systemControlNumber: 12033044X
-            - oclcSymbol: UKSUS
-              systemControlNumber: '1594743347'
-            - oclcSymbol: UKTLS
-              systemControlNumber: '120281791'
-            - oclcSymbol: UNITY
-              systemControlNumber: '120281791'
-            - oclcSymbol: UNITY
-              systemControlNumber: 12033044X
-            - oclcSymbol: WARCC
-              systemControlNumber: '1594743347'
-            mergedOclcNumbers:
-            - '261176486'
-            - '330361568'
-            - '377707240'
-            - '426228842'
-            - '701739996'
-            - '716923895'
-            - '731216527'
-            - '887752101'
-            - '945738851'
-            - '1045429884'
-          title:
-            mainTitles:
-            - text: 'Pride and prejudice and zombies : the classic regency romance--now with ultraviolent zombie mayhem / by Jane Austen and Seth Grahame-Smith.'
-            seriesTitles:
-            - seriesTitle: Quirk classics
-            - seriesTitle: Quirk classics.
-          contributor:
-            creators:
-            - firstName:
-                text: Seth
-              secondName:
-                text: Grahame-Smith
-              type: person
-              creatorNotes:
-              - author.
-              relators:
-              - term: Author.
-                alternateTerm: aut
-            - firstName:
-                text: Jane
-              secondName:
-                text: Austen
-              type: person
-              creatorNotes:
-              - 1775-1817. http://rdaregistry.info/Elements/w/P10197
-              relators:
-              - alternateTerm: http://rdaregistry.info/Elements/w/P10197
-            additionalCreators:
-            - relationshipInfo: 'Parody of (work):'
-              titles:
-              - Pride and prejudice.
-              relators:
-              - alternateTerm: http://rdaregistry.info/Elements/w/P10197
-              relatedData: Austen, Jane, 1775-1817.
-          subjects:
-          - subjectName:
-              text: Austen, Jane, 1775-1817 Parodies, imitations, etc.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: personalName
-          - subjectName:
-              text: Bennet, Elizabeth (Fictitious character) Fiction.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: personalName
-          - subjectName:
-              text: Darcy, Fitzwilliam (Fictitious character) Fiction.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: personalName
-          - subjectName:
-              text: Austen, Jane, 1775-1817.
-            vocabulary: fast
-            subjectType: personalName
-          - subjectName:
-              text: Bennet, Elizabeth (Fictitious character)
-            vocabulary: fast
-            subjectType: personalName
-          - subjectName:
-              text: Darcy, Fitzwilliam (Fictitious character)
-            vocabulary: fast
-            subjectType: personalName
-          - subjectName:
-              text: Austen, Jane, 1775-1817 Parodies, imitations, etc.
-            vocabulary: sears
-            subjectType: personalName
-          - subjectName:
-              text: Zombies Fiction.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: topic
-          - subjectName:
-              text: Young women England Fiction.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: topic
-          - subjectName:
-              text: Social classes England Fiction.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: topic
-          - subjectName:
-              text: Sisters Fiction.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: topic
-          - subjectName:
-              text: Sisters.
-            vocabulary: fast
-            subjectType: topic
-          - subjectName:
-              text: Social classes.
-            vocabulary: fast
-            subjectType: topic
-          - subjectName:
-              text: Young women.
-            vocabulary: fast
-            subjectType: topic
-          - subjectName:
-              text: Zombies.
-            vocabulary: fast
-            subjectType: topic
-          - subjectName:
-              text: Darcy, Fitzwilliam (Fictional character) Fiction.
-            vocabulary: sears
-            subjectType: topic
-          - subjectName:
-              text: Bennet, Elizabeth (Fictional character) Fiction.
-            vocabulary: sears
-            subjectType: topic
-          - subjectName:
-              text: Zombies Fiction.
-            vocabulary: sears
-            subjectType: topic
-          - subjectName:
-              text: England Fiction.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: geographicalTerm
-          - subjectName:
-              text: England.
-            vocabulary: fast
-            subjectType: geographicalTerm
-          - subjectName:
-              text: Horror tales.
-            vocabulary: Library of Congress Subject Headings
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Parodies, imitations, etc.
-            vocabulary: fast
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Regency fiction.
-            vocabulary: gsafd
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Parodies (Literature)
-            vocabulary: lcgft
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Zombie fiction.
-            vocabulary: lcgft
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Horror fiction.
-            vocabulary: lcgft
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Romance fiction.
-            vocabulary: lcgft
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Historical fiction.
-            vocabulary: lcgft
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Novels.
-            vocabulary: lcgft
-            subjectType: genreFormTerm
-          - subjectName:
-              text: Regency novels.
-            vocabulary: sears
-            subjectType: genreFormTerm
-          classification:
-            dewey: 813/.6
-            lc: PS3607.R348 P75 2009
-          publishers:
-          - publisherName:
-              text: Quirk Books ; Distributed in North America by Chronicle Books
-            publicationPlace: 'Philadelphia :, San Francisco :'
-          date:
-            publicationDate: ©2009.
-            createDate: '20080916'
-            replaceDate: '20191127'
-          language:
-            catalogingLanguage: eng
-          edition: {}
-          note: {}
-          format:
-            generalFormat: Book
-            specificFormat: PrintBook
-            materialTypes:
-            - fic
-          musicInfo: {}
-          description:
-            physicalDescription: '335 pages : illustrations ; 21 cm.'
-            genres:
-            - Horror tales.
-            - Parodies, imitations, etc.
-            - Regency fiction.
-            - Parodies (Literature)
-            - Zombie fiction.
-            - Horror fiction.
-            - Romance fiction.
-            - Historical fiction.
-            - Novels.
-            - Regency novels.
-            - Fiction.
-            summaries:
-            - text: As a mysterious plague falls upon the village of Meryton and zombies start rising from the dead, Elizabeth Bennet is determined to destroy the evil menace, but becomes distracted by the arrival of the dashing and arrogant Mr. Darcy.
-            peerReviewed: N
-          related: {}
-          work:
-            id: '4923669497'
-            count: 34
-          editionCluster:
-            id: d1627d1ae0c1cfa1446621aa64d1313a
-            count: 11
-          totalEditions: 9
-          database:
-            source: xwc
-            collection: xwc
-    invalid-query-parameter-bad-orderBy:
-      summary: Error returned when orderBy parameter contains invalid value
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: 'orderBy value ''somekey'' is invalid. Acceptable orderBy values: [recency, bestMatch, creator, publicationDateAsc, publicationDateDesc, mostWidelyHeld, title, library]'
-    success-brief-bibs-chapter:
-      summary: OCLC Number for chapter material format
-      value:
-        oclcNumber: '748392933'
-        title: Nanomachine computing by quorum sensing
-        creator: Wiedermann J.
-        date: '2011'
-        language: eng
-        generalFormat: ArtChap
-        specificFormat: Chptr
-    success-brief-bibs-film:
-      summary: OCLC Number for film material format
-      value:
-        oclcNumber: '12140861'
-        title: Easy street.
-        creator: Charlie Chaplin
-        date: '[197-?]'
-        language: eng
-        generalFormat: Video
-        specificFormat: Film
-        publisher: Blackhawk Films / Eastin-Phelan Corp.
-        publicationPlace: 'Davenport, Iowa :'
-        catalogingInfo:
-          catalogingAgency: YQR
-          transcribingAgency: YQR
-          catalogingLanguage: eng
-          levelOfCataloging: ' '
-    success-brief-bibs-article:
-      summary: OCLC Number for article material format
-      value:
-        oclcNumber: '806039046'
-        title: Where to find it guide 2012.
-        date: '2012'
-        language: eng
-        generalFormat: ArtChap
-        specificFormat: Artcl
-        catalogingInfo:
-          catalogingAgency: VG8
-          transcribingAgency: VG8
-          catalogingLanguage: eng
-          levelOfCataloging: ' '
-    missing-query-parameter-value:
-      summary: Error returned when query parameter value not valid
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: Query term is not provided.
+          termHighlights:
+            highlightFields:
+            - title
+            totalHighlights: 1
+          termHighlightedRecord:
+            title: '{{term}}Pride and Prejudice{{/term} [eBook - RBdigital]'
     success-brief-bibs-other-editions-holding-indicators:
       summary: successful request for brief-bibs other editions with holding indicators
       value:
@@ -3598,12 +3300,237 @@ components:
           institutionHoldingIndicators:
           - id: '128807'
             holdsItem: false
-    invalid-query-parameter-bad-index:
-      summary: Error returned when q parameter contains invalid index
+    success-brief-bibs-chapter:
+      summary: OCLC Number for chapter material format
+      value:
+        oclcNumber: '748392933'
+        title: Nanomachine computing by quorum sensing
+        creator: Wiedermann J.
+        date: '2011'
+        language: eng
+        generalFormat: ArtChap
+        specificFormat: Chptr
+    success-brief-bibs-film:
+      summary: OCLC Number for film material format
+      value:
+        oclcNumber: '12140861'
+        title: Easy street.
+        creator: Charlie Chaplin
+        date: '[197-?]'
+        language: eng
+        generalFormat: Video
+        specificFormat: Film
+        publisher: Blackhawk Films / Eastin-Phelan Corp.
+        publicationPlace: 'Davenport, Iowa :'
+        catalogingInfo:
+          catalogingAgency: YQR
+          transcribingAgency: YQR
+          catalogingLanguage: eng
+          levelOfCataloging: ' '
+    invalid-query-parameter-bad-orderBy:
+      summary: Error returned when orderBy parameter contains invalid value
       value:
         type: INVALID_QUERY_PARAMETER_VALUE
         title: Validation Failure
-        detail: 'Search term ''mt:doc'' is invalid. Following indexes are not allowed: [dd=, dd:, yr=, yr:, li=, li:, ln=, ln:, ll=, ll:, mt=, mt:, cs=, cs:, x0=, x0:, x4=, x4:]'
+        detail: 'orderBy value ''somekey'' is invalid. Acceptable orderBy values: [recency, bestMatch, creator, publicationDateAsc, publicationDateDesc, mostWidelyHeld, title, library]'
+    success-brief-bibs-other-editions:
+      summary: successful request for brief-bibs other editions
+      value:
+        numberOfRecords: 61
+        briefRecords:
+        - oclcNumber: '318877925'
+          title: Simon's cat / by Simon Tofield.
+          creator: Simon. Tofield
+          date: '2009'
+          language: eng
+          generalFormat: Book
+          specificFormat: PrintBook
+          edition: 1st ed.
+          publisher: Grand Central Pub.
+        - oclcNumber: '668192366'
+          title: 'Simon''s cat : beyond the fence.'
+          creator: Simon. Tofield
+          date: '2011'
+          language: eng
+          generalFormat: Book
+          specificFormat: PrintBook
+          edition: 1st ed.
+          publisher: Grand Central Pub.
+        - oclcNumber: '426122879'
+          title: Simon's cat.
+          creator: Simon. Tofield
+          date: '2009'
+          language: eng
+          generalFormat: Book
+          specificFormat: PrintBook
+          publisher: Canongate
+        - oclcNumber: '698261374'
+          title: 'Simon''s cat : beyond the fence.'
+          creator: Simon. Tofield
+          date: '2010'
+          language: eng
+          generalFormat: Book
+          specificFormat: Digital
+          publisher: Canongate
+        - oclcNumber: '716443553'
+          title: Simon's cat beyond the fence.
+          creator: Simon. Tofield
+          date: '2010'
+          language: eng
+          generalFormat: Book
+          specificFormat: PrintBook
+          publisher: Canongate
+        - oclcNumber: '869821272'
+          title: Beyond the fence.
+          creator: Simon Tofield
+          date: '2011'
+          language: eng
+          generalFormat: Book
+          specificFormat: Digital
+          publisher: Grand Central Publishing
+        - oclcNumber: '698364575'
+          title: Simon's cat.
+          creator: Simon. Tofield
+          date: '2009'
+          language: eng
+          generalFormat: Book
+          specificFormat: Digital
+          publisher: Canongate
+        - oclcNumber: '471205692'
+          title: Simon's cat.
+          creator: Simon. Tofield
+          date: '2009'
+          language: eng
+          generalFormat: Book
+          specificFormat: PrintBook
+          publisher: Canongate
+        - oclcNumber: '883250952'
+          title: Simon's cat.
+          creator: Simon Tofield
+          date: '2009'
+          language: eng
+          generalFormat: Book
+          specificFormat: Digital
+          edition: First edition.
+          publisher: Grand Central Publishing
+        - oclcNumber: '637439104'
+          title: 'Simon''s cat : beyond the fence.'
+          creator: Simon. Tofield
+          date: '2010'
+          language: eng
+          generalFormat: Book
+          specificFormat: PrintBook
+          publisher: Penguin Canada
+    invalid-query-parameter-bad-facet-number:
+      summary: Error returned when facet parameter contains invalid value
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: Number of facet is not numeric.
+    success-brief-bibs-photo:
+      summary: OCLC Number for photo material format
+      value:
+        oclcNumber: '722875457'
+        title: NRCS photo gallery.
+        creator: United States.
+        date: 200u
+        language: eng
+        generalFormat: Vis
+        specificFormat: Digital
+        publisher: U.S. Dept. of Agriculture, Natural Resources Conservation Service
+        publicationPlace: '[Washington, D.C.] :'
+        catalogingInfo:
+          catalogingAgency: GPO
+          transcribingAgency: GPO
+          catalogingLanguage: eng
+          levelOfCataloging: ' '
+    success-brief-bibs-ebook:
+      summary: OCLC Number for ebook material format
+      value:
+        oclcNumber: '43475873'
+        title: 'EBay the smart way : selling, buying, and profiting on the Webʼs #1 auction site'
+        creator: Joseph T. Sinclair
+        date: '1999.'
+        language: eng
+        generalFormat: Book
+        specificFormat: Digital
+        publisher: American Management Association
+        publicationPlace: 'New York :'
+        mergedOclcNumbers:
+        - '152077258'
+        - '532484211'
+        isbns:
+        - 058510414X
+        - '9780585104140'
+        catalogingInfo:
+          catalogingAgency: N$T
+          transcribingAgency: N$T
+          catalogingLanguage: eng
+          levelOfCataloging: ' '
+    success-brief-bibs-digital_article:
+      summary: OCLC Number for article material format
+      value:
+        oclcNumber: '316235490'
+        title: 'Tables of difference of latitude and departure : constructed to every quarter of a degree of thr [sic] quadrant, and continued from one, to the distance of one hundred miles or chains.'
+        creator: J. Robertson
+        date: '1785.'
+        language: eng
+        generalFormat: ArtChap
+        specificFormat: Digital
+        publisher: Printed and sold by Joseph Crukshank, in Market-Street, between Second and Third-Streets
+        publicationPlace: 'Philadelphia: :'
+        catalogingInfo:
+          catalogingAgency: LGG
+          transcribingAgency: LGG
+          catalogingLanguage: eng
+          levelOfCataloging: ' '
+    success-brief-bibs-search:
+      summary: successful search request for brief-bibs
+      value:
+        numberOfRecords: 2
+        briefRecords:
+        - oclcNumber: '44959645'
+          title: Pride and prejudice.
+          creator: Jane Austen
+          date: 199u
+          language: eng
+          generalFormat: Book
+          specificFormat: Digital
+          publisher: Project Gutenberg
+          publicationPlace: Champaign, Ill.
+          isbns:
+          - 0585013365
+          - '9780585013367'
+          - '9781925480337'
+          - 192548033X
+          mergedOclcNumbers:
+          - '818363152'
+          - '854852439'
+          - '859164912'
+          - '956345342'
+          catalogingInfo:
+            catalogingAgency: N$T
+            transcribingAgency: N$T
+            catalogingLanguage: eng
+            levelOfCataloging: L
+        - oclcNumber: '1103229133'
+          title: Pride and Prejudice [eBook - RBdigital].
+          creator: Jane Austen
+          date: '1998'
+          language: eng
+          generalFormat: Book
+          specificFormat: Digital
+          publisher: Project Gutenberg Literary Archive Foundation
+          publicationPlace: Salt Lake City
+          isbns:
+          - '9781470398842'
+          - '1470398842'
+          mergedOclcNumbers: null
+          catalogingInfo:
+            catalogingAgency: HQD
+            transcribingAgency: HQD
+            catalogingLanguage: eng
+            levelOfCataloging: ' '
     success-bibs:
       summary: successful request for bibs
       value:
@@ -5588,65 +5515,35 @@ components:
           database:
             source: xwc
             collection: xwc
-    bibRecordBrief-highlights:
-      summary: successful request for searching brief bibs with highlights on
+    invalid-query-parameter-bad-index:
+      summary: Error returned when q parameter contains invalid index
       value:
-        numberOfRecords: 2
-        briefRecords:
-        - oclcNumber: '44959645'
-          title: Pride and prejudice
-          creator: Jane Austen
-          date: 199u
-          language: eng
-          generalFormat: Book
-          specificFormat: Digital
-          publisher: Project Gutenberg
-          publicationPlace: Champaign, Ill.
-          isbns:
-          - 0585013365
-          - '9780585013367'
-          - '9781925480337'
-          - 192548033X
-          mergedOclcNumbers:
-          - '818363152'
-          - '854852439'
-          - '859164912'
-          - '956345342'
-          catalogingInfo:
-            catalogingAgency: N$T
-            transcribingAgency: N$T
-            catalogingLanguage: eng
-            levelOfCataloging: L
-          termHighlights:
-            highlightFields:
-            - title
-            totalHighlights: 1
-          termHighlightedRecord:
-            title: '{{term}}Pride and prejudice{{/term}'
-        - oclcNumber: '1103229133'
-          title: Pride and Prejudice [eBook - RBdigital]
-          creator: Jane Austen
-          date: '1998'
-          language: eng
-          generalFormat: Book
-          specificFormat: Digital
-          publisher: Project Gutenberg Literary Archive Foundation
-          publicationPlace: Salt Lake City
-          isbns:
-          - '9781470398842'
-          - '1470398842'
-          mergedOclcNumbers: null
-          catalogingInfo:
-            catalogingAgency: HQD
-            transcribingAgency: HQD
-            catalogingLanguage: eng
-            levelOfCataloging: ' '
-          termHighlights:
-            highlightFields:
-            - title
-            totalHighlights: 1
-          termHighlightedRecord:
-            title: '{{term}}Pride and Prejudice{{/term} [eBook - RBdigital]'
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: 'Search term ''mt:doc'' is invalid. Following indexes are not allowed: [dd=, dd:, yr=, yr:, li=, li:, ln=, ln:, ll=, ll:, mt=, mt:, cs=, cs:, x0=, x0:, x4=, x4:]'
+    success-brief-bibs-oclcnumber:
+      summary: successful request a brief bib record by OCLC Number
+      value:
+        oclcNumber: '318877925'
+        title: Simon's cat / by Simon Tofield.
+        creator: Simon. Tofield
+        date: '2009.'
+        language: eng
+        generalFormat: Book
+        specificFormat: PrintBook
+        edition: 1st ed.
+        publisher: Grand Central Pub.
+        publicationPlace: 'New York :'
+        mergedOclcNumbers:
+        - '877908501'
+        isbns:
+        - '9780446560061'
+        - '0446560065'
+        catalogingInfo:
+          catalogingAgency: DLC
+          transcribingAgency: DLC
+          catalogingLanguage: eng
+          levelOfCataloging: ' '
     success-brief-bibs-website:
       summary: OCLC Number for website material format
       value:
@@ -5697,561 +5594,666 @@ components:
           transcribingAgency: INU
           catalogingLanguage: eng
           levelOfCataloging: ' '
-    invalid-query-parameter-bad-facet-name:
-      summary: Error returned when facet parameter contains invalid value
+    success-brief-bibs-painting:
+      summary: OCLC Number for painting material format
       value:
-        type: INVALID_QUERY_PARAMETER_VALUE
+        oclcNumber: '879604262'
+        title: Chinese painting & calligraphy.
+        creator: Seattle Art Museum
+        date: '2011'
+        language: eng
+        generalFormat: Vis
+        specificFormat: Digital
+        publisher: Seattle Art Museum
+        publicationPlace: 'Seattle :'
+        catalogingInfo:
+          catalogingAgency: SA1
+          transcribingAgency: SA1
+          catalogingLanguage: eng
+          levelOfCataloging: ' '
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
         title: Validation Failure
-        detail: 'Facet name ''author'' is invalid. Acceptable facet name: [datePublished, creator, itemType, subject, genre, itemSubType, language]'
-  parameters:
-    accept:
-      name: Accept
-      in: header
-      description: Content Type the client supports and is requesting (application/json currently supported)
-      schema:
-        type: string
-        default: application/json
-      required: false
-    parameters-oclcNumberAsId:
-      name: oclcNumber
-      in: path
-      description: record OCLC number
-      required: true
-      schema:
-        $ref: '#/components/schemas/OclcNumber'
-      example: 41266045
-    newsArticles:
-      name: newsArticles
-      in: query
-      description: Filter results to include, exclude, or only show news articles
-      required: false
-      schema:
-        type: string
-        enum:
-        - include
-        - exclude
-        - only
-        default: exclude
-      example: exclude
-    groupVariantRecords:
-      name: groupVariantRecords
-      in: query
-      description: Whether or not to group variant records. Default is 'false'
-      required: false
-      schema:
-        type: boolean
-        default: false
-    genre:
-      name: genre
-      in: query
-      description: Genre to limit results to (ge index)
-      required: false
-      schema:
-        type: string
-      example: fiction
-    oclcNumberAsId:
-      name: oclcNumber
-      in: path
-      description: record OCLC number
-      required: true
-      schema:
-        $ref: '#/components/schemas/OclcNumber'
-      example: 41266045
-    inLanguage:
-      name: inLanguage
-      in: query
-      description: Limiter to restrict the response to the single specified language (ln index). (eng, fre, ger)
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - eng
-        multiple:
-          value:
-          - eng
-          - fre
-          - ger
-    peerReviewed:
-      name: peerReviewed
-      in: query
-      description: filter to just peer reviewed content
-      required: false
-      schema:
-        type: boolean
-    heldByGroup:
-      name: heldByGroup
-      in: query
-      description: Restrict to holdings held by Group Symbol
-      required: false
-      schema:
-        type: string
-      example: ASRL
-    content:
-      name: content
-      in: query
-      description: Content to limit results to
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
+        detail: Required String parameter 'q' is not present
+    bibRecord-highlights:
+      summary: successful search for bibs with highlights
+      value:
+      - identifier:
+          oclcNumber: '868267173'
+          isbns:
+          - 130629827X
+          - '9781306298278'
+          - '9781467732390'
+          - '1467732397'
+          - '9781467749787'
+          - '1467749788'
+          - '1467768413'
+          - '9781467768412'
+          mergedOclcNumbers:
+          - '872549825'
+          - '1044824718'
+          - '1045477205'
+          - '1046106765'
+          - '1046636937'
+          - '1049594666'
+        title:
+          mainTitles:
+          - text: Pride and prejudice / by Jane Austen.
+          seriesTitles:
+          - seriesTitle: First Avenue Classics Ser.
+          - seriesTitle: First Avenue Classics Ser.
+        contributor:
+          creators:
+          - firstName:
+              text: Jane
+            secondName:
+              text: Austen
+            type: person
+            creatorNotes:
+            - 1775-1817, author.
+            relators:
+            - term: Author.
+              alternateTerm: aut
+        subjects:
+        - subjectName:
+            text: Social classes Fiction.
+          vocabulary: Library of Congress Subject Headings
+          subjectType: topic
+        - subjectName:
+            text: Young women Fiction.
+          vocabulary: Library of Congress Subject Headings
+          subjectType: topic
+        - subjectName:
+            text: Courtship Fiction.
+          vocabulary: Library of Congress Subject Headings
+          subjectType: topic
+        - subjectName:
+            text: Sisters Fiction.
+          vocabulary: Library of Congress Subject Headings
+          subjectType: topic
+        - subjectName:
+            text: LITERARY CRITICISM European English, Irish, Scottish, Welsh.
+          vocabulary: bisacsh
+          subjectType: topic
+        - subjectName:
+            text: Courtship.
+          vocabulary: fast
+          subjectType: topic
+        - subjectName:
+            text: Sisters.
+          vocabulary: fast
+          subjectType: topic
+        - subjectName:
+            text: Social classes.
+          vocabulary: fast
+          subjectType: topic
+        - subjectName:
+            text: Young women.
+          vocabulary: fast
+          subjectType: topic
+        - subjectName:
+            text: England Fiction.
+          vocabulary: Library of Congress Subject Headings
+          subjectType: geographicalTerm
+        - subjectName:
+            text: England.
+          vocabulary: fast
+          subjectType: geographicalTerm
+        - subjectName:
+            text: Domestic fiction.
+          vocabulary: Library of Congress Subject Headings
+          subjectType: genreFormTerm
+        - subjectName:
+            text: Fiction.
+          vocabulary: fast
+          subjectType: genreFormTerm
+        - subjectName:
+            text: Domestic fiction.
+          vocabulary: lcgft
+          subjectType: genreFormTerm
+        - subjectName:
+            text: Electronic books.
+          vocabulary: lcgft
+          subjectType: genreFormTerm
+        classification:
+          dewey: '823.7'
+          lc: PR4034
+        publishers:
+        - publisherName:
+            text: First Avenue Editions, a division of Lerner Publishing Group
+          publicationPlace: 'Minneapolis, MN :'
+        date:
+          publicationDate: '[2014]'
+          createDate: '20140117'
+          replaceDate: '20191023'
+        language:
+          catalogingLanguage: eng
+        edition: {}
+        note: {}
+        format:
+          generalFormat: Book
+          specificFormat: Digital
+          materialTypes:
+          - dct
           - fic
-          - nonFic
-          - bio
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - fic
-        multiple:
-          value:
-          - fic
-          - bio
-    unit:
-      name: unit
-      in: query
-      description: distance unit
-      required: false
-      schema:
-        $ref: '#/components/schemas/Unit'
-    subtopic:
-      name: subtopic
-      in: query
-      description: subtopic to limit results to (s1 index). Based on OCLC Conspectus Category
-      required: false
-      schema:
-        type: string
-      example: 34932000
-    lon:
-      name: lon
-      in: query
-      description: longitude
-      required: false
-      schema:
-        $ref: '#/components/schemas/Longitude'
-    heldByRelevanceGroup:
-      name: heldByRelevanceGroup
-      in: query
-      description: Filter holdings to specified relevance groups
-      required: false
-      schema:
-        type: array
-        items:
-          type: integer
-        minItems: 1
-        maxItems: 5
-      explode: false
-    heldByInstitutionID:
-      name: heldByInstitutionID
-      in: query
-      description: Institution registryId
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/RegistryId'
-        minItems: 0
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - 128807
-        multiple:
-          value:
-          - 128807
-          - 91475
-    orderBy:
-      name: orderBy
-      in: query
-      description: result sort key
-      required: false
-      schema:
-        type: string
-        default: bestMatch
-        enum:
-        - library
-        - recency
-        - bestMatch
-        - creator
-        - publicationDateAsc
-        - publicationDateDesc
-        - mostWidelyHeld
-        - title
-    distance:
-      name: distance
-      in: query
-      description: distance
-      required: false
-      schema:
-        type: integer
-        format: int32
-      example: 10
-    catalogSource:
-      name: catalogSource
-      in: query
-      description: Limiter to restrict the response to the single OCLC symbol as the cataloging source (cs index). (OSL)
-      required: false
-      schema:
-        type: string
-      example: OCL
-    heldByBranchID:
-      name: heldByBranchID
-      in: query
-      description: Filter holdings to specified branch IDs
-      required: false
-      schema:
-        type: array
-        items:
-          type: integer
-        minItems: 1
-        maxItems: 5
-      explode: false
-    creator:
-      name: creator
-      in: query
-      description: creator strings to filter to
-      required: false
-      schema:
-        description: pipe delimited set of creator strings to filter to
-        type: array
-        items:
-          type: string
-        minItems: 1
-        maxItems: 5
-        example:
-        - austen
-        - jane|bronte
-        - emily
-      explode: false
-      style: pipeDelimited
-    retentionCommitments:
-      name: retentionCommitments
-      in: query
-      description: Limiter to restrict the response to bibliographic records with a retention commitment (l8 index).
-      required: false
-      schema:
-        type: boolean
-        default: false
-    deweyNumber:
-      name: deweyNumber
-      in: query
-      description: Limiter to restrict the response to the specified dewey classification number(s). For multiple values repeat the URL parameter. (dd index)
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - 870
-    heldBy:
-      name: heldBy
-      in: query
-      description: Institution Symbol
-      deprecated: true
-      required: false
-      schema:
-        type: string
-      example: TXH
-    bookReviews:
-      name: bookReviews
-      in: query
-      description: Filter results to include, exclude, or only show book reviews
-      required: false
-      schema:
-        type: string
-        enum:
-        - include
-        - exclude
-        - only
-        default: exclude
-      example: exclude
-    materialType:
-      name: materialType
-      in: query
-      description: Limiter to restrict the response to the specified material type (mt index). (URL, LPS)
-      required: false
-      schema:
-        type: string
-      example: URL
-    inCatalogLanguage:
-      name: inCatalogLanguage
-      in: query
-      description: Limiter to restrict the response to the single specified cataloging language (ll index). (dut, eng)
-      required: false
-      schema:
-        type: string
-      example: eng
-    offset:
-      name: offset
-      in: query
-      description: start position of the bib records to return (0 based), default 0
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 0
-      example: 10
-    limit:
-      name: limit
-      in: query
-      description: maximum number of records to return, maximum 50, default 10
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-      example: 50
-    itemType:
-      name: itemType
-      in: query
-      description: Limiter to restrict the response to the single specified OCLC top-level facet type (x0 index). (book, image)
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/ItemType'
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - book
-        multiple:
-          value:
-          - book
-          - audiobook
-    showHoldingIndicators:
-      name: showHoldingsIndicators
-      in: query
-      description: whether or not to show holdings indicators in response
-      required: false
-      schema:
-        type: boolean
-        default: false
-    query:
-      name: q
-      in: query
-      description: query in the form of a keyword search or fielded search, for example  (au:gazihan OR au:womacka) AND kw:java See - https://help.oclc.org/Librarian_Toolbox/Searching_WorldCat_Indexes/Bibliographic_records/Bibliographic_record_indexes/Bibliographic_record_index_lists
-      required: true
-      schema:
-        type: string
-      example: 'ti: Simon''s Cat'
-    openAccess:
-      name: openAccess
-      in: query
-      description: filter to just open access content
-      required: false
-      schema:
-        type: boolean
-    lat:
-      name: lat
-      in: query
-      description: latitude
-      required: false
-      schema:
-        $ref: '#/components/schemas/Latitude'
-    editionOrderBy:
-      name: orderBy
-      in: query
-      description: how to sort the edition resultsresults
-      schema:
-        type: string
-        enum:
-        - library
-        - recency
-        - bestMatch
-        - creator
-        - publicationDateAsc
-        - publicationDateDesc
-        - language
-        - mostWidelyHeld
-        - title
-        default: publicationDateDesc
-      example: language
-    enableSearchExpansion:
-      name: enableSearchExpansion
-      in: query
-      description: whether or not to expand search terms
-      schema:
-        type: boolean
-        default: false
-    facets:
-      name: facets
-      in: query
-      description: The requested list of facets requested in the response
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
-          - subject
-          - creator
-          - datePublished
-          - genre
-          - itemType
-          - itemSubTypeBrief
-          - itemSubType
-          - language
-          - topic
-          - subtopic
-          - content
-          - audience
-          - databases
-        minItems: 1
-        maxItems: 13
-      explode: false
-      examples:
-        single:
-          value:
-          - creator
-        multiple:
-          value:
-          - creator
-          - itemType
-    heldBySymbol:
-      name: heldBySymbol
-      in: query
-      description: Institution Symbol
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/OCLCSymbol'
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - TXH
-        multiple:
-          value:
-          - TXH
-          - YSM
-    spProgram:
-      name: spProgram
-      in: query
-      description: Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index).
-      required: false
-      schema:
-        type: string
-      example: WEST
-    groupRelatedEditions:
-      name: groupRelatedEditions
-      in: query
-      description: Whether or not to use FRBR grouping. Default is 'false'
-      required: false
-      schema:
-        type: boolean
-        default: false
-    topic:
-      name: topic
-      in: query
-      description: topic to limit results to (s0 index). Based on OCLC Conspectus Division
-      required: false
-      schema:
-        type: string
-      example: 34000000
-    showLocalBibData:
-      name: showLocalBibData
-      in: query
-      description: whether or not to show local bibliographic data in response
-      required: false
-      schema:
-        type: boolean
-        default: false
-    audience:
-      name: audience
-      in: query
-      description: Audience to limit results to
-      required: false
-      schema:
-        type: string
-        enum:
-        - juv
-        - nonJuv
-      example: juv
-    datePublished:
-      name: datePublished
-      in: query
-      description: Limiter to restrict the response to one or more dates or to a range (in index). (2000, 2000-2010, 1990,1991)
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single_date:
-          value:
-          - 2000
-        multiple_dates:
-          value:
-          - 1990
-          - 1991
-        range:
-          value:
-          - 2000-2010
-    dbIds:
-      name: dbIds
-      in: query
-      description: The database IDs to filter to
-      required: false
-      schema:
-        type: array
-        items:
-          type: integer
-        minItems: 1
-      explode: false
-    preferredLanguage:
-      name: preferredLanguage
-      in: query
-      description: language user would prefer metadata description in
-      required: false
-      schema:
-        description: three character MARC code for language to prefer records in
-        type: string
-        example: fre
-    itemSubType:
-      name: itemSubType
-      in: query
-      description: Limiter to restrict the response to the single specified OCLC sub facet type (x1 index). (dvd, digital)
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/ItemSubType'
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - book-digital
-        multiple:
-          value:
-          - book-digital
-          - audiobook-digital
+          - url
+        musicInfo: {}
+        digitalAccessAndLocations:
+        - uri: http://search.ebscohost.com/login.aspx?direct=true&scope=site&db=nlebk&db=nlabk&AN=687384
+          materialSpecified: EBSCOhost
+        - uri: http://www.myilibrary.com?id=561078
+          materialSpecified: MyiLibrary
+        - uri: https://www.overdrive.com/search?q=C0633B4B-E547-44B3-BE08-5AD6247CFEBF
+          materialSpecified: OverDrive
+        - uri: http://rbdigital.oneclickdigital.com
+        - uri: https://samples.overdrive.com/pride-and-prejudice-c0633b?.epub-sample.overdrive.com
+          materialSpecified: Excerpt
+        - uri: http://images.contentreserve.com/ImageType-100/0955-1/{C0633B4B-E547-44B3-BE08-5AD6247CFEBF}Img100.jpg
+          materialSpecified: Image
+        - uri: http://public.ebookcentral.proquest.com/choice/publicfullrecord.aspx?p=5445266
+          publicNote: Click here to view book
+        - uri: http://public.ebookcentral.proquest.com/choice/publicfullrecord.aspx?p=5444679
+          publicNote: Click here to view book
+        - uri: https://www.hoopladigital.com/title/11273197
+          materialSpecified: Access ebook here.
+          publicNote: Instantly available on hoopla.
+        - uri: https://d2snwnmzyr8jue.cloudfront.net/lpg_9781467768412_180.jpeg
+          materialSpecified: Access ebook here.
+          publicNote: Cover image
+        - uri: https://ebookcentral.proquest.com/lib/soas-ebooks/detail.action?docID=5445266
+          publicNote: Connect to electronic book via Ebook Central.
+        - uri: https://ebookcentral.proquest.com/lib/columbia/detail.action?docID=5445266
+          publicNote: Ebook Central Academic Complete
+        - uri: https://ebookcentral.proquest.com/lib/ucm/detail.action?docID=5445266
+          publicNote: View Full Text
+        - uri: http://ra.ocls.ca/ra/login.aspx?inst=stlawrence&url=https://ebookcentral.proquest.com/lib/stlawrence-ebooks/detail.action?docID=5445266
+        description:
+          physicalDescription: 1 online resource
+          genres:
+          - Domestic fiction.
+          - Electronic books.
+          - Fiction.
+          summaries:
+          - text: Elizabeth Bennet and her four sisters need husbands, according to their mother. Hope soars when a wealthy bachelor moves in nearby. Filled with romance and heartbreak, the story warns of judging by first impressions and being prideful.
+          contents:
+          - contentNote:
+              text: Cover; Title Page; Copyright Page; Contents; Chapter 1; Chapter 2; Chapter 3; Chapter 4; Chapter 5; Chapter 6; Chapter 7; Chapter 8; Chapter 9; Chapter 10; Chapter 11; Chapter 12; Chapter 13; Chapter 14; Chapter 15; Chapter 16; Chapter 17; Chapter 18; Chapter 19; Chapter 20; Chapter 21; Chapter 22; Chapter 23; Chapter 24; Chapter 25; Chapter 26; Chapter 27; Chapter 28; Chapter 29; Chapter 30; Chapter 31; Chapter 32; Chapter 33; Chapter 34; Chapter 35; Chapter 36; Chapter 37; Chapter 38; Chapter 39; Chapter 40; Chapter 41; Chapter 42; Chapter 43; Chapter 44; Chapter 45; Chapter 46; Chapter 47
+          - contentNote:
+              text: Chapter 48Chapter 49; Chapter 50; Chapter 51; Chapter 52; Chapter 53; Chapter 54; Chapter 55; Chapter 56; Chapter 57; Chapter 58; Chapter 59; Chapter 60; Chapter 61; Back Cover
+          peerReviewed: N
+        related:
+          additionalPhysicalFormEntries:
+          - displayConstant: 'Print version:'
+            isbns:
+            - '9781306298278'
+        work:
+          id: '1881837462'
+          count: 4503
+        editionCluster:
+          id: f7489b4b967ebd9ff6a0858ffb7e7378
+          count: 2
+        totalEditions: 2218
+        database:
+          source: xwc
+          collection: xwc
+      - identifier:
+          oclcNumber: '670411708'
+          isbns:
+          - '9781602918771'
+          - '1602918775'
+          externalIdentifiers:
+          - oclcSymbol: AU@
+            systemControlNumber: 48820984
+        title:
+          mainTitles:
+          - text: Pride and prejudice / Jane Austen.
+          seriesTitles:
+          - seriesTitle: Timeless classics study guide
+          - seriesTitle: Timeless classics study guide.
+        contributor:
+          creators:
+          - firstName:
+              text: Jane
+            secondName:
+              text: Austen
+            type: person
+            creatorNotes:
+            - 1775-1817.
+          - nonPersonName:
+              text: Saddleback Educational Publishing.
+            type: corporation
+        subjects:
+        - subjectName:
+            text: Austen, Jane, 1775-1817.
+          vocabulary: Library of Congress Subject Headings
+          subjectType: personalName
+        - subjectName:
+            text: Pride and prejudice (Austen, Jane)
+          vocabulary: fast
+          subjectType: uniformTitle
+        - subjectName:
+            text: LITERARY CRITICISM European English, Irish, Scottish, Welsh.
+          vocabulary: bisacsh
+          subjectType: topic
+        classification:
+          dewey: 823/.7
+          lc: PR4034.P7
+        publishers:
+        - publisherName:
+            text: Saddleback Educational Pub.
+          publicationPlace: 'Irvine :'
+        date:
+          publicationDate: '2010.'
+          createDate: '20101018'
+          replaceDate: '20191022'
+        language:
+          catalogingLanguage: eng
+        edition: {}
+        note: {}
+        format:
+          generalFormat: Book
+          specificFormat: Digital
+          materialTypes:
+          - dct
+          - url
+        musicInfo: {}
+        digitalAccessAndLocations:
+        - uri: http://public.ebookcentral.proquest.com/choice/publicfullrecord.aspx?p=589483
+          materialSpecified: ProQuest Ebook Central
+        - uri: http://search.ebscohost.com/login.aspx?direct=true&scope=site&db=nlebk&db=nlabk&AN=435912
+          materialSpecified: EBSCOhost
+        - uri: https://www.overdrive.com/search?q=2B6712AA-E584-4F22-AAD8-1F3A7FAB5F6D
+          materialSpecified: OverDrive
+        - uri: http://images.contentreserve.com/ImageType-100/2671-1/{2B6712AA-E584-4F22-AAD8-1F3A7FAB5F6D}Img100.jpg
+          materialSpecified: Image
+        description:
+          physicalDescription: 1 online resource (50 pages).
+          genres:
+          - Electronic books.
+          summaries:
+          - text: Thirty-five reproducible activities per guide reiforce basic reading and comprehension skills while teaching higher-order critical thinking. Also included are teaching suggestions, background notes, summaries, and answer keys.
+          contents:
+          - contentNote:
+              text: Table of contents; teacher notes; author facts; character facts; chapter summaries; answer key; glossary; activities.
+          peerReviewed: N
+        related:
+          additionalPhysicalFormEntries:
+          - displayConstant: 'Print version:'
+            titles:
+            - Pride and Prejudice Study Guide.
+            isbns:
+            - '9781616511463'
+            mainEntryHeadings:
+            - Publishing, Saddleback Educational.
+        work:
+          id: '1881837462'
+          count: 4503
+        editionCluster:
+          id: 77ff4ccd62041d39ac73b22eaf92a78b
+          count: 2
+        totalEditions: 2218
+        database:
+          source: xwc
+          collection: xwc
+    success-single-bib:
+      summary: successful search for single bib record
+      value:
+        numberOfRecords: 1
+        bibRecords:
+        - identifier:
+            oclcNumber: '311684437'
+            lccn: '2008937609'
+            isbns:
+            - '9781594743344'
+            - '1594743347'
+            - '9781594743351'
+            - '1594743355'
+            - '9781594744518'
+            - '1594744513'
+            externalIdentifiers:
+            - oclcSymbol: AU@
+              systemControlNumber: 43839587
+            - oclcSymbol: AU@
+              systemControlNumber: '000044205433'
+            - oclcSymbol: AU@
+              systemControlNumber: 44218081
+            - oclcSymbol: AU@
+              systemControlNumber: 54552395
+            - oclcSymbol: CBK
+              systemControlNumber: '120281791'
+            - oclcSymbol: COVCL
+              systemControlNumber: '1594743347'
+            - oclcSymbol: DEBBG
+              systemControlNumber: BV035970551
+            - oclcSymbol: LBRUT
+              systemControlNumber: '1594743347'
+            - oclcSymbol: NLGGC
+              systemControlNumber: '321202333'
+            - oclcSymbol: NLNZL
+              systemControlNumber: '9913384163502836'
+            - oclcSymbol: NOK
+              systemControlNumber: '1594743347'
+            - oclcSymbol: NOK
+              systemControlNumber: '1594744513'
+            - oclcSymbol: NZ1
+              systemControlNumber: '12866253'
+            - oclcSymbol: NZ1
+              systemControlNumber: '1338416'
+            - oclcSymbol: NZ1
+              systemControlNumber: '14508856'
+            - oclcSymbol: OXFCL
+              systemControlNumber: '1594743347'
+            - oclcSymbol: REABC
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKBCI
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKBCI
+              systemControlNumber: 12033044X
+            - oclcSymbol: UKBED
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKBFB
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKBNS
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKBNS
+              systemControlNumber: 12033044X
+            - oclcSymbol: UKBNT
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKBOR
+              systemControlNumber: 12033044X
+            - oclcSymbol: UKBUR
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKCHS
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKDEL
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKDLI
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKDON
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKDOR
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKGTH
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKJSY
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKKCC
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKKUT
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKLBB
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKLCL
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKLLS
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKNLL
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKNWH
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKNWP
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKPMH
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKSCO
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKSCO
+              systemControlNumber: 12033044X
+            - oclcSymbol: UKSCO
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKSFD
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKSGC
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKSGC
+              systemControlNumber: 12033044X
+            - oclcSymbol: UKSGC
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKSOM
+              systemControlNumber: '120281791'
+            - oclcSymbol: UKSOM
+              systemControlNumber: 12033044X
+            - oclcSymbol: UKSUS
+              systemControlNumber: '1594743347'
+            - oclcSymbol: UKTLS
+              systemControlNumber: '120281791'
+            - oclcSymbol: UNITY
+              systemControlNumber: '120281791'
+            - oclcSymbol: UNITY
+              systemControlNumber: 12033044X
+            - oclcSymbol: WARCC
+              systemControlNumber: '1594743347'
+            mergedOclcNumbers:
+            - '261176486'
+            - '330361568'
+            - '377707240'
+            - '426228842'
+            - '701739996'
+            - '716923895'
+            - '731216527'
+            - '887752101'
+            - '945738851'
+            - '1045429884'
+          title:
+            mainTitles:
+            - text: 'Pride and prejudice and zombies : the classic regency romance--now with ultraviolent zombie mayhem / by Jane Austen and Seth Grahame-Smith.'
+            seriesTitles:
+            - seriesTitle: Quirk classics
+            - seriesTitle: Quirk classics.
+          contributor:
+            creators:
+            - firstName:
+                text: Seth
+              secondName:
+                text: Grahame-Smith
+              type: person
+              creatorNotes:
+              - author.
+              relators:
+              - term: Author.
+                alternateTerm: aut
+            - firstName:
+                text: Jane
+              secondName:
+                text: Austen
+              type: person
+              creatorNotes:
+              - 1775-1817. http://rdaregistry.info/Elements/w/P10197
+              relators:
+              - alternateTerm: http://rdaregistry.info/Elements/w/P10197
+            additionalCreators:
+            - relationshipInfo: 'Parody of (work):'
+              titles:
+              - Pride and prejudice.
+              relators:
+              - alternateTerm: http://rdaregistry.info/Elements/w/P10197
+              relatedData: Austen, Jane, 1775-1817.
+          subjects:
+          - subjectName:
+              text: Austen, Jane, 1775-1817 Parodies, imitations, etc.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: personalName
+          - subjectName:
+              text: Bennet, Elizabeth (Fictitious character) Fiction.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: personalName
+          - subjectName:
+              text: Darcy, Fitzwilliam (Fictitious character) Fiction.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: personalName
+          - subjectName:
+              text: Austen, Jane, 1775-1817.
+            vocabulary: fast
+            subjectType: personalName
+          - subjectName:
+              text: Bennet, Elizabeth (Fictitious character)
+            vocabulary: fast
+            subjectType: personalName
+          - subjectName:
+              text: Darcy, Fitzwilliam (Fictitious character)
+            vocabulary: fast
+            subjectType: personalName
+          - subjectName:
+              text: Austen, Jane, 1775-1817 Parodies, imitations, etc.
+            vocabulary: sears
+            subjectType: personalName
+          - subjectName:
+              text: Zombies Fiction.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: topic
+          - subjectName:
+              text: Young women England Fiction.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: topic
+          - subjectName:
+              text: Social classes England Fiction.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: topic
+          - subjectName:
+              text: Sisters Fiction.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: topic
+          - subjectName:
+              text: Sisters.
+            vocabulary: fast
+            subjectType: topic
+          - subjectName:
+              text: Social classes.
+            vocabulary: fast
+            subjectType: topic
+          - subjectName:
+              text: Young women.
+            vocabulary: fast
+            subjectType: topic
+          - subjectName:
+              text: Zombies.
+            vocabulary: fast
+            subjectType: topic
+          - subjectName:
+              text: Darcy, Fitzwilliam (Fictional character) Fiction.
+            vocabulary: sears
+            subjectType: topic
+          - subjectName:
+              text: Bennet, Elizabeth (Fictional character) Fiction.
+            vocabulary: sears
+            subjectType: topic
+          - subjectName:
+              text: Zombies Fiction.
+            vocabulary: sears
+            subjectType: topic
+          - subjectName:
+              text: England Fiction.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: geographicalTerm
+          - subjectName:
+              text: England.
+            vocabulary: fast
+            subjectType: geographicalTerm
+          - subjectName:
+              text: Horror tales.
+            vocabulary: Library of Congress Subject Headings
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Parodies, imitations, etc.
+            vocabulary: fast
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Regency fiction.
+            vocabulary: gsafd
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Parodies (Literature)
+            vocabulary: lcgft
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Zombie fiction.
+            vocabulary: lcgft
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Horror fiction.
+            vocabulary: lcgft
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Romance fiction.
+            vocabulary: lcgft
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Historical fiction.
+            vocabulary: lcgft
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Novels.
+            vocabulary: lcgft
+            subjectType: genreFormTerm
+          - subjectName:
+              text: Regency novels.
+            vocabulary: sears
+            subjectType: genreFormTerm
+          classification:
+            dewey: 813/.6
+            lc: PS3607.R348 P75 2009
+          publishers:
+          - publisherName:
+              text: Quirk Books ; Distributed in North America by Chronicle Books
+            publicationPlace: 'Philadelphia :, San Francisco :'
+          date:
+            publicationDate: ©2009.
+            createDate: '20080916'
+            replaceDate: '20191127'
+          language:
+            catalogingLanguage: eng
+          edition: {}
+          note: {}
+          format:
+            generalFormat: Book
+            specificFormat: PrintBook
+            materialTypes:
+            - fic
+          musicInfo: {}
+          description:
+            physicalDescription: '335 pages : illustrations ; 21 cm.'
+            genres:
+            - Horror tales.
+            - Parodies, imitations, etc.
+            - Regency fiction.
+            - Parodies (Literature)
+            - Zombie fiction.
+            - Horror fiction.
+            - Romance fiction.
+            - Historical fiction.
+            - Novels.
+            - Regency novels.
+            - Fiction.
+            summaries:
+            - text: As a mysterious plague falls upon the village of Meryton and zombies start rising from the dead, Elizabeth Bennet is determined to destroy the evil menace, but becomes distracted by the arrival of the dashing and arrogant Mr. Darcy.
+            peerReviewed: N
+          related: {}
+          work:
+            id: '4923669497'
+            count: 34
+          editionCluster:
+            id: d1627d1ae0c1cfa1446621aa64d1313a
+            count: 11
+          totalEditions: 9
+          database:
+            source: xwc
+            collection: xwc
+    success-brief-bibs-article:
+      summary: OCLC Number for article material format
+      value:
+        oclcNumber: '806039046'
+        title: Where to find it guide 2012.
+        date: '2012'
+        language: eng
+        generalFormat: ArtChap
+        specificFormat: Artcl
+        catalogingInfo:
+          catalogingAgency: VG8
+          transcribingAgency: VG8
+          catalogingLanguage: eng
+          levelOfCataloging: ' '
   securitySchemes:
     worldcat_metadata_auth:
       type: oauth2

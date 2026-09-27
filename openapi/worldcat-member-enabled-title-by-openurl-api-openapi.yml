@@ -254,19 +254,6 @@ paths:
       - api_key: []
 components:
   schemas:
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        rel:
-          type: string
-          enum:
-          - self
-          - alternate
-          - parent
-          - enclosure
-          - via
     Title:
       type: object
       properties:
@@ -361,7 +348,26 @@ components:
       - provider_name
       - provider_uid
       - publisher
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
   examples:
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
     success-openurl-single:
       summary: successful openurl request
       value:
@@ -386,12 +392,6 @@ components:
         provider_name: Safari Books Online
         collection_name: Safari Tech Books Online
         oclcnum: '61849699'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
   securitySchemes:
     api_key:
       type: apiKey

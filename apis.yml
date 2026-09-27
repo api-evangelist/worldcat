@@ -38,6 +38,17 @@ created: "2026-06-13"
 modified: "2026-06-13"
 specificationVersion: '0.23'
 tags:
+  - Library
+  - Bibliographic Records
+  - WorldCat
+  - OCLC
+  - Cataloging
+  - Metadata
+  - Discovery
+  - Books
+  - Media
+  - Linked Data
+tags_raw:
   - Libraries
   - Bibliographic Records
   - WorldCat
@@ -63,7 +74,7 @@ apis:
   - Knowledge Base
   - E-Resources
   - OpenURL
-  - Libraries
+  - Library
   - Subscription
   tags_raw:
   - Knowledge Base

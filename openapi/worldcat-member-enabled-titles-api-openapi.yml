@@ -250,6 +250,44 @@ components:
           - parent
           - enclosure
           - via
+    TitleSearchResults:
+      type: object
+      properties:
+        title:
+          description: name of the results
+          type: string
+        updated:
+          description: date query run
+          type: string
+        id:
+          description: ID for result set
+          type: string
+        author:
+          description: who created the result set
+          type: string
+        links:
+          description: Link to the results
+          type: string
+        totalResults:
+          description: Total number of results
+          type: integer
+          format: int32
+        startIndex:
+          description: start position of the results
+          type: integer
+          format: int32
+        itemsPerPage:
+          description: number of items per page
+          type: integer
+          format: int32
+        Query:
+          description: query sent to API
+          type: string
+        entries:
+          description: actual results
+          type: array
+          items:
+            $ref: '#/components/schemas/Title'
     Title:
       type: object
       properties:
@@ -344,71 +382,13 @@ components:
       - provider_name
       - provider_uid
       - publisher
-    TitleSearchResults:
-      type: object
-      properties:
-        title:
-          description: name of the results
-          type: string
-        updated:
-          description: date query run
-          type: string
-        id:
-          description: ID for result set
-          type: string
-        author:
-          description: who created the result set
-          type: string
-        links:
-          description: Link to the results
-          type: string
-        totalResults:
-          description: Total number of results
-          type: integer
-          format: int32
-        startIndex:
-          description: start position of the results
-          type: integer
-          format: int32
-        itemsPerPage:
-          description: number of items per page
-          type: integer
-          format: int32
-        Query:
-          description: query sent to API
-          type: string
-        entries:
-          description: actual results
-          type: array
-          items:
-            $ref: '#/components/schemas/Title'
   examples:
-    success-read-entry:
-      summary: successful request to read a title
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
       value:
-        title: API Testing with Postman
-        id: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
-        published: '2019-03-16T20:03:56Z'
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961.html
-          rel: alternate
-        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
-          rel: self
-        - href: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F9781789616569%3Ftocview%3Dtrue&linktype=best
-          rel: via
-        - href: http://my.safaribooksonline.com/9781789616569?tocview=true
-          rel: canonical
-        entry_uid: '44119961'
-        entry_status: raw
-        bkey: '9781789616569'
-        collection_uid: safari.tech
-        collection_name: Safari Tech Books Online
-        provider_uid: safari
-        provider_name: Safari Books Online
-        isbn: '9781789616569'
-        publisher: Packt Publishing
-        coverage: ebook@2019-02-28
-        coll_type: browsable
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
     success-search-collection:
       summary: successful search of collections
       value:
@@ -458,12 +438,32 @@ components:
           available_entries: '106'
           selected_entries: '106'
           localstem: 'true'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
+    success-read-entry:
+      summary: successful request to read a title
       value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
+        title: API Testing with Postman
+        id: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
+        published: '2019-03-16T20:03:56Z'
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961.html
+          rel: alternate
+        - href: http://worldcat.org/webservices/kb/rest/entries/safari.tech,44119961
+          rel: self
+        - href: http://linker2.worldcat.org/?jHome=http%3A%2F%2Fmy.safaribooksonline.com%2F9781789616569%3Ftocview%3Dtrue&linktype=best
+          rel: via
+        - href: http://my.safaribooksonline.com/9781789616569?tocview=true
+          rel: canonical
+        entry_uid: '44119961'
+        entry_status: raw
+        bkey: '9781789616569'
+        collection_uid: safari.tech
+        collection_name: Safari Tech Books Online
+        provider_uid: safari
+        provider_name: Safari Books Online
+        isbn: '9781789616569'
+        publisher: Packt Publishing
+        coverage: ebook@2019-02-28
+        coll_type: browsable
   securitySchemes:
     api_key:
       type: apiKey
