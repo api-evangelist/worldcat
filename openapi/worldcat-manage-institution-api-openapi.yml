@@ -557,217 +557,27 @@ paths:
         - WorldCatMetadataAPI:get_holding_codes
         - WorldCatMetadataAPI:manage_bibs
 components:
-  schemas:
-    InstitutionBranchConfig:
-      type: object
-      properties:
-        hasProblems:
-          type: boolean
-        id:
-          type: integer
-        institutionNumber:
-          type: string
-        institutionName:
-          type: string
-        oclcSymbol:
-          $ref: '#/components/schemas/OCLCSymbol'
-        branchLocations:
-          type: array
-          items:
-            $ref: '#/components/schemas/BranchLocations'
-    SourceOclcNumber:
-      description: The holding library symbol to move from
-      type: string
-    OCLCSymbol:
-      description: institution OCLC Symbol. Special characters need to be encoded properly.
-      type: string
-      minLength: 3
-      maxLength: 8
-      pattern: ^[a-zA-Z0-9@*&#%+$/]{1,}$
-    MoveHoldings:
-      description: Move holdings for an institution
-      type: object
-      properties:
-        sourceOclcNumber:
-          $ref: '#/components/schemas/SourceOclcNumber'
-        targetOclcNumber:
-          $ref: '#/components/schemas/TargetOclcNumber'
-    MARCXML:
-      description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
-      type: object
-      xml:
-        name: record
-      externalDocs:
-        description: Learn about the Marc Bibliographic Standard
-        url: https://www.loc.gov/standards/marcxml/
-    ProblemType:
-      description: A URI reference [RFC3986] that identifies the problem type.
-      type: string
-      format: uri
-      enum:
-      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-      - https://developer.api.oclc.org/errors/NOT_ALLOWED
-      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
-      - https://developer.api.oclc.org/errors/BAD_REQUEST
-      - https://developer.api.oclc.org/errors/NOT_FOUND
-      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
-      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
-      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
-      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
-      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
-      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
-    OclcNumber:
-      description: the oclc number of a given bibliographic record
-      type: integer
-      format: int64
-    RegistryId:
-      description: The identifier in the WorldCat Registry for the institution
-      type: integer
-    schemas-OclcNumber:
-      description: the oclc number of a given bibliographic record
-      type: integer
-      format: int64
-      example: 61253844
-    BranchLocations:
-      type: object
-      properties:
-        branchLocationId:
-          type: string
-        branchLocationNumber:
-          type: string
-        branchLocationName:
-          type: string
-        branchLocationHoldingCode:
-          type: string
-        branchLocationHoldingSymbol:
-          type: string
-        defaultHoldingSymbol:
-          type: boolean
-        shelvingLocations:
-          type: array
-          items:
-            type: string
-        shelvingLocationScheme:
-          type: string
-    TargetOclcNumber:
-      description: The holding library symbol to move to
-      type: string
-    Problem:
-      type: object
-      description: RFC 7807 description of an error.
-      properties:
-        type:
-          $ref: '#/components/schemas/ProblemType'
-        title:
-          description: A short, human-readable summary of the problem type.
-          type: string
-        instance:
-          description: A URI reference that identifies the specific occurrence of the problem.
-          type: string
-          format: uri
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.,
-          type: string
-        invalidParams:
-          description: An array of validation errors.
-          type: array
-          items:
-            description: The validation error descriptor.
-            type: object
-            properties:
-              path:
-                type: string
-              name:
-                type: string
-              reason:
-                type: string
   examples:
-    xml-missing-control-number-unset:
-      summary: Control Number is Missing
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the unset holding operation.
-        status:
-          summary: BIB_LACKS_CONTROL_NUMBER
-          description: Record is missing a control number
-    not-acceptable-error:
-      summary: Error when media type in Accept header not supported
-      value:
-        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-        title: ''
-        detail: 'Media type application/xml not supported. Supported media types: application/json'
-    non-numeric-oclc-number:
-      summary: Non-Numeric OCLC Number
-      value:
-        type: BAD_REQUEST
-        title: Invalid identifier.
-        detail: 'A request with a non-numeric identifier was attempted: ocm12121212'
-    xml-has-missing-or-unusable-data:
-      summary: Bibliographic record has missing or unusable data
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform bib create.
-        detail: Fixed field does not have usable data
-    holding-already-set:
-      summary: Holding Already Set.
+    holding-unset-blocked-by-lbds-and-lhrs:
+      summary: Holding Unset Blocked by LBD(s) and LHR(s).
       value:
         controlNumber: '439887343'
         requestedControlNumber: '439887343'
         institutionCode: '158223'
         institutionSymbol: OCWMS
         success: false
-        message: WorldCat Holding already set.
-        action: Set Holdings
+        message: Unset Holdings Failed. Local bibliographic data (LBD) and local holdings records (LHRs) are attached to this record.
+        action: Unset Holdings
     non-boolean-cascade-delete:
       summary: cascadeDelete has invalid boolean value
       value:
         type: BAD_REQUEST
         title: Invalid value.
         detail: 'A request with a non-boolean value was attempted: test'
-    xml-has-validation-errors:
-      summary: Bibliographic record has bad data
+    forbidden:
+      summary: Error returned when API credentials not for resource
       value:
-        errorCount: 1,
-        errors: -"Invalid symbol OCWMS in 1st $c in 040."
-        variableFieldErrors:
-          -tag: '040'
-          errorLevel: CRITICAL
-          message: Invalid symbol OCWMS in 1st $c in 040.
-    not-acceptable-error-language:
-      summary: Error when language in Accept-Language header not supported
-      value:
-        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-        title: ''
-        detail: 'en-UK supported. Supported languages: en, es, fr'
-    holding-already-unset:
-      summary: Holding Already Unset.
-      value:
-        controlNumber: '439887343'
-        requestedControlNumber: '439887343'
-        institutionCode: '158223'
-        institutionSymbol: OCWMS
-        success: false
-        message: WorldCat Holding already unset.
-        action: Unset Holdings
-    holding-unset-blocked-by-lbds:
-      summary: Holding Unset Blocked by LBD(s).
-      value:
-        controlNumber: '439887343'
-        requestedControlNumber: '439887343'
-        institutionCode: '158223'
-        institutionSymbol: OCWMS
-        success: false
-        message: Unset Holdings Failed. Local bibliographic data (LBD) is attached to this record.
-        action: Unset Holdings
-    xml-has-parsing-errors:
-      summary: Bibliographic record has parsing errors
-      value:
-        type: BAD_REQUEST
-        title: Unable to crosswalk the record.
-        detail: The record has parsing errors.
+        message: Forbidden
     holding-unset-blocked-by-lhrs:
       summary: Holding Unset Blocked by LHR(s).
       value:
@@ -778,20 +588,25 @@ components:
         success: false
         message: Unset Holdings Failed. Local holdings records (LHRs) are attached to this record.
         action: Unset Holdings
-    missing-single-required-query-parameter:
-      summary: Error returned when (only) a single id was not specified
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: 'An identifier parameter is required - but only one is permitted: oclcSymbol, registryId or IpAddress'
-    bib-not-found:
-      summary: Bibliographic Record Not Found
+    bib-marcxml-existing:
+      summary: Bibliographic MARC XML record
+      value: "<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n"
+    xml-has-missing-or-unusable-data:
+      summary: Bibliographic record has missing or unusable data
       value:
         type: BAD_REQUEST
-        title: Unable to perform the bib read operation.
-        detail:
-          summary: NOT_FOUND
-          description: Not able to find the requested Bib
+        title: Unable to perform bib create.
+        detail: Fixed field does not have usable data
+    holding-already-unset:
+      summary: Holding Already Unset.
+      value:
+        controlNumber: '439887343'
+        requestedControlNumber: '439887343'
+        institutionCode: '158223'
+        institutionSymbol: OCWMS
+        success: false
+        message: WorldCat Holding already unset.
+        action: Unset Holdings
     branchesSingleShelvingLocation:
       summary: Show branch and shelving location information
       value:
@@ -815,20 +630,109 @@ components:
           - SOUT-Reference
           - SOUT-STACKS
           shelvingLocationScheme: Library of Congress
-    unauthorized:
-      summary: Error returned when valid API credentials not sent or invalid
+    failed-not-found:
+      summary: Error when resource not found
       value:
-        message: Unauthorized
-    holding-unset-blocked-by-lbds-and-lhrs:
-      summary: Holding Unset Blocked by LBD(s) and LHR(s).
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
+    missing-single-required-query-parameter:
+      summary: Error returned when (only) a single id was not specified
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: 'An identifier parameter is required - but only one is permitted: oclcSymbol, registryId or IpAddress'
+    xml-has-parsing-errors:
+      summary: Bibliographic record has parsing errors
+      value:
+        type: BAD_REQUEST
+        title: Unable to crosswalk the record.
+        detail: The record has parsing errors.
+    xml-has-validation-errors:
+      summary: Bibliographic record has bad data
+      value:
+        errorCount: 1,
+        errors: -"Invalid symbol OCWMS in 1st $c in 040."
+        variableFieldErrors:
+          -tag: '040'
+          errorLevel: CRITICAL
+          message: Invalid symbol OCWMS in 1st $c in 040.
+    not-acceptable-error:
+      summary: Error when media type in Accept header not supported
+      value:
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'Media type application/xml not supported. Supported media types: application/json'
+    bib-not-found:
+      summary: Bibliographic Record Not Found
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the bib read operation.
+        detail:
+          summary: NOT_FOUND
+          description: Not able to find the requested Bib
+    method-not-allowed-error:
+      summary: Error when invalid HTTP method used
+      value:
+        title: NOT_ALLOWED
+        detail: POST method not allowed
+    holding-unset-blocked-by-lbds:
+      summary: Holding Unset Blocked by LBD(s).
       value:
         controlNumber: '439887343'
         requestedControlNumber: '439887343'
         institutionCode: '158223'
         institutionSymbol: OCWMS
         success: false
-        message: Unset Holdings Failed. Local bibliographic data (LBD) and local holdings records (LHRs) are attached to this record.
+        message: Unset Holdings Failed. Local bibliographic data (LBD) is attached to this record.
         action: Unset Holdings
+    holding-unset:
+      summary: Holding Unset Successfully.
+      value:
+        controlNumber: '439887343'
+        requestedControlNumber: '439887343'
+        institutionCode: '159782'
+        institutionSymbol: OCWMS
+        success: true
+        message: Unset Holdings Succeeded.
+        action: Unset Holdings
+    holding-set:
+      summary: Holding Set Successfully.
+      value:
+        controlNumber: '439887343'
+        requestedControlNumber: '439887343'
+        institutionCode: '158223'
+        institutionSymbol: OCWMS
+        success: true
+        message: Set Holding Succeeded.
+        action: Set Holdings
+    not-acceptable-error-language:
+      summary: Error when language in Accept-Language header not supported
+      value:
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'en-UK supported. Supported languages: en, es, fr'
+    xml-missing-control-number-set:
+      summary: Control Number is Missing
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the set holding operation.
+        status:
+          summary: BIB_LACKS_CONTROL_NUMBER
+          description: Record is missing a control number
+    non-numeric-oclc-number:
+      summary: Non-Numeric OCLC Number
+      value:
+        type: BAD_REQUEST
+        title: Invalid identifier.
+        detail: 'A request with a non-numeric identifier was attempted: ocm12121212'
+    bib-marc-existing:
+      summary: Bibliographic MARC record
+      value: "00291nam a2200109 a 4500001001300000008004100013010001700054040002200071100002700093245001600120500004500136\\u001Eocn970988303\\u001E120827s2012    nyua          000 0 eng d\\u001E  \\u001Fa   63011276 \\u001E  \\u001FaOCWMS\\u001Fbeng\\u001FcOCWMS\\u001E0 \\u001FaOCLC Developer Network\\u001E10\\u001FaTest Record\\u001E  \\u001FaFOR OCLC DEVELOPER NETWORK DOCUMENTATION\\u001E\\u001D      \n"
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
     branchesShelvingLocations:
       summary: Show branch and shelving location information
       value:
@@ -917,39 +821,24 @@ components:
           - CENT-Reference
           - CENT-STACKS
           shelvingLocationScheme: Library of Congress
-    holding-unset:
-      summary: Holding Unset Successfully.
-      value:
-        controlNumber: '439887343'
-        requestedControlNumber: '439887343'
-        institutionCode: '159782'
-        institutionSymbol: OCWMS
-        success: true
-        message: Unset Holdings Succeeded.
-        action: Unset Holdings
-    failed-not-found:
-      summary: Error when resource not found
-      value:
-        type: NOT_FOUND
-        title: Resource Not Found
-        detail: The specified resource was not found at this address.
-    bib-marcxml-existing:
-      summary: Bibliographic MARC XML record
-      value: "<record>\n  <leader>00000nam a2200000 a 4500</leader>\n  <controlfield tag=\"001\">ocn970988303</controlfield>\n  <controlfield tag=\"008\">120827s2012    nyua          000 0 eng d</controlfield>\n  <datafield tag=\"010\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">   63011276 </subfield>\n  </datafield>\n  <datafield tag=\"040\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n    <subfield code=\"b\">eng</subfield>\n    <subfield code=\"c\">OCWMS</subfield>\n  </datafield>\n  <datafield tag=\"100\" ind1=\"0\" ind2=\" \">\n    <subfield code=\"a\">OCLC Developer Network</subfield>\n  </datafield>\n  <datafield tag=\"245\" ind1=\"1\" ind2=\"0\">\n    <subfield code=\"a\">Test Record</subfield>\n  </datafield>\n  <datafield tag=\"500\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">FOR OCLC DEVELOPER NETWORK DOCUMENTATION</subfield>\n  </datafield>\n</record>\n"
-    forbidden:
-      summary: Error returned when API credentials not for resource
-      value:
-        message: Forbidden
-    holding-set:
-      summary: Holding Set Successfully.
+    holding-already-set:
+      summary: Holding Already Set.
       value:
         controlNumber: '439887343'
         requestedControlNumber: '439887343'
         institutionCode: '158223'
         institutionSymbol: OCWMS
-        success: true
-        message: Set Holding Succeeded.
+        success: false
+        message: WorldCat Holding already set.
         action: Set Holdings
+    xml-missing-control-number-unset:
+      summary: Control Number is Missing
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the unset holding operation.
+        status:
+          summary: BIB_LACKS_CONTROL_NUMBER
+          description: Record is missing a control number
     branchesOnly:
       summary: Show branch information Only
       value:
@@ -976,47 +865,16 @@ components:
         - branchLocationId: '130456'
           branchLocationNumber: '33486'
           branchLocationName: OCLC Library Central Branch
-    xml-missing-control-number-set:
-      summary: Control Number is Missing
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the set holding operation.
-        status:
-          summary: BIB_LACKS_CONTROL_NUMBER
-          description: Record is missing a control number
-    method-not-allowed-error:
-      summary: Error when invalid HTTP method used
-      value:
-        title: NOT_ALLOWED
-        detail: POST method not allowed
-    bib-marc-existing:
-      summary: Bibliographic MARC record
-      value: "00291nam a2200109 a 4500001001300000008004100013010001700054040002200071100002700093245001600120500004500136\\u001Eocn970988303\\u001E120827s2012    nyua          000 0 eng d\\u001E  \\u001Fa   63011276 \\u001E  \\u001FaOCWMS\\u001Fbeng\\u001FcOCWMS\\u001E0 \\u001FaOCLC Developer Network\\u001E10\\u001FaTest Record\\u001E  \\u001FaFOR OCLC DEVELOPER NETWORK DOCUMENTATION\\u001E\\u001D      \n"
   responses:
-    500-internal-server-error:
-      description: Something went wrong (hopefully rare) - please try again.
+    403-forbidden-url:
+      description: Forbidden URL.
       content:
         application/json:
           examples:
-            accept-header-unacceptable:
-              summary: Unexpected Error.
+            forbidden-url:
+              summary: Forbidden URL
               value:
-                type: INTERNAL_SERVER_ERROR
-                title: string
-                detail: string
-    internal-server-error:
-      description: Something went wrong (hopfully rare) - please try again
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          examples:
-            forbidden:
-              $ref: '#/components/examples/forbidden'
+                message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
     406-accept-header-unacceptable:
       description: Accept Header Media Type is not Supported.
       content:
@@ -1028,15 +886,6 @@ components:
                 type: NOT_ACCEPTABLE
                 title: Invalid 'Accept' header.
                 detail: 'A request with an invalid ''Accept'' header was attempted: ....'
-    403-forbidden-url:
-      description: Forbidden URL.
-      content:
-        application/json:
-          examples:
-            forbidden-url:
-              summary: Forbidden URL
-              value:
-                message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
     unauthorized:
       description: Unauthorized
       content:
@@ -1044,15 +893,24 @@ components:
           examples:
             unauthorized:
               $ref: '#/components/examples/unauthorized'
-    method-not-supported:
-      description: Method not supported, see response Allow header
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          examples:
+            forbidden:
+              $ref: '#/components/examples/forbidden'
+    failed-not-acceptable:
+      description: Media type not supported
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Problem'
           examples:
-            not-allowed:
-              $ref: '#/components/examples/method-not-allowed-error'
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
+            not-acceptable-error-language:
+              $ref: '#/components/examples/not-acceptable-error-language'
     failed-not-found:
       description: Failed operation - resource not found
       content:
@@ -1075,37 +933,160 @@ components:
             branchesSingleShelvingLocation:
               $ref: '#/components/examples/branchesSingleShelvingLocation'
       description: Find basic configuration for a specified library
-    failed-not-acceptable:
-      description: Media type not supported
+    method-not-supported:
+      description: Method not supported, see response Allow header
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Problem'
           examples:
-            not-acceptable-error:
-              $ref: '#/components/examples/not-acceptable-error'
-            not-acceptable-error-language:
-              $ref: '#/components/examples/not-acceptable-error-language'
-  parameters:
-    oclcSymbols:
-      name: oclcSymbols
-      description: Comma seperated list of oclc symbols to retrieve
-      schema:
-        type: array
-        items:
+            not-allowed:
+              $ref: '#/components/examples/method-not-allowed-error'
+    500-internal-server-error:
+      description: Something went wrong (hopefully rare) - please try again.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Unexpected Error.
+              value:
+                type: INTERNAL_SERVER_ERROR
+                title: string
+                detail: string
+    internal-server-error:
+      description: Something went wrong (hopfully rare) - please try again
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+  schemas:
+    MARCXML:
+      description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
+      type: object
+      xml:
+        name: record
+      externalDocs:
+        description: Learn about the Marc Bibliographic Standard
+        url: https://www.loc.gov/standards/marcxml/
+    MoveHoldings:
+      description: Move holdings for an institution
+      type: object
+      properties:
+        sourceOclcNumber:
+          $ref: '#/components/schemas/SourceOclcNumber'
+        targetOclcNumber:
+          $ref: '#/components/schemas/TargetOclcNumber'
+    TargetOclcNumber:
+      description: The holding library symbol to move to
+      type: string
+    BranchLocations:
+      type: object
+      properties:
+        branchLocationId:
+          type: string
+        branchLocationNumber:
+          type: string
+        branchLocationName:
+          type: string
+        branchLocationHoldingCode:
+          type: string
+        branchLocationHoldingSymbol:
+          type: string
+        defaultHoldingSymbol:
+          type: boolean
+        shelvingLocations:
+          type: array
+          items:
+            type: string
+        shelvingLocationScheme:
+          type: string
+    InstitutionBranchConfig:
+      type: object
+      properties:
+        hasProblems:
+          type: boolean
+        id:
+          type: integer
+        institutionNumber:
+          type: string
+        institutionName:
+          type: string
+        oclcSymbol:
           $ref: '#/components/schemas/OCLCSymbol'
-      style: form
-      explode: false
-      examples:
-        single:
-          value:
-          - TXH
-        multiple:
-          value:
-          - TXH
-          - TUC
-      in: query
-      required: false
+        branchLocations:
+          type: array
+          items:
+            $ref: '#/components/schemas/BranchLocations'
+    OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+    OCLCSymbol:
+      description: institution OCLC Symbol. Special characters need to be encoded properly.
+      type: string
+      minLength: 3
+      maxLength: 8
+      pattern: ^[a-zA-Z0-9@*&#%+$/]{1,}$
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    schemas-OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+      example: 61253844
+    RegistryId:
+      description: The identifier in the WorldCat Registry for the institution
+      type: integer
+    SourceOclcNumber:
+      description: The holding library symbol to move from
+      type: string
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
+  parameters:
     branchLocationLimit:
       name: branchLocationLimit
       description: branch identifier (registryId) to limit results to
@@ -1113,6 +1094,16 @@ components:
         type: integer
       in: query
       required: false
+    oclcNumberListReq:
+      name: oclcNumbers
+      in: query
+      description: One or more OCLC numbers. Separated by comma if providing multiple.
+      required: true
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/OclcNumber'
+      example: 41266045,1056157740
     registryIds:
       name: registryIds
       description: Comma seperated list of registryIds to retrieve
@@ -1132,6 +1123,14 @@ components:
           - 91475
       in: query
       required: false
+    accept:
+      name: Accept
+      in: header
+      description: Content Type the client supports and is requesting (application/json currently supported)
+      schema:
+        type: string
+        default: application/json
+      required: false
     includeShelvingLocations:
       name: includeShelvingLocations
       description: whether or not to include shelving location information in the response
@@ -1140,23 +1139,24 @@ components:
         default: false
       in: query
       required: false
-    oclcNumberListReq:
-      name: oclcNumbers
-      in: query
-      description: One or more OCLC numbers. Separated by comma if providing multiple.
-      required: true
+    oclcSymbols:
+      name: oclcSymbols
+      description: Comma seperated list of oclc symbols to retrieve
       schema:
         type: array
         items:
-          $ref: '#/components/schemas/OclcNumber'
-      example: 41266045,1056157740
-    accept:
-      name: Accept
-      in: header
-      description: Content Type the client supports and is requesting (application/json currently supported)
-      schema:
-        type: string
-        default: application/json
+          $ref: '#/components/schemas/OCLCSymbol'
+      style: form
+      explode: false
+      examples:
+        single:
+          value:
+          - TXH
+        multiple:
+          value:
+          - TXH
+          - TUC
+      in: query
       required: false
   securitySchemes:
     worldcat_metadata_auth:

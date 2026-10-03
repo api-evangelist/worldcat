@@ -101,111 +101,6 @@ paths:
         - wcapi:view_retained_holdings
 components:
   parameters:
-    retainedHoldingsOrderBy:
-      name: orderBy
-      in: query
-      description: result sort key
-      required: false
-      schema:
-        type: string
-        default: oclcSymbol
-        enum:
-        - commitmentExpirationDate
-        - location
-        - oclcSymbol
-    barcode:
-      name: barcode
-      in: query
-      description: barcode
-      required: false
-      schema:
-        type: string
-      example: K123456789
-    limit:
-      name: limit
-      in: query
-      description: maximum number of records to return, maximum 50, default 10
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 10
-      example: 50
-    heldBySymbol:
-      name: heldBySymbol
-      in: query
-      description: Institution Symbol
-      required: false
-      schema:
-        type: array
-        items:
-          $ref: '#/components/schemas/OCLCSymbol'
-        minItems: 1
-        maxItems: 5
-      explode: false
-      examples:
-        single:
-          value:
-          - TXH
-        multiple:
-          value:
-          - TXH
-          - YSM
-    lhrOrderBy:
-      name: orderBy
-      in: query
-      description: result sort key
-      required: false
-      schema:
-        type: string
-        default: oclcSymbol
-        enum:
-        - commitmentExpirationDate
-        - location
-        - oclcSymbol
-    lhr-control-number:
-      name: controlNumber
-      in: path
-      description: LHR control number
-      required: true
-      schema:
-        type: string
-      example: 238374600
-    offset:
-      name: offset
-      in: query
-      description: start position of the bib records to return (0 based), default 0
-      required: false
-      schema:
-        type: integer
-        format: int32
-        default: 0
-      example: 10
-    oclcNumber:
-      name: oclcNumber
-      in: query
-      description: oclc number of the bibliographic item
-      required: false
-      schema:
-        $ref: '#/components/schemas/OclcNumber'
-      example: 41266045
-    heldBy:
-      name: heldBy
-      in: query
-      description: Institution Symbol
-      deprecated: true
-      required: false
-      schema:
-        type: string
-      example: TXH
-    spProgram:
-      name: spProgram
-      in: query
-      description: Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index).
-      required: false
-      schema:
-        type: string
-      example: WEST
     heldByInstitutionID:
       name: heldByInstitutionID
       in: query
@@ -226,6 +121,73 @@ components:
           value:
           - 128807
           - 91475
+    limit:
+      name: limit
+      in: query
+      description: maximum number of records to return, maximum 50, default 10
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 10
+      example: 50
+    lhr-control-number:
+      name: controlNumber
+      in: path
+      description: LHR control number
+      required: true
+      schema:
+        type: string
+      example: 238374600
+    oclcNumber:
+      name: oclcNumber
+      in: query
+      description: oclc number of the bibliographic item
+      required: false
+      schema:
+        $ref: '#/components/schemas/OclcNumber'
+      example: 41266045
+    barcode:
+      name: barcode
+      in: query
+      description: barcode
+      required: false
+      schema:
+        type: string
+      example: K123456789
+    lhrOrderBy:
+      name: orderBy
+      in: query
+      description: result sort key
+      required: false
+      schema:
+        type: string
+        default: oclcSymbol
+        enum:
+        - commitmentExpirationDate
+        - location
+        - oclcSymbol
+    retainedHoldingsOrderBy:
+      name: orderBy
+      in: query
+      description: result sort key
+      required: false
+      schema:
+        type: string
+        default: oclcSymbol
+        enum:
+        - commitmentExpirationDate
+        - location
+        - oclcSymbol
+    heldBy:
+      name: heldBy
+      in: query
+      description: Institution Symbol
+      deprecated: true
+      required: false
+      schema:
+        type: string
+      example: TXH
     accept:
       name: Accept
       in: header
@@ -234,62 +196,45 @@ components:
         type: string
         default: application/json
       required: false
+    heldBySymbol:
+      name: heldBySymbol
+      in: query
+      description: Institution Symbol
+      required: false
+      schema:
+        type: array
+        items:
+          $ref: '#/components/schemas/OCLCSymbol'
+        minItems: 1
+        maxItems: 5
+      explode: false
+      examples:
+        single:
+          value:
+          - TXH
+        multiple:
+          value:
+          - TXH
+          - YSM
+    offset:
+      name: offset
+      in: query
+      description: start position of the bib records to return (0 based), default 0
+      required: false
+      schema:
+        type: integer
+        format: int32
+        default: 0
+      example: 10
+    spProgram:
+      name: spProgram
+      in: query
+      description: Limiter to restrict the response to bibliographic records associated with a particular shared print program (l8 index).
+      required: false
+      schema:
+        type: string
+      example: WEST
   schemas:
-    OCLCSymbol:
-      description: institution OCLC Symbol. Special characters need to be encoded properly.
-      type: string
-      minLength: 3
-      maxLength: 8
-      pattern: ^[a-zA-Z0-9@*&#%+$/]{1,}$
-    HoldingRange:
-      type: object
-      properties:
-        from:
-          type: string
-        to:
-          type: string
-    DisplayCallNumber:
-      description: Display call Number [LHR -> v852 |k,h,i,m / |j/ |l]
-      type: string
-    SharedPrintCommitment:
-      type: object
-      properties:
-        actionNote:
-          description: Action Note [LHR -> HldDetRec/v583sa]
-          type: string
-        materialsSpecified:
-          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
-          type: string
-        institution:
-          description: Institution to which applies [LHR -> HldDetRec/v583s5]
-          type: string
-        dateOfAction:
-          description: date of action [LHR -> HldDetRec/v583sc]
-          type: string
-        commitmentExpirationDate:
-          description: commitment expiration date [LHR -> HldDetRec/v583sd]
-          type: string
-        authorization:
-          description: Authorization [LHR -> HldDetRec/v583sf]
-          type: string
-        methodOfAction:
-          description: Method of Action [LHR -> HldDetRec/v583si]
-          type: string
-        siteOfAction:
-          description: Site of Action [LHR -> HldDetRec/v583sj]
-          type: string
-        status:
-          description: Status [LHR -> HldDetRec/v583sl]
-          type: string
-        uri:
-          description: URI [LHR -> HldDetRec/v583su]
-          type: string
-        publicNote:
-          description: Public Note [LHR -> HldDetRec/v583sz]
-          type: string
-    SummaryOfHoldings:
-      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
-      type: string
     HoldingResultSet:
       type: object
       properties:
@@ -300,25 +245,128 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/HoldingDetail'
-    ProblemType:
-      description: A URI reference [RFC3986] that identifies the problem type.
+    TemporaryLocation:
+      description: Temporary location [876-878 |l]
       type: string
-      format: uri
-      enum:
-      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-      - https://developer.api.oclc.org/errors/NOT_ALLOWED
-      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
-      - https://developer.api.oclc.org/errors/BAD_REQUEST
-      - https://developer.api.oclc.org/errors/NOT_FOUND
-      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
-      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
-      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
-      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
-      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
-      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
+    SummaryOfHoldings:
+      description: Summary of Holdings [https://www.loc.gov/marc/holdings/echdcntf.html]
+      type: string
+    HoldingDetail:
+      type: object
+      properties:
+        lhrControlNumber:
+          description: LHR Control Number [LHR -> HldDetRec/c001]
+          type: string
+        lhrDateEntered:
+          description: LHR Date Entered [LHR -> HldDetRec/Admin/CreateDate]
+          type: string
+        lhrLastUpdated:
+          description: LHR Date Last Used [LHR -> HldDetRec/Admin/ReplacedDate]
+          type: string
+        oclcNumber:
+          description: OCLC Number [LHR -> HldDetRec/c004]
+          type: string
+        format:
+          description: material format [LHR -> HldDetRec/c007]
+          type: string
+        location:
+          $ref: '#/components/schemas/HoldingLocation'
+        copyNumber:
+          description: copy number [LHR -> HldDetRec/v852st]
+          type: string
+        callNumber:
+          $ref: '#/components/schemas/CallNumber'
+        lendingPolicy:
+          description: local lending policy [LHR -> HldDetRec/Admin/Lend]
+          type: string
+        hasSharedPrintCommitment:
+          $ref: '#/components/schemas/HasSharedPrintCommitment'
+        sharedPrintCommitments:
+          description: shared print details [LHR -> HldDetRec/v583]
+          type: array
+          items:
+            $ref: '#/components/schemas/SharedPrintCommitment'
+        summary:
+          description: summary statement [LHR -> HldSummRec/v966sa]
+          type: string
+        holdingParts:
+          description: Textual Holding [LHR -> HldDetRec/v866,v867,v868] Item Information Holding [LHR -> HldDetRec/v876,v877,v878] Enumeration Chronology Holding [LHR -> HldDetRec/v863,v864,v865]
+          type: array
+          items:
+            $ref: '#/components/schemas/HoldingPart'
+      required:
+      - lhrControlNumber
+      - lhrDateEntered
+      - lhrLastUpdated
+      - oclcNumber
+      - format
+      - lendingPolicy
+      - hasSharedPrintCommitment
+    DisplayCallNumber:
+      description: Display call Number [LHR -> v852 |k,h,i,m / |j/ |l]
+      type: string
+    PieceDesignation:
+      description: Piece Designation [852/863-865/866-868/876-878 |p]
+      type: string
+    MaterialSpecified:
+      description: '[876-8 |3]'
+      type: string
+    OclcNumber:
+      description: the oclc number of a given bibliographic record
+      type: integer
+      format: int64
+    CaptionValuePair:
+      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
+      type: object
+      properties:
+        caption:
+          type: string
+        value:
+          type: string
+    OCLCSymbol:
+      description: institution OCLC Symbol. Special characters need to be encoded properly.
+      type: string
+      minLength: 3
+      maxLength: 8
+      pattern: ^[a-zA-Z0-9@*&#%+$/]{1,}$
+    Problem:
+      type: object
+      description: RFC 7807 description of an error.
+      properties:
+        type:
+          $ref: '#/components/schemas/ProblemType'
+        title:
+          description: A short, human-readable summary of the problem type.
+          type: string
+        instance:
+          description: A URI reference that identifies the specific occurrence of the problem.
+          type: string
+          format: uri
+        detail:
+          description: A human-readable explanation specific to this occurrence of the problem.,
+          type: string
+        invalidParams:
+          description: An array of validation errors.
+          type: array
+          items:
+            description: The validation error descriptor.
+            type: object
+            properties:
+              path:
+                type: string
+              name:
+                type: string
+              reason:
+                type: string
+    ShelvingLocation:
+      description: Shelving location [LHR -> v852sc]
+      type: string
+    TextualHoldingsStatement:
+      description: '[866-8 |a]'
+      type: string
+    RegistryId:
+      description: The identifier in the WorldCat Registry for the institution
+      type: integer
     HoldingPart:
       type: object
       properties:
@@ -377,136 +425,6 @@ components:
           type: array
           items:
             type: string
-    ShelvingLocation:
-      description: Shelving location [LHR -> v852sc]
-      type: string
-    TextualHoldingsStatement:
-      description: '[866-8 |a]'
-      type: string
-    PieceDesignation:
-      description: Piece Designation [852/863-865/866-868/876-878 |p]
-      type: string
-    HasSharedPrintCommitment:
-      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
-      type: string
-      enum:
-      - Y
-      - N
-    OclcNumber:
-      description: the oclc number of a given bibliographic record
-      type: integer
-      format: int64
-    RegistryId:
-      description: The identifier in the WorldCat Registry for the institution
-      type: integer
-    TemporaryLocation:
-      description: Temporary location [876-878 |l]
-      type: string
-    SublocationCollection:
-      description: Sublocation or collection [LHR -> v852sb]
-      type: string
-    HoldingDetail:
-      type: object
-      properties:
-        lhrControlNumber:
-          description: LHR Control Number [LHR -> HldDetRec/c001]
-          type: string
-        lhrDateEntered:
-          description: LHR Date Entered [LHR -> HldDetRec/Admin/CreateDate]
-          type: string
-        lhrLastUpdated:
-          description: LHR Date Last Used [LHR -> HldDetRec/Admin/ReplacedDate]
-          type: string
-        oclcNumber:
-          description: OCLC Number [LHR -> HldDetRec/c004]
-          type: string
-        format:
-          description: material format [LHR -> HldDetRec/c007]
-          type: string
-        location:
-          $ref: '#/components/schemas/HoldingLocation'
-        copyNumber:
-          description: copy number [LHR -> HldDetRec/v852st]
-          type: string
-        callNumber:
-          $ref: '#/components/schemas/CallNumber'
-        lendingPolicy:
-          description: local lending policy [LHR -> HldDetRec/Admin/Lend]
-          type: string
-        hasSharedPrintCommitment:
-          $ref: '#/components/schemas/HasSharedPrintCommitment'
-        sharedPrintCommitments:
-          description: shared print details [LHR -> HldDetRec/v583]
-          type: array
-          items:
-            $ref: '#/components/schemas/SharedPrintCommitment'
-        summary:
-          description: summary statement [LHR -> HldSummRec/v966sa]
-          type: string
-        holdingParts:
-          description: Textual Holding [LHR -> HldDetRec/v866,v867,v868] Item Information Holding [LHR -> HldDetRec/v876,v877,v878] Enumeration Chronology Holding [LHR -> HldDetRec/v863,v864,v865]
-          type: array
-          items:
-            $ref: '#/components/schemas/HoldingPart'
-      required:
-      - lhrControlNumber
-      - lhrDateEntered
-      - lhrLastUpdated
-      - oclcNumber
-      - format
-      - lendingPolicy
-      - hasSharedPrintCommitment
-    HoldingLocation:
-      description: Local holding location [LHR -> v852sa,b,c]
-      type: object
-      properties:
-        holdingLocation:
-          description: Institution Symbol [LHR -> v852sa]
-          type: string
-        sublocationCollection:
-          $ref: '#/components/schemas/SublocationCollection'
-        shelvingLocation:
-          $ref: '#/components/schemas/ShelvingLocation'
-    CaptionValuePair:
-      description: The caption and value pair for a caption describing a numeric, alphabetic, and/or date designation for an item. The caption is defined as an attribute on the element and the value for the caption is defined by the element contents.
-      type: object
-      properties:
-        caption:
-          type: string
-        value:
-          type: string
-    MaterialSpecified:
-      description: '[876-8 |3]'
-      type: string
-    Problem:
-      type: object
-      description: RFC 7807 description of an error.
-      properties:
-        type:
-          $ref: '#/components/schemas/ProblemType'
-        title:
-          description: A short, human-readable summary of the problem type.
-          type: string
-        instance:
-          description: A URI reference that identifies the specific occurrence of the problem.
-          type: string
-          format: uri
-        detail:
-          description: A human-readable explanation specific to this occurrence of the problem.,
-          type: string
-        invalidParams:
-          description: An array of validation errors.
-          type: array
-          items:
-            description: The validation error descriptor.
-            type: object
-            properties:
-              path:
-                type: string
-              name:
-                type: string
-              reason:
-                type: string
     CallNumber:
       description: Local call number [LHR -> v852sh,i,j,k,l,m]
       type: object
@@ -554,381 +472,95 @@ components:
           type: array
           items:
             type: string
+    HoldingLocation:
+      description: Local holding location [LHR -> v852sa,b,c]
+      type: object
+      properties:
+        holdingLocation:
+          description: Institution Symbol [LHR -> v852sa]
+          type: string
+        sublocationCollection:
+          $ref: '#/components/schemas/SublocationCollection'
+        shelvingLocation:
+          $ref: '#/components/schemas/ShelvingLocation'
+    HoldingRange:
+      type: object
+      properties:
+        from:
+          type: string
+        to:
+          type: string
+    HasSharedPrintCommitment:
+      description: institution has shared print commitment [Holdings/LibHasSharedPrint || LHR -> HldDetRec/Admin/SPReg]
+      type: string
+      enum:
+      - Y
+      - N
+    SharedPrintCommitment:
+      type: object
+      properties:
+        actionNote:
+          description: Action Note [LHR -> HldDetRec/v583sa]
+          type: string
+        materialsSpecified:
+          description: Materials Sepcified [LHR -> HldDetRec/v583s3]
+          type: string
+        institution:
+          description: Institution to which applies [LHR -> HldDetRec/v583s5]
+          type: string
+        dateOfAction:
+          description: date of action [LHR -> HldDetRec/v583sc]
+          type: string
+        commitmentExpirationDate:
+          description: commitment expiration date [LHR -> HldDetRec/v583sd]
+          type: string
+        authorization:
+          description: Authorization [LHR -> HldDetRec/v583sf]
+          type: string
+        methodOfAction:
+          description: Method of Action [LHR -> HldDetRec/v583si]
+          type: string
+        siteOfAction:
+          description: Site of Action [LHR -> HldDetRec/v583sj]
+          type: string
+        status:
+          description: Status [LHR -> HldDetRec/v583sl]
+          type: string
+        uri:
+          description: URI [LHR -> HldDetRec/v583su]
+          type: string
+        publicNote:
+          description: Public Note [LHR -> HldDetRec/v583sz]
+          type: string
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
+    SublocationCollection:
+      description: Sublocation or collection [LHR -> v852sb]
+      type: string
   examples:
-    not-acceptable-error:
-      summary: Error when media type in Accept header not supported
-      value:
-        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-        title: ''
-        detail: 'Media type application/xml not supported. Supported media types: application/json'
-    invalid-oclc-number:
-      summary: Error returned when oclc number isn't valid
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: oclcNumber must be a positive whole number
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
-    success-my-holdings:
-      summary: successful search for monograph holdings
-      value:
-        numberOfHoldings: 1
-        detailedHoldings:
-        - lhrControlNumber: '132422447'
-          lhrDateEntered: '20190816'
-          lhrLastUpdated: '20190816'
-          oclcNumber: '246197114'
-          format: zu
-          location:
-            holdingLocation: OCWMS
-            sublocationCollection: CENT
-            shelvingLocation: CENT-STACKS
-          copyNumber: '1'
-          callNumber:
-            displayCallNumber: CATS
-            classificationPart: CATS
-          hasSharedPrintCommitment: N
-          summary: Local holdings available.
-          holdingParts:
-          - pieceDesignation: CR963528
-    not-acceptable-error-language:
-      summary: Error when language in Accept-Language header not supported
-      value:
-        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-        title: ''
-        detail: 'en-UK supported. Supported languages: en, es, fr'
-    missing-query-parameter-value:
-      summary: Error returned when query parameter value not valid
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: Query term is not provided.
-    success-my-holdings-with-item-types:
-      summary: successful search for holdings with different item types
-      value:
-        numberOfHoldings: 2
-        detailedHoldings:
-        - lhrControlNumber: '132422447'
-          lhrDateEntered: '20190816'
-          lhrLastUpdated: '20190816'
-          oclcNumber: '246197114'
-          format: zu
-          location:
-            holdingLocation: OCWMS
-            sublocationCollection: CENT
-            shelvingLocation: CENT-STACKS
-          copyNumber: '1'
-          callNumber:
-            displayCallNumber: QA76.76.A65 M67 2018
-            classificationPart: QA76.76.A65
-            itemParts:
-            - M67
-            - 2018
-          hasSharedPrintCommitment: N
-          holdingParts:
-          - pieceDesignation: CR963528
-            itemType: basic
-          - pieceDesignation: CR963529
-            itemType: supplementary
-          - pieceDesignation: CR963530
-            itemType: index
-    invalid-accession-number:
-      summary: Error returned when accession number isn't valid
-      value:
-        type: INVALID_QUERY_PARAMETER_VALUE
-        title: Validation Failure
-        detail: accession number must be a positive whole number
-    success-my-holdings-accession-number-serial:
-      summary: successful request for serial holdings by accession number
-      value:
-        lhrControlNumber: '180160011'
-        lhrLastUpdated: '20150504'
-        oclcNumber: '2351916'
-        format: zu
-        location:
-          holdingLocation: OCPSB
-          sublocationCollection: WEST
-          shelvingLocation: WEST-Periodicals
-        copyNumber: '2'
-        callNumber:
-          displayCallNumber: '12457896321'
-          classificationPart: '12457896321'
-        hasSharedPrintCommitment: N
-        summary: v.133 (2008)-
-        holdingParts:
-        - linkingAndSequenceNumber: '1.1'
-          enumerations:
-          - value: '1'
-          - value: '1'
-          chronologies:
-          - value: '2015'
-          - value: Jan
-        - linkingAndSequenceNumber: '2.1'
-          enumerations:
-          - value: '1'
-          - value: '2'
-          chronologies:
-          - value: '2015'
-          - value: Feb
-        - linkingAndSequenceNumber: '1.1'
-          summaryOfHoldings: 1:1(2015:Jan)
-          pieceDesignation: '986532741'
-        - linkingAndSequenceNumber: '2.1'
-          summaryOfHoldings: 1:2(2015:Feb)
-          pieceDesignation: '986532743'
-    success-my-holdings-with-private-notes:
-      summary: successful search for holdings with private notes
-      value:
-        numberOfHoldings: 1
-        detailedHoldings:
-        - lhrControlNumber: '132422447'
-          lhrDateEntered: '20190816'
-          lhrLastUpdated: '20190816'
-          oclcNumber: '246197114'
-          format: zu
-          location:
-            holdingLocation: OCWMS
-            sublocationCollection: CENT
-            shelvingLocation: CENT-STACKS
-          copyNumber: '1'
-          callNumber:
-            displayCallNumber: QA76.76.A65 M67 2018
-            classificationPart: QA76.76.A65
-            itemParts:
-            - M67
-            - 2018
-            shelvingScheme: Library of Congress classification
-            privateNotes:
-            - Show in OPAC
-            - Staff only
-          hasSharedPrintCommitment: N
-          holdingParts:
-          - pieceDesignation: CR963528
-            itemType: basic
-            privateNotes:
-            - Internal processing note
-    success-retained-holdings-monograph:
-      summary: return retained holdings for a monograph
-      value:
-        numberOfHoldings: 1
-        detailedHoldings:
-        - lhrControlNumber: '184757025'
-          lhrDateEntered: '20171208'
-          lhrLastUpdated: '20171208'
-          oclcNumber: '650'
-          format: zu
-          location:
-            holdingLocation: NKF
-            sublocationCollection: NKFA
-            shelvingLocation: Stacks
-          callNumber:
-            displayCallNumber: QA9.F85
-            classificationPart: QA9.F85
-          hasSharedPrintCommitment: Y
-          sharedPrintCommitments:
-          - actionNote: committed to retain
-            institution: MChiL
-            dateOfAction: '20160630'
-            commitmentExpirationDate: '20310630'
-            authorization: EAST
-            uri: http://eastlibraries.org/retained-materials
-          summary: Local Holdings Available.
-          holdingParts:
-          - pieceDesignation: '30594001082474'
     invalid-query-parameter-bad-orderBy:
       summary: Error returned when orderBy parameter contains invalid value
       value:
         type: INVALID_QUERY_PARAMETER_VALUE
         title: Validation Failure
         detail: 'orderBy value ''somekey'' is invalid. Acceptable orderBy values: [recency, bestMatch, creator, publicationDateAsc, publicationDateDesc, mostWidelyHeld, title, library]'
-    failed-not-found:
-      summary: Error when resource not found
-      value:
-        type: NOT_FOUND
-        title: Resource Not Found
-        detail: The specified resource was not found at this address.
-    success-retained-holdings-serial-2:
-      summary: return retained holdings for a serial
-      value:
-        numberOfHoldings: 1
-        detailedHoldings:
-        - lhrControlNumber: '2892929'
-          lhrDateEntered: '20200505'
-          lhrLastUpdated: '20200505'
-          oclcNumber: '1696940'
-          format: ta
-          location:
-            holdingLocation: VKM
-            sublocationCollection: VKMA
-          hasSharedPrintCommitment: Y
-          sharedPrintCommitments:
-          - actionNote: completeness reviewed
-            materialsSpecified: v.1-5 (1906-1910), v.19 (1952), v.21-25 (1954-1958), v.27 (1960), v.29 (1962), v.32-42 (1965-1975), v.45-56 (1978-1990), v.58-75 (1992-2010)
-            institution: NLouvS
-            dateOfAction: '20160630'
-            commitmentExpirationDate: '20310630'
-            methodOfAction: volume-level validation
-          - actionNote: committed to retain
-            materialsSpecified: v.1-5 (1906-1910), v.19 (1952), v.21-25 (1954-1958), v.27 (1960), v.29 (1962), v.32-42 (1965-1975), v.45-56 (1978-1990), v.58-75 (1992-2010)
-            institution: NLouvS
-            dateOfAction: '20160630'
-            commitmentExpirationDate: '20310630'
-            authorization: east
-            uri: https://eastlibraries.org/retained-materials
-          summary: v.1(1906)-v.5(1910),v.19(1952),v.21(1954)-v.25(1958),v.27(1960),v.29(1962),v.32(1965)-v.42(1975),v.45(1978)-v.56(1990),v.58(1992)-v.75(2010)
-          holdingParts:
-          - linkingAndSequenceNumber: '1.1'
-            enumerations:
-            - caption: v.
-              value: 1-5
-            chronologies:
-            - caption: (year)
-              value: 1906-1910
-            yearRanges:
-            - from: '1906'
-              to: '1910'
-            volumeRanges:
-            - from: '1'
-              to: '5'
-          - linkingAndSequenceNumber: '1.2'
-            enumerations:
-            - caption: v.
-              value: '19'
-            chronologies:
-            - caption: (year)
-              value: '1952'
-          - linkingAndSequenceNumber: '1.3'
-            enumerations:
-            - caption: v.
-              value: 21-25
-            chronologies:
-            - caption: (year)
-              value: 1954-1958
-            yearRanges:
-            - from: '1954'
-              to: '1958'
-            volumeRanges:
-            - from: '21'
-              to: '25'
-          - linkingAndSequenceNumber: '1.4'
-            enumerations:
-            - caption: v.
-              value: '27'
-            chronologies:
-            - caption: (year)
-              value: '1960'
-          - linkingAndSequenceNumber: '1.5'
-            enumerations:
-            - caption: v.
-              value: '29'
-            chronologies:
-            - caption: (year)
-              value: '1962'
-          - linkingAndSequenceNumber: '1.6'
-            enumerations:
-            - caption: v.
-              value: 32-42
-            chronologies:
-            - caption: (year)
-              value: 1965-1975
-            yearRanges:
-            - from: '1965'
-              to: '1975'
-            volumeRanges:
-            - from: '32'
-              to: '42'
-          - linkingAndSequenceNumber: '1.7'
-            enumerations:
-            - caption: v.
-              value: 45-56
-            chronologies:
-            - caption: (year)
-              value: 1978-1990
-            yearRanges:
-            - from: '1978'
-              to: '1990'
-            volumeRanges:
-            - from: '45'
-              to: '56'
-          - linkingAndSequenceNumber: '1.8'
-            enumerations:
-            - caption: v.
-              value: 58-75
-            chronologies:
-            - caption: (year)
-              value: 1992-2010
-            yearRanges:
-            - from: '1992'
-              to: '2010'
-            volumeRanges:
-            - from: '58'
-              to: '75'
-    success-retained-holdings-serial:
-      summary: return retained holdings for a serial
-      value:
-        numberOfHoldings: 1
-        detailedHoldings:
-        - lhrControlNumber: '293921067'
-          lhrDateEntered: '20200122'
-          lhrLastUpdated: '20200122'
-          oclcNumber: '1588319'
-          format: zu
-          location:
-            holdingLocation: CRL
-            sublocationCollection: JSTR
-          hasSharedPrintCommitment: Y
-          sharedPrintCommitments:
-          - actionNote: condition reviewed
-            materialsSpecified: v.1-v.80 (1931-2010)
-            institution: ICRL
-            dateOfAction: '20110101'
-            methodOfAction: issue-level validation
-            status: marginalia$torn
-            publicNote: marginalia v.40:590,592,594-596;v.42:396,153-159;v.44:463;v.45:211;v.46:189,196-197,199;v.49:153-166,168$torn pages v.49:pp.62-64
-          - actionNote: committed to retain
-            materialsSpecified: v.1-v.80 (1931-2010)
-            institution: ICRL
-            dateOfAction: '20110101'
-            commitmentExpirationDate: '20501231'
-            authorization: CRLJSTOR
-            siteOfAction: CRLAA
-            uri: http://www.crl.edu/archiving-preservation/print-archives/crl-administered/jstor
-          summary: Local Holdings Available.
-    success-my-holdings-with-shelving-scheme:
-      summary: successful search for holdings with shelving scheme
-      value:
-        numberOfHoldings: 1
-        detailedHoldings:
-        - lhrControlNumber: '132422447'
-          lhrDateEntered: '20190816'
-          lhrLastUpdated: '20190816'
-          oclcNumber: '246197114'
-          format: zu
-          location:
-            holdingLocation: OCWMS
-            sublocationCollection: CENT
-            shelvingLocation: CENT-STACKS
-          copyNumber: '1'
-          callNumber:
-            displayCallNumber: 025.5 D123 2020
-            classificationPart: 25.5
-            itemParts:
-            - D123
-            - 2020
-            shelvingScheme: Dewey Decimal classification
-          hasSharedPrintCommitment: N
-          holdingParts:
-          - pieceDesignation: CR963528
-            itemType: basic
-    method-not-allowed-error:
-      summary: Error when invalid HTTP method used
-      value:
-        title: NOT_ALLOWED
-        detail: POST method not allowed
     success-my-holdings-serial:
       summary: successful search for serial holdings
       value:
@@ -1808,27 +1440,32 @@ components:
           - summaryOfHoldings: test textual holdings
             itemMaterialSpecified: test textual holdings
             pieceDesignation: FakeBarcode
-    success-my-holdings-accession-number:
-      summary: successful request for monograph holding by accession number
+    success-my-holdings-with-shelving-scheme:
+      summary: successful search for holdings with shelving scheme
       value:
-        lhrControlNumber: '132422447'
-        lhrDateEntered: '20190816'
-        lhrLastUpdated: '20190816'
-        oclcNumber: '246197114'
-        format: zu
-        location:
-          holdingLocation: OCWMS
-          sublocationCollection: CENT
-          shelvingLocation: CENT-STACKS
-        copyNumber: '1'
-        callNumber:
-          displayCallNumber: CATS
-          classificationPart: CATS
-        hasSharedPrintCommitment: N
-        summary: Local holdings available.
-        holdingParts:
-        - pieceDesignation: CR963528
-          temporaryLocation: présêlection
+        numberOfHoldings: 1
+        detailedHoldings:
+        - lhrControlNumber: '132422447'
+          lhrDateEntered: '20190816'
+          lhrLastUpdated: '20190816'
+          oclcNumber: '246197114'
+          format: zu
+          location:
+            holdingLocation: OCWMS
+            sublocationCollection: CENT
+            shelvingLocation: CENT-STACKS
+          copyNumber: '1'
+          callNumber:
+            displayCallNumber: 025.5 D123 2020
+            classificationPart: 25.5
+            itemParts:
+            - D123
+            - 2020
+            shelvingScheme: Dewey Decimal classification
+          hasSharedPrintCommitment: N
+          holdingParts:
+          - pieceDesignation: CR963528
+            itemType: basic
     success-retained-holdings:
       summary: successful request for retained holdings
       value:
@@ -2061,7 +1698,414 @@ components:
           summary: Local Holdings Available.
           holdingParts:
           - pieceDesignation: '564474'
+    invalid-accession-number:
+      summary: Error returned when accession number isn't valid
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: accession number must be a positive whole number
+    invalid-oclc-number:
+      summary: Error returned when oclc number isn't valid
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: oclcNumber must be a positive whole number
+    missing-query-parameter-value:
+      summary: Error returned when query parameter value not valid
+      value:
+        type: INVALID_QUERY_PARAMETER_VALUE
+        title: Validation Failure
+        detail: Query term is not provided.
+    success-my-holdings:
+      summary: successful search for monograph holdings
+      value:
+        numberOfHoldings: 1
+        detailedHoldings:
+        - lhrControlNumber: '132422447'
+          lhrDateEntered: '20190816'
+          lhrLastUpdated: '20190816'
+          oclcNumber: '246197114'
+          format: zu
+          location:
+            holdingLocation: OCWMS
+            sublocationCollection: CENT
+            shelvingLocation: CENT-STACKS
+          copyNumber: '1'
+          callNumber:
+            displayCallNumber: CATS
+            classificationPart: CATS
+          hasSharedPrintCommitment: N
+          summary: Local holdings available.
+          holdingParts:
+          - pieceDesignation: CR963528
+    success-my-holdings-with-private-notes:
+      summary: successful search for holdings with private notes
+      value:
+        numberOfHoldings: 1
+        detailedHoldings:
+        - lhrControlNumber: '132422447'
+          lhrDateEntered: '20190816'
+          lhrLastUpdated: '20190816'
+          oclcNumber: '246197114'
+          format: zu
+          location:
+            holdingLocation: OCWMS
+            sublocationCollection: CENT
+            shelvingLocation: CENT-STACKS
+          copyNumber: '1'
+          callNumber:
+            displayCallNumber: QA76.76.A65 M67 2018
+            classificationPart: QA76.76.A65
+            itemParts:
+            - M67
+            - 2018
+            shelvingScheme: Library of Congress classification
+            privateNotes:
+            - Show in OPAC
+            - Staff only
+          hasSharedPrintCommitment: N
+          holdingParts:
+          - pieceDesignation: CR963528
+            itemType: basic
+            privateNotes:
+            - Internal processing note
+    success-my-holdings-accession-number-serial:
+      summary: successful request for serial holdings by accession number
+      value:
+        lhrControlNumber: '180160011'
+        lhrLastUpdated: '20150504'
+        oclcNumber: '2351916'
+        format: zu
+        location:
+          holdingLocation: OCPSB
+          sublocationCollection: WEST
+          shelvingLocation: WEST-Periodicals
+        copyNumber: '2'
+        callNumber:
+          displayCallNumber: '12457896321'
+          classificationPart: '12457896321'
+        hasSharedPrintCommitment: N
+        summary: v.133 (2008)-
+        holdingParts:
+        - linkingAndSequenceNumber: '1.1'
+          enumerations:
+          - value: '1'
+          - value: '1'
+          chronologies:
+          - value: '2015'
+          - value: Jan
+        - linkingAndSequenceNumber: '2.1'
+          enumerations:
+          - value: '1'
+          - value: '2'
+          chronologies:
+          - value: '2015'
+          - value: Feb
+        - linkingAndSequenceNumber: '1.1'
+          summaryOfHoldings: 1:1(2015:Jan)
+          pieceDesignation: '986532741'
+        - linkingAndSequenceNumber: '2.1'
+          summaryOfHoldings: 1:2(2015:Feb)
+          pieceDesignation: '986532743'
+    failed-not-found:
+      summary: Error when resource not found
+      value:
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
+    success-retained-holdings-serial-2:
+      summary: return retained holdings for a serial
+      value:
+        numberOfHoldings: 1
+        detailedHoldings:
+        - lhrControlNumber: '2892929'
+          lhrDateEntered: '20200505'
+          lhrLastUpdated: '20200505'
+          oclcNumber: '1696940'
+          format: ta
+          location:
+            holdingLocation: VKM
+            sublocationCollection: VKMA
+          hasSharedPrintCommitment: Y
+          sharedPrintCommitments:
+          - actionNote: completeness reviewed
+            materialsSpecified: v.1-5 (1906-1910), v.19 (1952), v.21-25 (1954-1958), v.27 (1960), v.29 (1962), v.32-42 (1965-1975), v.45-56 (1978-1990), v.58-75 (1992-2010)
+            institution: NLouvS
+            dateOfAction: '20160630'
+            commitmentExpirationDate: '20310630'
+            methodOfAction: volume-level validation
+          - actionNote: committed to retain
+            materialsSpecified: v.1-5 (1906-1910), v.19 (1952), v.21-25 (1954-1958), v.27 (1960), v.29 (1962), v.32-42 (1965-1975), v.45-56 (1978-1990), v.58-75 (1992-2010)
+            institution: NLouvS
+            dateOfAction: '20160630'
+            commitmentExpirationDate: '20310630'
+            authorization: east
+            uri: https://eastlibraries.org/retained-materials
+          summary: v.1(1906)-v.5(1910),v.19(1952),v.21(1954)-v.25(1958),v.27(1960),v.29(1962),v.32(1965)-v.42(1975),v.45(1978)-v.56(1990),v.58(1992)-v.75(2010)
+          holdingParts:
+          - linkingAndSequenceNumber: '1.1'
+            enumerations:
+            - caption: v.
+              value: 1-5
+            chronologies:
+            - caption: (year)
+              value: 1906-1910
+            yearRanges:
+            - from: '1906'
+              to: '1910'
+            volumeRanges:
+            - from: '1'
+              to: '5'
+          - linkingAndSequenceNumber: '1.2'
+            enumerations:
+            - caption: v.
+              value: '19'
+            chronologies:
+            - caption: (year)
+              value: '1952'
+          - linkingAndSequenceNumber: '1.3'
+            enumerations:
+            - caption: v.
+              value: 21-25
+            chronologies:
+            - caption: (year)
+              value: 1954-1958
+            yearRanges:
+            - from: '1954'
+              to: '1958'
+            volumeRanges:
+            - from: '21'
+              to: '25'
+          - linkingAndSequenceNumber: '1.4'
+            enumerations:
+            - caption: v.
+              value: '27'
+            chronologies:
+            - caption: (year)
+              value: '1960'
+          - linkingAndSequenceNumber: '1.5'
+            enumerations:
+            - caption: v.
+              value: '29'
+            chronologies:
+            - caption: (year)
+              value: '1962'
+          - linkingAndSequenceNumber: '1.6'
+            enumerations:
+            - caption: v.
+              value: 32-42
+            chronologies:
+            - caption: (year)
+              value: 1965-1975
+            yearRanges:
+            - from: '1965'
+              to: '1975'
+            volumeRanges:
+            - from: '32'
+              to: '42'
+          - linkingAndSequenceNumber: '1.7'
+            enumerations:
+            - caption: v.
+              value: 45-56
+            chronologies:
+            - caption: (year)
+              value: 1978-1990
+            yearRanges:
+            - from: '1978'
+              to: '1990'
+            volumeRanges:
+            - from: '45'
+              to: '56'
+          - linkingAndSequenceNumber: '1.8'
+            enumerations:
+            - caption: v.
+              value: 58-75
+            chronologies:
+            - caption: (year)
+              value: 1992-2010
+            yearRanges:
+            - from: '1992'
+              to: '2010'
+            volumeRanges:
+            - from: '58'
+              to: '75'
+    not-acceptable-error:
+      summary: Error when media type in Accept header not supported
+      value:
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'Media type application/xml not supported. Supported media types: application/json'
+    method-not-allowed-error:
+      summary: Error when invalid HTTP method used
+      value:
+        title: NOT_ALLOWED
+        detail: POST method not allowed
+    success-my-holdings-accession-number:
+      summary: successful request for monograph holding by accession number
+      value:
+        lhrControlNumber: '132422447'
+        lhrDateEntered: '20190816'
+        lhrLastUpdated: '20190816'
+        oclcNumber: '246197114'
+        format: zu
+        location:
+          holdingLocation: OCWMS
+          sublocationCollection: CENT
+          shelvingLocation: CENT-STACKS
+        copyNumber: '1'
+        callNumber:
+          displayCallNumber: CATS
+          classificationPart: CATS
+        hasSharedPrintCommitment: N
+        summary: Local holdings available.
+        holdingParts:
+        - pieceDesignation: CR963528
+          temporaryLocation: présêlection
+    success-retained-holdings-monograph:
+      summary: return retained holdings for a monograph
+      value:
+        numberOfHoldings: 1
+        detailedHoldings:
+        - lhrControlNumber: '184757025'
+          lhrDateEntered: '20171208'
+          lhrLastUpdated: '20171208'
+          oclcNumber: '650'
+          format: zu
+          location:
+            holdingLocation: NKF
+            sublocationCollection: NKFA
+            shelvingLocation: Stacks
+          callNumber:
+            displayCallNumber: QA9.F85
+            classificationPart: QA9.F85
+          hasSharedPrintCommitment: Y
+          sharedPrintCommitments:
+          - actionNote: committed to retain
+            institution: MChiL
+            dateOfAction: '20160630'
+            commitmentExpirationDate: '20310630'
+            authorization: EAST
+            uri: http://eastlibraries.org/retained-materials
+          summary: Local Holdings Available.
+          holdingParts:
+          - pieceDesignation: '30594001082474'
+    not-acceptable-error-language:
+      summary: Error when language in Accept-Language header not supported
+      value:
+        type: https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+        title: ''
+        detail: 'en-UK supported. Supported languages: en, es, fr'
+    success-my-holdings-with-item-types:
+      summary: successful search for holdings with different item types
+      value:
+        numberOfHoldings: 2
+        detailedHoldings:
+        - lhrControlNumber: '132422447'
+          lhrDateEntered: '20190816'
+          lhrLastUpdated: '20190816'
+          oclcNumber: '246197114'
+          format: zu
+          location:
+            holdingLocation: OCWMS
+            sublocationCollection: CENT
+            shelvingLocation: CENT-STACKS
+          copyNumber: '1'
+          callNumber:
+            displayCallNumber: QA76.76.A65 M67 2018
+            classificationPart: QA76.76.A65
+            itemParts:
+            - M67
+            - 2018
+          hasSharedPrintCommitment: N
+          holdingParts:
+          - pieceDesignation: CR963528
+            itemType: basic
+          - pieceDesignation: CR963529
+            itemType: supplementary
+          - pieceDesignation: CR963530
+            itemType: index
+    success-retained-holdings-serial:
+      summary: return retained holdings for a serial
+      value:
+        numberOfHoldings: 1
+        detailedHoldings:
+        - lhrControlNumber: '293921067'
+          lhrDateEntered: '20200122'
+          lhrLastUpdated: '20200122'
+          oclcNumber: '1588319'
+          format: zu
+          location:
+            holdingLocation: CRL
+            sublocationCollection: JSTR
+          hasSharedPrintCommitment: Y
+          sharedPrintCommitments:
+          - actionNote: condition reviewed
+            materialsSpecified: v.1-v.80 (1931-2010)
+            institution: ICRL
+            dateOfAction: '20110101'
+            methodOfAction: issue-level validation
+            status: marginalia$torn
+            publicNote: marginalia v.40:590,592,594-596;v.42:396,153-159;v.44:463;v.45:211;v.46:189,196-197,199;v.49:153-166,168$torn pages v.49:pp.62-64
+          - actionNote: committed to retain
+            materialsSpecified: v.1-v.80 (1931-2010)
+            institution: ICRL
+            dateOfAction: '20110101'
+            commitmentExpirationDate: '20501231'
+            authorization: CRLJSTOR
+            siteOfAction: CRLAA
+            uri: http://www.crl.edu/archiving-preservation/print-archives/crl-administered/jstor
+          summary: Local Holdings Available.
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
   responses:
+    success-retained-holdings:
+      description: successful search for retained holdings
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/HoldingResultSet'
+          examples:
+            success-retained-holdings:
+              $ref: '#/components/examples/success-retained-holdings'
+            success-retained-holdings-monograph:
+              $ref: '#/components/examples/success-retained-holdings-monograph'
+            success-retained-holdings-serial:
+              $ref: '#/components/examples/success-retained-holdings-serial'
+            success-retained-holdings-serial-2:
+              $ref: '#/components/examples/success-retained-holdings-serial-2'
+    failed-not-acceptable:
+      description: Media type not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
+            not-acceptable-error-language:
+              $ref: '#/components/examples/not-acceptable-error-language'
+    method-not-supported:
+      description: Method not supported, see response Allow header
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-allowed:
+              $ref: '#/components/examples/method-not-allowed-error'
+    failed-not-found:
+      description: Failed operation - resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            failed-not-found:
+              $ref: '#/components/examples/failed-not-found'
     success-my-holdings:
       description: successful read one of my holdings
       content:
@@ -2090,56 +2134,6 @@ components:
               $ref: '#/components/examples/success-my-holdings-with-shelving-scheme'
             success-my-holdings-with-item-types:
               $ref: '#/components/examples/success-my-holdings-with-item-types'
-    internal-server-error:
-      description: Something went wrong (hopfully rare) - please try again
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-    method-not-supported:
-      description: Method not supported, see response Allow header
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-allowed:
-              $ref: '#/components/examples/method-not-allowed-error'
-    success-retained-holdings:
-      description: successful search for retained holdings
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/HoldingResultSet'
-          examples:
-            success-retained-holdings:
-              $ref: '#/components/examples/success-retained-holdings'
-            success-retained-holdings-monograph:
-              $ref: '#/components/examples/success-retained-holdings-monograph'
-            success-retained-holdings-serial:
-              $ref: '#/components/examples/success-retained-holdings-serial'
-            success-retained-holdings-serial-2:
-              $ref: '#/components/examples/success-retained-holdings-serial-2'
-    failed-not-found:
-      description: Failed operation - resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            failed-not-found:
-              $ref: '#/components/examples/failed-not-found'
-    failed-not-acceptable:
-      description: Media type not supported
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-acceptable-error:
-              $ref: '#/components/examples/not-acceptable-error'
-            not-acceptable-error-language:
-              $ref: '#/components/examples/not-acceptable-error-language'
     holding_query_error:
       description: Invalid query. The request was unacceptable, often due to missing a required parameter.
       content:
@@ -2155,6 +2149,12 @@ components:
               $ref: '#/components/examples/invalid-query-parameter-bad-orderBy'
             invalid-oclc-number:
               $ref: '#/components/examples/invalid-oclc-number'
+    internal-server-error:
+      description: Something went wrong (hopfully rare) - please try again
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
   securitySchemes:
     worldcat_search_auth:
       type: oauth2

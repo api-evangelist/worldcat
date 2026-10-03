@@ -254,6 +254,19 @@ paths:
       - api_key: []
 components:
   schemas:
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
     Title:
       type: object
       properties:
@@ -348,19 +361,6 @@ components:
       - provider_name
       - provider_uid
       - publisher
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        rel:
-          type: string
-          enum:
-          - self
-          - alternate
-          - parent
-          - enclosure
-          - via
   examples:
     missing-query-parameter:
       summary: Error returned when required query parameter not sent
