@@ -232,58 +232,6 @@ paths:
         - WorldCatMetadataAPI:manage_institution_lbds
 components:
   examples:
-    lbd-marc-existing:
-      summary: LBD MARC XML Record
-      value: "00136n   a2200085   4500001001000000004000500010005001700015935001000032940000800042\\u001E589046562\\u001E3160\\u001E20210910120824.8\\u001E  \\u001FaMyLSN\\u001E  \\u001FaWAU\\u001E\\u001D   \n"
-    forbidden:
-      summary: Error returned when API credentials not for resource
-      value:
-        message: Forbidden
-    lbd-create-lacks-owning-institution:
-      summary: LBD Lacks Owning Institution.
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the lbd create operation.
-        detail:
-          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
-          description: The LBD must have an owning institution symbol
-    lbd-marcxml-existing:
-      summary: LBD MARC XML Record
-      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n"
-    lbd-marcxml-new:
-      summary: LBD MARC XML Record
-      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n"
-    lbd-replace-lacks-owning-institution:
-      summary: LBD Lacks Owning Institution.
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the lbd replace operation.
-        detail:
-          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
-          description: The LBD must have an owning institution symbol
-    failed-not-found:
-      summary: Error when resource not found
-      value:
-        type: NOT_FOUND
-        title: Resource Not Found
-        detail: The specified resource was not found at this address.
-    unauthorized:
-      summary: Error returned when valid API credentials not sent or invalid
-      value:
-        message: Unauthorized
-    lbd-create-has-control-number:
-      summary: LBD Has Control Number.
-      value:
-        type: BAD_REQUEST
-        title: Unable to perform the lbd create operation.
-        detail:
-          summary: LBD_HAS_CONTROL_NUMBER
-          description: The LBD must lack a control number for adds
-    lbd-marc-new:
-      summary: LBD MARC XML Record
-      value: '00086n   a2200061   4500004000600000935001000006940000800016\u001E316d0\u001E  \u001FaMyLSN\u001E  \u001FaWAU\u001E\u001D
-
-        '
     lbd-read-not-found:
       summary: LBD Not Found.
       value:
@@ -292,6 +240,58 @@ components:
         detail:
           summary: NOT_FOUND
           description: Not able to find the requested LBD
+    lbd-create-lacks-owning-institution:
+      summary: LBD Lacks Owning Institution.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd create operation.
+        detail:
+          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
+          description: The LBD must have an owning institution symbol
+    lbd-replace-lacks-owning-institution:
+      summary: LBD Lacks Owning Institution.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd replace operation.
+        detail:
+          summary: LBD_LACKS_OWNING_INSTITUTION_SYMBOL
+          description: The LBD must have an owning institution symbol
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    forbidden:
+      summary: Error returned when API credentials not for resource
+      value:
+        message: Forbidden
+    lbd-marcxml-new:
+      summary: LBD MARC XML Record
+      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"004\">3160</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>        \n"
+    lbd-marc-existing:
+      summary: LBD MARC XML Record
+      value: "00136n   a2200085   4500001001000000004000500010005001700015935001000032940000800042\\u001E589046562\\u001E3160\\u001E20210910120824.8\\u001E  \\u001FaMyLSN\\u001E  \\u001FaWAU\\u001E\\u001D   \n"
+    lbd-marcxml-existing:
+      summary: LBD MARC XML Record
+      value: "<record>\n  <leader>00000n   a2200000   4500</leader>\n  <controlfield tag=\"001\">589046562</controlfield>\n  <controlfield tag=\"004\">3160</controlfield>\n  <controlfield tag=\"005\">20210910120824.8</controlfield>\n  <datafield tag=\"935\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">MyLSN</subfield>\n  </datafield>\n  <datafield tag=\"940\" ind1=\" \" ind2=\" \">\n    <subfield code=\"a\">OCWMS</subfield>\n  </datafield>\n</record>      \n"
+    failed-not-found:
+      summary: Error when resource not found
+      value:
+        type: NOT_FOUND
+        title: Resource Not Found
+        detail: The specified resource was not found at this address.
+    lbd-marc-new:
+      summary: LBD MARC XML Record
+      value: '00086n   a2200061   4500004000600000935001000006940000800016\u001E316d0\u001E  \u001FaMyLSN\u001E  \u001FaWAU\u001E\u001D
+
+        '
+    lbd-create-has-control-number:
+      summary: LBD Has Control Number.
+      value:
+        type: BAD_REQUEST
+        title: Unable to perform the lbd create operation.
+        detail:
+          summary: LBD_HAS_CONTROL_NUMBER
+          description: The LBD must lack a control number for adds
   responses:
     403-forbidden-url:
       description: Forbidden URL.
@@ -302,6 +302,24 @@ components:
               summary: Forbidden URL
               value:
                 message: '''tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq'' not a valid key=value pair (missing equal-sign) in Authorization header: ''Bearer tk_TW6fPd4fgsaA45HIYslXmeSlc1DleGlOdBCdVimq''.'
+    500-internal-server-error:
+      description: Something went wrong (hopefully rare) - please try again.
+      content:
+        application/json:
+          examples:
+            accept-header-unacceptable:
+              summary: Unexpected Error.
+              value:
+                type: INTERNAL_SERVER_ERROR
+                title: string
+                detail: string
+    forbidden:
+      description: Forbidden
+      content:
+        application/json:
+          examples:
+            forbidden:
+              $ref: '#/components/examples/forbidden'
     406-accept-header-unacceptable:
       description: Accept Header Media Type is not Supported.
       content:
@@ -320,13 +338,6 @@ components:
           examples:
             unauthorized:
               $ref: '#/components/examples/unauthorized'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          examples:
-            forbidden:
-              $ref: '#/components/examples/forbidden'
     failed-not-found:
       description: Failed operation - resource not found
       content:
@@ -336,18 +347,26 @@ components:
           examples:
             failed-not-found:
               $ref: '#/components/examples/failed-not-found'
-    500-internal-server-error:
-      description: Something went wrong (hopefully rare) - please try again.
-      content:
-        application/json:
-          examples:
-            accept-header-unacceptable:
-              summary: Unexpected Error.
-              value:
-                type: INTERNAL_SERVER_ERROR
-                title: string
-                detail: string
   schemas:
+    ProblemType:
+      description: A URI reference [RFC3986] that identifies the problem type.
+      type: string
+      format: uri
+      enum:
+      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
+      - https://developer.api.oclc.org/errors/NOT_ALLOWED
+      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
+      - https://developer.api.oclc.org/errors/BAD_REQUEST
+      - https://developer.api.oclc.org/errors/NOT_FOUND
+      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
+      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
+      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
+      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
+      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
+      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
+      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
     MARCXML:
       description: see https://www.loc.gov/standards/marcxml/schema/MARC21slim.xsd
       type: object
@@ -385,25 +404,6 @@ components:
                 type: string
               reason:
                 type: string
-    ProblemType:
-      description: A URI reference [RFC3986] that identifies the problem type.
-      type: string
-      format: uri
-      enum:
-      - https://developer.api.oclc.org/errors/NOT_ACCEPTABLE
-      - https://developer.api.oclc.org/errors/NOT_ALLOWED
-      - https://developer.api.oclc.org/errors/INTERAL_SERVER_ERROR
-      - https://developer.api.oclc.org/errors/BAD_REQUEST
-      - https://developer.api.oclc.org/errors/NOT_FOUND
-      - https://developer.api.oclc.org/errors/NOT_ELIGIBLE
-      - https://developer.api.oclc.org/errors/MISSING_QUERY_PARAMETER
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETERS
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_VALUE
-      - https://developer.api.oclc.org/errors/INVALID_QUERY_PARAMETER_NAME
-      - https://developer.api.oclc.org/errors/SYNTAX_ERROR
-      - https://developer.api.oclc.org/errors/INVALID_DOCUMENT
-      - https://developer.api.oclc.org/errors/MISSING_ELEMENT
-      - https://developer.api.oclc.org/errors/INVALID_ELEMENT_VALUE
   securitySchemes:
     worldcat_metadata_auth:
       type: oauth2

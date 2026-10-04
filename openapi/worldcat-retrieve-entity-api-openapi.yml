@@ -48,15 +48,33 @@ paths:
         - publicEntities:read_brief_entities
 components:
   responses:
-    bad-gateway-error:
-      description: Bad Gateway
+    internal-server-error:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            access-denied-error:
+              $ref: '#/components/examples/internal-error'
+    failed-not-acceptable:
+      description: Media type not supported
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Problem'
+          examples:
+            not-acceptable-error:
+              $ref: '#/components/examples/not-acceptable-error'
+    forbidden:
+      description: Forbidden
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/ProblemGateway'
           examples:
-            access-denied-error:
-              $ref: '#/components/examples/bad-gateway-error'
+            forbidden:
+              $ref: '#/components/examples/forbidden'
     not-modified:
       description: The client has performed a conditional GET request and access is allowed, but the document has not been modified.
       headers:
@@ -73,33 +91,6 @@ components:
           examples:
             unauthorized:
               $ref: '#/components/examples/unauthorized'
-    forbidden:
-      description: Forbidden
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ProblemGateway'
-          examples:
-            forbidden:
-              $ref: '#/components/examples/forbidden'
-    failed-not-acceptable:
-      description: Media type not supported
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            not-acceptable-error:
-              $ref: '#/components/examples/not-acceptable-error'
-    failed-not-found:
-      description: Failed operation - resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Problem'
-          examples:
-            failed-not-found-user:
-              $ref: '#/components/examples/failed-not-found'
     post-not-supported:
       description: Method not supported, see response Allow header
       content:
@@ -109,55 +100,24 @@ components:
           examples:
             not-allowed:
               $ref: '#/components/examples/post-not-allowed-error'
-    internal-server-error:
-      description: Internal server error
+    failed-not-found:
+      description: Failed operation - resource not found
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Problem'
           examples:
-            access-denied-error:
-              $ref: '#/components/examples/internal-error'
-  examples:
-    forbidden:
-      summary: Error returned when API credentials not for resource
-      value:
-        message: Forbidden
-    failed-not-found:
-      summary: Entity is not found
-      value:
-        type: ITEM_NOT_FOUND
-        title: Item was not found
-        timestamp: '2024-01-01T20:00:39.647Z'
-        detail: Entity ID E39PBJpjdHFcRjmdvjWFr33fb is not found
-    post-not-allowed-error:
-      summary: Error when invalid HTTP method used
-      value:
-        type: METHOD_NOT_ALLOWED
-        title: Method not allowed
-        timestamp: '2024-01-01T20:00:39.647'
-        detail: Request method 'POST' is not supported
-    not-acceptable-error:
-      summary: Error when media type in Accept header not supported
-      value:
-        type: NOT_ACCEPTABLE
-        title: Not acceptable
-        timestamp: '2020-01-01T20:00:39.647634'
-        detail: 'Acceptable representations: application/json;charset=UTF-8, application/problem+json'
-    internal-error:
-      summary: Unexpected server error
-      value:
-        type: INTERNAL_ERROR
-        title: Internal error
-        timestamp: '2020-01-01T20:00:39.647634'
-    unauthorized:
-      summary: Error returned when valid API credentials not sent or invalid
-      value:
-        message: Unauthorized
+            failed-not-found-user:
+              $ref: '#/components/examples/failed-not-found'
     bad-gateway-error:
-      summary: Unexpected server error
-      value:
-        message: Bad Gateway
+      description: Bad Gateway
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ProblemGateway'
+          examples:
+            access-denied-error:
+              $ref: '#/components/examples/bad-gateway-error'
   parameters:
     if-none-match:
       name: If-None-Match
@@ -186,15 +146,46 @@ components:
       schema:
         type: string
         example: E39PBJcGmbT4qdMwCHRrCypHG3
-  headers:
-    Cache-Control:
-      schema:
-        type: string
-      description: Transmits a variety of cache control directives that typically override default caching algorithms.
-    ETag:
-      schema:
-        type: string
-      description: Identifier for a specific version of a resource.
+  examples:
+    unauthorized:
+      summary: Error returned when valid API credentials not sent or invalid
+      value:
+        message: Unauthorized
+    bad-gateway-error:
+      summary: Unexpected server error
+      value:
+        message: Bad Gateway
+    post-not-allowed-error:
+      summary: Error when invalid HTTP method used
+      value:
+        type: METHOD_NOT_ALLOWED
+        title: Method not allowed
+        timestamp: '2024-01-01T20:00:39.647'
+        detail: Request method 'POST' is not supported
+    internal-error:
+      summary: Unexpected server error
+      value:
+        type: INTERNAL_ERROR
+        title: Internal error
+        timestamp: '2020-01-01T20:00:39.647634'
+    forbidden:
+      summary: Error returned when API credentials not for resource
+      value:
+        message: Forbidden
+    not-acceptable-error:
+      summary: Error when media type in Accept header not supported
+      value:
+        type: NOT_ACCEPTABLE
+        title: Not acceptable
+        timestamp: '2020-01-01T20:00:39.647634'
+        detail: 'Acceptable representations: application/json;charset=UTF-8, application/problem+json'
+    failed-not-found:
+      summary: Entity is not found
+      value:
+        type: ITEM_NOT_FOUND
+        title: Item was not found
+        timestamp: '2024-01-01T20:00:39.647Z'
+        detail: Entity ID E39PBJpjdHFcRjmdvjWFr33fb is not found
   schemas:
     Problem:
       type: object
@@ -211,13 +202,6 @@ components:
           type: string
         detail:
           description: A human-readable explanation specific to this occurrence of the problem.
-          type: string
-    ProblemGateway:
-      type: object
-      description: Description of error occurring at platform gateway level
-      properties:
-        message:
-          description: Sole field returned if gateway error occurs
           type: string
     JsonLdEntity:
       type: object
@@ -267,6 +251,22 @@ components:
             es:
               type: string
               example: bibliotecario estadounidense
+    ProblemGateway:
+      type: object
+      description: Description of error occurring at platform gateway level
+      properties:
+        message:
+          description: Sole field returned if gateway error occurs
+          type: string
+  headers:
+    ETag:
+      schema:
+        type: string
+      description: Identifier for a specific version of a resource.
+    Cache-Control:
+      schema:
+        type: string
+      description: Transmits a variety of cache control directives that typically override default caching algorithms.
   securitySchemes:
     entity_data_auth:
       type: oauth2

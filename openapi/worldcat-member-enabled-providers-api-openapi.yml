@@ -285,6 +285,31 @@ components:
           items:
             $ref: '#/components/schemas/Provider'
   examples:
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
+    success-read-provider:
+      summary: successful request to read a provider
+      value:
+        title: Nature Publishing Group
+        id: http://worldcat.org/webservices/kb/rest/providers/NPG
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/providers/NPG
+          rel: self
+        - href: http://www.nature.com
+          rel: via
+        - href: http://worldcat.org/webservices/kb/rest/providers/NPG.html
+          rel: alternate
+        provider_uid: NPG
+        vic_id: 572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6
+        provider_name: Nature Publishing Group
+        available_collections: '22'
+        selected_collections: '22'
+        available_entries: '1115'
+        selected_entries: '1115'
     success-search-provider:
       summary: successful search of providers
       value:
@@ -316,31 +341,6 @@ components:
           kb:selected_collections: '1'
           kb:available_entries: '980'
           kb:selected_entries: '105'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
-    success-read-provider:
-      summary: successful request to read a provider
-      value:
-        title: Nature Publishing Group
-        id: http://worldcat.org/webservices/kb/rest/providers/NPG
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/providers/NPG
-          rel: self
-        - href: http://www.nature.com
-          rel: via
-        - href: http://worldcat.org/webservices/kb/rest/providers/NPG.html
-          rel: alternate
-        provider_uid: NPG
-        vic_id: 572cde9e-0a1d-40ce-9f54-ad3ffcf42aa6
-        provider_name: Nature Publishing Group
-        available_collections: '22'
-        selected_collections: '22'
-        available_entries: '1115'
-        selected_entries: '1115'
   securitySchemes:
     api_key:
       type: apiKey

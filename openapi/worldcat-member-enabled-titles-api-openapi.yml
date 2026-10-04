@@ -263,6 +263,12 @@ components:
         publisher: Packt Publishing
         coverage: ebook@2019-02-28
         coll_type: browsable
+    missing-query-parameter:
+      summary: Error returned when required query parameter not sent
+      value:
+        type: MISSING_QUERY_PARAMETER
+        title: Validation Failure
+        detail: Required String parameter 'q' is not present
     success-search-collection:
       summary: successful search of collections
       value:
@@ -312,64 +318,7 @@ components:
           available_entries: '106'
           selected_entries: '106'
           localstem: 'true'
-    missing-query-parameter:
-      summary: Error returned when required query parameter not sent
-      value:
-        type: MISSING_QUERY_PARAMETER
-        title: Validation Failure
-        detail: Required String parameter 'q' is not present
   schemas:
-    TitleSearchResults:
-      type: object
-      properties:
-        title:
-          description: name of the results
-          type: string
-        updated:
-          description: date query run
-          type: string
-        id:
-          description: ID for result set
-          type: string
-        author:
-          description: who created the result set
-          type: string
-        links:
-          description: Link to the results
-          type: string
-        totalResults:
-          description: Total number of results
-          type: integer
-          format: int32
-        startIndex:
-          description: start position of the results
-          type: integer
-          format: int32
-        itemsPerPage:
-          description: number of items per page
-          type: integer
-          format: int32
-        Query:
-          description: query sent to API
-          type: string
-        entries:
-          description: actual results
-          type: array
-          items:
-            $ref: '#/components/schemas/Title'
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        rel:
-          type: string
-          enum:
-          - self
-          - alternate
-          - parent
-          - enclosure
-          - via
     Title:
       type: object
       properties:
@@ -464,6 +413,57 @@ components:
       - provider_name
       - provider_uid
       - publisher
+    TitleSearchResults:
+      type: object
+      properties:
+        title:
+          description: name of the results
+          type: string
+        updated:
+          description: date query run
+          type: string
+        id:
+          description: ID for result set
+          type: string
+        author:
+          description: who created the result set
+          type: string
+        links:
+          description: Link to the results
+          type: string
+        totalResults:
+          description: Total number of results
+          type: integer
+          format: int32
+        startIndex:
+          description: start position of the results
+          type: integer
+          format: int32
+        itemsPerPage:
+          description: number of items per page
+          type: integer
+          format: int32
+        Query:
+          description: query sent to API
+          type: string
+        entries:
+          description: actual results
+          type: array
+          items:
+            $ref: '#/components/schemas/Title'
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
   securitySchemes:
     api_key:
       type: apiKey
