@@ -240,19 +240,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Collection'
-    Link:
-      type: object
-      properties:
-        href:
-          type: string
-        rel:
-          type: string
-          enum:
-          - self
-          - alternate
-          - parent
-          - enclosure
-          - via
     Collection:
       type: object
       required:
@@ -329,40 +316,20 @@ components:
         localstem:
           description: something
           type: boolean
+    Link:
+      type: object
+      properties:
+        href:
+          type: string
+        rel:
+          type: string
+          enum:
+          - self
+          - alternate
+          - parent
+          - enclosure
+          - via
   examples:
-    success-read-collection:
-      summary: successful request to read a collection
-      value:
-        title: Nature Publishing Group
-        id: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
-        updated: '2014-02-15T20:20:12Z'
-        links:
-        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
-          rel: self
-        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals.html
-          rel: alternate
-        - href: http://www.nature.com
-          rel: via
-        - href: http://worldcat.org/webservices/kb/export/6569/6569_NPG.journals_kbart.txt
-          rel: enclosure
-          title: kbart file
-          length: 52000
-        provider_uid: NPG
-        provider_name: Nature Publishing Group
-        collection_uid: NPG.journals
-        owner_institution: '6569'
-        source_institution: '6569'
-        collection_status: raw
-        collection_type: browsable
-        title_link_template: '[[localstem]][[url]]'
-        linkscheme: npg
-        uhf_version: release134
-        marcdelivery_no_delete: 'false'
-        google_scholar_enabled: 'true'
-        open: 'true'
-        available_entries: '104'
-        selected_entries: '104'
-        localstem: 'true'
     missing-query-parameter:
       summary: Error returned when required query parameter not sent
       value:
@@ -418,6 +385,39 @@ components:
           available_entries: '106'
           selected_entries: '106'
           localstem: 'true'
+    success-read-collection:
+      summary: successful request to read a collection
+      value:
+        title: Nature Publishing Group
+        id: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
+        updated: '2014-02-15T20:20:12Z'
+        links:
+        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals
+          rel: self
+        - href: http://worldcat.org/webservices/kb/rest/collections/NPG.journals.html
+          rel: alternate
+        - href: http://www.nature.com
+          rel: via
+        - href: http://worldcat.org/webservices/kb/export/6569/6569_NPG.journals_kbart.txt
+          rel: enclosure
+          title: kbart file
+          length: 52000
+        provider_uid: NPG
+        provider_name: Nature Publishing Group
+        collection_uid: NPG.journals
+        owner_institution: '6569'
+        source_institution: '6569'
+        collection_status: raw
+        collection_type: browsable
+        title_link_template: '[[localstem]][[url]]'
+        linkscheme: npg
+        uhf_version: release134
+        marcdelivery_no_delete: 'false'
+        google_scholar_enabled: 'true'
+        open: 'true'
+        available_entries: '104'
+        selected_entries: '104'
+        localstem: 'true'
   securitySchemes:
     api_key:
       type: apiKey
